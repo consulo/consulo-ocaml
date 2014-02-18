@@ -18,34 +18,39 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldPath;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlFieldPathImpl extends BaseOCamlElement implements OCamlFieldPath {
-    public OCamlFieldPathImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlFieldPathImpl extends BaseOCamlElement implements OCamlFieldPath
+{
+	public OCamlFieldPathImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitFieldPath(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitFieldPath(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlFieldName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlFieldName.class);
+	}
 
-    @Nullable
-    public OCamlFieldName getFieldName() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlFieldName.class);
-    }
+	@Nullable
+	public OCamlFieldName getFieldName()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlFieldName.class);
+	}
 }

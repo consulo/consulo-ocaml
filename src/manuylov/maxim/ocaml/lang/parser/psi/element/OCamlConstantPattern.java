@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-public interface OCamlConstantPattern extends OCamlPattern, OCamlConstant {
+public interface OCamlConstantPattern extends OCamlPattern, OCamlConstant
+{
 }

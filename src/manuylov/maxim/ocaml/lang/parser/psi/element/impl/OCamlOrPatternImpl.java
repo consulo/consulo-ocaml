@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlOrPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlOrPatternImpl extends BaseOCamlPattern implements OCamlOrPattern {
-    public OCamlOrPatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlOrPatternImpl extends BaseOCamlPattern implements OCamlOrPattern
+{
+	public OCamlOrPatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitOrPattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitOrPattern(this);
+	}
 }

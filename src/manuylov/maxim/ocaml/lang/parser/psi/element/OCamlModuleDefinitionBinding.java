@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 23.05.2009
  */
-public interface OCamlModuleDefinitionBinding extends OCamlResolvedModuleName<OCamlModuleExpression> {
+public interface OCamlModuleDefinitionBinding extends OCamlResolvedModuleName<OCamlModuleExpression>
+{
 }

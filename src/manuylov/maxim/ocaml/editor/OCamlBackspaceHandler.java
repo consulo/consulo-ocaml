@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.editor;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.codeInsight.editorActions.BackspaceHandler;
 import com.intellij.codeInsight.editorActions.BackspaceHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
@@ -25,29 +26,35 @@ import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.psi.PsiFile;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlBackspaceHandler extends BackspaceHandlerDelegate {
-    private LogicalPosition myTargetPosition;
+public class OCamlBackspaceHandler extends BackspaceHandlerDelegate
+{
+	private LogicalPosition myTargetPosition;
 
-    public void beforeCharDeleted(final char c, @NotNull final PsiFile file, @NotNull final Editor editor) {
-        if (!OCamlFileUtil.isOCamlSourceFile(file.getFileType())) return;
-        myTargetPosition = BackspaceHandler.getBackspaceUnindentPosition(file, editor);
-    }
+	public void beforeCharDeleted(final char c, @NotNull final PsiFile file, @NotNull final Editor editor)
+	{
+		if(!OCamlFileUtil.isOCamlSourceFile(file.getFileType()))
+		{
+			return;
+		}
+		myTargetPosition = BackspaceHandler.getBackspaceUnindentPosition(file, editor);
+	}
 
-    public boolean charDeleted(final char c, @NotNull final PsiFile file, @NotNull final Editor editor) {
-        if (myTargetPosition != null) {
-            final int offset = editor.getCaretModel().getOffset();
-            editor.getSelectionModel().setSelection(offset - editor.getCaretModel().getVisualPosition().column + myTargetPosition.column, offset);
-            EditorModificationUtil.deleteSelectedText(editor);
-            editor.getCaretModel().moveToLogicalPosition(myTargetPosition);
-            myTargetPosition = null;
-            return true;
-        }
-        return false;
-    }
+	public boolean charDeleted(final char c, @NotNull final PsiFile file, @NotNull final Editor editor)
+	{
+		if(myTargetPosition != null)
+		{
+			final int offset = editor.getCaretModel().getOffset();
+			editor.getSelectionModel().setSelection(offset - editor.getCaretModel().getVisualPosition().column + myTargetPosition.column, offset);
+			EditorModificationUtil.deleteSelectedText(editor);
+			editor.getCaretModel().moveToLogicalPosition(myTargetPosition);
+			myTargetPosition = null;
+			return true;
+		}
+		return false;
+	}
 }

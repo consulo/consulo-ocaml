@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.module;
 
+import java.io.File;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
 import com.intellij.openapi.module.ModuleType;
@@ -29,103 +34,124 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-class OCamlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder {
-    @NotNull private String myRelativeSourcesPath = "src";
-    private boolean myShouldCreateSourcesDir = true;
-    @Nullable private String myContentRootPath = null;
-    @Nullable private Sdk mySdk = null;
+class OCamlModuleBuilder extends ModuleBuilder implements SourcePathsBuilder
+{
+	@NotNull
+	private String myRelativeSourcesPath = "src";
+	private boolean myShouldCreateSourcesDir = true;
+	@Nullable
+	private String myContentRootPath = null;
+	@Nullable
+	private Sdk mySdk = null;
 
-    public void setupRootModel(@NotNull final ModifiableRootModel rootModel) throws ConfigurationException {
-        if (mySdk != null) {
-            rootModel.setSdk(mySdk);
-        } else {
-            rootModel.inheritSdk();
-        }
-        if (myContentRootPath != null) {
-            final LocalFileSystem lfs = LocalFileSystem.getInstance();
-            //noinspection ConstantConditions
-            final VirtualFile moduleContentRoot = lfs.refreshAndFindFileByPath(FileUtil.toSystemIndependentName(myContentRootPath));
-            if (moduleContentRoot != null) {
-                final ContentEntry contentEntry = rootModel.addContentEntry(moduleContentRoot);
-                if (myShouldCreateSourcesDir) {
-                    final File sourcesDir = getSourcesDir();
-                    if (!sourcesDir.isDirectory()) {
-                        //noinspection ResultOfMethodCallIgnored
-                        sourcesDir.mkdirs();
-                    }
-                    final VirtualFile sourceRoot = lfs.refreshAndFindFileByIoFile(sourcesDir);
-                    if (sourceRoot != null) {
-                        contentEntry.addSourceFolder(sourceRoot, false, "");
-                    }
-                }
-            }
-        }
-    }
+	public void setupRootModel(@NotNull final ModifiableRootModel rootModel) throws ConfigurationException
+	{
+		if(mySdk != null)
+		{
+			rootModel.setSdk(mySdk);
+		}
+		else
+		{
+			rootModel.inheritSdk();
+		}
+		if(myContentRootPath != null)
+		{
+			final LocalFileSystem lfs = LocalFileSystem.getInstance();
+			//noinspection ConstantConditions
+			final VirtualFile moduleContentRoot = lfs.refreshAndFindFileByPath(FileUtil.toSystemIndependentName(myContentRootPath));
+			if(moduleContentRoot != null)
+			{
+				final ContentEntry contentEntry = rootModel.addContentEntry(moduleContentRoot);
+				if(myShouldCreateSourcesDir)
+				{
+					final File sourcesDir = getSourcesDir();
+					if(!sourcesDir.isDirectory())
+					{
+						//noinspection ResultOfMethodCallIgnored
+						sourcesDir.mkdirs();
+					}
+					final VirtualFile sourceRoot = lfs.refreshAndFindFileByIoFile(sourcesDir);
+					if(sourceRoot != null)
+					{
+						contentEntry.addSourceFolder(sourceRoot, false, "");
+					}
+				}
+			}
+		}
+	}
 
-    @NotNull
-    private File getSourcesDir() {
-        final String[] dirs = myRelativeSourcesPath.replace("\\", "/").split("/");
-        File result = new File(myContentRootPath);
-        for (final String dir : dirs) {
-            result = new File(result, dir);
-        }
-        return result;
-    }
+	@NotNull
+	private File getSourcesDir()
+	{
+		final String[] dirs = myRelativeSourcesPath.replace("\\", "/").split("/");
+		File result = new File(myContentRootPath);
+		for(final String dir : dirs)
+		{
+			result = new File(result, dir);
+		}
+		return result;
+	}
 
-    @NotNull
-    public ModuleType getModuleType() {
-        return OCamlModuleType.getInstance();
-    }
+	@NotNull
+	public ModuleType getModuleType()
+	{
+		return OCamlModuleType.getInstance();
+	}
 
-    @Nullable
-    public String getContentEntryPath() {
-        return myContentRootPath;
-    }
+	@Nullable
+	public String getContentEntryPath()
+	{
+		return myContentRootPath;
+	}
 
-    public void setContentEntryPath(@Nullable final String contentRootPath) {
-        myContentRootPath = contentRootPath;
-    }
+	public void setContentEntryPath(@Nullable final String contentRootPath)
+	{
+		myContentRootPath = contentRootPath;
+	}
 
-    public boolean isShouldCreateSourcesDir() {
-        return myShouldCreateSourcesDir;
-    }
+	public boolean isShouldCreateSourcesDir()
+	{
+		return myShouldCreateSourcesDir;
+	}
 
-    public void setShouldCreateSourcesDir(final boolean shouldCreateSourcesDir) {
-        myShouldCreateSourcesDir = shouldCreateSourcesDir;
-    }
+	public void setShouldCreateSourcesDir(final boolean shouldCreateSourcesDir)
+	{
+		myShouldCreateSourcesDir = shouldCreateSourcesDir;
+	}
 
-    @NotNull
-    public String getRelativeSourcesPath() {
-        return myRelativeSourcesPath;
-    }
+	@NotNull
+	public String getRelativeSourcesPath()
+	{
+		return myRelativeSourcesPath;
+	}
 
-    public void setRelativeSourcesPath(@NotNull final String relativeSourcesPath) {
-        myRelativeSourcesPath = relativeSourcesPath;
-    }
+	public void setRelativeSourcesPath(@NotNull final String relativeSourcesPath)
+	{
+		myRelativeSourcesPath = relativeSourcesPath;
+	}
 
-    public void setSdk(@Nullable final Sdk sdk) {
-        mySdk = sdk;
-    }
+	public void setSdk(@Nullable final Sdk sdk)
+	{
+		mySdk = sdk;
+	}
 
-    public List<Pair<String, String>> getSourcePaths() {
-        throw new UnsupportedOperationException();
-    }
+	public List<Pair<String, String>> getSourcePaths()
+	{
+		throw new UnsupportedOperationException();
+	}
 
-    public void setSourcePaths(final List<Pair<String, String>> sourcePaths) {
-        throw new UnsupportedOperationException();
-    }
+	public void setSourcePaths(final List<Pair<String, String>> sourcePaths)
+	{
+		throw new UnsupportedOperationException();
+	}
 
-    public void addSourcePath(final Pair<String, String> sourcePathInfo) {
-        throw new UnsupportedOperationException();
-    }
+	public void addSourcePath(final Pair<String, String> sourcePathInfo)
+	{
+		throw new UnsupportedOperationException();
+	}
 }

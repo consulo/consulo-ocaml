@@ -18,33 +18,38 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlSelfResolvedReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameDefinition;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 25.04.2010
  */
-public class OCamlConstructorNameDefinitionImpl extends BaseOCamlSelfResolvedReference implements OCamlConstructorNameDefinition {
-    public OCamlConstructorNameDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlConstructorNameDefinitionImpl extends BaseOCamlSelfResolvedReference implements OCamlConstructorNameDefinition
+{
+	public OCamlConstructorNameDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.UpperCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.UpperCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "constructor";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "constructor";
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitConstructorNameDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitConstructorNameDefinition(this);
+	}
 }

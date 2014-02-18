@@ -24,14 +24,17 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithLazyExpressionSurrounder extends BaseOCamlSurrounder {
-    public OCamlWithLazyExpressionSurrounder() {
-        super("lazy");
-    }
+public class OCamlWithLazyExpressionSurrounder extends BaseOCamlSurrounder
+{
+	public OCamlWithLazyExpressionSurrounder()
+	{
+		super("lazy");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return "lazy (" +  text + ")";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return "lazy (" + text + ")";
+	}
 }

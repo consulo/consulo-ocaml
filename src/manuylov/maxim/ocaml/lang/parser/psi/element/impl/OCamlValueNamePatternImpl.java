@@ -18,33 +18,38 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlSelfResolvedReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueNamePattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 15.04.2010
  */
-public class OCamlValueNamePatternImpl extends BaseOCamlSelfResolvedReference implements OCamlValueNamePattern {
-    public OCamlValueNamePatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlValueNamePatternImpl extends BaseOCamlSelfResolvedReference implements OCamlValueNamePattern
+{
+	public OCamlValueNamePatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitValueNamePattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitValueNamePattern(this);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.ValueName;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.ValueName;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "variable";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "variable";
+	}
 }

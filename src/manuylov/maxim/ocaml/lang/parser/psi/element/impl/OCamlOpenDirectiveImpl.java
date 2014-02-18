@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -25,29 +26,33 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModulePath;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlOpenDirective;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlOpenDirectiveImpl extends BaseOCamlElement implements OCamlOpenDirective {
-    public OCamlOpenDirectiveImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlOpenDirectiveImpl extends BaseOCamlElement implements OCamlOpenDirective
+{
+	public OCamlOpenDirectiveImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModulePath.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModulePath.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitOpenDirective(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitOpenDirective(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        final OCamlModulePath expression = OCamlPsiUtil.getFirstChildOfType(this, OCamlModulePath.class);
-        return OCamlDeclarationsUtil.processDeclarationsInStructuredElement(builder, expression);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		final OCamlModulePath expression = OCamlPsiUtil.getFirstChildOfType(this, OCamlModulePath.class);
+		return OCamlDeclarationsUtil.processDeclarationsInStructuredElement(builder, expression);
+	}
 }

@@ -18,24 +18,20 @@
 
 package manuylov.maxim.ocaml.fileType.ml;
 
-import com.intellij.lang.ParserDefinition;
-import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
-import manuylov.maxim.ocaml.fileType.ml.parser.MLParserDefinition;
 import org.jetbrains.annotations.NotNull;
+import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 28.03.2009
  */
-public class MLFileTypeLanguage extends OCamlFileTypeLanguage {
-    @NotNull public static final MLFileTypeLanguage INSTANCE = new MLFileTypeLanguage();
+public class MLFileTypeLanguage extends OCamlFileTypeLanguage
+{
+	@NotNull
+	public static final MLFileTypeLanguage INSTANCE = new MLFileTypeLanguage();
 
-    private MLFileTypeLanguage() {
-        super("OCAML_ML");
-    }
-
-    @NotNull
-    public ParserDefinition getParserDefinition() {
-        return new MLParserDefinition();
-    }
+	private MLFileTypeLanguage()
+	{
+		super("OCAML_ML");
+	}
 }

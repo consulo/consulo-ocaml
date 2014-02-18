@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.findUsages;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
@@ -26,70 +28,82 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlNamedElement;
 import manuylov.maxim.ocaml.lang.lexer.OCamlHighlightingLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 26.04.2010
  */
-public class OCamlFindUsagesProvider implements FindUsagesProvider {
-    @NotNull private static final DefaultWordsScanner DEFAULT_WORDS_SCANNER =
-        new DefaultWordsScanner(new OCamlHighlightingLexer(),
-            OCamlTokenTypes.DWS_IDENTIFIERS, OCamlTokenTypes.DWS_COMMENTS, OCamlTokenTypes.DWS_LITERALS) {{
-            setMayHaveFileRefsInLiterals(true);
-        }};
+public class OCamlFindUsagesProvider implements FindUsagesProvider
+{
+	@NotNull
+	private static final DefaultWordsScanner DEFAULT_WORDS_SCANNER = new DefaultWordsScanner(new OCamlHighlightingLexer(),
+			OCamlTokenTypes.DWS_IDENTIFIERS, OCamlTokenTypes.DWS_COMMENTS, OCamlTokenTypes.DWS_LITERALS)
+	{{
+			setMayHaveFileRefsInLiterals(true);
+		}};
 
-    @NotNull
-    public WordsScanner getWordsScanner() {
-        return DEFAULT_WORDS_SCANNER;
-    }
+	@NotNull
+	public WordsScanner getWordsScanner()
+	{
+		return DEFAULT_WORDS_SCANNER;
+	}
 
-    public boolean canFindUsagesFor(@NotNull final PsiElement psiElement) {
-        return true;
-    }
+	public boolean canFindUsagesFor(@NotNull final PsiElement psiElement)
+	{
+		return true;
+	}
 
-    @Nullable
-    public String getHelpId(@NotNull final PsiElement psiElement) {
-        return null;
-    }
+	@Nullable
+	public String getHelpId(@NotNull final PsiElement psiElement)
+	{
+		return null;
+	}
 
-    @NotNull
-    public String getType(@NotNull final PsiElement element) {
-        if (element instanceof OCamlNamedElement) {
-            return ((OCamlNamedElement)element).getDescription();
-        }
-        return "";
-    }
+	@NotNull
+	public String getType(@NotNull final PsiElement element)
+	{
+		if(element instanceof OCamlNamedElement)
+		{
+			return ((OCamlNamedElement) element).getDescription();
+		}
+		return "";
+	}
 
-    @NotNull
-    public String getDescriptiveName(@NotNull final PsiElement element) {
-        return getName(element);
-    }
+	@NotNull
+	public String getDescriptiveName(@NotNull final PsiElement element)
+	{
+		return getName(element);
+	}
 
-    @NotNull
-    public String getNodeText(@NotNull final PsiElement element, final boolean useFullName) {
-        final StringBuilder sb = new StringBuilder(OCamlStringUtil.firstLetterToUpperCase(getType(element)));
-        if (sb.length() > 0) {
-            sb.append(" ");
-        }
-        sb.append(useFullName ? getCanonicalPath(element) : getName(element));
-        return sb.toString();
-    }
+	@NotNull
+	public String getNodeText(@NotNull final PsiElement element, final boolean useFullName)
+	{
+		final StringBuilder sb = new StringBuilder(OCamlStringUtil.firstLetterToUpperCase(getType(element)));
+		if(sb.length() > 0)
+		{
+			sb.append(" ");
+		}
+		sb.append(useFullName ? getCanonicalPath(element) : getName(element));
+		return sb.toString();
+	}
 
-    @NotNull
-    private String getName(@NotNull final PsiElement element) {
-        if (element instanceof OCamlNamedElement) {
-            return OCamlStringUtil.getNotNull(((OCamlNamedElement) element).getName());
-        }
-        return "";
-    }
+	@NotNull
+	private String getName(@NotNull final PsiElement element)
+	{
+		if(element instanceof OCamlNamedElement)
+		{
+			return OCamlStringUtil.getNotNull(((OCamlNamedElement) element).getName());
+		}
+		return "";
+	}
 
-    @NotNull
-    private String getCanonicalPath(@NotNull final PsiElement element) {
-        if (element instanceof OCamlNamedElement) {
-            return OCamlStringUtil.getNotNull(((OCamlNamedElement) element).getCanonicalPath());
-        }
-        return "";
-    }
+	@NotNull
+	private String getCanonicalPath(@NotNull final PsiElement element)
+	{
+		if(element instanceof OCamlNamedElement)
+		{
+			return OCamlStringUtil.getNotNull(((OCamlNamedElement) element).getCanonicalPath());
+		}
+		return "";
+	}
 }

@@ -18,39 +18,45 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleExpression;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleTypeConstraintModuleExpression;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlModuleTypeConstraintModuleExpressionImpl extends BaseOCamlElement implements OCamlModuleTypeConstraintModuleExpression {
-    public OCamlModuleTypeConstraintModuleExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlModuleTypeConstraintModuleExpressionImpl extends BaseOCamlElement implements OCamlModuleTypeConstraintModuleExpression
+{
+	public OCamlModuleTypeConstraintModuleExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitModuleTypeConstraintModuleExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitModuleTypeConstraintModuleExpression(this);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(
-            OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class),
-            OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleType.class)
-        );
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class),
+				OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleType.class));
+	}
 }

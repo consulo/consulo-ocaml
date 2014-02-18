@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 13.05.2010
  */
-public interface OCamlParenthesesTypeParameters extends OCamlTypeParameters {
+public interface OCamlParenthesesTypeParameters extends OCamlTypeParameters
+{
 }

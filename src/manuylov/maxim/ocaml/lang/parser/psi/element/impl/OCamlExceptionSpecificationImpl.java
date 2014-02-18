@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -27,33 +28,39 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExceptionSpecification;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlExceptionSpecificationImpl extends BaseOCamlElement implements OCamlExceptionSpecification {
-    public OCamlExceptionSpecificationImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlExceptionSpecificationImpl extends BaseOCamlElement implements OCamlExceptionSpecification
+{
+	public OCamlExceptionSpecificationImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        if (getNode().findChildByType(OCamlTokenTypes.OF_KEYWORD) != null) {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
-        }
-        else {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorNameDefinition.class);
-        }
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		if(getNode().findChildByType(OCamlTokenTypes.OF_KEYWORD) != null)
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
+		}
+		else
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorNameDefinition.class);
+		}
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitExceptionSpecification(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitExceptionSpecification(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlConstructorNameDefinition.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlConstructorNameDefinition.class);
+	}
 }

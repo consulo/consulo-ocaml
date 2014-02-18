@@ -24,8 +24,9 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 25.03.2009
  */
-public interface OCamlResolvedReferencesProcessor {
-    boolean process(@NotNull final OCamlResolvedReference psiElement);
+public interface OCamlResolvedReferencesProcessor
+{
+	boolean process(@NotNull final OCamlResolvedReference psiElement);
 
-    void setResolvingBuilder(@NotNull final ResolvingBuilder resolvingBuilder);
+	void setResolvingBuilder(@NotNull final ResolvingBuilder resolvingBuilder);
 }

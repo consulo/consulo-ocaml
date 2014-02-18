@@ -24,14 +24,17 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithBeginEndExpressionSurrounder extends BaseOCamlSurrounder {
-    public OCamlWithBeginEndExpressionSurrounder() {
-        super("begin ... end");
-    }
+public class OCamlWithBeginEndExpressionSurrounder extends BaseOCamlSurrounder
+{
+	public OCamlWithBeginEndExpressionSurrounder()
+	{
+		super("begin ... end");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return "begin " + text + " end";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return "begin " + text + " end";
+	}
 }

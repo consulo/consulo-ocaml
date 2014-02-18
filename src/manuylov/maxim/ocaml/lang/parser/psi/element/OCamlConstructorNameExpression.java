@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-public interface OCamlConstructorNameExpression extends OCamlConstructorName, OCamlExpression {
+public interface OCamlConstructorNameExpression extends OCamlConstructorName, OCamlExpression
+{
 }

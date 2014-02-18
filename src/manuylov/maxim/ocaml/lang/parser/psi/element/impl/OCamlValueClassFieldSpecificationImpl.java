@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -26,28 +27,32 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlInstVarNameDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueClassFieldSpecification;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlValueClassFieldSpecificationImpl extends BaseOCamlElement implements OCamlValueClassFieldSpecification {
-    public OCamlValueClassFieldSpecificationImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlValueClassFieldSpecificationImpl extends BaseOCamlElement implements OCamlValueClassFieldSpecification
+{
+	public OCamlValueClassFieldSpecificationImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitValueClassFieldSpecification(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitValueClassFieldSpecification(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlInstVarNameDefinition.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlInstVarNameDefinition.class);
+	}
 }

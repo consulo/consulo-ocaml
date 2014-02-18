@@ -18,38 +18,43 @@
 
 package manuylov.maxim.ocaml.fileType.mli.parser;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.parser.ast.StatementParsing;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.CommentsParserPsiBuilder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 09.02.2009
  */
-class MLIParser implements PsiParser {
-    @NotNull
-    public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder) {
-        final PsiBuilder builderWrapper = new CommentsParserPsiBuilder(builder);
+class MLIParser implements PsiParser
+{
+	@NotNull
+	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, @NotNull LanguageVersion languageVersion)
+	{
+		final PsiBuilder builderWrapper = new CommentsParserPsiBuilder(builder);
 
-        final PsiBuilder.Marker rootMarker = builderWrapper.mark();
-        final PsiBuilder.Marker moduleSpecificationMarker = builderWrapper.mark();
-        final PsiBuilder.Marker moduleTypeMarker = builderWrapper.mark();
+		final PsiBuilder.Marker rootMarker = builderWrapper.mark();
+		final PsiBuilder.Marker moduleSpecificationMarker = builderWrapper.mark();
+		final PsiBuilder.Marker moduleTypeMarker = builderWrapper.mark();
 
-        StatementParsing.parseSpecifications(builderWrapper, new StatementParsing.Condition() {
-            public boolean test() {
-                return builderWrapper.eof();
-            }
-        });
+		StatementParsing.parseSpecifications(builderWrapper, new StatementParsing.Condition()
+		{
+			public boolean test()
+			{
+				return builderWrapper.eof();
+			}
+		});
 
-        moduleTypeMarker.done(OCamlElementTypes.FILE_MODULE_TYPE);
-        moduleSpecificationMarker.done(OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING);
-        rootMarker.done(root);
+		moduleTypeMarker.done(OCamlElementTypes.FILE_MODULE_TYPE);
+		moduleSpecificationMarker.done(OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING);
+		rootMarker.done(root);
 
-        return builderWrapper.getTreeBuilt();
-    }
+		return builderWrapper.getTreeBuilt();
+	}
 }

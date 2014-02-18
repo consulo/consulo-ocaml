@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
  * @author Maxim.Manuylov
  *         Date: 01.05.2009
  */
-public interface OCamlResolvedMethod extends OCamlResolvedReference {
+public interface OCamlResolvedMethod extends OCamlResolvedReference
+{
 }

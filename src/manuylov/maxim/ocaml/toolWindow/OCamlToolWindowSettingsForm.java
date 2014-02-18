@@ -18,6 +18,17 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
@@ -28,97 +39,106 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.RawCommandLineEditor;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.04.2010
  */
-public class OCamlToolWindowSettingsForm {
-    private RawCommandLineEditor myCommandLineParamsEditor;
-    private JComboBox mySdkComboBox;
-    private JButton myConfigureButton;
-    private JPanel myRootPanel;
-    private TextFieldWithBrowseButton myWorkingDirectoryEditor;
+public class OCamlToolWindowSettingsForm
+{
+	private RawCommandLineEditor myCommandLineParamsEditor;
+	private JComboBox mySdkComboBox;
+	private JButton myConfigureButton;
+	private JPanel myRootPanel;
+	private TextFieldWithBrowseButton myWorkingDirectoryEditor;
 
-    @NotNull private final Project myProject;
+	@NotNull
+	private final Project myProject;
 
-    public OCamlToolWindowSettingsForm(@NotNull final Project project) {
-        myProject = project;
+	public OCamlToolWindowSettingsForm(@NotNull final Project project)
+	{
+		myProject = project;
 
-        final List<Sdk> allSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
-        allSdks.add(0, null);
-        mySdkComboBox.setModel(new CollectionComboBoxModel(allSdks, null));
-        mySdkComboBox.setRenderer(new SdkListCellRenderer("<Project Default>"));
+		final List<Sdk> allSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
+		allSdks.add(0, null);
+		mySdkComboBox.setModel(new CollectionComboBoxModel(allSdks, null));
+		mySdkComboBox.setRenderer(new SdkListCellRenderer("<Project Default>"));
 
-        myConfigureButton.addActionListener(new ActionListener() {
-            public void actionPerformed(@NotNull final ActionEvent e) {
-                final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySdkComboBox.getSelectedItem(),
-                    myProject, mySdkComboBox);
-                editor.show();
-                if (editor.isOK()) {
-                    setSelectedSdk(editor.getSelectedJdk());
-                }
-            }
-        });
+		myConfigureButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(@NotNull final ActionEvent e)
+			{
+				final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySdkComboBox.getSelectedItem(), myProject, mySdkComboBox);
+				editor.show();
+				if(editor.isOK())
+				{
+					setSelectedSdk(editor.getSelectedJdk());
+				}
+			}
+		});
 
-        final FileChooserDescriptor workingDirChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
-        workingDirChooserDescriptor.setRoot(myProject.getBaseDir());
-        myWorkingDirectoryEditor.addBrowseFolderListener("Select Working Directory", "", myProject, workingDirChooserDescriptor);
-    }
+		final FileChooserDescriptor workingDirChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
+		workingDirChooserDescriptor.setRoot(myProject.getBaseDir());
+		myWorkingDirectoryEditor.addBrowseFolderListener("Select Working Directory", "", myProject, workingDirChooserDescriptor);
+	}
 
-    @NotNull
-    public JComponent getRootPanel() {
-        return myRootPanel;
-    }
+	@NotNull
+	public JComponent getRootPanel()
+	{
+		return myRootPanel;
+	}
 
-    @NotNull
-    public JComboBox getSdkComboBox() {
-        return mySdkComboBox;
-    }
+	@NotNull
+	public JComboBox getSdkComboBox()
+	{
+		return mySdkComboBox;
+	}
 
-    @NotNull
-    public String getCmdParams() {
-        return myCommandLineParamsEditor.getText();
-    }
+	@NotNull
+	public String getCmdParams()
+	{
+		return myCommandLineParamsEditor.getText();
+	}
 
-    public void setCmdParams(@NotNull final String params) {
-        myCommandLineParamsEditor.setText(params);
-    }
+	public void setCmdParams(@NotNull final String params)
+	{
+		myCommandLineParamsEditor.setText(params);
+	}
 
-    @NotNull
-    public String getWorkingDirectory() {
-        return myWorkingDirectoryEditor.getText();
-    }
+	@NotNull
+	public String getWorkingDirectory()
+	{
+		return myWorkingDirectoryEditor.getText();
+	}
 
-    public void setWorkingDirectory(@NotNull final String dir) {
-        myWorkingDirectoryEditor.setText(dir);
-    }
+	public void setWorkingDirectory(@NotNull final String dir)
+	{
+		myWorkingDirectoryEditor.setText(dir);
+	}
 
-    @Nullable
-    public Sdk getSelectedSdk() {
-        return (Sdk) mySdkComboBox.getSelectedItem();
-    }
+	@Nullable
+	public Sdk getSelectedSdk()
+	{
+		return (Sdk) mySdkComboBox.getSelectedItem();
+	}
 
-    public void setSelectedSdk(@Nullable final Sdk sdk) {
-        if (sdk == null) {
-            mySdkComboBox.setSelectedItem(null);
-            return;
-        }
-        final String sdkHome = sdk.getHomePath();
-        final int count = mySdkComboBox.getItemCount();
-        for (int i = 0; i < count; i++) {
-            final Sdk item = (Sdk) mySdkComboBox.getItemAt(i);
-            if (item != null && sdkHome.equals(item.getHomePath())) {
-                mySdkComboBox.setSelectedIndex(i);
-                return;
-            }
-        }
-    }
+	public void setSelectedSdk(@Nullable final Sdk sdk)
+	{
+		if(sdk == null)
+		{
+			mySdkComboBox.setSelectedItem(null);
+			return;
+		}
+		final String sdkHome = sdk.getHomePath();
+		final int count = mySdkComboBox.getItemCount();
+		for(int i = 0; i < count; i++)
+		{
+			final Sdk item = (Sdk) mySdkComboBox.getItemAt(i);
+			if(item != null && sdkHome.equals(item.getHomePath()))
+			{
+				mySdkComboBox.setSelectedIndex(i);
+				return;
+			}
+		}
+	}
 }

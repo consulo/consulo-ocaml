@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleTypeTypeConstraint;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlModuleTypeTypeConstraintImpl extends BaseOCamlElement implements OCamlModuleTypeTypeConstraint {
-    public OCamlModuleTypeTypeConstraintImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlModuleTypeTypeConstraintImpl extends BaseOCamlElement implements OCamlModuleTypeTypeConstraint
+{
+	public OCamlModuleTypeTypeConstraintImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitModuleTypeTypeConstraint(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitModuleTypeTypeConstraint(this);
+	}
 }

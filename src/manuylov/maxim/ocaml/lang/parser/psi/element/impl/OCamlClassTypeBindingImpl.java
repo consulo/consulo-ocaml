@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -28,49 +30,56 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassBodyType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassTypeBinding;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlClassTypeBindingImpl extends BaseOCamlResolvedReference implements OCamlClassTypeBinding {
-    public OCamlClassTypeBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlClassTypeBindingImpl extends BaseOCamlResolvedReference implements OCamlClassTypeBinding
+{
+	public OCamlClassTypeBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlClassBodyType.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlClassBodyType.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitClassTypeBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitClassTypeBinding(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.TYPE_CONSTRUCTOR_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.TYPE_CONSTRUCTOR_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "type";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "type";
+	}
 
-    @Nullable
-    public OCamlClassType getExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlClassType.class);
-    }
+	@Nullable
+	public OCamlClassType getExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlClassType.class);
+	}
 
-    @Nullable
-    public OCamlClassType getTypeExpression() {
-        return null;
-    }
+	@Nullable
+	public OCamlClassType getTypeExpression()
+	{
+		return null;
+	}
 }

@@ -18,38 +18,43 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassMethodAccessingExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlMethodName;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlClassMethodAccessingExpressionImpl extends BaseOCamlElement implements OCamlClassMethodAccessingExpression {
-    public OCamlClassMethodAccessingExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlClassMethodAccessingExpressionImpl extends BaseOCamlElement implements OCamlClassMethodAccessingExpression
+{
+	public OCamlClassMethodAccessingExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlMethodName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlMethodName.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitClassMethodAccessingExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitClassMethodAccessingExpression(this);
+	}
 
-    @Nullable
-    public OCamlExpression getObject() {
-        final List<OCamlExpression> children = OCamlPsiUtil.getChildrenOfType(this, OCamlExpression.class);
-        return children.size() == 0 ? null : children.get(0);
-    }
+	@Nullable
+	public OCamlExpression getObject()
+	{
+		final List<OCamlExpression> children = OCamlPsiUtil.getChildrenOfType(this, OCamlExpression.class);
+		return children.size() == 0 ? null : children.get(0);
+	}
 }

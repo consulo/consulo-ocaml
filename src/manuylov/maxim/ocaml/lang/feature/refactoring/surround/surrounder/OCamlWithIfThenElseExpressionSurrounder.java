@@ -24,21 +24,25 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithIfThenElseExpressionSurrounder extends BaseOCamlSurrounderWithNavigation {
-    private static final String START = "if ";
+public class OCamlWithIfThenElseExpressionSurrounder extends BaseOCamlSurrounderWithNavigation
+{
+	private static final String START = "if ";
 
-    public OCamlWithIfThenElseExpressionSurrounder() {
-        super("if / then / else");
-    }
+	public OCamlWithIfThenElseExpressionSurrounder()
+	{
+		super("if / then / else");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return START + " then begin " + text + " end else begin  end";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return START + " then begin " + text + " end else begin  end";
+	}
 
-    @Override
-    protected int getOffset(@NotNull final String surroundedText) {
-        return START.length();
-    }
+	@Override
+	protected int getOffset(@NotNull final String surroundedText)
+	{
+		return START.length();
+	}
 }

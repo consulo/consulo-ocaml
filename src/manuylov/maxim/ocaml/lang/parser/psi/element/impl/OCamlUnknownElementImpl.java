@@ -18,34 +18,40 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiFile;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnknownElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlUnknownElementImpl extends BaseOCamlElement implements OCamlUnknownElement {
-    @Nullable private PsiFile myOriginalFile = null;
+public class OCamlUnknownElementImpl extends BaseOCamlElement implements OCamlUnknownElement
+{
+	@Nullable
+	private PsiFile myOriginalFile = null;
 
-    public OCamlUnknownElementImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+	public OCamlUnknownElementImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void setFile(@NotNull final PsiFile file) {
-        myOriginalFile = file;
-    }
+	public void setFile(@NotNull final PsiFile file)
+	{
+		myOriginalFile = file;
+	}
 
-    @Override
-    public PsiFile getContainingFile() {
-        return myOriginalFile;
-    }
+	@Override
+	public PsiFile getContainingFile()
+	{
+		return myOriginalFile;
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitUnknownElement(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitUnknownElement(this);
+	}
 }

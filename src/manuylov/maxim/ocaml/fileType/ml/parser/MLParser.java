@@ -18,38 +18,44 @@
 
 package manuylov.maxim.ocaml.fileType.ml.parser;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.parser.ast.StatementParsing;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.CommentsParserPsiBuilder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 09.02.2009
  */
-class MLParser implements PsiParser {
-    @NotNull
-    public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder) {
-        final PsiBuilder builderWrapper = new CommentsParserPsiBuilder(builder);
+class MLParser implements PsiParser
+{
+	@Override
+	@NotNull
+	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, @NotNull LanguageVersion languageVersion)
+	{
+		final PsiBuilder builderWrapper = new CommentsParserPsiBuilder(builder);
 
-        final PsiBuilder.Marker rootMarker = builderWrapper.mark();
-        final PsiBuilder.Marker moduleDefinitionMarker = builderWrapper.mark();
-        final PsiBuilder.Marker moduleExpressionMarker = builderWrapper.mark();
+		final PsiBuilder.Marker rootMarker = builderWrapper.mark();
+		final PsiBuilder.Marker moduleDefinitionMarker = builderWrapper.mark();
+		final PsiBuilder.Marker moduleExpressionMarker = builderWrapper.mark();
 
-        StatementParsing.parseDefinitionsAndExpressions(builderWrapper, new StatementParsing.Condition() {
-            public boolean test() {
-                return builderWrapper.eof();
-            }
-        });
+		StatementParsing.parseDefinitionsAndExpressions(builderWrapper, new StatementParsing.Condition()
+		{
+			public boolean test()
+			{
+				return builderWrapper.eof();
+			}
+		});
 
-        moduleExpressionMarker.done(OCamlElementTypes.FILE_MODULE_EXPRESSION);
-        moduleDefinitionMarker.done(OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING);
-        rootMarker.done(root);
-        
-        return builderWrapper.getTreeBuilt();
-    }
+		moduleExpressionMarker.done(OCamlElementTypes.FILE_MODULE_EXPRESSION);
+		moduleDefinitionMarker.done(OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING);
+		rootMarker.done(root);
+
+		return builderWrapper.getTreeBuilt();
+	}
 }

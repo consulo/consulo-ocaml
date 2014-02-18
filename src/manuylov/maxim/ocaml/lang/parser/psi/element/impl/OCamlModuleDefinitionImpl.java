@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -25,28 +26,32 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleDefinitionBinding;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlModuleDefinitionImpl extends BaseOCamlElement implements OCamlModuleDefinition {
-    public OCamlModuleDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlModuleDefinitionImpl extends BaseOCamlElement implements OCamlModuleDefinition
+{
+	public OCamlModuleDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleDefinitionBinding.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleDefinitionBinding.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitModuleDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitModuleDefinition(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlModuleDefinitionBinding.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlModuleDefinitionBinding.class);
+	}
 }

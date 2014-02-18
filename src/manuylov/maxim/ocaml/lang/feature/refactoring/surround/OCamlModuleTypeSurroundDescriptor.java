@@ -25,8 +25,10 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlModuleTypeSurroundDescriptor extends BaseOCamlSurroundDescriptor {
-    public OCamlModuleTypeSurroundDescriptor() {
-        super(OCamlModuleType.class, new OCamlWithParenthesesExpressionSurrounder());
-    }
+public class OCamlModuleTypeSurroundDescriptor extends BaseOCamlSurroundDescriptor
+{
+	public OCamlModuleTypeSurroundDescriptor()
+	{
+		super(OCamlModuleType.class, new OCamlWithParenthesesExpressionSurrounder());
+	}
 }

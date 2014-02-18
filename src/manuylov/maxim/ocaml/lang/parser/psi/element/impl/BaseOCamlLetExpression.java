@@ -18,33 +18,40 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ElementPosition;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetBinding;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.04.2009
  */
-abstract class BaseOCamlLetExpression extends BaseOCamlLetElement {
-    public BaseOCamlLetExpression(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+abstract class BaseOCamlLetExpression extends BaseOCamlLetElement
+{
+	public BaseOCamlLetExpression(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        if (builder.getLastParentPosition() == ElementPosition.Sibling) return false;
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		if(builder.getLastParentPosition() == ElementPosition.Sibling)
+		{
+			return false;
+		}
 
-        final OCamlElement lastParent = builder.getLastParent();
-        //noinspection SimplifiableIfStatement
-        if (lastParent instanceof OCamlLetBinding && !isRecursive()) {
-            return false;
-        }
+		final OCamlElement lastParent = builder.getLastParent();
+		//noinspection SimplifiableIfStatement
+		if(lastParent instanceof OCamlLetBinding && !isRecursive())
+		{
+			return false;
+		}
 
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlLetBinding.class);
-    }
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlLetBinding.class);
+	}
 }

@@ -24,7 +24,8 @@ import org.jetbrains.annotations.Nullable;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlExpressionStatement extends OCamlStatement {
-    @Nullable
-    OCamlExpression getExpression();
+public interface OCamlExpressionStatement extends OCamlStatement
+{
+	@Nullable
+	OCamlExpression getExpression();
 }

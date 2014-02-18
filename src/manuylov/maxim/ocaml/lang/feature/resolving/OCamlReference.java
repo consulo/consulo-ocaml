@@ -18,34 +18,35 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public interface OCamlReference extends OCamlNamedElement, PsiReference {
-    @Nullable
-    OCamlResolvedReference resolve();
+public interface OCamlReference extends OCamlNamedElement, PsiReference
+{
+	@Nullable
+	OCamlResolvedReference resolve();
 
-    @NotNull
-    LookupElement[] getVariants();
+	@NotNull
+	LookupElement[] getVariants();
 
-    @NotNull
-    List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes();
+	@NotNull
+	List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes();
 
-    @NotNull
-    List<? extends OCamlExtendedModuleName> getModulePath();
+	@NotNull
+	List<? extends OCamlExtendedModuleName> getModulePath();
 
-    boolean isBundled();
+	boolean isBundled();
 
-    boolean isReferenceToWithFakeModules(@NotNull final PsiElement element, @NotNull final OCamlFile... fakeModules);
+	boolean isReferenceToWithFakeModules(@NotNull final PsiElement element, @NotNull final OCamlFile... fakeModules);
 }

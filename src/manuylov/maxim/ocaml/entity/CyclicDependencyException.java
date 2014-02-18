@@ -18,37 +18,42 @@
 
 package manuylov.maxim.ocaml.entity;
 
-import manuylov.maxim.ocaml.util.TreeNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import manuylov.maxim.ocaml.util.TreeNode;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 11.04.2010
  */
-public class CyclicDependencyException extends Exception {
-    public CyclicDependencyException(@NotNull final TreeNode<OCamlModule> node) {
-        super(generateMessage(node));
-    }
+public class CyclicDependencyException extends Exception
+{
+	public CyclicDependencyException(@NotNull final TreeNode<OCamlModule> node)
+	{
+		super(generateMessage(node));
+	}
 
-    @NotNull
-    private static String generateMessage(@NotNull final TreeNode<OCamlModule> node) {
-        final StringBuilder sb = new StringBuilder();
-        final OCamlModule module = node.getData();
-        TreeNode<OCamlModule> current = processNode(sb, node);
-        while (current != null && !current.getData().equals(module)) {
-            current = processNode(sb, current);
-        }
-        assert current != null;
-        sb.insert(0, module.getName());
-        sb.insert(0, "There is the cycle of OCaml module dependencies: ");
-        return sb.toString();
-    }
+	@NotNull
+	private static String generateMessage(@NotNull final TreeNode<OCamlModule> node)
+	{
+		final StringBuilder sb = new StringBuilder();
+		final OCamlModule module = node.getData();
+		TreeNode<OCamlModule> current = processNode(sb, node);
+		while(current != null && !current.getData().equals(module))
+		{
+			current = processNode(sb, current);
+		}
+		assert current != null;
+		sb.insert(0, module.getName());
+		sb.insert(0, "There is the cycle of OCaml module dependencies: ");
+		return sb.toString();
+	}
 
-    @Nullable
-    private static TreeNode<OCamlModule> processNode(@NotNull final StringBuilder sb, @NotNull final TreeNode<OCamlModule> node) {
-        sb.insert(0, node.getData().getName());
-        sb.insert(0, " -> ");
-        return node.getParent();
-    }
+	@Nullable
+	private static TreeNode<OCamlModule> processNode(@NotNull final StringBuilder sb, @NotNull final TreeNode<OCamlModule> node)
+	{
+		sb.insert(0, node.getData().getName());
+		sb.insert(0, " -> ");
+		return node.getParent();
+	}
 }

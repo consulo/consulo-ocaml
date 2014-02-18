@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -30,44 +32,50 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlAsPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueNamePattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlAsPatternImpl extends BaseOCamlResolvedReference implements OCamlAsPattern {
-    public OCamlAsPatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlAsPatternImpl extends BaseOCamlResolvedReference implements OCamlAsPattern
+{
+	public OCamlAsPatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitAsPattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitAsPattern(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlValueNamePattern.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlValueNamePattern.class);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.checkNodeType(getNode().getLastChildNode(), OCamlElementTypes.VALUE_NAME_PATTERN);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.checkNodeType(getNode().getLastChildNode(), OCamlElementTypes.VALUE_NAME_PATTERN);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.ValueName;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.ValueName;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "pattern";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "pattern";
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return builder.getProcessor().process(this) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);    
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return builder.getProcessor().process(this) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
+	}
 }

@@ -25,5 +25,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlNamedElement;
  * @author Maxim.Manuylov
  *         Date: 30.04.2010
  */
-public interface OCamlNamedStubElement<T extends OCamlNamedElement> extends NamedStub<T> {
+public interface OCamlNamedStubElement<T extends OCamlNamedElement> extends NamedStub<T>
+{
 }

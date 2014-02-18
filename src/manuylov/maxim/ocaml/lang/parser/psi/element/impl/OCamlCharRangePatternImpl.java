@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlCharRangePattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 25.04.2010
  */
-public class OCamlCharRangePatternImpl extends BaseOCamlPattern implements OCamlCharRangePattern {
-    public OCamlCharRangePatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlCharRangePatternImpl extends BaseOCamlPattern implements OCamlCharRangePattern
+{
+	public OCamlCharRangePatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.CHAR_LITERALS);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.CHAR_LITERALS);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitCharRangePattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitCharRangePattern(this);
+	}
 }

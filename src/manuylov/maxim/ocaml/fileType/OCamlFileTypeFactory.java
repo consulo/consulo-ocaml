@@ -18,25 +18,28 @@
 
 package manuylov.maxim.ocaml.fileType;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.04.2010
  */
-public class OCamlFileTypeFactory extends FileTypeFactory {
-    @Override
-    public void createFileTypes(@NotNull final FileTypeConsumer consumer) {
-        consume(consumer, MLFileType.INSTANCE);
-        consume(consumer, MLIFileType.INSTANCE);
-    }
+public class OCamlFileTypeFactory extends FileTypeFactory
+{
+	@Override
+	public void createFileTypes(@NotNull final FileTypeConsumer consumer)
+	{
+		consume(consumer, MLFileType.INSTANCE);
+		consume(consumer, MLIFileType.INSTANCE);
+	}
 
-    private void consume(@NotNull final FileTypeConsumer consumer, @NotNull final FileType fileType) {
-        consumer.consume(fileType, fileType.getDefaultExtension());
-    }
+	private void consume(@NotNull final FileTypeConsumer consumer, @NotNull final FileType fileType)
+	{
+		consumer.consume(fileType, fileType.getDefaultExtension());
+	}
 }

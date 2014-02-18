@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
@@ -25,41 +26,48 @@ import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementProcessor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public abstract class BaseOCamlElement extends ASTWrapperPsiElement implements OCamlElement {
-    public BaseOCamlElement(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+public abstract class BaseOCamlElement extends ASTWrapperPsiElement implements OCamlElement
+{
+	public BaseOCamlElement(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return false;
-    }
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return false;
+	}
 
-    @Override
-    public void accept(@NotNull final PsiElementVisitor psiElementVisitor) {
-        boolean processed = false;
+	@Override
+	public void accept(@NotNull final PsiElementVisitor psiElementVisitor)
+	{
+		boolean processed = false;
 
-        if (psiElementVisitor instanceof OCamlElementVisitor) {
-            visit((OCamlElementVisitor)psiElementVisitor);
-            processed = true;
-        }
+		if(psiElementVisitor instanceof OCamlElementVisitor)
+		{
+			visit((OCamlElementVisitor) psiElementVisitor);
+			processed = true;
+		}
 
-        if (psiElementVisitor instanceof OCamlElementProcessor) {
-            ((OCamlElementProcessor) psiElementVisitor).process(this);
-            processed = true;
-        }
+		if(psiElementVisitor instanceof OCamlElementProcessor)
+		{
+			((OCamlElementProcessor) psiElementVisitor).process(this);
+			processed = true;
+		}
 
-        if (!processed) {
-            super.accept(psiElementVisitor);
-        }
-    }
+		if(!processed)
+		{
+			super.accept(psiElementVisitor);
+		}
+	}
 
-    public boolean endsCorrectly() {
-        return true;
-    }
+	public boolean endsCorrectly()
+	{
+		return true;
+	}
 }

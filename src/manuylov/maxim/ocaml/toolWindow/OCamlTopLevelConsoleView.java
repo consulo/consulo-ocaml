@@ -18,6 +18,12 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import java.awt.Dimension;
+
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
@@ -33,73 +39,78 @@ import com.intellij.ui.content.ContentManager;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 import manuylov.maxim.ocaml.settings.OCamlSettings;
 import manuylov.maxim.ocaml.util.OCamlSystemUtil;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
-class OCamlTopLevelConsoleView extends BaseOCamlToolWindowView {
-    private static int ourLastConsoleNumber = 0;
-    private final int myConsoleNumber;
+class OCamlTopLevelConsoleView extends BaseOCamlToolWindowView
+{
+	private static int ourLastConsoleNumber = 0;
+	private final int myConsoleNumber;
 
-    @NotNull private final ConsoleView myConsoleView;
-    @NotNull private final OSProcessHandler myProcessHandler;
+	@NotNull
+	private final ConsoleView myConsoleView;
+	@NotNull
+	private final OSProcessHandler myProcessHandler;
 
-    public OCamlTopLevelConsoleView(@NotNull final Project project, @NotNull final ContentManager contentManager, final Sdk topLevelSdk) throws ExecutionException {
-        super(project, contentManager);
-        myConsoleNumber = ++ourLastConsoleNumber;
+	public OCamlTopLevelConsoleView(@NotNull final Project project, @NotNull final ContentManager contentManager,
+			final Sdk topLevelSdk) throws ExecutionException
+	{
+		super(project, contentManager);
+		myConsoleNumber = ++ourLastConsoleNumber;
 
-        final GeneralCommandLine cmd = createCommandLine(topLevelSdk);
-        myConsoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
-        myProcessHandler = new OSProcessHandler(cmd.createProcess(), cmd.getCommandLineString());
-        myConsoleView.attachToProcess(myProcessHandler);
-        ProcessTerminatedListener.attach(myProcessHandler);
+		final GeneralCommandLine cmd = createCommandLine(topLevelSdk);
+		myConsoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
+		myProcessHandler = new OSProcessHandler(cmd.createProcess(), cmd.getCommandLineString());
+		myConsoleView.attachToProcess(myProcessHandler);
+		ProcessTerminatedListener.attach(myProcessHandler);
 
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        final DefaultActionGroup group = new DefaultActionGroup();
-        group.add(getOCamlToolWindowOpenCloseAction(true, false));
-        group.addAll(myConsoleView.createConsoleActions());
-        group.add(getOCamlToolWindowSettingsAction());
-        group.add(getOCamlToolWindowOpenCloseAction(false, true));
-        final JComponent toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, group, false).getComponent();
-        toolbar.setMaximumSize(new Dimension(toolbar.getPreferredSize().width, Integer.MAX_VALUE));
+		final DefaultActionGroup group = new DefaultActionGroup();
+		group.add(getOCamlToolWindowOpenCloseAction(true, false));
+		group.addAll(myConsoleView.createConsoleActions());
+		group.add(getOCamlToolWindowSettingsAction());
+		group.add(getOCamlToolWindowOpenCloseAction(false, true));
+		final JComponent toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, group, false).getComponent();
+		toolbar.setMaximumSize(new Dimension(toolbar.getPreferredSize().width, Integer.MAX_VALUE));
 
-        add(toolbar);
-        add(myConsoleView.getComponent());
+		add(toolbar);
+		add(myConsoleView.getComponent());
 
-        myConsoleView.getComponent().requestFocus();
-        myProcessHandler.startNotify();
-    }
+		myConsoleView.getComponent().requestFocus();
+		myProcessHandler.startNotify();
+	}
 
-    public int getConsoleNumber() {
-        return myConsoleNumber;
-    }
+	public int getConsoleNumber()
+	{
+		return myConsoleNumber;
+	}
 
-    @NotNull
-    private GeneralCommandLine createCommandLine(@NotNull final Sdk topLevelSdk) {
-        final String sdkHomePath = topLevelSdk.getHomePath();
-        final String consoleExePath = OCamlSdkType.getTopLevelExecutable(sdkHomePath).getAbsolutePath();
-        final GeneralCommandLine cmd = new GeneralCommandLine();
-        final OCamlSettings settings = OCamlSettings.getInstance();
-        final String workingDir = settings.getTopLevelCmdWorkingDir().trim();
-        cmd.setWorkDirectory(workingDir.isEmpty() ? sdkHomePath : workingDir);
-        cmd.setExePath(consoleExePath);
-        OCamlSystemUtil.addStdPaths(cmd, topLevelSdk);
-        final String cmdOptions = settings.getTopLevelCmdOptions().trim();
-        if (!cmdOptions.isEmpty()) {
-            cmd.getParametersList().addParametersString(cmdOptions);
-        }
-        return cmd;
-    }
+	@NotNull
+	private GeneralCommandLine createCommandLine(@NotNull final Sdk topLevelSdk)
+	{
+		final String sdkHomePath = topLevelSdk.getHomePath();
+		final String consoleExePath = OCamlSdkType.getTopLevelExecutable(sdkHomePath).getAbsolutePath();
+		final GeneralCommandLine cmd = new GeneralCommandLine();
+		final OCamlSettings settings = OCamlSettings.getInstance();
+		final String workingDir = settings.getTopLevelCmdWorkingDir().trim();
+		cmd.setWorkDirectory(workingDir.isEmpty() ? sdkHomePath : workingDir);
+		cmd.setExePath(consoleExePath);
+		OCamlSystemUtil.addStdPaths(cmd, topLevelSdk);
+		final String cmdOptions = settings.getTopLevelCmdOptions().trim();
+		if(!cmdOptions.isEmpty())
+		{
+			cmd.getParametersList().addParametersString(cmdOptions);
+		}
+		return cmd;
+	}
 
-    @Override
-    public void dispose() {
-        myConsoleView.dispose();
-        myProcessHandler.destroyProcess();
-    }
+	@Override
+	public void dispose()
+	{
+		myConsoleView.dispose();
+		myProcessHandler.destroyProcess();
+	}
 }

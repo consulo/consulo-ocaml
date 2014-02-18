@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
@@ -26,54 +31,58 @@ import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlMethodName;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMethodName {
-    public OCamlMethodNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMethodName
+{
+	public OCamlMethodNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitMethodName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitMethodName(this);
+	}
 
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "method";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "method";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Collections.emptyList();
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Collections.emptyList();
+	}
 
-    @NotNull
-    public List<OCamlExtendedModuleName> getModulePath() {
-        return Collections.emptyList();
-    }
+	@NotNull
+	public List<OCamlExtendedModuleName> getModulePath()
+	{
+		return Collections.emptyList();
+	}
 
-    @Nullable
-    @Override
-    public OCamlResolvedReference resolve() {
+	@Nullable
+	@Override
+	public OCamlResolvedReference resolve()
+	{
 /*
-        final OCamlElement parent = OCamlPsiUtil.getParent(this);
+		final OCamlElement parent = OCamlPsiUtil.getParent(this);
         if (parent == null) return null;
 
         if (parent instanceof OCamlResolvedMethod) {
@@ -96,14 +105,14 @@ public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMeth
         }
 */
 
-        return null; //todo
-    }
+		return null; //todo
+	}
 
 
-
-    @NotNull
-    @Override
-    public LookupElement[] getVariants() {
+	@NotNull
+	@Override
+	public LookupElement[] getVariants()
+	{
 /*
         final OCamlElement parent = OCamlPsiUtil.getParent(this);
         if (parent == null) return new OCamlResolvedReference[0];
@@ -116,11 +125,12 @@ public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMeth
 
         return (OCamlResolvedReference[]) object.getAvailableMethods().toArray();
 */
-        return new LookupElement[0]; //todo
-    }
+		return new LookupElement[0]; //todo
+	}
 
-    @Override
-    public boolean isSoft() {
-        return true; // todo
-    }
+	@Override
+	public boolean isSoft()
+	{
+		return true; // todo
+	}
 }

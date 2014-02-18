@@ -18,38 +18,41 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlObjectSelfDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlObjectSelfSpecification;
-import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.05.2009
  */
-public class OCamlObjectSelfSpecificationImpl extends BaseOCamlElement implements OCamlObjectSelfSpecification {
-    public OCamlObjectSelfSpecificationImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlObjectSelfSpecificationImpl extends BaseOCamlElement implements OCamlObjectSelfSpecification
+{
+	public OCamlObjectSelfSpecificationImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitObjectSelfSpecification(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitObjectSelfSpecification(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeExpression.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeExpression.class);
+	}
 }

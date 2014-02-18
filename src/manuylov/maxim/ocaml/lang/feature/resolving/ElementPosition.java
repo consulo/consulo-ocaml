@@ -22,7 +22,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving;
  * @author Maxim.Manuylov
  *         Date: 26.03.2009
  */
-public enum ElementPosition {
-    Sibling,
-    Child
+public enum ElementPosition
+{
+	Sibling,
+	Child
 }

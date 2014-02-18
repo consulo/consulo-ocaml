@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeConstraintPattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlTypeConstraintPatternImpl extends BaseOCamlPattern implements OCamlTypeConstraintPattern {
-    public OCamlTypeConstraintPatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlTypeConstraintPatternImpl extends BaseOCamlPattern implements OCamlTypeConstraintPattern
+{
+	public OCamlTypeConstraintPatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitTypeConstraintPattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitTypeConstraintPattern(this);
+	}
 }

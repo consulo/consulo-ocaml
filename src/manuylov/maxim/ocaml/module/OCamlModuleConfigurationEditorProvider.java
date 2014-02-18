@@ -18,30 +18,35 @@
 
 package manuylov.maxim.ocaml.module;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleConfigurationEditor;
 import com.intellij.openapi.roots.ui.configuration.DefaultModuleConfigurationEditorFactory;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationEditorProvider;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.04.2010
  */
-public class OCamlModuleConfigurationEditorProvider implements ModuleConfigurationEditorProvider {
-    public ModuleConfigurationEditor[] createEditors(@NotNull final ModuleConfigurationState state) {
-        final Module module = state.getRootModel().getModule();
-        if (!OCamlModuleUtil.isOCamlModule(module)) return ModuleConfigurationEditor.EMPTY;
-        final DefaultModuleConfigurationEditorFactory editorFactory = DefaultModuleConfigurationEditorFactory.getInstance();
-        final List<ModuleConfigurationEditor> editors = new ArrayList<ModuleConfigurationEditor>();
-        editors.add(editorFactory.createModuleContentRootsEditor(state));
-        editors.add(editorFactory.createOutputEditor(state));
-        editors.add(editorFactory.createClasspathEditor(state));
-        return editors.toArray(new ModuleConfigurationEditor[editors.size()]);
-    }
+public class OCamlModuleConfigurationEditorProvider implements ModuleConfigurationEditorProvider
+{
+	public ModuleConfigurationEditor[] createEditors(@NotNull final ModuleConfigurationState state)
+	{
+		final Module module = state.getRootModel().getModule();
+		if(!OCamlModuleUtil.isOCamlModule(module))
+		{
+			return ModuleConfigurationEditor.EMPTY;
+		}
+		final DefaultModuleConfigurationEditorFactory editorFactory = DefaultModuleConfigurationEditorFactory.getInstance();
+		final List<ModuleConfigurationEditor> editors = new ArrayList<ModuleConfigurationEditor>();
+		editors.add(editorFactory.createModuleContentRootsEditor(state));
+		editors.add(editorFactory.createOutputEditor(state));
+		editors.add(editorFactory.createClasspathEditor(state));
+		return editors.toArray(new ModuleConfigurationEditor[editors.size()]);
+	}
 }

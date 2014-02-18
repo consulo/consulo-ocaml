@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.compile;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.compiler.options.CompileStepBeforeRun;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -25,48 +27,52 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.openapi.compiler.CompileContext;
 import manuylov.maxim.ocaml.run.OCamlRunConfiguration;
 import manuylov.maxim.ocaml.run.OCamlRunner;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 10.04.2010
  */
-class OCamlCompileContext {
-    @Nullable private final OCamlRunConfiguration myRunConfiguration;
-    private final boolean myIsStandaloneCompile;
-    private final boolean myIsDebugMode;
+class OCamlCompileContext
+{
+	@Nullable
+	private final OCamlRunConfiguration myRunConfiguration;
+	private final boolean myIsStandaloneCompile;
+	private final boolean myIsDebugMode;
 
-    private OCamlCompileContext(final boolean isStandaloneCompile,
-                               @Nullable final OCamlRunConfiguration runConfiguration,
-                               final boolean isDebugMode) {
-        myIsStandaloneCompile = isStandaloneCompile;
-        myRunConfiguration = runConfiguration;
-        myIsDebugMode = isDebugMode;
-    }
+	private OCamlCompileContext(final boolean isStandaloneCompile, @Nullable final OCamlRunConfiguration runConfiguration, final boolean isDebugMode)
+	{
+		myIsStandaloneCompile = isStandaloneCompile;
+		myRunConfiguration = runConfiguration;
+		myIsDebugMode = isDebugMode;
+	}
 
-    public boolean isStandaloneCompile() {
-        return myIsStandaloneCompile;
-    }
+	public boolean isStandaloneCompile()
+	{
+		return myIsStandaloneCompile;
+	}
 
-    @Nullable
-    public OCamlRunConfiguration getRunConfiguration() {
-        return myRunConfiguration;
-    }
+	@Nullable
+	public OCamlRunConfiguration getRunConfiguration()
+	{
+		return myRunConfiguration;
+	}
 
-    public boolean isDebugMode() {
-        return myIsDebugMode;
-    }
+	public boolean isDebugMode()
+	{
+		return myIsDebugMode;
+	}
 
-    @NotNull
-    public static OCamlCompileContext createOn(@NotNull final CompileContext context) {
-        final RunConfiguration configuration = CompileStepBeforeRun.getRunConfiguration(context);
-        if (configuration == null || !(configuration instanceof OCamlRunConfiguration)) {
-            return new OCamlCompileContext(true, null, false);
-        }
-        final String debugExecutorId = DefaultDebugExecutor.getDebugExecutorInstance().getId();
-        final Executor currentExecutor = OCamlRunner.getCurrentExecutor();
-        final boolean isDebugMode = currentExecutor != null && debugExecutorId.equals(currentExecutor.getId());
-        return new OCamlCompileContext(false, (OCamlRunConfiguration) configuration, isDebugMode);
-    }
+	@NotNull
+	public static OCamlCompileContext createOn(@NotNull final CompileContext context)
+	{
+		final RunConfiguration configuration = CompileStepBeforeRun.getRunConfiguration(context);
+		if(configuration == null || !(configuration instanceof OCamlRunConfiguration))
+		{
+			return new OCamlCompileContext(true, null, false);
+		}
+		final String debugExecutorId = DefaultDebugExecutor.getDebugExecutorInstance().getId();
+		final Executor currentExecutor = OCamlRunner.getCurrentExecutor();
+		final boolean isDebugMode = currentExecutor != null && debugExecutorId.equals(currentExecutor.getId());
+		return new OCamlCompileContext(false, (OCamlRunConfiguration) configuration, isDebugMode);
+	}
 }

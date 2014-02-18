@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -25,29 +26,33 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlIncludeDirectiveDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlIncludeDirectiveDefinitionImpl extends BaseOCamlElement implements OCamlIncludeDirectiveDefinition {
-    public OCamlIncludeDirectiveDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlIncludeDirectiveDefinitionImpl extends BaseOCamlElement implements OCamlIncludeDirectiveDefinition
+{
+	public OCamlIncludeDirectiveDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleExpression.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitIncludeDirectiveDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitIncludeDirectiveDefinition(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        final OCamlModuleExpression expression = OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class);
-        return OCamlDeclarationsUtil.processDeclarationsInStructuredElement(builder, expression);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		final OCamlModuleExpression expression = OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class);
+		return OCamlDeclarationsUtil.processDeclarationsInStructuredElement(builder, expression);
+	}
 }

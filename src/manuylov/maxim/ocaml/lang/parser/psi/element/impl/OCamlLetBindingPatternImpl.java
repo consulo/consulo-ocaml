@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -26,30 +27,34 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetBindingPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 20.04.2010
  */
-public class OCamlLetBindingPatternImpl extends BaseOCamlElement implements OCamlLetBindingPattern {
-    public OCamlLetBindingPatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlLetBindingPatternImpl extends BaseOCamlElement implements OCamlLetBindingPattern
+{
+	public OCamlLetBindingPatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitLetBindingPattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitLetBindingPattern(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        final OCamlElement lastParent = builder.getLastParent(), lastParentParent = lastParent == null ? null : OCamlPsiUtil.getParent(lastParent);
-        final boolean lastParentParentIsSibling = lastParentParent != null && OCamlPsiUtil.areSiblings(this, lastParentParent);
-        return !lastParentParentIsSibling && OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		final OCamlElement lastParent = builder.getLastParent(), lastParentParent = lastParent == null ? null : OCamlPsiUtil.getParent(lastParent);
+		final boolean lastParentParentIsSibling = lastParentParent != null && OCamlPsiUtil.areSiblings(this, lastParentParent);
+		return !lastParentParentIsSibling && OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
+	}
 }

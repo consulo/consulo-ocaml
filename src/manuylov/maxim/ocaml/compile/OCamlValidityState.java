@@ -18,81 +18,103 @@
 
 package manuylov.maxim.ocaml.compile;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.EOFException;
+import java.io.File;
+import java.io.IOException;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.compiler.TimestampValidityState;
 import com.intellij.openapi.compiler.ValidityState;
 import com.intellij.openapi.vfs.VirtualFile;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 10.04.2010
  */
-class OCamlValidityState implements ValidityState {
-    @NotNull private final TimestampValidityState myTimestampValidityState;
-    private final boolean myIsDebugMode;
+class OCamlValidityState implements ValidityState
+{
+	@NotNull
+	private final TimestampValidityState myTimestampValidityState;
+	private final boolean myIsDebugMode;
 
-    public OCamlValidityState(@NotNull final TimestampValidityState timestampValidityState, final boolean isDebugMode) {
-        myTimestampValidityState = timestampValidityState;
-        myIsDebugMode = isDebugMode;
-    }
+	public OCamlValidityState(@NotNull final TimestampValidityState timestampValidityState, final boolean isDebugMode)
+	{
+		myTimestampValidityState = timestampValidityState;
+		myIsDebugMode = isDebugMode;
+	}
 
-    public boolean equalsTo(@Nullable final ValidityState otherState) {
-        if (otherState == null || !(otherState instanceof OCamlValidityState)) {
-          return false;
-        }
-        final OCamlValidityState thatState = (OCamlValidityState) otherState;
-        return myTimestampValidityState.equalsTo(thatState.myTimestampValidityState) && myIsDebugMode == thatState.myIsDebugMode;
-    }
+	public boolean equalsTo(@Nullable final ValidityState otherState)
+	{
+		if(otherState == null || !(otherState instanceof OCamlValidityState))
+		{
+			return false;
+		}
+		final OCamlValidityState thatState = (OCamlValidityState) otherState;
+		return myTimestampValidityState.equalsTo(thatState.myTimestampValidityState) && myIsDebugMode == thatState.myIsDebugMode;
+	}
 
-    public void save(@NotNull final DataOutput out) throws IOException {
-        myTimestampValidityState.save(out);
-        out.writeBoolean(myIsDebugMode);
-    }
+	public void save(@NotNull final DataOutput out) throws IOException
+	{
+		myTimestampValidityState.save(out);
+		out.writeBoolean(myIsDebugMode);
+	}
 
-    @NotNull
-    public static ValidityState load(@NotNull final DataInput in) throws IOException {
-        try {
-            final TimestampValidityState timestampValidityState = TimestampValidityState.load(in);
-            try {
-                return new OCamlValidityState(timestampValidityState, in.readBoolean());
-            }
-            catch (final EOFException e) {
-                return timestampValidityState;
-            }
-        } catch (final EOFException e) {
-            return NeedRecompilationValidityState.INSTANCE;
-        }
-    }
+	@NotNull
+	public static ValidityState load(@NotNull final DataInput in) throws IOException
+	{
+		try
+		{
+			final TimestampValidityState timestampValidityState = TimestampValidityState.load(in);
+			try
+			{
+				return new OCamlValidityState(timestampValidityState, in.readBoolean());
+			}
+			catch(final EOFException e)
+			{
+				return timestampValidityState;
+			}
+		}
+		catch(final EOFException e)
+		{
+			return NeedRecompilationValidityState.INSTANCE;
+		}
+	}
 
-    @NotNull
-    public static ValidityState create(@NotNull final VirtualFile file,
-                                       @NotNull final File compiledFile,
-                                       final boolean isDebugMode,
-                                       final boolean forceRecompilation) {
-        final TimestampValidityState timestampValidityState = new TimestampValidityState(file.getTimeStamp());
-        if (OCamlFileUtil.isOCamlFile(file)) {
-            if (forceRecompilation || !compiledFile.exists()) {
-                return NeedRecompilationValidityState.INSTANCE;
-            }
-            return new OCamlValidityState(timestampValidityState, isDebugMode);
-        }
-        else {
-            return timestampValidityState;
-        }
-    }
+	@NotNull
+	public static ValidityState create(@NotNull final VirtualFile file, @NotNull final File compiledFile, final boolean isDebugMode,
+			final boolean forceRecompilation)
+	{
+		final TimestampValidityState timestampValidityState = new TimestampValidityState(file.getTimeStamp());
+		if(OCamlFileUtil.isOCamlFile(file))
+		{
+			if(forceRecompilation || !compiledFile.exists())
+			{
+				return NeedRecompilationValidityState.INSTANCE;
+			}
+			return new OCamlValidityState(timestampValidityState, isDebugMode);
+		}
+		else
+		{
+			return timestampValidityState;
+		}
+	}
 
-    private static class NeedRecompilationValidityState implements ValidityState {
-        @NotNull public static final NeedRecompilationValidityState INSTANCE = new NeedRecompilationValidityState();
+	private static class NeedRecompilationValidityState implements ValidityState
+	{
+		@NotNull
+		public static final NeedRecompilationValidityState INSTANCE = new NeedRecompilationValidityState();
 
-        public boolean equalsTo(@NotNull final ValidityState otherState) {
-            return false;
-        }
+		public boolean equalsTo(@NotNull final ValidityState otherState)
+		{
+			return false;
+		}
 
-        public void save(@NotNull final DataOutput out) throws IOException {
-        }
-    }
+		public void save(@NotNull final DataOutput out) throws IOException
+		{
+		}
+	}
 }

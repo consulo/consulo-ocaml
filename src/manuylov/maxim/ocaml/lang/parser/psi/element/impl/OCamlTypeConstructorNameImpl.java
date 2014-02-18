@@ -18,6 +18,13 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -25,79 +32,90 @@ import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassSpecificationBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassTypeBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeConstructorName;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlTypeConstructorNameImpl extends BaseOCamlReference implements OCamlTypeConstructorName {
-    @NotNull private static final Set<String> ourBundledTypes = new HashSet<String>() {{
-        add("array");
-        add("bool");
-        add("char");
-        add("exn");
-        add("float");
-        add("format4");
-        add("format6");
-        add("int");
-        add("int32");
-        add("int64");
-        add("list");
-        add("nativeint");
-        add("option");
-        add("string");
-        add("unit");
-    }};
+public class OCamlTypeConstructorNameImpl extends BaseOCamlReference implements OCamlTypeConstructorName
+{
+	@NotNull
+	private static final Set<String> ourBundledTypes = new HashSet<String>()
+	{{
+			add("array");
+			add("bool");
+			add("char");
+			add("exn");
+			add("float");
+			add("format4");
+			add("format6");
+			add("int");
+			add("int32");
+			add("int64");
+			add("list");
+			add("nativeint");
+			add("option");
+			add("string");
+			add("unit");
+		}};
 
-    @Override
-    public boolean isBundled() {
-        return ourBundledTypes.contains(getName());
-    }
+	@Override
+	public boolean isBundled()
+	{
+		return ourBundledTypes.contains(getName());
+	}
 
-    public OCamlTypeConstructorNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+	public OCamlTypeConstructorNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitTypeConstructorName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitTypeConstructorName(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "type";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "type";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlTypeBinding.class, 
-            OCamlClassTypeBinding.class, OCamlClassBinding.class, OCamlClassSpecificationBinding.class);
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlTypeBinding.class, OCamlClassTypeBinding.class, OCamlClassBinding.class,
+				OCamlClassSpecificationBinding.class);
+	}
 
-    @NotNull
-    public List<OCamlExtendedModuleName> getModulePath() {
-        return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);
-    }
+	@NotNull
+	public List<OCamlExtendedModuleName> getModulePath()
+	{
+		return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.findActualDefinitionsOfStructuredElementReference(this);
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.findActualDefinitionsOfStructuredElementReference(this);
+	}
 }

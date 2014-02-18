@@ -18,39 +18,46 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.jetbrains.annotations.NotNull;
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
+
 /**
  * @author Maxim.Manuylov
  *         Date: 27.03.2009
  */
-class VariantsCollectorProcessor extends BaseOCamlResolvedReferencesProcessor {
-    @NotNull private final ArrayList<LookupElement> myVariants = new ArrayList<LookupElement>();
-    @NotNull private final Set<String> myPaths = new HashSet<String>();
+class VariantsCollectorProcessor extends BaseOCamlResolvedReferencesProcessor
+{
+	@NotNull
+	private final ArrayList<LookupElement> myVariants = new ArrayList<LookupElement>();
+	@NotNull
+	private final Set<String> myPaths = new HashSet<String>();
 
-    public VariantsCollectorProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types) {
-        super(types);
-    }
+	public VariantsCollectorProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types)
+	{
+		super(types);
+	}
 
-    public boolean doProcess(@NotNull final OCamlResolvedReference psiElement) {
-        final String path = psiElement.getCanonicalPath();
-        if (!myPaths.contains(path)) {
-            myPaths.add(path);
-            myVariants.add(LookupElementBuilder.create(psiElement));
-        }
-        return false;
-    }
+	public boolean doProcess(@NotNull final OCamlResolvedReference psiElement)
+	{
+		final String path = psiElement.getCanonicalPath();
+		if(!myPaths.contains(path))
+		{
+			myPaths.add(path);
+			myVariants.add(LookupElementBuilder.create(psiElement));
+		}
+		return false;
+	}
 
-    @NotNull
-    public LookupElement[] getCollectedVariants() {
-        return myVariants.toArray(new LookupElement[myVariants.size()]);
-    }
+	@NotNull
+	public LookupElement[] getCollectedVariants()
+	{
+		return myVariants.toArray(new LookupElement[myVariants.size()]);
+	}
 }

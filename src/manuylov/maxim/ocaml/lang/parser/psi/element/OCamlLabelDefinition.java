@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
  * @author Maxim.Manuylov
  *         Date: 03.05.2009
  */
-public interface OCamlLabelDefinition extends OCamlResolvedReference {
+public interface OCamlLabelDefinition extends OCamlResolvedReference
+{
 }

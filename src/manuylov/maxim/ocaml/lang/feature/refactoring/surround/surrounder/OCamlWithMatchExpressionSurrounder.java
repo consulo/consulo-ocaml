@@ -24,19 +24,23 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithMatchExpressionSurrounder extends BaseOCamlSurrounderWithNavigation {
-    public OCamlWithMatchExpressionSurrounder() {
-        super("match / with");
-    }
+public class OCamlWithMatchExpressionSurrounder extends BaseOCamlSurrounderWithNavigation
+{
+	public OCamlWithMatchExpressionSurrounder()
+	{
+		super("match / with");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return "match " + text + " with ";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return "match " + text + " with ";
+	}
 
-    @Override
-    protected int getOffset(@NotNull final String surroundedText) {
-        return surroundedText.length();
-    }
+	@Override
+	protected int getOffset(@NotNull final String surroundedText)
+	{
+		return surroundedText.length();
+	}
 }

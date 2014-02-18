@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -26,52 +31,57 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLabelDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLabelName;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlLabelNameImpl extends BaseOCamlReference implements OCamlLabelName {
-    public OCamlLabelNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlLabelNameImpl extends BaseOCamlReference implements OCamlLabelName
+{
+	public OCamlLabelNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitLabelName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitLabelName(this);
+	}
 
-    @NotNull
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	@NotNull
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "label";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "label";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlLabelDefinition.class);
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlLabelDefinition.class);
+	}
 
-    @NotNull
-    public List<OCamlExtendedModuleName> getModulePath() {
-        return Collections.emptyList();
-    }
-    //todo resolve
-    @Override
-    public boolean isSoft() {
-        return true; // todo
-    }
+	@NotNull
+	public List<OCamlExtendedModuleName> getModulePath()
+	{
+		return Collections.emptyList();
+	}
+
+	//todo resolve
+	@Override
+	public boolean isSoft()
+	{
+		return true; // todo
+	}
 }

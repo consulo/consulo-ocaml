@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -25,36 +29,38 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassPath;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlClassPathImpl extends BaseOCamlElement implements OCamlClassPath {
-    public OCamlClassPathImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlClassPathImpl extends BaseOCamlElement implements OCamlClassPath
+{
+	public OCamlClassPathImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitClassPath(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitClassPath(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlClassName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlClassName.class);
+	}
 
-    @Nullable
-    public OCamlClassName getClassName() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlClassName.class);
-    }
+	@Nullable
+	public OCamlClassName getClassName()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlClassName.class);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(getClassName());
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(getClassName());
+	}
 }

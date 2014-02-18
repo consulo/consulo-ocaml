@@ -18,26 +18,30 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlExtendedModuleNameImpl extends BaseOCamlElement implements OCamlExtendedModuleName {
-    public OCamlExtendedModuleNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlExtendedModuleNameImpl extends BaseOCamlElement implements OCamlExtendedModuleName
+{
+	public OCamlExtendedModuleNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitExtendedModuleName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitExtendedModuleName(this);
+	}
 
-    @NotNull
-    public OCamlExtendedModuleName getModuleName() {
-        return this;
-    }
+	@NotNull
+	public OCamlExtendedModuleName getModuleName()
+	{
+		return this;
+	}
 }

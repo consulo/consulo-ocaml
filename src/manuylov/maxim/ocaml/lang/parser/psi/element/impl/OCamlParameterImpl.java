@@ -18,39 +18,44 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLabelDefinition;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParameter;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlParameterImpl extends BaseOCamlElement implements OCamlParameter {
-    public OCamlParameterImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlParameterImpl extends BaseOCamlElement implements OCamlParameter
+{
+	public OCamlParameterImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR)
-            || OCamlPsiUtil.endsCorrectlyWith(this, OCamlLabelDefinition.class)
-            || OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR) || OCamlPsiUtil.endsCorrectlyWith(this, OCamlLabelDefinition.class) || OCamlPsiUtil
+				.endsCorrectlyWith(this, OCamlPattern.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitParameter(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitParameter(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlPsiUtil.hasChildOfType(this, OCamlPattern.class) 
-            ? OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class)
-            : OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlLabelDefinition.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlPsiUtil.hasChildOfType(this, OCamlPattern.class) ? OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this,
+				OCamlPattern.class) : OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlLabelDefinition.class);
+	}
 }

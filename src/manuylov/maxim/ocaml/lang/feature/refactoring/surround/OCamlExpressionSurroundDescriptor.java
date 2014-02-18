@@ -25,20 +25,13 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlExpressionSurroundDescriptor extends BaseOCamlSurroundDescriptor {
-    public OCamlExpressionSurroundDescriptor() {
-        super(OCamlExpression.class,
-            new OCamlWithParenthesesExpressionSurrounder(),
-            new OCamlWithAssertExpressionSurrounder(),
-            new OCamlWithBeginEndExpressionSurrounder(),
-            new OCamlWithForExpressionSurrounder(),
-            new OCamlWithIfThenExpressionSurrounder(),
-            new OCamlWithIfThenElseExpressionSurrounder(),
-            new OCamlWithLazyExpressionSurrounder(),
-            new OCamlWithLetExpressionSurrounder(),
-            new OCamlWithMatchExpressionSurrounder(),
-            new OCamlWithTryExpressionSurrounder(),
-            new OCamlWithWhileExpressionSurrounder()
-        );
-    }
+public class OCamlExpressionSurroundDescriptor extends BaseOCamlSurroundDescriptor
+{
+	public OCamlExpressionSurroundDescriptor()
+	{
+		super(OCamlExpression.class, new OCamlWithParenthesesExpressionSurrounder(), new OCamlWithAssertExpressionSurrounder(),
+				new OCamlWithBeginEndExpressionSurrounder(), new OCamlWithForExpressionSurrounder(), new OCamlWithIfThenExpressionSurrounder(),
+				new OCamlWithIfThenElseExpressionSurrounder(), new OCamlWithLazyExpressionSurrounder(), new OCamlWithLetExpressionSurrounder(),
+				new OCamlWithMatchExpressionSurrounder(), new OCamlWithTryExpressionSurrounder(), new OCamlWithWhileExpressionSurrounder());
+	}
 }

@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -30,54 +32,62 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlMethodClassFieldDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPolyTypeExpression;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlMethodClassFieldDefinitionImpl extends BaseOCamlResolvedReference implements OCamlMethodClassFieldDefinition {
-    public OCamlMethodClassFieldDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlMethodClassFieldDefinitionImpl extends BaseOCamlResolvedReference implements OCamlMethodClassFieldDefinition
+{
+	public OCamlMethodClassFieldDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        if (getNode().findChildByType(OCamlTokenTypes.EQ) != null) {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
-        }
-        else {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPolyTypeExpression.class);
-        }
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		if(getNode().findChildByType(OCamlTokenTypes.EQ) != null)
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
+		}
+		else
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPolyTypeExpression.class);
+		}
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitMethodClassFieldDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitMethodClassFieldDefinition(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.METHOD_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.METHOD_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "method";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "method";
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return builder.getProcessor().process(this); //todo parameters inside
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return builder.getProcessor().process(this); //todo parameters inside
 /*
-        if (builder.getProcessor().process(this)) return true;
+		if (builder.getProcessor().process(this)) return true;
         final OCamlClassExpression expression = OCamlPsiUtil.getFirstChildOfType(this, OCamlClassExpression.class);
         return OCamlDeclarationsUtil.processDeclarationsInStructuredElement(builder, expression);
 */
-    }
+	}
 }

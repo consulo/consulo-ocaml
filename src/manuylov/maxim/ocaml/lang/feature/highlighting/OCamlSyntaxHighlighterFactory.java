@@ -18,21 +18,23 @@
 
 package manuylov.maxim.ocaml.lang.feature.highlighting;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.04.2010
  */
-public class OCamlSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
-    @NotNull
-    @Override
-    public SyntaxHighlighter getSyntaxHighlighter(@Nullable final Project project, @NotNull final VirtualFile virtualFile) {
-        return new OCamlSyntaxHighlighter();
-    }
+public class OCamlSyntaxHighlighterFactory extends SyntaxHighlighterFactory
+{
+	@NotNull
+	@Override
+	public SyntaxHighlighter getSyntaxHighlighter(@Nullable final Project project, @NotNull final VirtualFile virtualFile)
+	{
+		return new OCamlSyntaxHighlighter();
+	}
 }

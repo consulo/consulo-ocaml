@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -26,28 +27,32 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterizedBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameters;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 25.04.2010
  */
-public class OCamlTypeParameterizedBindingImpl extends BaseOCamlElement implements OCamlTypeParameterizedBinding {
-    public OCamlTypeParameterizedBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlTypeParameterizedBindingImpl extends BaseOCamlElement implements OCamlTypeParameterizedBinding
+{
+	public OCamlTypeParameterizedBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeBinding.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeBinding.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitTypeParameterizedBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitTypeParameterizedBinding(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeParameters.class, OCamlTypeParameterizedBinding.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeParameters.class, OCamlTypeParameterizedBinding.class);
+	}
 }

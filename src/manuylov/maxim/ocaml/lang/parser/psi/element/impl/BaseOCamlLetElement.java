@@ -18,18 +18,21 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.OCamlASTTreeUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetElement;
-import org.jetbrains.annotations.NotNull;
 
-abstract class BaseOCamlLetElement extends BaseOCamlElement implements OCamlLetElement {
-    public BaseOCamlLetElement(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+abstract class BaseOCamlLetElement extends BaseOCamlElement implements OCamlLetElement
+{
+	public BaseOCamlLetElement(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    public boolean isRecursive() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlTokenTypes.REC_KEYWORD) != null;
-    }
+	public boolean isRecursive()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlTokenTypes.REC_KEYWORD) != null;
+	}
 }

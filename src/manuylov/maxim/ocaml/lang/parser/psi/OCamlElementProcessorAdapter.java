@@ -24,5 +24,6 @@ import com.intellij.psi.PsiElementVisitor;
  * @author Maxim.Manuylov
  *         Date: 28.03.2009
  */
-public abstract class OCamlElementProcessorAdapter extends PsiElementVisitor implements OCamlElementProcessor {
+public abstract class OCamlElementProcessorAdapter extends PsiElementVisitor implements OCamlElementProcessor
+{
 }

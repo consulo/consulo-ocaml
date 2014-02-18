@@ -22,5 +22,7 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 23.05.2009
  */
-public interface OCamlResolvedStructuredElementName<T extends OCamlStructuredElement, Q extends OCamlStructuredElement> extends OCamlStructuredBinding<T, Q> {
+public interface OCamlResolvedStructuredElementName<T extends OCamlStructuredElement, Q extends OCamlStructuredElement> extends
+		OCamlStructuredBinding<T, Q>
+{
 }

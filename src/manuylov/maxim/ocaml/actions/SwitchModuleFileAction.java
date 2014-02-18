@@ -18,8 +18,15 @@
 
 package manuylov.maxim.ocaml.actions;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.intellij.ide.IdeView;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
@@ -34,62 +41,87 @@ import com.intellij.psi.PsiManager;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
 
-import java.io.File;
-import java.io.IOException;
-
 /**
  * @author Maxim.Manuylov
  *         Date: 13.04.2010
  */
-public class SwitchModuleFileAction extends AnAction {
-    public void actionPerformed(final AnActionEvent e) {
-        final DataContext dataContext = e.getDataContext();
+public class SwitchModuleFileAction extends AnAction
+{
+	public void actionPerformed(final AnActionEvent e)
+	{
+		final DataContext dataContext = e.getDataContext();
 
-        final Project project = PlatformDataKeys.PROJECT.getData(dataContext);
-        if (project == null) return;
+		final Project project = PlatformDataKeys.PROJECT.getData(dataContext);
+		if(project == null)
+		{
+			return;
+		}
 
-        final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
-        if (view == null) return;
+		final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
+		if(view == null)
+		{
+			return;
+		}
 
-        final VirtualFile file = PlatformDataKeys.VIRTUAL_FILE.getData(dataContext);
-        if (file == null) return;
+		final VirtualFile file = PlatformDataKeys.VIRTUAL_FILE.getData(dataContext);
+		if(file == null)
+		{
+			return;
+		}
 
-        final VirtualFile parent = file.getParent();
-        if (parent == null) return;
+		final VirtualFile parent = file.getParent();
+		if(parent == null)
+		{
+			return;
+		}
 
-        final File anotherFile = new File(parent.getPath(), OCamlFileUtil.getAnotherFileName(file));
-        VirtualFile anotherVirtualFile = LocalFileSystem.getInstance().findFileByIoFile(anotherFile);
+		final File anotherFile = new File(parent.getPath(), OCamlFileUtil.getAnotherFileName(file));
+		VirtualFile anotherVirtualFile = LocalFileSystem.getInstance().findFileByIoFile(anotherFile);
 
-        if (anotherVirtualFile == null) {
-            final String anotherFilePath = FileUtil.toSystemDependentName(anotherFile.getAbsolutePath());
-            final Module module = ModuleUtil.findModuleForFile(file, project);
-            if (OCamlModuleUtil.isOCamlModule(module)
-                && ModuleRootManager.getInstance(module).getFileIndex().isInSourceContent(file)) {
-                if (Messages.showYesNoCancelDialog(project,
-                    "File \"" + anotherFilePath + "\" does not exist. Do you want to create it?",
-                    "Open file \"" + anotherFilePath + "\"", Messages.getQuestionIcon()) != 0) {
-                    return;
-                }
-                ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                    public void run() {
-                        try {
-                            parent.createChildData(SwitchModuleFileAction.this, anotherFile.getName());
-                        } catch (final IOException e) {
-                            Messages.showErrorDialog(project, e.getMessage(), "Error");
-                        }
-                    }
-                });
-                anotherVirtualFile = LocalFileSystem.getInstance().findFileByIoFile(anotherFile);
-                if (anotherVirtualFile == null) return;
-            } else {
-                Messages.showErrorDialog(project, "File \"" + anotherFilePath + "\" does not exist.", "Open file \"" + anotherFilePath + "\"");
-                return;
-            }
-        }
+		if(anotherVirtualFile == null)
+		{
+			final String anotherFilePath = FileUtil.toSystemDependentName(anotherFile.getAbsolutePath());
+			final Module module = ModuleUtil.findModuleForFile(file, project);
+			if(OCamlModuleUtil.isOCamlModule(module) && ModuleRootManager.getInstance(module).getFileIndex().isInSourceContent(file))
+			{
+				if(Messages.showYesNoCancelDialog(project, "File \"" + anotherFilePath + "\" does not exist. Do you want to create it?",
+						"Open file \"" + anotherFilePath + "\"", Messages.getQuestionIcon()) != 0)
+				{
+					return;
+				}
+				ApplicationManager.getApplication().runWriteAction(new Runnable()
+				{
+					public void run()
+					{
+						try
+						{
+							parent.createChildData(SwitchModuleFileAction.this, anotherFile.getName());
+						}
+						catch(final IOException e)
+						{
+							Messages.showErrorDialog(project, e.getMessage(), "Error");
+						}
+					}
+				});
+				anotherVirtualFile = LocalFileSystem.getInstance().findFileByIoFile(anotherFile);
+				if(anotherVirtualFile == null)
+				{
+					return;
+				}
+			}
+			else
+			{
+				Messages.showErrorDialog(project, "File \"" + anotherFilePath + "\" does not exist.", "Open file \"" + anotherFilePath + "\"");
+				return;
+			}
+		}
 
-        final PsiFile anotherPsiFile = PsiManager.getInstance(project).findFile(anotherVirtualFile);
-        if (anotherPsiFile == null) return;
-        
-        view.selectElement(anotherPsiFile);
-    }
+		final PsiFile anotherPsiFile = PsiManager.getInstance(project).findFile(anotherVirtualFile);
+		if(anotherPsiFile == null)
+		{
+			return;
+		}
+
+		view.selectElement(anotherPsiFile);
+	}
 }

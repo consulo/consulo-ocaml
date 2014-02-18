@@ -18,31 +18,37 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
-import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 17.04.2010
  */
-public class ResolvingContext {
-    @NotNull private final OCamlReference mySourceElement;
-    @NotNull private final List<? extends OCamlExtendedModuleName> myModulePath;
+public class ResolvingContext
+{
+	@NotNull
+	private final OCamlReference mySourceElement;
+	@NotNull
+	private final List<? extends OCamlExtendedModuleName> myModulePath;
 
-    public ResolvingContext(@NotNull final OCamlReference sourceElement, @NotNull final List<? extends OCamlExtendedModuleName> modulePath) {
-        mySourceElement = sourceElement;
-        myModulePath = modulePath;
-    }
+	public ResolvingContext(@NotNull final OCamlReference sourceElement, @NotNull final List<? extends OCamlExtendedModuleName> modulePath)
+	{
+		mySourceElement = sourceElement;
+		myModulePath = modulePath;
+	}
 
-    @NotNull
-    public OCamlReference getSourceElement() {
-        return mySourceElement;
-    }
+	@NotNull
+	public OCamlReference getSourceElement()
+	{
+		return mySourceElement;
+	}
 
-    @NotNull
-    public List<? extends OCamlExtendedModuleName> getModulePath() {
-        return myModulePath;
-    }
+	@NotNull
+	public List<? extends OCamlExtendedModuleName> getModulePath()
+	{
+		return myModulePath;
+	}
 }

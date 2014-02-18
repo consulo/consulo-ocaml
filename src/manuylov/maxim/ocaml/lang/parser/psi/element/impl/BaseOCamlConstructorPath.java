@@ -18,23 +18,26 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorPath;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-abstract class BaseOCamlConstructorPath extends BaseOCamlElement implements OCamlConstructorPath {
-    public BaseOCamlConstructorPath(@NotNull final ASTNode node) {
-        super(node);
-    }
+abstract class BaseOCamlConstructorPath extends BaseOCamlElement implements OCamlConstructorPath
+{
+	public BaseOCamlConstructorPath(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorName.class);
+	}
 }

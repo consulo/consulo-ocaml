@@ -18,108 +18,128 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.PsiBuilder;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 10.02.2009
  */
-class LetParsing extends Parsing {
-    public static void parseLetExpression(@NotNull final PsiBuilder builder, @NotNull final ExpressionType expType) {
-        final PsiBuilder.Marker letExpressionMarker = builder.mark();
+class LetParsing extends Parsing
+{
+	public static void parseLetExpression(@NotNull final PsiBuilder builder, @NotNull final ExpressionType expType)
+	{
+		final PsiBuilder.Marker letExpressionMarker = builder.mark();
 
-        checkMatches(builder, OCamlTokenTypes.LET_KEYWORD, Strings.LET_KEYWORD_EXPECTED);
+		checkMatches(builder, OCamlTokenTypes.LET_KEYWORD, Strings.LET_KEYWORD_EXPECTED);
 
-        ignore(builder, OCamlTokenTypes.REC_KEYWORD);
+		ignore(builder, OCamlTokenTypes.REC_KEYWORD);
 
-        do {
-            parseLetBinding(builder);
-        } while (ignore(builder, OCamlTokenTypes.AND_KEYWORD));
+		do
+		{
+			parseLetBinding(builder);
+		}
+		while(ignore(builder, OCamlTokenTypes.AND_KEYWORD));
 
-        checkMatches(builder, OCamlTokenTypes.IN_KEYWORD, Strings.IN_KEYWORD_EXPECTED);
+		checkMatches(builder, OCamlTokenTypes.IN_KEYWORD, Strings.IN_KEYWORD_EXPECTED);
 
-        switch (expType) {
-            case Expression: {
-                ExpressionParsing.parseExpression(builder);
+		switch(expType)
+		{
+			case Expression:
+			{
+				ExpressionParsing.parseExpression(builder);
 
-                letExpressionMarker.done(OCamlElementTypes.LET_EXPRESSION);
+				letExpressionMarker.done(OCamlElementTypes.LET_EXPRESSION);
 
-                break;
-            }
+				break;
+			}
 
-            case ClassExpression: {
-                ClassParsing.parseClassExpression(builder);
+			case ClassExpression:
+			{
+				ClassParsing.parseClassExpression(builder);
 
-                letExpressionMarker.done(OCamlElementTypes.LET_CLASS_EXPRESSION);
+				letExpressionMarker.done(OCamlElementTypes.LET_CLASS_EXPRESSION);
 
-                break;
-            }
-        }
-    }
+				break;
+			}
+		}
+	}
 
-    public static boolean tryParseLetStatement(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker letStatementMarker = builder.mark();
+	public static boolean tryParseLetStatement(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker letStatementMarker = builder.mark();
 
-        if (!ignore(builder, OCamlTokenTypes.LET_KEYWORD)) {
-            letStatementMarker.drop();
-            return false;
-        }
+		if(!ignore(builder, OCamlTokenTypes.LET_KEYWORD))
+		{
+			letStatementMarker.drop();
+			return false;
+		}
 
-        ignore(builder, OCamlTokenTypes.REC_KEYWORD);
+		ignore(builder, OCamlTokenTypes.REC_KEYWORD);
 
-        do {
-            parseLetBinding(builder);
-        } while (ignore(builder, OCamlTokenTypes.AND_KEYWORD));
+		do
+		{
+			parseLetBinding(builder);
+		}
+		while(ignore(builder, OCamlTokenTypes.AND_KEYWORD));
 
-        if (builder.getTokenType() == OCamlTokenTypes.IN_KEYWORD) {
-            letStatementMarker.rollbackTo();
-            return false;
-        }
+		if(builder.getTokenType() == OCamlTokenTypes.IN_KEYWORD)
+		{
+			letStatementMarker.rollbackTo();
+			return false;
+		}
 
-        letStatementMarker.done(OCamlElementTypes.LET_STATEMENT);
+		letStatementMarker.done(OCamlElementTypes.LET_STATEMENT);
 
-        return true;
-    }
+		return true;
+	}
 
-    private static void parseLetBinding(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker letBindingMarker = builder.mark();
+	private static void parseLetBinding(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker letBindingMarker = builder.mark();
 
-        PatternParsing.parsePattern(builder);
+		PatternParsing.parsePattern(builder);
 
-        letBindingMarker.done(OCamlElementTypes.LET_BINDING_PATTERN);
+		letBindingMarker.done(OCamlElementTypes.LET_BINDING_PATTERN);
 
-        if (ignore(builder, OCamlTokenTypes.EQ)) {
-            ExpressionParsing.parseExpression(builder);
-        }
-        else {
-            final Runnable parsing = new Runnable() {
-                public void run() {
-                    ExpressionParsing.parseParameter(builder);
-                }
-            };
+		if(ignore(builder, OCamlTokenTypes.EQ))
+		{
+			ExpressionParsing.parseExpression(builder);
+		}
+		else
+		{
+			final Runnable parsing = new Runnable()
+			{
+				public void run()
+				{
+					ExpressionParsing.parseParameter(builder);
+				}
+			};
 
-            while (!builder.eof() && builder.getTokenType() != OCamlTokenTypes.COLON && builder.getTokenType() != OCamlTokenTypes.EQ) {
-                advanceLexerIfNothingWasParsed(builder, parsing);
-            }
+			while(!builder.eof() && builder.getTokenType() != OCamlTokenTypes.COLON && builder.getTokenType() != OCamlTokenTypes.EQ)
+			{
+				advanceLexerIfNothingWasParsed(builder, parsing);
+			}
 
-            if (ignore(builder, OCamlTokenTypes.COLON)) {
-                TypeParsing.parseTypeExpression(builder);
-            }
+			if(ignore(builder, OCamlTokenTypes.COLON))
+			{
+				TypeParsing.parseTypeExpression(builder);
+			}
 
-            checkMatches(builder, OCamlTokenTypes.EQ, Strings.EQ_EXPECTED);
+			checkMatches(builder, OCamlTokenTypes.EQ, Strings.EQ_EXPECTED);
 
-            ExpressionParsing.parseExpression(builder);
-        }
+			ExpressionParsing.parseExpression(builder);
+		}
 
-        letBindingMarker.precede().done(OCamlElementTypes.LET_BINDING);
-    }
+		letBindingMarker.precede().done(OCamlElementTypes.LET_BINDING);
+	}
 
-    public static enum ExpressionType {
-        Expression,
-        ClassExpression
-    }
+	public static enum ExpressionType
+	{
+		Expression,
+		ClassExpression
+	}
 }

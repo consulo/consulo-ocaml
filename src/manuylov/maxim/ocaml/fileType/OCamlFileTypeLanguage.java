@@ -18,25 +18,24 @@
 
 package manuylov.maxim.ocaml.fileType;
 
-import com.intellij.lang.Language;
-import com.intellij.lang.ParserDefinition;
-import manuylov.maxim.ocaml.lang.OCamlLanguage;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.Language;
+import manuylov.maxim.ocaml.lang.OCamlLanguage;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 28.03.2009
  */
-public abstract class OCamlFileTypeLanguage extends Language {
-    protected OCamlFileTypeLanguage(@NotNull final String id) {
-        super(OCamlLanguage.INSTANCE, id);
-    }
+public abstract class OCamlFileTypeLanguage extends Language
+{
+	protected OCamlFileTypeLanguage(@NotNull final String id)
+	{
+		super(OCamlLanguage.INSTANCE, id);
+	}
 
-    @NotNull
-    public abstract ParserDefinition getParserDefinition();
-
-    @Override
-    public boolean isCaseSensitive() {
-        return true;
-    }
+	@Override
+	public boolean isCaseSensitive()
+	{
+		return true;
+	}
 }

@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlFunExpression extends OCamlExpression {
+public interface OCamlFunExpression extends OCamlExpression
+{
 }

@@ -18,43 +18,54 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameDefinition;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorPath;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExceptionDefinition;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlExceptionDefinitionImpl extends BaseOCamlElement implements OCamlExceptionDefinition {
-    public OCamlExceptionDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlExceptionDefinitionImpl extends BaseOCamlElement implements OCamlExceptionDefinition
+{
+	public OCamlExceptionDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        if (getNode().findChildByType(OCamlTokenTypes.OF_KEYWORD) != null) {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
-        }
-        else if (getNode().findChildByType(OCamlTokenTypes.EQ) != null) {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorPath.class);
-        }
-        else {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorNameDefinition.class);
-        }
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		if(getNode().findChildByType(OCamlTokenTypes.OF_KEYWORD) != null)
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
+		}
+		else if(getNode().findChildByType(OCamlTokenTypes.EQ) != null)
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorPath.class);
+		}
+		else
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorNameDefinition.class);
+		}
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitExceptionDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitExceptionDefinition(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlConstructorNameDefinition.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlConstructorNameDefinition.class);
+	}
 }

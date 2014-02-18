@@ -18,42 +18,51 @@
 
 package manuylov.maxim.ocaml.util;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 11.04.2010
  */
-public class TreeNode<T> {
-    @NotNull private final T myData;
-    @Nullable private TreeNode<T> myParent = null;
-    @NotNull final private List<TreeNode<T>> myChildren = new ArrayList<TreeNode<T>>();
+public class TreeNode<T>
+{
+	@NotNull
+	private final T myData;
+	@Nullable
+	private TreeNode<T> myParent = null;
+	@NotNull
+	final private List<TreeNode<T>> myChildren = new ArrayList<TreeNode<T>>();
 
-    public TreeNode(@NotNull final T data) {
-        myData = data;
-    }
+	public TreeNode(@NotNull final T data)
+	{
+		myData = data;
+	}
 
-    @NotNull
-    public T getData() {
-        return myData;
-    }
+	@NotNull
+	public T getData()
+	{
+		return myData;
+	}
 
-    @NotNull
-    public List<TreeNode<T>> getChildren() {
-        return myChildren;
-    }
+	@NotNull
+	public List<TreeNode<T>> getChildren()
+	{
+		return myChildren;
+	}
 
-    @Nullable
-    public TreeNode<T> getParent() {
-        return myParent;
-    }
+	@Nullable
+	public TreeNode<T> getParent()
+	{
+		return myParent;
+	}
 
-    public void addChild(@NotNull final TreeNode<T> child) {
-        child.myParent = this;
-        myChildren.add(child);
-    }
+	public void addChild(@NotNull final TreeNode<T> child)
+	{
+		child.myParent = this;
+		myChildren.add(child);
+	}
 }

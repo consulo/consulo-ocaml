@@ -25,49 +25,69 @@ import org.jetbrains.annotations.Nullable;
  * @author Maxim.Manuylov
  *         Date: 20.04.2010
  */
-public class OCamlStringUtil {
-    @NotNull
-    public static String getNotNull(@Nullable final String string) {
-        return string == null ? "" : string;
-    }
+public class OCamlStringUtil
+{
+	@NotNull
+	public static String getNotNull(@Nullable final String string)
+	{
+		return string == null ? "" : string;
+	}
 
-    @NotNull
-    public static String firstLetterToUpperCase(@NotNull final String string) {
-        if (string.length() == 0) return string;
-        return Character.toUpperCase(string.charAt(0)) + string.substring(1);
-    }
+	@NotNull
+	public static String firstLetterToUpperCase(@NotNull final String string)
+	{
+		if(string.length() == 0)
+		{
+			return string;
+		}
+		return Character.toUpperCase(string.charAt(0)) + string.substring(1);
+	}
 
-    @NotNull
-    public static String firstLetterToLowerCase(@NotNull final String string) {
-        if (string.length() == 0) return string;
-        return Character.toLowerCase(string.charAt(0)) + string.substring(1);
-    }
+	@NotNull
+	public static String firstLetterToLowerCase(@NotNull final String string)
+	{
+		if(string.length() == 0)
+		{
+			return string;
+		}
+		return Character.toLowerCase(string.charAt(0)) + string.substring(1);
+	}
 
-    @NotNull
-    public static String changeFirstLetterCase(final String string) {
-        if (string.length() == 0) return string;
-        return changeLetterCase(string.charAt(0)) + string.substring(1);
-    }
+	@NotNull
+	public static String changeFirstLetterCase(final String string)
+	{
+		if(string.length() == 0)
+		{
+			return string;
+		}
+		return changeLetterCase(string.charAt(0)) + string.substring(1);
+	}
 
-    @NotNull
-    public static String makeFirstLetterCaseTheSame(@NotNull final String string, @NotNull final String pattern) {
-        return isUpperCase(pattern.charAt(0)) ? firstLetterToUpperCase(string) : firstLetterToLowerCase(string);
-    }
+	@NotNull
+	public static String makeFirstLetterCaseTheSame(@NotNull final String string, @NotNull final String pattern)
+	{
+		return isUpperCase(pattern.charAt(0)) ? firstLetterToUpperCase(string) : firstLetterToLowerCase(string);
+	}
 
-    private static char changeLetterCase(final char letter) {
-        return isUpperCase(letter) ? Character.toLowerCase(letter) : Character.toUpperCase(letter);
-    }
+	private static char changeLetterCase(final char letter)
+	{
+		return isUpperCase(letter) ? Character.toLowerCase(letter) : Character.toUpperCase(letter);
+	}
 
-    private static boolean isUpperCase(final char letter) {
-        return letter == Character.toUpperCase(letter);
-    }
+	private static boolean isUpperCase(final char letter)
+	{
+		return letter == Character.toUpperCase(letter);
+	}
 
-    public static void insert(@NotNull final StringBuilder builder, final int position, @NotNull final String textToInsert) {
-        if (position == builder.length()) {
-            builder.append(textToInsert);
-        }
-        else {
-            builder.insert(position, textToInsert);
-        }
-    }
+	public static void insert(@NotNull final StringBuilder builder, final int position, @NotNull final String textToInsert)
+	{
+		if(position == builder.length())
+		{
+			builder.append(textToInsert);
+		}
+		else
+		{
+			builder.insert(position, textToInsert);
+		}
+	}
 }

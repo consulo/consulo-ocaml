@@ -25,8 +25,10 @@ import manuylov.maxim.ocaml.lang.parser.stub.index.OCamlModuleIndex;
  * @author Maxim.Manuylov
  *         Date: 27.04.2010
  */
-public class OCamlGoToClassContributor extends BaseOCamlChooseByNameContributor {
-    public OCamlGoToClassContributor() {
-        super(OCamlClassIndex.KEY, OCamlModuleIndex.KEY);
-    }
+public class OCamlGoToClassContributor extends BaseOCamlChooseByNameContributor
+{
+	public OCamlGoToClassContributor()
+	{
+		super(OCamlClassIndex.KEY, OCamlModuleIndex.KEY);
+	}
 }

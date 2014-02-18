@@ -24,14 +24,17 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithAssertExpressionSurrounder extends BaseOCamlSurrounder {
-    public OCamlWithAssertExpressionSurrounder() {
-        super("assert");
-    }
+public class OCamlWithAssertExpressionSurrounder extends BaseOCamlSurrounder
+{
+	public OCamlWithAssertExpressionSurrounder()
+	{
+		super("assert");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return "assert (" +  text + ")";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return "assert (" + text + ")";
+	}
 }

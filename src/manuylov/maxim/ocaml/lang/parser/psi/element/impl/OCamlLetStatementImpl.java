@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ElementPosition;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -27,34 +28,39 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetStatement;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlLetStatementImpl extends BaseOCamlLetElement implements OCamlLetStatement {
-    public OCamlLetStatementImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlLetStatementImpl extends BaseOCamlLetElement implements OCamlLetStatement
+{
+	public OCamlLetStatementImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlLetBinding.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlLetBinding.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitLetStatement(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitLetStatement(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        final ElementPosition lastParentPosition = builder.getLastParentPosition();
-        final OCamlElement lastParent = builder.getLastParent();
-        //noinspection SimplifiableIfStatement
-        if (lastParentPosition == ElementPosition.Child && lastParent instanceof OCamlLetBinding && !isRecursive()) {
-            return false;
-        }
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlLetBinding.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		final ElementPosition lastParentPosition = builder.getLastParentPosition();
+		final OCamlElement lastParent = builder.getLastParent();
+		//noinspection SimplifiableIfStatement
+		if(lastParentPosition == ElementPosition.Child && lastParent instanceof OCamlLetBinding && !isRecursive())
+		{
+			return false;
+		}
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlLetBinding.class);
+	}
 }

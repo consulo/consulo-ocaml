@@ -24,21 +24,25 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithWhileExpressionSurrounder extends BaseOCamlSurrounderWithNavigation {
-    private static final String START = "while ";
+public class OCamlWithWhileExpressionSurrounder extends BaseOCamlSurrounderWithNavigation
+{
+	private static final String START = "while ";
 
-    public OCamlWithWhileExpressionSurrounder() {
-        super("while");
-    }
+	public OCamlWithWhileExpressionSurrounder()
+	{
+		super("while");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return START + " do " + text + " done";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return START + " do " + text + " done";
+	}
 
-    @Override
-    protected int getOffset(@NotNull final String surroundedText) {
-        return START.length();
-    }
+	@Override
+	protected int getOffset(@NotNull final String surroundedText)
+	{
+		return START.length();
+	}
 }

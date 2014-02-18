@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public interface OCamlForExpressionBinding extends OCamlElement {
+public interface OCamlForExpressionBinding extends OCamlElement
+{
 }

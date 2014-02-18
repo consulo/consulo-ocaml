@@ -25,8 +25,10 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassExpression;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlClassExpressionSurroundDescriptor extends BaseOCamlSurroundDescriptor {
-    public OCamlClassExpressionSurroundDescriptor() {
-        super(OCamlClassExpression.class, new OCamlWithParenthesesExpressionSurrounder());
-    }
+public class OCamlClassExpressionSurroundDescriptor extends BaseOCamlSurroundDescriptor
+{
+	public OCamlClassExpressionSurroundDescriptor()
+	{
+		super(OCamlClassExpression.class, new OCamlWithParenthesesExpressionSurrounder());
+	}
 }

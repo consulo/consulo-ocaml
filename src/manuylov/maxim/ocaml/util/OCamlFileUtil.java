@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.util;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.CompilerModuleExtension;
@@ -28,91 +33,103 @@ import com.intellij.psi.PsiFile;
 import manuylov.maxim.ocaml.fileType.OCamlFileType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.util.ArrayList;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 07.04.2010
  */
-public class OCamlFileUtil {
-    public static boolean isOCamlSourceFile(@NotNull final FileType fileType) {
-        return fileType == MLFileType.INSTANCE || fileType == MLIFileType.INSTANCE;
-    }
+public class OCamlFileUtil
+{
+	public static boolean isOCamlSourceFile(@NotNull final FileType fileType)
+	{
+		return fileType == MLFileType.INSTANCE || fileType == MLIFileType.INSTANCE;
+	}
 
-    public static boolean isOCamlSourceFile(@NotNull final VirtualFile file) {
-        return isOCamlSourceFile(file.getFileType());
-    }
+	public static boolean isOCamlSourceFile(@NotNull final VirtualFile file)
+	{
+		return isOCamlSourceFile(file.getFileType());
+	}
 
-    public static boolean isOCamlFile(@NotNull final VirtualFile file) {
-        final String extension = file.getExtension();
-        return isOCamlSourceFile(file)
-            || "cmi".equals(extension)
-            || "cmo".equals(extension); //todo create CMI and CMO fileTypes
-    }
+	public static boolean isOCamlFile(@NotNull final VirtualFile file)
+	{
+		final String extension = file.getExtension();
+		return isOCamlSourceFile(file) || "cmi".equals(extension) || "cmo".equals(extension); //todo create CMI and CMO fileTypes
+	}
 
-    @NotNull
-    public static File getCompiledDir(@NotNull final ProjectFileIndex fileIndex, @NotNull final VirtualFile sourcesDir) {
-        final VirtualFile sourceRoot = fileIndex.getSourceRootForFile(sourcesDir);
-        assert sourceRoot != null && sourceRoot.isDirectory();
-        final String sourceRootPath = sourceRoot.getPath();
+	@NotNull
+	public static File getCompiledDir(@NotNull final ProjectFileIndex fileIndex, @NotNull final VirtualFile sourcesDir)
+	{
+		final VirtualFile sourceRoot = fileIndex.getSourceRootForFile(sourcesDir);
+		assert sourceRoot != null && sourceRoot.isDirectory();
+		final String sourceRootPath = sourceRoot.getPath();
 
-        final ArrayList<String> relativeDirs = new ArrayList<String>();
-        VirtualFile parent = sourcesDir;
-        while (parent != null && !parent.getPath().equals(sourceRootPath)) {
-            relativeDirs.add(0, parent.getName());
-            parent = parent.getParent();
-        }
-        assert parent != null;
+		final ArrayList<String> relativeDirs = new ArrayList<String>();
+		VirtualFile parent = sourcesDir;
+		while(parent != null && !parent.getPath().equals(sourceRootPath))
+		{
+			relativeDirs.add(0, parent.getName());
+			parent = parent.getParent();
+		}
+		assert parent != null;
 
-        final Module module = fileIndex.getModuleForFile(sourcesDir);
-        assert module != null;
-        final CompilerModuleExtension compilerModuleExtension = CompilerModuleExtension.getInstance(module);
-        assert compilerModuleExtension != null;
-        final VirtualFile outputRoot = compilerModuleExtension.getCompilerOutputPath();
-        assert outputRoot != null && outputRoot.isDirectory();
+		final Module module = fileIndex.getModuleForFile(sourcesDir);
+		assert module != null;
+		final CompilerModuleExtension compilerModuleExtension = CompilerModuleExtension.getInstance(module);
+		assert compilerModuleExtension != null;
+		final VirtualFile outputRoot = compilerModuleExtension.getCompilerOutputPath();
+		assert outputRoot != null && outputRoot.isDirectory();
 
-        File destDir = new File(outputRoot.getPath());
-        for (final String dirName : relativeDirs) {
-            destDir = new File(destDir, dirName);
-        }
+		File destDir = new File(outputRoot.getPath());
+		for(final String dirName : relativeDirs)
+		{
+			destDir = new File(destDir, dirName);
+		}
 
-        return destDir;
-    }
+		return destDir;
+	}
 
-    @NotNull
-    public static String getAnotherFileName(@NotNull final VirtualFile file) {
-        final FileType type = file.getFileType();
-        assert type instanceof OCamlFileType;
-        return getFileName(file.getNameWithoutExtension(), ((OCamlFileType) type).getAnotherFileType());
-    }
+	@NotNull
+	public static String getAnotherFileName(@NotNull final VirtualFile file)
+	{
+		final FileType type = file.getFileType();
+		assert type instanceof OCamlFileType;
+		return getFileName(file.getNameWithoutExtension(), ((OCamlFileType) type).getAnotherFileType());
+	}
 
-    @NotNull
-    public static String getFileName(@NotNull final String nameWithoutExtension, @NotNull final FileType type) {
-        return nameWithoutExtension + "." + type.getDefaultExtension();
-    }
+	@NotNull
+	public static String getFileName(@NotNull final String nameWithoutExtension, @NotNull final FileType type)
+	{
+		return nameWithoutExtension + "." + type.getDefaultExtension();
+	}
 
-    @Nullable
-    public static VirtualFile getAnotherFile(@Nullable final VirtualFile file) {
-        if (file == null) return null;
-        final VirtualFile parent = file.getParent();
-        if (parent == null) return null;
-        return parent.findChild(getAnotherFileName(file));
-    }
+	@Nullable
+	public static VirtualFile getAnotherFile(@Nullable final VirtualFile file)
+	{
+		if(file == null)
+		{
+			return null;
+		}
+		final VirtualFile parent = file.getParent();
+		if(parent == null)
+		{
+			return null;
+		}
+		return parent.findChild(getAnotherFileName(file));
+	}
 
-    public static boolean isImplementationFile(@NotNull final VirtualFile file) {
-        return file.getFileType() == MLFileType.INSTANCE;
-    }
+	public static boolean isImplementationFile(@NotNull final VirtualFile file)
+	{
+		return file.getFileType() == MLFileType.INSTANCE;
+	}
 
-    public static boolean isImplementationFile(@NotNull final PsiFile file) {
-        return file.getFileType() == MLFileType.INSTANCE;
-    }
+	public static boolean isImplementationFile(@NotNull final PsiFile file)
+	{
+		return file.getFileType() == MLFileType.INSTANCE;
+	}
 
-    @NotNull
-    public static String getPathToDisplay(@NotNull final VirtualFile file) {
-        return FileUtil.toSystemDependentName(file.getPath());
-    }
+	@NotNull
+	public static String getPathToDisplay(@NotNull final VirtualFile file)
+	{
+		return FileUtil.toSystemDependentName(file.getPath());
+	}
 }

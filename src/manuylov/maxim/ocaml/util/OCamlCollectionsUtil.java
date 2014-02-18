@@ -18,23 +18,27 @@
 
 package manuylov.maxim.ocaml.util;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 05.05.2010
  */
-public class OCamlCollectionsUtil {
-    public static <T> List<T> createNotNullValuesList(@NotNull final T... values) {
-        final List<T> result = new ArrayList<T>(values.length);
-        for (final T value : values) {
-            if (value != null) {
-                result.add(value);
-            }
-        }
-        return result;
-    }
+public class OCamlCollectionsUtil
+{
+	public static <T> List<T> createNotNullValuesList(@NotNull final T... values)
+	{
+		final List<T> result = new ArrayList<T>(values.length);
+		for(final T value : values)
+		{
+			if(value != null)
+			{
+				result.add(value);
+			}
+		}
+		return result;
+	}
 }

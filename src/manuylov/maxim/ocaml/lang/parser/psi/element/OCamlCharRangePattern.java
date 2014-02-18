@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 25.04.2010
  */
-public interface OCamlCharRangePattern extends OCamlPattern {
+public interface OCamlCharRangePattern extends OCamlPattern
+{
 }

@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
  * @author Maxim.Manuylov
  *         Date: 20.04.2010
  */
-public interface OCamlRecordFieldInitializationInPattern extends OCamlResolvedReference {
+public interface OCamlRecordFieldInitializationInPattern extends OCamlResolvedReference
+{
 }

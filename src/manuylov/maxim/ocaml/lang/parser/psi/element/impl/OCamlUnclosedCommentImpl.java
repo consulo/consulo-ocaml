@@ -18,33 +18,38 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnclosedComment;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 14.06.2009
  */
-public class OCamlUnclosedCommentImpl extends BaseOCamlElement implements OCamlUnclosedComment {
-    public OCamlUnclosedCommentImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlUnclosedCommentImpl extends BaseOCamlElement implements OCamlUnclosedComment
+{
+	public OCamlUnclosedCommentImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return false;
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return false;
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitUnclosedComment(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitUnclosedComment(this);
+	}
 
-    @NotNull
-    public IElementType getTokenType() {
-        return OCamlElementTypes.UNCLOSED_COMMENT;
-    }
+	@NotNull
+	public IElementType getTokenType()
+	{
+		return OCamlElementTypes.UNCLOSED_COMMENT;
+	}
 }

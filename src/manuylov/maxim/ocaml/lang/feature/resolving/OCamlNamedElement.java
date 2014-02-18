@@ -18,27 +18,28 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiNamedElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public interface OCamlNamedElement extends OCamlElement, PsiNamedElement, NavigationItem {
-    @Nullable
-    ASTNode getNameElement();
+public interface OCamlNamedElement extends OCamlElement, PsiNamedElement, NavigationItem
+{
+	@Nullable
+	ASTNode getNameElement();
 
-    @Nullable
-    String getCanonicalPath();
+	@Nullable
+	String getCanonicalPath();
 
-    @NotNull
-    NameType getNameType();
+	@NotNull
+	NameType getNameType();
 
-    @NotNull
-    String getDescription();
+	@NotNull
+	String getDescription();
 }

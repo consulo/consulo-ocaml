@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.feature.resolving;
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public interface OCamlResolvedReference extends OCamlNamedElement {
+public interface OCamlResolvedReference extends OCamlNamedElement
+{
 }

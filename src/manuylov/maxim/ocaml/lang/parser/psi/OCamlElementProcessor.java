@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 22.05.2009
  */
-public interface OCamlElementProcessor {
-    void process(@NotNull final OCamlElement psiElement);
+public interface OCamlElementProcessor
+{
+	void process(@NotNull final OCamlElement psiElement);
 }

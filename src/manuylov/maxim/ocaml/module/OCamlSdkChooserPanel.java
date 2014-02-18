@@ -18,6 +18,20 @@
 
 package manuylov.maxim.ocaml.module;
 
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.ide.util.projectWizard.JdkChooserPanel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -26,65 +40,66 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.MultiLineLabelUI;
 import com.intellij.util.ui.UIUtil;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.04.2010
  */
-class OCamlSdkChooserPanel extends JComponent {
-    @NotNull private final JdkChooserPanel myJdkChooser;
+class OCamlSdkChooserPanel extends JComponent
+{
+	@NotNull
+	private final JdkChooserPanel myJdkChooser;
 
-    public OCamlSdkChooserPanel(final Project project) {
-        myJdkChooser = new JdkChooserPanel(project);
+	public OCamlSdkChooserPanel(final Project project)
+	{
+		myJdkChooser = new JdkChooserPanel(project);
 
-        setLayout(new GridBagLayout());
-        setBorder(BorderFactory.createEtchedBorder());
+		setLayout(new GridBagLayout());
+		setBorder(BorderFactory.createEtchedBorder());
 
-        final JLabel label = new JLabel("Specify the OCaml binaries directory");
-        label.setUI(new MultiLineLabelUI());
-        add(label, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST,
-            GridBagConstraints.HORIZONTAL, new Insets(8, 10, 8, 10), 0, 0));
+		final JLabel label = new JLabel("Specify the OCaml binaries directory");
+		label.setUI(new MultiLineLabelUI());
+		add(label, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL,
+				new Insets(8, 10, 8, 10), 0, 0));
 
-        final JLabel jdkLabel = new JLabel("OCaml SDK version:");
-        jdkLabel.setFont(UIUtil.getLabelFont().deriveFont(Font.BOLD));
-        add(jdkLabel, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST,
-            GridBagConstraints.NONE, new Insets(8, 10, 0, 10), 0, 0));
+		final JLabel jdkLabel = new JLabel("OCaml SDK version:");
+		jdkLabel.setFont(UIUtil.getLabelFont().deriveFont(Font.BOLD));
+		add(jdkLabel, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 2, 1, 1.0, 0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+				new Insets(8, 10, 0, 10), 0, 0));
 
-        add(myJdkChooser, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST,
-            GridBagConstraints.BOTH, new Insets(2, 10, 10, 5), 0, 0));
-        JButton configureButton = new JButton("Configure...");
-        add(configureButton, new GridBagConstraints(1, GridBagConstraints.RELATIVE, 1, 1, 0.0, 1.0, GridBagConstraints.NORTHWEST,
-            GridBagConstraints.NONE, new Insets(2, 0, 10, 5), 0, 0));
+		add(myJdkChooser, new GridBagConstraints(0, GridBagConstraints.RELATIVE, 1, 1, 1.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH,
+				new Insets(2, 10, 10, 5), 0, 0));
+		JButton configureButton = new JButton("Configure...");
+		add(configureButton, new GridBagConstraints(1, GridBagConstraints.RELATIVE, 1, 1, 0.0, 1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.NONE,
+				new Insets(2, 0, 10, 5), 0, 0));
 
-        configureButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                myJdkChooser.editJdkTable();
-            }
-        });
+		configureButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				myJdkChooser.editJdkTable();
+			}
+		});
 
-        myJdkChooser.setAllowedJdkTypes(new SdkType[] { OCamlSdkType.getInstance() });
+		myJdkChooser.setAllowedJdkTypes(new SdkType[]{OCamlSdkType.getInstance()});
 
-        final Sdk selectedJdk = project == null ? null : ProjectRootManager.getInstance(project).getProjectJdk();
-        myJdkChooser.updateList(selectedJdk, null);
-    }
+		final Sdk selectedJdk = project == null ? null : ProjectRootManager.getInstance(project).getProjectJdk();
+		myJdkChooser.updateList(selectedJdk, null);
+	}
 
-    @Nullable
-    public Sdk getChosenJdk() {
-        return myJdkChooser.getChosenJdk();
-    }
+	@Nullable
+	public Sdk getChosenJdk()
+	{
+		return myJdkChooser.getChosenJdk();
+	}
 
-    public JComponent getPreferredFocusedComponent() {
-        return myJdkChooser;
-    }
+	public JComponent getPreferredFocusedComponent()
+	{
+		return myJdkChooser;
+	}
 
-    public void selectSdk(@Nullable final Sdk sdk) {
-        myJdkChooser.selectJdk(sdk);
-    }
+	public void selectSdk(@Nullable final Sdk sdk)
+	{
+		myJdkChooser.selectJdk(sdk);
+	}
 }

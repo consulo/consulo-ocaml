@@ -18,6 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -27,33 +30,33 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassTypeConstraint;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlClassTypeConstraintImpl extends BaseOCamlElement implements OCamlClassTypeConstraint {
-    public OCamlClassTypeConstraintImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlClassTypeConstraintImpl extends BaseOCamlElement implements OCamlClassTypeConstraint
+{
+	public OCamlClassTypeConstraintImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitClassTypeConstraint(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitClassTypeConstraint(this);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(
-            OCamlPsiUtil.getFirstChildOfType(this, OCamlClassExpression.class),
-            OCamlPsiUtil.getFirstChildOfType(this, OCamlClassType.class)
-        );
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getFirstChildOfType(this, OCamlClassExpression.class),
+				OCamlPsiUtil.getFirstChildOfType(this, OCamlClassType.class));
+	}
 }

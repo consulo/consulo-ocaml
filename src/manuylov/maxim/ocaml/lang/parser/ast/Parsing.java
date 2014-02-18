@@ -18,75 +18,90 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import manuylov.maxim.ocaml.lang.Strings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 10.02.2009
  */
-abstract class Parsing {
-    protected static void checkMatches(@NotNull final PsiBuilder builder, @NotNull final IElementType token, @NotNull final String message) {
-        if (!ignore(builder, token)) {
-            builder.error(message);
-        }
-    }
+abstract class Parsing
+{
+	protected static void checkMatches(@NotNull final PsiBuilder builder, @NotNull final IElementType token, @NotNull final String message)
+	{
+		if(!ignore(builder, token))
+		{
+			builder.error(message);
+		}
+	}
 
-    protected static boolean ignore(@NotNull final PsiBuilder builder, @NotNull final IElementType token) {
-        return ignore(builder, TokenSet.create(token));
-    }
+	protected static boolean ignore(@NotNull final PsiBuilder builder, @NotNull final IElementType token)
+	{
+		return ignore(builder, TokenSet.create(token));
+	}
 
-    protected static boolean ignore(@NotNull final PsiBuilder builder, @NotNull final TokenSet tokens) {
-        if (tokens.contains(builder.getTokenType())) {
-            builder.advanceLexer();
-            return true;
-        }
-        return false;
-    }
+	protected static boolean ignore(@NotNull final PsiBuilder builder, @NotNull final TokenSet tokens)
+	{
+		if(tokens.contains(builder.getTokenType()))
+		{
+			builder.advanceLexer();
+			return true;
+		}
+		return false;
+	}
 
-    protected static void advanceLexerIfNothingWasParsed(@NotNull final PsiBuilder builder, @NotNull final Runnable parsing) {
-        advanceLexerIfNothingWasParsed(builder, new boolean[] { false }, parsing);
-    }
+	protected static void advanceLexerIfNothingWasParsed(@NotNull final PsiBuilder builder, @NotNull final Runnable parsing)
+	{
+		advanceLexerIfNothingWasParsed(builder, new boolean[]{false}, parsing);
+	}
 
-    protected static void advanceLexerIfNothingWasParsed(@NotNull final PsiBuilder builder, @NotNull final boolean[] shouldBreak, @NotNull final Runnable parsing) {
-        final int offsetBefore = builder.getCurrentOffset();
+	protected static void advanceLexerIfNothingWasParsed(@NotNull final PsiBuilder builder, @NotNull final boolean[] shouldBreak,
+			@NotNull final Runnable parsing)
+	{
+		final int offsetBefore = builder.getCurrentOffset();
 
-        parsing.run();
+		parsing.run();
 
-        if (builder.getCurrentOffset() == offsetBefore && !shouldBreak[0]) {
-            if (builder.getTokenType() == null) {
-                builder.error(Strings.UNEXPECTED_END_OF_FILE);
-            }
-            else {
-                final PsiBuilder.Marker marker = builder.mark();
-                builder.advanceLexer();
-                marker.error(Strings.UNEXPECTED_TOKEN);
-            }
-        }
-    }
+		if(builder.getCurrentOffset() == offsetBefore && !shouldBreak[0])
+		{
+			if(builder.getTokenType() == null)
+			{
+				builder.error(Strings.UNEXPECTED_END_OF_FILE);
+			}
+			else
+			{
+				final PsiBuilder.Marker marker = builder.mark();
+				builder.advanceLexer();
+				marker.error(Strings.UNEXPECTED_TOKEN);
+			}
+		}
+	}
 
-    @Nullable
-    protected static IElementType getNextTokenType(@NotNull final PsiBuilder builder) {
-        return getTokenType(builder, 1);
-    }
+	@Nullable
+	protected static IElementType getNextTokenType(@NotNull final PsiBuilder builder)
+	{
+		return getTokenType(builder, 1);
+	}
 
-    @Nullable
-    private static IElementType getTokenType(@NotNull final PsiBuilder builder, final int skipTokensCount) {
-        final PsiBuilder.Marker marker = builder.mark();
+	@Nullable
+	private static IElementType getTokenType(@NotNull final PsiBuilder builder, final int skipTokensCount)
+	{
+		final PsiBuilder.Marker marker = builder.mark();
 
-        for (int i = 0; i < skipTokensCount; i++) {
-            builder.getTokenType();
-            builder.advanceLexer();
-        }
+		for(int i = 0; i < skipTokensCount; i++)
+		{
+			builder.getTokenType();
+			builder.advanceLexer();
+		}
 
-        final IElementType token = builder.getTokenType();
+		final IElementType token = builder.getTokenType();
 
-        marker.rollbackTo();
+		marker.rollbackTo();
 
-        return token;
-    }
+		return token;
+	}
 }

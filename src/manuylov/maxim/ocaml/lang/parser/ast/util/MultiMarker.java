@@ -18,53 +18,66 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.util;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 12.02.2009
  */
-public class MultiMarker {
-    @NotNull private final PsiBuilder myBuilder;
-    @NotNull private final List<PsiBuilder.Marker> myMarkers = new ArrayList<PsiBuilder.Marker>();
+public class MultiMarker
+{
+	@NotNull
+	private final PsiBuilder myBuilder;
+	@NotNull
+	private final List<PsiBuilder.Marker> myMarkers = new ArrayList<PsiBuilder.Marker>();
 
-    public MultiMarker(@NotNull final PsiBuilder builder) {
-        myBuilder = builder;
-    }
-    
-    public void mark() {
-        myMarkers.add(myBuilder.mark());
-    }
+	public MultiMarker(@NotNull final PsiBuilder builder)
+	{
+		myBuilder = builder;
+	}
 
-    public void done(@NotNull final IElementType type) {
-        for (int i = myMarkers.size() - 1; i >= 0; i--) {
-            myMarkers.get(i).done(type);
-        }
-        myMarkers.clear();
-    }
+	public void mark()
+	{
+		myMarkers.add(myBuilder.mark());
+	}
 
-    public void rollbackToTheFirstMark() {
-        if (!myMarkers.isEmpty()) {
-            myMarkers.get(0).rollbackTo();
-        }
-        myMarkers.clear();
-    }
+	public void done(@NotNull final IElementType type)
+	{
+		for(int i = myMarkers.size() - 1; i >= 0; i--)
+		{
+			myMarkers.get(i).done(type);
+		}
+		myMarkers.clear();
+	}
 
-    public void drop() {
-        for (int i = myMarkers.size() - 1; i >= 0; i--) {
-            myMarkers.get(i).drop();
-        }
-        myMarkers.clear();
-    }
+	public void rollbackToTheFirstMark()
+	{
+		if(!myMarkers.isEmpty())
+		{
+			myMarkers.get(0).rollbackTo();
+		}
+		myMarkers.clear();
+	}
 
-    public void dropLast() {
-        if (!myMarkers.isEmpty()) {
-            myMarkers.remove(myMarkers.size() - 1).drop();
-        }
-    }
+	public void drop()
+	{
+		for(int i = myMarkers.size() - 1; i >= 0; i--)
+		{
+			myMarkers.get(i).drop();
+		}
+		myMarkers.clear();
+	}
+
+	public void dropLast()
+	{
+		if(!myMarkers.isEmpty())
+		{
+			myMarkers.remove(myMarkers.size() - 1).drop();
+		}
+	}
 }

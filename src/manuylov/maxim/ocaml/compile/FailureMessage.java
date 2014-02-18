@@ -25,57 +25,65 @@ import org.jetbrains.annotations.Nullable;
  * @author Maxim.Manuylov
  *         Date: 02.06.2010
  */
-class FailureMessage {
-    @NotNull private final Type myType;
-    @NotNull private final String myMessageText;
-    @Nullable private final String myFilePath;
-    private final int myLineNumber;
-    private final int myStartPosition;
-    private final int myEndPosition;
+class FailureMessage
+{
+	@NotNull
+	private final Type myType;
+	@NotNull
+	private final String myMessageText;
+	@Nullable
+	private final String myFilePath;
+	private final int myLineNumber;
+	private final int myStartPosition;
+	private final int myEndPosition;
 
-    FailureMessage(@NotNull final Type type,
-                   @NotNull final String messageText,
-                   @Nullable final String filePath,
-                   final int lineNumber,
-                   final int startPosition,
-                   final int endPosition) {
-        myType = type;
-        myMessageText = messageText;
-        myFilePath = filePath;
-        myLineNumber = lineNumber;
-        myStartPosition = startPosition;
-        myEndPosition = endPosition;
-    }
+	FailureMessage(@NotNull final Type type, @NotNull final String messageText, @Nullable final String filePath, final int lineNumber,
+			final int startPosition, final int endPosition)
+	{
+		myType = type;
+		myMessageText = messageText;
+		myFilePath = filePath;
+		myLineNumber = lineNumber;
+		myStartPosition = startPosition;
+		myEndPosition = endPosition;
+	}
 
-    @NotNull
-    public Type getType() {
-        return myType;
-    }
+	@NotNull
+	public Type getType()
+	{
+		return myType;
+	}
 
-    @NotNull
-    public String getMessageText() {
-        return myMessageText;
-    }
+	@NotNull
+	public String getMessageText()
+	{
+		return myMessageText;
+	}
 
-    @Nullable
-    public String getFilePath() {
-        return myFilePath;
-    }
+	@Nullable
+	public String getFilePath()
+	{
+		return myFilePath;
+	}
 
-    public int getLineNumber() {
-        return myLineNumber;
-    }
+	public int getLineNumber()
+	{
+		return myLineNumber;
+	}
 
-    public int getStartPosition() {
-        return myStartPosition;
-    }
+	public int getStartPosition()
+	{
+		return myStartPosition;
+	}
 
-    public int getEndPosition() {
-        return myEndPosition;
-    }
+	public int getEndPosition()
+	{
+		return myEndPosition;
+	}
 
-    public static enum Type {
-        ERROR,
-        WARNING
-    }
+	public static enum Type
+	{
+		ERROR,
+		WARNING
+	}
 }

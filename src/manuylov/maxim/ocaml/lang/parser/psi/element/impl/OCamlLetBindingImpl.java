@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
@@ -27,50 +29,57 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlLetBindingImpl extends BaseOCamlElement implements OCamlLetBinding {
-    public OCamlLetBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlLetBindingImpl extends BaseOCamlElement implements OCamlLetBinding
+{
+	public OCamlLetBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitLetBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitLetBinding(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        final OCamlExpression expression = getExpression();
-        //noinspection SimplifiableIfStatement
-        if (expression != null && builder.childWasAlreadyProcessed(expression) && !isParentRecursive()) {
-            return false;
-        }
-        final OCamlPattern pattern = getPattern();
-        return pattern != null && pattern.processDeclarations(builder);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		final OCamlExpression expression = getExpression();
+		//noinspection SimplifiableIfStatement
+		if(expression != null && builder.childWasAlreadyProcessed(expression) && !isParentRecursive())
+		{
+			return false;
+		}
+		final OCamlPattern pattern = getPattern();
+		return pattern != null && pattern.processDeclarations(builder);
+	}
 
-    @Nullable
-    private OCamlExpression getExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlExpression.class);
-    }
+	@Nullable
+	private OCamlExpression getExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlExpression.class);
+	}
 
-    @Nullable
-    private OCamlPattern getPattern() {
-        return OCamlPsiUtil.getFirstChildOfType(this, OCamlPattern.class);
-    }
+	@Nullable
+	private OCamlPattern getPattern()
+	{
+		return OCamlPsiUtil.getFirstChildOfType(this, OCamlPattern.class);
+	}
 
-    private boolean isParentRecursive() {
-        final OCamlElement parent = OCamlPsiUtil.getParent(this);
-        return parent != null && parent instanceof OCamlLetElement && ((OCamlLetElement) parent).isRecursive();
-    }
+	private boolean isParentRecursive()
+	{
+		final OCamlElement parent = OCamlPsiUtil.getParent(this);
+		return parent != null && parent instanceof OCamlLetElement && ((OCamlLetElement) parent).isRecursive();
+	}
 }

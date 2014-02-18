@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -27,39 +29,44 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPlusMinusTypeParameter;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterName;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlPlusMinusTypeParameterImpl extends BaseOCamlResolvedReference implements OCamlPlusMinusTypeParameter {
-    public OCamlPlusMinusTypeParameterImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlPlusMinusTypeParameterImpl extends BaseOCamlResolvedReference implements OCamlPlusMinusTypeParameter
+{
+	public OCamlPlusMinusTypeParameterImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeParameterName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeParameterName.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitPlusMinusTypeParameter(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitPlusMinusTypeParameter(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.TYPE_PARAMETER_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.TYPE_PARAMETER_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.AnyCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.AnyCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "type parameter";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "type parameter";
+	}
 }

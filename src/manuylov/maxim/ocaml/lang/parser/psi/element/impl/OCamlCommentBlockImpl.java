@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -25,28 +26,32 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlCommentBlock;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 14.06.2009
  */
-public class OCamlCommentBlockImpl extends BaseOCamlElement implements OCamlCommentBlock {
-    public OCamlCommentBlockImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlCommentBlockImpl extends BaseOCamlElement implements OCamlCommentBlock
+{
+	public OCamlCommentBlockImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitCommentBlock(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitCommentBlock(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.COMMENT_END);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.COMMENT_END);
+	}
 
-    @NotNull
-    public IElementType getTokenType() {
-        return OCamlElementTypes.COMMENT_BLOCK;
-    }
+	@NotNull
+	public IElementType getTokenType()
+	{
+		return OCamlElementTypes.COMMENT_BLOCK;
+	}
 }

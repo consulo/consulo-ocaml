@@ -18,36 +18,42 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.util;
 
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.sun.istack.internal.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 16.04.2009
  */
-public class OCamlASTTreeUtil {
-    @Nullable
-    public static ASTNode checkNodeType(@Nullable final ASTNode node, @NotNull final IElementType type) {
-        return node != null && node.getElementType() == type ? node : null;
-    }
+public class OCamlASTTreeUtil
+{
+	@Nullable
+	public static ASTNode checkNodeType(@Nullable final ASTNode node, @NotNull final IElementType type)
+	{
+		return node != null && node.getElementType() == type ? node : null;
+	}
 
-    @Nullable
-    public static ASTNode findChildOfType(@NotNull final ASTNode parent, @NotNull final IElementType type) {
-        final ASTNode[] children = parent.getChildren(null);
+	@Nullable
+	public static ASTNode findChildOfType(@NotNull final ASTNode parent, @NotNull final IElementType type)
+	{
+		final ASTNode[] children = parent.getChildren(null);
 
-        for (final ASTNode child : children) {
-            final IElementType elementType = child.getElementType();
-            if (elementType == null) {
-                break;
-            }
-            else if (elementType == type) {
-                return child;
-            }
-        }
+		for(final ASTNode child : children)
+		{
+			final IElementType elementType = child.getElementType();
+			if(elementType == null)
+			{
+				break;
+			}
+			else if(elementType == type)
+			{
+				return child;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
 }

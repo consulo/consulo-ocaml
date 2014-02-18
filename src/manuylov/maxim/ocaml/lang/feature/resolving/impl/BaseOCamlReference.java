@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Comparing;
@@ -30,90 +32,107 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingContext;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public abstract class BaseOCamlReference extends BaseOCamlNamedElement implements OCamlReference {
-    public BaseOCamlReference(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+public abstract class BaseOCamlReference extends BaseOCamlNamedElement implements OCamlReference
+{
+	public BaseOCamlReference(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @NotNull
-    public PsiElement getElement() {
-        return this;
-    }
+	@NotNull
+	public PsiElement getElement()
+	{
+		return this;
+	}
 
-    @NotNull
-    @Override
-    public PsiReference getReference() {
-        return this;
-    }
+	@NotNull
+	@Override
+	public PsiReference getReference()
+	{
+		return this;
+	}
 
-    @NotNull
-    public TextRange getRangeInElement() {
-        return new TextRange(0, getTextLength());
-    }
+	@NotNull
+	public TextRange getRangeInElement()
+	{
+		return new TextRange(0, getTextLength());
+	}
 
-    @Nullable
-    public String getCanonicalText() {
-        return getCanonicalPath();
-    }
+	@Nullable
+	public String getCanonicalText()
+	{
+		return getCanonicalPath();
+	}
 
-    @NotNull
-    public PsiElement handleElementRename(@NotNull final String newElementName) throws IncorrectOperationException {
-        return setName(newElementName);
-    }
+	@NotNull
+	public PsiElement handleElementRename(@NotNull final String newElementName) throws IncorrectOperationException
+	{
+		return setName(newElementName);
+	}
 
-    @Nullable
-    public PsiElement bindToElement(@NotNull final PsiElement element) {
-        return null;
-    }
+	@Nullable
+	public PsiElement bindToElement(@NotNull final PsiElement element)
+	{
+		return null;
+	}
 
-    public boolean isReferenceTo(@NotNull final PsiElement element) {
-        return isReferenceTo_weak(element) && resolve() == element;
-    }
+	public boolean isReferenceTo(@NotNull final PsiElement element)
+	{
+		return isReferenceTo_weak(element) && resolve() == element;
+	}
 
-    public boolean isReferenceToWithFakeModules(@NotNull final PsiElement element, @NotNull final OCamlFile... fakeModules) {
-        return isReferenceTo_weak(element) && OCamlResolvingUtil.resolveWithFakeModules(this, fakeModules) == element;
-    }
+	public boolean isReferenceToWithFakeModules(@NotNull final PsiElement element, @NotNull final OCamlFile... fakeModules)
+	{
+		return isReferenceTo_weak(element) && OCamlResolvingUtil.resolveWithFakeModules(this, fakeModules) == element;
+	}
 
-    private boolean isReferenceTo_weak(@NotNull final PsiElement element) {
-        return hasPossibleType(element) && Comparing.equal(getName(), ((OCamlResolvedReference) element).getName());
-    }
+	private boolean isReferenceTo_weak(@NotNull final PsiElement element)
+	{
+		return hasPossibleType(element) && Comparing.equal(getName(), ((OCamlResolvedReference) element).getName());
+	}
 
-    private boolean hasPossibleType(@NotNull final PsiElement element) {
-        for (final Class<? extends OCamlResolvedReference> type : getPossibleResolvedTypes()) {
-            if (type.isInstance(element)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean hasPossibleType(@NotNull final PsiElement element)
+	{
+		for(final Class<? extends OCamlResolvedReference> type : getPossibleResolvedTypes())
+		{
+			if(type.isInstance(element))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    @NotNull
-    public LookupElement[] getVariants() {
-        return OCamlResolvingUtil.getVariants(getResolvingContext(), getPossibleResolvedTypes());
-    }
+	@NotNull
+	public LookupElement[] getVariants()
+	{
+		return OCamlResolvingUtil.getVariants(getResolvingContext(), getPossibleResolvedTypes());
+	}
 
-    public boolean isSoft() {
-        return false;
-    }
+	public boolean isSoft()
+	{
+		return false;
+	}
 
-    @Nullable
-    public OCamlResolvedReference resolve() {
-        return OCamlResolvingUtil.resolve(getResolvingContext(), getPossibleResolvedTypes());
-    }
+	@Nullable
+	public OCamlResolvedReference resolve()
+	{
+		return OCamlResolvingUtil.resolve(getResolvingContext(), getPossibleResolvedTypes());
+	}
 
-    public boolean isBundled() {
-        return false;
-    }
+	public boolean isBundled()
+	{
+		return false;
+	}
 
-    @NotNull
-    private ResolvingContext getResolvingContext() {
-        return new ResolvingContext(this, getModulePath());
-    }
+	@NotNull
+	private ResolvingContext getResolvingContext()
+	{
+		return new ResolvingContext(this, getModulePath());
+	}
 }

@@ -18,47 +18,51 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.04.2010
  */
-class OCamlToolWindowUtil {
-    public static void addAndSelectStartContent(@NotNull final Project project, @NotNull final ContentManager contentManager) {
-        final OCamlToolWindowStartView view = new OCamlToolWindowStartView(project, contentManager);
-        addAndSelectContent(contentManager, view, null, false);
-    }
+class OCamlToolWindowUtil
+{
+	public static void addAndSelectStartContent(@NotNull final Project project, @NotNull final ContentManager contentManager)
+	{
+		final OCamlToolWindowStartView view = new OCamlToolWindowStartView(project, contentManager);
+		addAndSelectContent(contentManager, view, null, false);
+	}
 
-    public static void addAndSelectTopLevelConsoleContent(@NotNull final Project project,
-                                                          @NotNull final ContentManager contentManager,
-                                                          @NotNull final Sdk topLevelSdk) {
-        final OCamlTopLevelConsoleView view;
-        try {
-            view = new OCamlTopLevelConsoleView(project, contentManager, topLevelSdk);
-        } catch (final ExecutionException e) {
-            Messages.showErrorDialog(e.getLocalizedMessage(), "Error");
-            return;
-        }
-        addAndSelectContent(contentManager, view, "Top Level #" + view.getConsoleNumber(), true);
-    }
+	public static void addAndSelectTopLevelConsoleContent(@NotNull final Project project, @NotNull final ContentManager contentManager,
+			@NotNull final Sdk topLevelSdk)
+	{
+		final OCamlTopLevelConsoleView view;
+		try
+		{
+			view = new OCamlTopLevelConsoleView(project, contentManager, topLevelSdk);
+		}
+		catch(final ExecutionException e)
+		{
+			Messages.showErrorDialog(e.getLocalizedMessage(), "Error");
+			return;
+		}
+		addAndSelectContent(contentManager, view, "Top Level #" + view.getConsoleNumber(), true);
+	}
 
-    private static void addAndSelectContent(@NotNull final ContentManager contentManager,
-                                            @NotNull final BaseOCamlToolWindowView view,
-                                            @Nullable final String title,
-                                            final boolean closable) {
-        final Content content = contentManager.getFactory().createContent(view, title, false);
-        content.setDisposer(view);
-        content.setCloseable(closable);
-        content.setPreferredFocusableComponent(view);
-        contentManager.addContent(content);
-        contentManager.setSelectedContent(content, true);
-    }
+	private static void addAndSelectContent(@NotNull final ContentManager contentManager, @NotNull final BaseOCamlToolWindowView view,
+			@Nullable final String title, final boolean closable)
+	{
+		final Content content = contentManager.getFactory().createContent(view, title, false);
+		content.setDisposer(view);
+		content.setCloseable(closable);
+		content.setPreferredFocusableComponent(view);
+		contentManager.addContent(content);
+		contentManager.setSelectedContent(content, true);
+	}
 }

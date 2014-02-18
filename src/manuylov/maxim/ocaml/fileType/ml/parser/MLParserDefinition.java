@@ -18,6 +18,9 @@
 
 package manuylov.maxim.ocaml.fileType.ml.parser;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -26,25 +29,31 @@ import com.intellij.psi.tree.IFileElementType;
 import manuylov.maxim.ocaml.fileType.ml.parser.psi.element.impl.MLFile;
 import manuylov.maxim.ocaml.lang.parser.BaseParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 09.02.2009
  */
-public class MLParserDefinition extends BaseParserDefinition {
-    @NotNull
-    public PsiParser createParser(@NotNull final Project project) {
-        return new MLParser();
-    }
+public class MLParserDefinition extends BaseParserDefinition
+{
+	@Override
+	@NotNull
+	public PsiParser createParser(@Nullable final Project project, @NotNull LanguageVersion languageVersion)
+	{
+		return new MLParser();
+	}
 
-    @NotNull
-    public IFileElementType getFileNodeType() {
-        return OCamlElementTypes.ML_FILE;
-    }
+	@Override
+	@NotNull
+	public IFileElementType getFileNodeType()
+	{
+		return OCamlElementTypes.ML_FILE;
+	}
 
-    @NotNull
-    public PsiFile createFile(@NotNull final FileViewProvider fileViewProvider) {
-        return new MLFile(fileViewProvider);
-    }
+	@Override
+	@NotNull
+	public PsiFile createFile(@NotNull final FileViewProvider fileViewProvider)
+	{
+		return new MLFile(fileViewProvider);
+	}
 }

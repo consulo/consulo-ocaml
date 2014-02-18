@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -27,42 +29,50 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldPath;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordFieldInitializationInExpression;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 17.04.2010
  */
-public class OCamlRecordFieldInitializationInExpressionImpl extends BaseOCamlResolvedReference implements OCamlRecordFieldInitializationInExpression {
-    public OCamlRecordFieldInitializationInExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlRecordFieldInitializationInExpressionImpl extends BaseOCamlResolvedReference implements OCamlRecordFieldInitializationInExpression
+{
+	public OCamlRecordFieldInitializationInExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        final OCamlFieldPath fieldPath = OCamlPsiUtil.getFirstChildOfType(this, OCamlFieldPath.class);
-        if (fieldPath == null) return null;
-        final OCamlFieldName fieldName = fieldPath.getFieldName();
-        return fieldName == null ? null : fieldName.getNameElement();
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		final OCamlFieldPath fieldPath = OCamlPsiUtil.getFirstChildOfType(this, OCamlFieldPath.class);
+		if(fieldPath == null)
+		{
+			return null;
+		}
+		final OCamlFieldName fieldName = fieldPath.getFieldName();
+		return fieldName == null ? null : fieldName.getNameElement();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "field";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "field";
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitRecordFieldInitializationInExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitRecordFieldInitializationInExpression(this);
+	}
 }

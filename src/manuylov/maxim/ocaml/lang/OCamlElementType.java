@@ -18,21 +18,24 @@
 
 package manuylov.maxim.ocaml.lang;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 05.02.2009
  */
-public class OCamlElementType extends IElementType {
-    public OCamlElementType(@NotNull final String elementName) {                                 
-        super(elementName, MLFileTypeLanguage.INSTANCE); //todo base language or two different element types, see OCamlStubElementType
-    }
+public class OCamlElementType extends IElementType
+{
+	public OCamlElementType(@NotNull final String elementName)
+	{
+		super(elementName, MLFileTypeLanguage.INSTANCE); //todo base language or two different element types, see OCamlStubElementType
+	}
 
-    @Override                     
-    public String toString() {
-        return "OCaml:" + super.toString();
-    }
+	@Override
+	public String toString()
+	{
+		return "OCaml:" + super.toString();
+	}
 }

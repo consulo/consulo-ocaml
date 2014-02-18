@@ -18,20 +18,23 @@
 
 package manuylov.maxim.ocaml.lang.parser.stub.index;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlResolvedClassName;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 30.04.2010
  */
-public class OCamlClassIndex extends StringStubIndexExtension<OCamlResolvedClassName> {
-    @NotNull public static final StubIndexKey<String, OCamlResolvedClassName> KEY = StubIndexKey.createIndexKey("ocaml.class.shortname");
+public class OCamlClassIndex extends StringStubIndexExtension<OCamlResolvedClassName>
+{
+	@NotNull
+	public static final StubIndexKey<String, OCamlResolvedClassName> KEY = StubIndexKey.createIndexKey("ocaml.class.shortname");
 
-    @NotNull
-    public StubIndexKey<String, OCamlResolvedClassName> getKey() {
-        return KEY;
-    }
+	@NotNull
+	public StubIndexKey<String, OCamlResolvedClassName> getKey()
+	{
+		return KEY;
+	}
 }

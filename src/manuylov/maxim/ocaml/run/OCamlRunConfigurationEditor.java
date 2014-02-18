@@ -18,54 +18,66 @@
 
 package manuylov.maxim.ocaml.run;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.SettingsEditor;
+
 /**
  * @author Maxim.Manuylov
  *         Date: 07.04.2010
  */
-public class OCamlRunConfigurationEditor extends SettingsEditor<OCamlRunConfiguration> {
-    private OCamlRunConfigurationForm myForm;
+public class OCamlRunConfigurationEditor extends SettingsEditor<OCamlRunConfiguration>
+{
+	private OCamlRunConfigurationForm myForm;
 
-    public OCamlRunConfigurationEditor(@NotNull final OCamlRunConfiguration configuration) {
-        myForm = new OCamlRunConfigurationForm(configuration);
-    }
+	public OCamlRunConfigurationEditor(@NotNull final OCamlRunConfiguration configuration)
+	{
+		myForm = new OCamlRunConfigurationForm(configuration);
+	}
 
-    protected void resetEditorFrom(@NotNull final OCamlRunConfiguration config) {
-        copyBean(config, myForm);
-    }
+	protected void resetEditorFrom(@NotNull final OCamlRunConfiguration config)
+	{
+		copyBean(config, myForm);
+	}
 
-    protected void applyEditorTo(@NotNull final OCamlRunConfiguration config) throws ConfigurationException {
-        copyBean(myForm, config);
-    }
+	protected void applyEditorTo(@NotNull final OCamlRunConfiguration config) throws ConfigurationException
+	{
+		copyBean(myForm, config);
+	}
 
-    private void copyBean(@NotNull final OCamlRunConfigurationParams source, @NotNull final OCamlRunConfigurationParams target) {
-        try {
-            final BeanInfo beanInfo = Introspector.getBeanInfo(OCamlRunConfigurationParams.class);
-            for (final PropertyDescriptor propertyDescriptor : beanInfo.getPropertyDescriptors()) {
-                final Method writeMethod = propertyDescriptor.getWriteMethod();
-                final Method readMethod = propertyDescriptor.getReadMethod();
-                writeMethod.invoke(target, readMethod.invoke(source));
-            }        
-        } catch (final Throwable e) {
-            throw new RuntimeException(e);
-        }
-    }
+	private void copyBean(@NotNull final OCamlRunConfigurationParams source, @NotNull final OCamlRunConfigurationParams target)
+	{
+		try
+		{
+			final BeanInfo beanInfo = Introspector.getBeanInfo(OCamlRunConfigurationParams.class);
+			for(final PropertyDescriptor propertyDescriptor : beanInfo.getPropertyDescriptors())
+			{
+				final Method writeMethod = propertyDescriptor.getWriteMethod();
+				final Method readMethod = propertyDescriptor.getReadMethod();
+				writeMethod.invoke(target, readMethod.invoke(source));
+			}
+		}
+		catch(final Throwable e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
 
-    @NotNull
-    protected JComponent createEditor() {
-        return myForm.getRootPanel();
-    }
+	@NotNull
+	protected JComponent createEditor()
+	{
+		return myForm.getRootPanel();
+	}
 
-    protected void disposeEditor() {
-        myForm = null;
-    }
+	protected void disposeEditor()
+	{
+		myForm = null;
+	}
 }

@@ -18,58 +18,59 @@
 
 package manuylov.maxim.ocaml.run;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import manuylov.maxim.ocaml.entity.OCamlModule;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 07.04.2010
  */
-public interface OCamlRunConfigurationParams {
-    @Nullable
-    OCamlModule getMainOCamlModule();
+public interface OCamlRunConfigurationParams
+{
+	@Nullable
+	OCamlModule getMainOCamlModule();
 
-    void setMainOCamlModule(@Nullable OCamlModule ocamlModule);
+	void setMainOCamlModule(@Nullable OCamlModule ocamlModule);
 
-    @NotNull
-    String getProgramParams();
+	@NotNull
+	String getProgramParams();
 
-    void setProgramParams(@NotNull String params);
+	void setProgramParams(@NotNull String params);
 
-    boolean isUsedModuleSdk();
+	boolean isUsedModuleSdk();
 
-    void setUsedModuleSdk(boolean usedModuleSdk);
+	void setUsedModuleSdk(boolean usedModuleSdk);
 
-    @Nullable
-    Module getModule();
+	@Nullable
+	Module getModule();
 
-    void setModule(@Nullable Module module);
+	void setModule(@Nullable Module module);
 
-    @Nullable
-    Sdk getSpecifiedSdk();
+	@Nullable
+	Sdk getSpecifiedSdk();
 
-    void setSpecifiedSdk(@Nullable Sdk sdk);
+	void setSpecifiedSdk(@Nullable Sdk sdk);
 
-    @NotNull
-    String getCompilerOptions();
+	@NotNull
+	String getCompilerOptions();
 
-    void setCompilerOptions(@NotNull String options);
+	void setCompilerOptions(@NotNull String options);
 
-    @NotNull
-    String getLinkerOptions();
+	@NotNull
+	String getLinkerOptions();
 
-    void setLinkerOptions(@NotNull String options);
+	void setLinkerOptions(@NotNull String options);
 
-    @NotNull
-    String getRunnerOptions();
+	@NotNull
+	String getRunnerOptions();
 
-    void setRunnerOptions(@NotNull String options);
+	void setRunnerOptions(@NotNull String options);
 
-    @NotNull
-    String getWorkingDirectory();
+	@NotNull
+	String getWorkingDirectory();
 
-    void setWorkingDirectory(@NotNull String dirPath);
+	void setWorkingDirectory(@NotNull String dirPath);
 }

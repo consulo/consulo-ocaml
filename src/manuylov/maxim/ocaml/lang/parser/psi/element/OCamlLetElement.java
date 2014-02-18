@@ -24,6 +24,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 24.05.2009
  */
-public interface OCamlLetElement extends OCamlElement {
-    boolean isRecursive();
+public interface OCamlLetElement extends OCamlElement
+{
+	boolean isRecursive();
 }

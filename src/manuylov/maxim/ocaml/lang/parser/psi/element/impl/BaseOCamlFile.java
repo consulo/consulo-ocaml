@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -26,26 +28,28 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFile;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredBinding;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 22.03.2009
  */
-public abstract class BaseOCamlFile extends PsiFileBase implements OCamlFile {
-    protected BaseOCamlFile(@NotNull final FileViewProvider fileViewProvider, @NotNull final Language language) {
-        super(fileViewProvider, language);
-    }
+public abstract class BaseOCamlFile extends PsiFileBase implements OCamlFile
+{
+	protected BaseOCamlFile(@NotNull final FileViewProvider fileViewProvider, @NotNull final Language language)
+	{
+		super(fileViewProvider, language);
+	}
 
-    @Nullable
-    public <T extends OCamlStructuredBinding> T getModuleBinding(@NotNull final Class<T> type) {
-        return OCamlPsiUtil.getFirstChildOfType(this, type);
-    }
+	@Nullable
+	public <T extends OCamlStructuredBinding> T getModuleBinding(@NotNull final Class<T> type)
+	{
+		return OCamlPsiUtil.getFirstChildOfType(this, type);
+	}
 
-    @Nullable
-    public String getModuleName() {
-        final VirtualFile file = getVirtualFile();
-        return file == null ? null : OCamlStringUtil.firstLetterToUpperCase(file.getNameWithoutExtension());
-    }
+	@Nullable
+	public String getModuleName()
+	{
+		final VirtualFile file = getVirtualFile();
+		return file == null ? null : OCamlStringUtil.firstLetterToUpperCase(file.getNameWithoutExtension());
+	}
 }

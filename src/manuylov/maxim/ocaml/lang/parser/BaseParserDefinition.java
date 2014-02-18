@@ -18,8 +18,11 @@
 
 package manuylov.maxim.ocaml.lang.parser;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageUtil;
+import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
@@ -29,48 +32,62 @@ import manuylov.maxim.ocaml.lang.lexer.OCamlParsingLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementFactory;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 22.02.2009
  */
-public abstract class BaseParserDefinition implements ParserDefinition {
-    @NotNull
-    public Lexer createLexer(@NotNull final Project project) {
-        return doCreateLexer();
-    }
+public abstract class BaseParserDefinition implements ParserDefinition
+{
+	@Override
+	@NotNull
+	public Lexer createLexer(@Nullable final Project project, @NotNull LanguageVersion languageVersion)
+	{
+		return doCreateLexer();
+	}
 
-    @NotNull
-    public TokenSet getWhitespaceTokens() {
-        return OCamlTokenTypes.WHITE_SPACES;
-    }
+	@Override
+	@NotNull
+	public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion)
+	{
+		return OCamlTokenTypes.WHITE_SPACES;
+	}
 
-    @NotNull
-    public TokenSet getCommentTokens() {
-        return OCamlTokenTypes.COMMENTS;
-    }
+	@Override
+	@NotNull
+	public TokenSet getCommentTokens(@NotNull LanguageVersion languageVersion)
+	{
+		return OCamlTokenTypes.COMMENTS;
+	}
 
-    @NotNull
-    public TokenSet getStringLiteralElements() {
-        return OCamlTokenTypes.STRING_LITERALS;
-    }
+	@Override
+	@NotNull
+	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	{
+		return OCamlTokenTypes.STRING_LITERALS;
+	}
 
-    @NotNull
-    public SpaceRequirements spaceExistanceTypeBetweenTokens(@NotNull final ASTNode left, @NotNull final ASTNode right) {
-        if (left.getElementType() == OCamlElementTypes.LABEL_NAME && right.getElementType() == OCamlTokenTypes.COLON) {
-            return SpaceRequirements.MUST_NOT;
-        }
-        return LanguageUtil.canStickTokensTogetherByLexer(left, right, doCreateLexer());
-    }
+	@Override
+	@NotNull
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(@NotNull final ASTNode left, @NotNull final ASTNode right)
+	{
+		if(left.getElementType() == OCamlElementTypes.LABEL_NAME && right.getElementType() == OCamlTokenTypes.COLON)
+		{
+			return SpaceRequirements.MUST_NOT;
+		}
+		return LanguageUtil.canStickTokensTogetherByLexer(left, right, doCreateLexer());
+	}
 
-    @NotNull
-    public PsiElement createElement(@NotNull final ASTNode astNode) {
-        return OCamlElementFactory.INSTANCE.createElement(astNode);
-    }
+	@Override
+	@NotNull
+	public PsiElement createElement(@NotNull final ASTNode astNode)
+	{
+		return OCamlElementFactory.INSTANCE.createElement(astNode);
+	}
 
-    @NotNull
-    private Lexer doCreateLexer() {
-        return new OCamlParsingLexer();
-    }
+	@NotNull
+	private Lexer doCreateLexer()
+	{
+		return new OCamlParsingLexer();
+	}
 }

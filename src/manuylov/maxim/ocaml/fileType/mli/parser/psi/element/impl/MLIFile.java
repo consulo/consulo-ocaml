@@ -18,24 +18,27 @@
 
 package manuylov.maxim.ocaml.fileType.mli.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileTypeLanguage;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlFile;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 22.02.2009
  */
-public class MLIFile extends BaseOCamlFile {
-    public MLIFile(@NotNull final FileViewProvider fileViewProvider) {
-        super(fileViewProvider, MLIFileTypeLanguage.INSTANCE);
-    }
+public class MLIFile extends BaseOCamlFile
+{
+	public MLIFile(@NotNull final FileViewProvider fileViewProvider)
+	{
+		super(fileViewProvider, MLIFileTypeLanguage.INSTANCE);
+	}
 
-    @NotNull
-    public FileType getFileType() {
-        return MLIFileType.INSTANCE;
-    }
+	@NotNull
+	public FileType getFileType()
+	{
+		return MLIFileType.INSTANCE;
+	}
 }

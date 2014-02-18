@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.impl;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -33,108 +37,125 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleDefinitionBinding
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleSpecificationBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlElement;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 28.03.2009
  */
-public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements OCamlNamedElement {
-    protected BaseOCamlNamedElement(@NotNull final ASTNode node) {
-        super(node);
-    }
+public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements OCamlNamedElement
+{
+	protected BaseOCamlNamedElement(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Nullable
-    public String getCanonicalPath() {
-        final StringBuilder sb = new StringBuilder(OCamlStringUtil.getNotNull(getName()));
+	@Nullable
+	public String getCanonicalPath()
+	{
+		final StringBuilder sb = new StringBuilder(OCamlStringUtil.getNotNull(getName()));
 
-        final OCamlElementProcessorAdapter processor = new OCamlElementProcessorAdapter() {
-            public void process(@NotNull final OCamlElement psiElement) {
-                if (psiElement instanceof OCamlModuleDefinitionBinding || psiElement instanceof OCamlModuleSpecificationBinding) {
-                    sb.insert(0, ".");
-                    sb.insert(0, OCamlStringUtil.getNotNull(((OCamlNamedElement) psiElement).getName()));
-                }
-            }
-        };
+		final OCamlElementProcessorAdapter processor = new OCamlElementProcessorAdapter()
+		{
+			public void process(@NotNull final OCamlElement psiElement)
+			{
+				if(psiElement instanceof OCamlModuleDefinitionBinding || psiElement instanceof OCamlModuleSpecificationBinding)
+				{
+					sb.insert(0, ".");
+					sb.insert(0, OCamlStringUtil.getNotNull(((OCamlNamedElement) psiElement).getName()));
+				}
+			}
+		};
 
-        OCamlElement parent = OCamlPsiUtil.getParent(this);
+		OCamlElement parent = OCamlPsiUtil.getParent(this);
 
-        while (parent != null) {
-            parent.accept(processor);
-            parent = OCamlPsiUtil.getParent(parent);
-        }
+		while(parent != null)
+		{
+			parent.accept(processor);
+			parent = OCamlPsiUtil.getParent(parent);
+		}
 
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
-    @Override
-    @Nullable
-    public String getName() {
-        final ASTNode nameElement = getNameElement();
-        return nameElement == null ? null : nameElement.getText();
-    }
+	@Override
+	@Nullable
+	public String getName()
+	{
+		final ASTNode nameElement = getNameElement();
+		return nameElement == null ? null : nameElement.getText();
+	}
 
-    @Override
-    public int getTextOffset() {
-        final ASTNode nameElement = getNameElement();
-        return nameElement == null ? 0 : nameElement.getStartOffset();
-    }
+	@Override
+	public int getTextOffset()
+	{
+		final ASTNode nameElement = getNameElement();
+		return nameElement == null ? 0 : nameElement.getStartOffset();
+	}
 
-    @NotNull
-    public PsiElement setName(@NotNull final String name) throws IncorrectOperationException {
-        checkNameIsNotAKeyword(name);
-        getNameType().checkNameIsCorrect(this, name);
+	@NotNull
+	public PsiElement setName(@NotNull final String name) throws IncorrectOperationException
+	{
+		checkNameIsNotAKeyword(name);
+		getNameType().checkNameIsCorrect(this, name);
 
-        doSetName(name);
+		doSetName(name);
 
-        return this;
-    }
+		return this;
+	}
 
-    private void checkNameIsNotAKeyword(@NotNull final String name) throws IncorrectOperationException {
-        if (OCamlNamesValidator.isKeyword(name)) {
-            throw new IncorrectOperationException("It is not allowed to use a keyword as a " + getDescription() + " name.");
-        }
-    }
+	private void checkNameIsNotAKeyword(@NotNull final String name) throws IncorrectOperationException
+	{
+		if(OCamlNamesValidator.isKeyword(name))
+		{
+			throw new IncorrectOperationException("It is not allowed to use a keyword as a " + getDescription() + " name.");
+		}
+	}
 
-    protected void doSetName(@NotNull final String name) throws IncorrectOperationException {
-        final ASTNode nameElement = getNameElement();
-        if (nameElement == null) {
-            throw new IncorrectOperationException("Incorrect " + getDescription() + " name element");
-        }
+	protected void doSetName(@NotNull final String name) throws IncorrectOperationException
+	{
+		final ASTNode nameElement = getNameElement();
+		if(nameElement == null)
+		{
+			throw new IncorrectOperationException("Incorrect " + getDescription() + " name element");
+		}
 
-        OCamlASTNodeUtil.replaceLeafText(nameElement.getFirstChildNode(), name);
-    }
+		OCamlASTNodeUtil.replaceLeafText(nameElement.getFirstChildNode(), name);
+	}
 
-    @Override
-    public String toString() {
-        return getDescription() + " " + OCamlStringUtil.getNotNull(getName());
-    }
+	@Override
+	public String toString()
+	{
+		return getDescription() + " " + OCamlStringUtil.getNotNull(getName());
+	}
 
-    @Override
-    public ItemPresentation getPresentation() {
-        return new ItemPresentation() {
-            @NotNull
-            public String getPresentableText() {
-                return getDescription() + ' ' + getName();
-            }
+	@Override
+	public ItemPresentation getPresentation()
+	{
+		return new ItemPresentation()
+		{
+			@NotNull
+			public String getPresentableText()
+			{
+				return getDescription() + ' ' + getName();
+			}
 
-            @NotNull
-            public String getLocationString() {
-                return '(' + getContainingFile().getName() + ')';
-            }
+			@NotNull
+			public String getLocationString()
+			{
+				return '(' + getContainingFile().getName() + ')';
+			}
 
-            @Nullable
-            public Icon getIcon(final boolean open) {
-                return null;
-            }
+			@Nullable
+			public Icon getIcon(final boolean open)
+			{
+				return null;
+			}
 
-            @Nullable
-            public TextAttributesKey getTextAttributesKey() {
-                return null;
-            }
-        };
-    }
+			@Nullable
+			public TextAttributesKey getTextAttributesKey()
+			{
+				return null;
+			}
+		};
+	}
 }

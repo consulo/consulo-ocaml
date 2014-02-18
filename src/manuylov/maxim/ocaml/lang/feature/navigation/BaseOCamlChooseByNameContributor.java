@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.lang.feature.navigation;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
@@ -27,37 +32,40 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.ArrayUtil;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlNamedElement;
 import manuylov.maxim.ocaml.lang.parser.stub.index.StubIndexHelper;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 27.04.2010
  */
-abstract class BaseOCamlChooseByNameContributor implements ChooseByNameContributor {
-    @NotNull private final StubIndexKey<String, ? extends OCamlNamedElement>[] myIndexKeys;
+abstract class BaseOCamlChooseByNameContributor implements ChooseByNameContributor
+{
+	@NotNull
+	private final StubIndexKey<String, ? extends OCamlNamedElement>[] myIndexKeys;
 
-    protected BaseOCamlChooseByNameContributor(@NotNull final StubIndexKey<String, ? extends OCamlNamedElement>... indexKeys) {
-        myIndexKeys = indexKeys;
-    }
+	protected BaseOCamlChooseByNameContributor(@NotNull final StubIndexKey<String, ? extends OCamlNamedElement>... indexKeys)
+	{
+		myIndexKeys = indexKeys;
+	}
 
-    public String[] getNames(@NotNull final Project project, final boolean includeNonProjectItems) {
-        final Collection<String> names = new HashSet<String>();
-        for (final StubIndexKey<String, ?> indexKey : myIndexKeys) {
-            names.addAll(StubIndexHelper.getInstance(indexKey).getAllKeys(project, includeNonProjectItems));
-        }
-        return ArrayUtil.toStringArray(names);
-    }
+	public String[] getNames(@NotNull final Project project, final boolean includeNonProjectItems)
+	{
+		final Collection<String> names = new HashSet<String>();
+		for(final StubIndexKey<String, ?> indexKey : myIndexKeys)
+		{
+			names.addAll(StubIndexHelper.getInstance(indexKey).getAllKeys(project, includeNonProjectItems));
+		}
+		return ArrayUtil.toStringArray(names);
+	}
 
-    public NavigationItem[] getItemsByName(@NotNull final String name, @NotNull final String pattern, @NotNull final Project project, final boolean includeNonProjectItems) {
-        final GlobalSearchScope scope = StubIndexHelper.createScope(project, includeNonProjectItems);
-        final Collection<NavigationItem> items = new ArrayList<NavigationItem>();
-        for (final StubIndexKey<String, ? extends OCamlNamedElement> indexKey : myIndexKeys) {
-            items.addAll(StubIndex.getInstance().get(indexKey, name, project, scope));
-        }
-        return items.toArray(new NavigationItem[items.size()]);
-    }
+	public NavigationItem[] getItemsByName(@NotNull final String name, @NotNull final String pattern, @NotNull final Project project,
+			final boolean includeNonProjectItems)
+	{
+		final GlobalSearchScope scope = StubIndexHelper.createScope(project, includeNonProjectItems);
+		final Collection<NavigationItem> items = new ArrayList<NavigationItem>();
+		for(final StubIndexKey<String, ? extends OCamlNamedElement> indexKey : myIndexKeys)
+		{
+			items.addAll(StubIndex.getInstance().get(indexKey, name, project, scope));
+		}
+		return items.toArray(new NavigationItem[items.size()]);
+	}
 }

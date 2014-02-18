@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlRecordTypeDefinition extends OCamlTypeRepresentation {
+public interface OCamlRecordTypeDefinition extends OCamlTypeRepresentation
+{
 }

@@ -18,67 +18,88 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 14.04.2010
  */
-public class OCamlDeclarationsUtil {
-    public static boolean processDeclarationsInChildren(@NotNull final ResolvingBuilder builder,
-                                                        @NotNull final OCamlElement parent,
-                                                        @NotNull final Class<? extends OCamlElement>... childrenTypes) {
-        final List<? extends OCamlElement> children = OCamlPsiUtil.getChildrenOfTypes(parent, childrenTypes);
-        for (int i = children.size() - 1; i >= 0; i--) {
-            final OCamlElement child = children.get(i);
-            if (!builder.childWasAlreadyProcessed(child) && child.processDeclarations(builder)) {
-                return true;
-            }
-        }
-        return false;
-    }
+public class OCamlDeclarationsUtil
+{
+	public static boolean processDeclarationsInChildren(@NotNull final ResolvingBuilder builder, @NotNull final OCamlElement parent,
+			@NotNull final Class<? extends OCamlElement>... childrenTypes)
+	{
+		final List<? extends OCamlElement> children = OCamlPsiUtil.getChildrenOfTypes(parent, childrenTypes);
+		for(int i = children.size() - 1; i >= 0; i--)
+		{
+			final OCamlElement child = children.get(i);
+			if(!builder.childWasAlreadyProcessed(child) && child.processDeclarations(builder))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public static boolean processDeclarationsInStructuredElement(@NotNull final ResolvingBuilder builder,
-                                                                 @Nullable final OCamlStructuredElement psiElement) {
-        if (psiElement == null || builder.childWasAlreadyProcessed(psiElement)) return false;
-        final List<OCamlStructuredElement> actualDefinitions = psiElement.findActualDefinitions();
-        for (final OCamlStructuredElement actualDefinition : actualDefinitions) {
-            if (actualDefinition.processDeclarations(builder)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public static boolean processDeclarationsInStructuredElement(@NotNull final ResolvingBuilder builder,
+			@Nullable final OCamlStructuredElement psiElement)
+	{
+		if(psiElement == null || builder.childWasAlreadyProcessed(psiElement))
+		{
+			return false;
+		}
+		final List<OCamlStructuredElement> actualDefinitions = psiElement.findActualDefinitions();
+		for(final OCamlStructuredElement actualDefinition : actualDefinitions)
+		{
+			if(actualDefinition.processDeclarations(builder))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public static boolean processDeclarationsInStructuredBinding(@NotNull final ResolvingBuilder builder,
-                                                                 @NotNull final OCamlStructuredBinding binding) {
-        final OCamlStructuredElement expression = binding.getExpression();
-        if (expression != null && builder.childWasAlreadyProcessed(expression)) return false;
+	public static boolean processDeclarationsInStructuredBinding(@NotNull final ResolvingBuilder builder, @NotNull final OCamlStructuredBinding binding)
+	{
+		final OCamlStructuredElement expression = binding.getExpression();
+		if(expression != null && builder.childWasAlreadyProcessed(expression))
+		{
+			return false;
+		}
 
-        final OCamlStructuredElement typeExpression = binding.getTypeExpression();
-        if (typeExpression != null && builder.childWasAlreadyProcessed(typeExpression)) return false;
+		final OCamlStructuredElement typeExpression = binding.getTypeExpression();
+		if(typeExpression != null && builder.childWasAlreadyProcessed(typeExpression))
+		{
+			return false;
+		}
 
-        if (builder.getProcessor().process(binding)) return true;
+		if(builder.getProcessor().process(binding))
+		{
+			return true;
+		}
 
-        final String moduleName = binding.getName();
-        return moduleName != null && builder.tryProcessModule(moduleName,
-            createModuleProcessor(builder, expression),
-            createModuleProcessor(builder, typeExpression));
-    }
+		final String moduleName = binding.getName();
+		return moduleName != null && builder.tryProcessModule(moduleName, createModuleProcessor(builder, expression), createModuleProcessor(builder,
+				typeExpression));
+	}
 
-    private static ResolvingBuilder.ModuleProcessor createModuleProcessor(@NotNull final ResolvingBuilder builder,
-                                                                          @Nullable final OCamlStructuredElement moduleElement) {
-        return new ResolvingBuilder.ModuleProcessor() {
-            public boolean process() {
-                return processDeclarationsInStructuredElement(builder, moduleElement);
-            }
-        };
-    }
+	private static ResolvingBuilder.ModuleProcessor createModuleProcessor(@NotNull final ResolvingBuilder builder,
+			@Nullable final OCamlStructuredElement moduleElement)
+	{
+		return new ResolvingBuilder.ModuleProcessor()
+		{
+			public boolean process()
+			{
+				return processDeclarationsInStructuredElement(builder, moduleElement);
+			}
+		};
+	}
 }

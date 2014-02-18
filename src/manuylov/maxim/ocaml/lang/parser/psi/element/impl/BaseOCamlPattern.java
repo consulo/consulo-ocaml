@@ -18,23 +18,26 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 15.04.2010
  */
-abstract class BaseOCamlPattern extends BaseOCamlElement implements OCamlPattern {
-    public BaseOCamlPattern(@NotNull final ASTNode node) {
-        super(node);
-    }
+abstract class BaseOCamlPattern extends BaseOCamlElement implements OCamlPattern
+{
+	public BaseOCamlPattern(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
+	}
 }

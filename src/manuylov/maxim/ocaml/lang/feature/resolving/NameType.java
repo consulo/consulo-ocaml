@@ -18,39 +18,47 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
-import com.intellij.util.IncorrectOperationException;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.regex.Pattern;
+
+import org.jetbrains.annotations.NotNull;
+import com.intellij.util.IncorrectOperationException;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 27.03.2009
  */
-public enum NameType {
-    LowerCase("[_a-z][_0-9a-zA-Z']*"),
-    UpperCase("[A-Z][_0-9a-zA-Z']*"),
-    AnyCase("[_a-zA-Z][_0-9a-zA-Z']*"),
-    ValueName("(" + LowerCase.myRegexp +")|(\\([=<>@\\^\\|\\&/$%!\\?~\\-+\\*][!$%\\&\\*\\-+./:<=>\\?@^\\|~]*\\))") {
-        @Override
-        public void checkNameIsCorrect(@NotNull final OCamlNamedElement reference, @NotNull final String name) throws IncorrectOperationException {
-            super.checkNameIsCorrect(reference, name);
-        }
-    };
+public enum NameType
+{
+	LowerCase("[_a-z][_0-9a-zA-Z']*"),
+	UpperCase("[A-Z][_0-9a-zA-Z']*"),
+	AnyCase("[_a-zA-Z][_0-9a-zA-Z']*"),
+	ValueName("(" + LowerCase.myRegexp + ")|(\\([=<>@\\^\\|\\&/$%!\\?~\\-+\\*][!$%\\&\\*\\-+./:<=>\\?@^\\|~]*\\))")
+			{
+				@Override
+				public void checkNameIsCorrect(@NotNull final OCamlNamedElement reference, @NotNull final String name) throws IncorrectOperationException
+				{
+					super.checkNameIsCorrect(reference, name);
+				}
+			};
 
-    @NotNull private final String myRegexp;
+	@NotNull
+	private final String myRegexp;
 
-    NameType(@NotNull final String regexp) {
-        myRegexp = regexp;
-    }
+	NameType(@NotNull final String regexp)
+	{
+		myRegexp = regexp;
+	}
 
-    public void checkNameIsCorrect(@NotNull final OCamlNamedElement reference, @NotNull final String name) throws IncorrectOperationException {
-        if (!isNameIsCorrect(name)) {
-            throw new IncorrectOperationException("Name \"" + name + "\" is not possible for " + reference.getDescription());
-        }
-    }
+	public void checkNameIsCorrect(@NotNull final OCamlNamedElement reference, @NotNull final String name) throws IncorrectOperationException
+	{
+		if(!isNameIsCorrect(name))
+		{
+			throw new IncorrectOperationException("Name \"" + name + "\" is not possible for " + reference.getDescription());
+		}
+	}
 
-    public boolean isNameIsCorrect(@NotNull final String name) {
-        return Pattern.matches(myRegexp, name);
-    }
+	public boolean isNameIsCorrect(@NotNull final String name)
+	{
+		return Pattern.matches(myRegexp, name);
+	}
 }

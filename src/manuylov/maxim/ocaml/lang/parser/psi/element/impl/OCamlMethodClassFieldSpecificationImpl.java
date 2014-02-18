@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -27,39 +29,44 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlMethodClassFieldSpecification;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPolyTypeExpression;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlMethodClassFieldSpecificationImpl extends BaseOCamlResolvedReference implements OCamlMethodClassFieldSpecification {
-    public OCamlMethodClassFieldSpecificationImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlMethodClassFieldSpecificationImpl extends BaseOCamlResolvedReference implements OCamlMethodClassFieldSpecification
+{
+	public OCamlMethodClassFieldSpecificationImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPolyTypeExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPolyTypeExpression.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitMethodClassFieldSpecification(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitMethodClassFieldSpecification(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.METHOD_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.METHOD_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "method";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "method";
+	}
 }

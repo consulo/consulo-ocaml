@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.ProjectTopics;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.module.Module;
@@ -33,92 +34,117 @@ import com.intellij.ui.content.ContentManagerEvent;
 import com.intellij.util.messages.MessageBusConnection;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 29.04.2010
  */
-public class OCamlToolWindowComponent implements ProjectComponent {
-    @NotNull private final ToolWindowManager myToolWindowManager;
-    @NotNull private final MessageBusConnection myConnection;
-    @NotNull private final Project myProject;
-    @NotNull private final String TOOL_WINDOW_ID = "OCaml";
-    private boolean myToolWindowWasRegistered = false;
+public class OCamlToolWindowComponent implements ProjectComponent
+{
+	@NotNull
+	private final ToolWindowManager myToolWindowManager;
+	@NotNull
+	private final MessageBusConnection myConnection;
+	@NotNull
+	private final Project myProject;
+	@NotNull
+	private final String TOOL_WINDOW_ID = "OCaml";
+	private boolean myToolWindowWasRegistered = false;
 
-    public OCamlToolWindowComponent(@NotNull final Project project) {
-        myToolWindowManager = ToolWindowManager.getInstance(project);
-        myConnection = project.getMessageBus().connect();
-        myConnection.subscribe(ProjectTopics.MODULES, new ModuleAdapter() {
-            @Override
-            public void moduleAdded(@NotNull final Project project, @NotNull final Module module) {
-                registerToolWindowIfNeeded();
-            }
+	public OCamlToolWindowComponent(@NotNull final Project project)
+	{
+		myToolWindowManager = ToolWindowManager.getInstance(project);
+		myConnection = project.getMessageBus().connect();
+		myConnection.subscribe(ProjectTopics.MODULES, new ModuleAdapter()
+		{
+			@Override
+			public void moduleAdded(@NotNull final Project project, @NotNull final Module module)
+			{
+				registerToolWindowIfNeeded();
+			}
 
-            @Override
-            public void moduleRemoved(@NotNull final Project project, @NotNull final Module module) {
-                unregisterToolWindowIfNeeded();
-            }
-        });
-        myProject = project;
-    }
+			@Override
+			public void moduleRemoved(@NotNull final Project project, @NotNull final Module module)
+			{
+				unregisterToolWindowIfNeeded();
+			}
+		});
+		myProject = project;
+	}
 
-    @NotNull
-    public String getComponentName() {
-        return "OCAML_TOOL_WINDOW";
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return "OCAML_TOOL_WINDOW";
+	}
 
-    public void initComponent() {
-    }
+	public void initComponent()
+	{
+	}
 
-    public void disposeComponent() {
-        myConnection.disconnect();
-    }
+	public void disposeComponent()
+	{
+		myConnection.disconnect();
+	}
 
-    public void projectOpened() {
-        registerToolWindowIfNeeded();
-    }
+	public void projectOpened()
+	{
+		registerToolWindowIfNeeded();
+	}
 
-    public void projectClosed() {
-        unregisterToolWindowIfNeeded();
-    }
+	public void projectClosed()
+	{
+		unregisterToolWindowIfNeeded();
+	}
 
-    private void registerToolWindowIfNeeded() {
-        if (myToolWindowWasRegistered || !toolWindowShouldBeRegistered()) return;
+	private void registerToolWindowIfNeeded()
+	{
+		if(myToolWindowWasRegistered || !toolWindowShouldBeRegistered())
+		{
+			return;
+		}
 
-        final ToolWindow toolWindow = myToolWindowManager.registerToolWindow(TOOL_WINDOW_ID, true, ToolWindowAnchor.BOTTOM, false);
-        toolWindow.setIcon(OCamlIconUtil.getSmallOCamlIcon());
-        toolWindow.setTitle(TOOL_WINDOW_ID);
+		final ToolWindow toolWindow = myToolWindowManager.registerToolWindow(TOOL_WINDOW_ID, true, ToolWindowAnchor.BOTTOM, false);
+		toolWindow.setIcon(OCamlIconUtil.getSmallOCamlIcon());
+		toolWindow.setTitle(TOOL_WINDOW_ID);
 
-        myToolWindowWasRegistered = true;
+		myToolWindowWasRegistered = true;
 
-        final ContentManager contentManager = toolWindow.getContentManager();
-        contentManager.addContentManagerListener(new ContentManagerAdapter() {
-            @Override
-            public void contentRemoved(@NotNull final ContentManagerEvent event) {
-                if (contentManager.getContentCount() == 0) {
-                    OCamlToolWindowUtil.addAndSelectStartContent(myProject, contentManager);
-                }
-            }
-        });
+		final ContentManager contentManager = toolWindow.getContentManager();
+		contentManager.addContentManagerListener(new ContentManagerAdapter()
+		{
+			@Override
+			public void contentRemoved(@NotNull final ContentManagerEvent event)
+			{
+				if(contentManager.getContentCount() == 0)
+				{
+					OCamlToolWindowUtil.addAndSelectStartContent(myProject, contentManager);
+				}
+			}
+		});
 
-        OCamlToolWindowUtil.addAndSelectStartContent(myProject, contentManager);
-    }
+		OCamlToolWindowUtil.addAndSelectStartContent(myProject, contentManager);
+	}
 
-    private void unregisterToolWindowIfNeeded() {
-        if (myToolWindowWasRegistered && !toolWindowShouldBeRegistered()) {
-            myToolWindowManager.unregisterToolWindow(TOOL_WINDOW_ID);
-            myToolWindowWasRegistered = false;
-        }
-    }
+	private void unregisterToolWindowIfNeeded()
+	{
+		if(myToolWindowWasRegistered && !toolWindowShouldBeRegistered())
+		{
+			myToolWindowManager.unregisterToolWindow(TOOL_WINDOW_ID);
+			myToolWindowWasRegistered = false;
+		}
+	}
 
-    private boolean toolWindowShouldBeRegistered() {
-        final Module[] modules = ModuleManager.getInstance(myProject).getModules();
-        for (final Module module : modules) {
-            if (OCamlModuleUtil.isOCamlModule(module)) {
-                return true;
-            }
-        }
-        return false;
-    }
+	private boolean toolWindowShouldBeRegistered()
+	{
+		final Module[] modules = ModuleManager.getInstance(myProject).getModules();
+		for(final Module module : modules)
+		{
+			if(OCamlModuleUtil.isOCamlModule(module))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -25,8 +25,10 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlPatternSurroundDescriptor extends BaseOCamlSurroundDescriptor {
-    public OCamlPatternSurroundDescriptor() {
-        super(OCamlPattern.class, new OCamlWithParenthesesExpressionSurrounder());
-    }
+public class OCamlPatternSurroundDescriptor extends BaseOCamlSurroundDescriptor
+{
+	public OCamlPatternSurroundDescriptor()
+	{
+		super(OCamlPattern.class, new OCamlWithParenthesesExpressionSurrounder());
+	}
 }

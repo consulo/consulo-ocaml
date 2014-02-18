@@ -18,21 +18,24 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstantExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-public class OCamlConstantExpressionImpl extends BaseOCamlConstant implements OCamlConstantExpression {
-    public OCamlConstantExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlConstantExpressionImpl extends BaseOCamlConstant implements OCamlConstantExpression
+{
+	public OCamlConstantExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitConstantExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitConstantExpression(this);
+	}
 }

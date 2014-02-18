@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -27,58 +29,70 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.OCamlASTTreeUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordTypeDefinition;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeDefinitionConstraint;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeRepresentation;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlVariantTypeDefinition;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlTypeBindingImpl extends BaseOCamlResolvedReference implements OCamlTypeBinding {
-    public OCamlTypeBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlTypeBindingImpl extends BaseOCamlResolvedReference implements OCamlTypeBinding
+{
+	public OCamlTypeBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlRecordTypeDefinition.class)
-            || OCamlPsiUtil.endsCorrectlyWith(this, OCamlVariantTypeDefinition.class)
-            || OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class)
-            || OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeDefinitionConstraint.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlRecordTypeDefinition.class) || OCamlPsiUtil.endsCorrectlyWith(this,
+				OCamlVariantTypeDefinition.class) || OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class) || OCamlPsiUtil.endsCorrectlyWith(this,
+				OCamlTypeDefinitionConstraint.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitTypeBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitTypeBinding(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.TYPE_CONSTRUCTOR_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.TYPE_CONSTRUCTOR_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "type";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "type";
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return super.processDeclarations(builder) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeRepresentation.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return super.processDeclarations(builder) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeRepresentation.class);
+	}
 
-    @Nullable
-    public OCamlTypeExpression getExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlTypeExpression.class);
-    }
+	@Nullable
+	public OCamlTypeExpression getExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlTypeExpression.class);
+	}
 
-    @Nullable
-    public OCamlTypeExpression getTypeExpression() {
-        return null;
-    }
+	@Nullable
+	public OCamlTypeExpression getTypeExpression()
+	{
+		return null;
+	}
 }

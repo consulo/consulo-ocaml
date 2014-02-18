@@ -18,116 +18,146 @@
 
 package manuylov.maxim.ocaml.settings;
 
-import com.intellij.openapi.components.*;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.components.StorageScheme;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.io.FileUtil;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
 @State(
-    name = "OCamlSettings",
-    storages = {
-        @Storage(id = "default", file = "$PROJECT_FILE$"),
-        @Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/ocaml_settings.xml", scheme = StorageScheme.DIRECTORY_BASED)
-    })
-public class OCamlSettings implements ProjectComponent, PersistentStateComponent<OCamlState> {
-    @NotNull private final Project myProject;
-    @Nullable private Sdk myTopLevelSdk = null;
-    @NotNull private String myTopLevelCmdParams = "";
-    @NotNull private String myTopLevelCmdWorkingDir = "";
+		name = "OCamlSettings",
+		storages = {
+				@Storage(id = "default", file = "$PROJECT_FILE$"),
+				@Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/ocaml_settings.xml", scheme = StorageScheme.DIRECTORY_BASED)
+		})
+public class OCamlSettings implements ProjectComponent, PersistentStateComponent<OCamlState>
+{
+	@NotNull
+	private final Project myProject;
+	@Nullable
+	private Sdk myTopLevelSdk = null;
+	@NotNull
+	private String myTopLevelCmdParams = "";
+	@NotNull
+	private String myTopLevelCmdWorkingDir = "";
 
-    @NotNull private static OCamlSettings ourInstance;
+	@NotNull
+	private static OCamlSettings ourInstance;
 
-    @NotNull
-    public static OCamlSettings getInstance() {
-        return ourInstance;
-    }
+	@NotNull
+	public static OCamlSettings getInstance()
+	{
+		return ourInstance;
+	}
 
-    public OCamlSettings(@NotNull final Project project) {
-        myProject = project;
-        ourInstance = this;
-    }
+	public OCamlSettings(@NotNull final Project project)
+	{
+		myProject = project;
+		ourInstance = this;
+	}
 
-    @NotNull
-    public OCamlState getState() {
-        final OCamlState state = new OCamlState();
-        if (myTopLevelSdk != null) {
-            state.setTopLevelSdkHomePath(FileUtil.toSystemIndependentName(myTopLevelSdk.getHomePath()));
-        }
-        state.setTopLevelCmdOptions(myTopLevelCmdParams);
-        state.setTopLevelCmdWorkingDir(myTopLevelCmdWorkingDir);
-        return state;
-    }
+	@NotNull
+	public OCamlState getState()
+	{
+		final OCamlState state = new OCamlState();
+		if(myTopLevelSdk != null)
+		{
+			state.setTopLevelSdkHomePath(FileUtil.toSystemIndependentName(myTopLevelSdk.getHomePath()));
+		}
+		state.setTopLevelCmdOptions(myTopLevelCmdParams);
+		state.setTopLevelCmdWorkingDir(myTopLevelCmdWorkingDir);
+		return state;
+	}
 
-    public void loadState(@NotNull final OCamlState state) {
-        final String systemIndependentHomePath = state.getTopLevelSdkHomePath();
-        if (systemIndependentHomePath == null) {
-            myTopLevelSdk = null;
-        }
-        else {
-            final List<Sdk> ocamlSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
-            for (final Sdk ocamlSdk : ocamlSdks) {
-                if (systemIndependentHomePath.equals(FileUtil.toSystemIndependentName(ocamlSdk.getHomePath()))) {
-                    myTopLevelSdk = ocamlSdk;
-                    break;
-                }
-            }
-        }
-        myTopLevelCmdParams = OCamlStringUtil.getNotNull(state.getTopLevelCmdOptions());
-        myTopLevelCmdWorkingDir = OCamlStringUtil.getNotNull(state.getTopLevelCmdWorkingDir());
-    }
+	public void loadState(@NotNull final OCamlState state)
+	{
+		final String systemIndependentHomePath = state.getTopLevelSdkHomePath();
+		if(systemIndependentHomePath == null)
+		{
+			myTopLevelSdk = null;
+		}
+		else
+		{
+			final List<Sdk> ocamlSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
+			for(final Sdk ocamlSdk : ocamlSdks)
+			{
+				if(systemIndependentHomePath.equals(FileUtil.toSystemIndependentName(ocamlSdk.getHomePath())))
+				{
+					myTopLevelSdk = ocamlSdk;
+					break;
+				}
+			}
+		}
+		myTopLevelCmdParams = OCamlStringUtil.getNotNull(state.getTopLevelCmdOptions());
+		myTopLevelCmdWorkingDir = OCamlStringUtil.getNotNull(state.getTopLevelCmdWorkingDir());
+	}
 
-    @Nullable
-    public Sdk getTopLevelSdk() {
-        return myTopLevelSdk;
-    }
+	@Nullable
+	public Sdk getTopLevelSdk()
+	{
+		return myTopLevelSdk;
+	}
 
-    public void setTopLevelSdk(@Nullable final Sdk topLevelSdk) {
-        myTopLevelSdk = topLevelSdk;
-    }
+	public void setTopLevelSdk(@Nullable final Sdk topLevelSdk)
+	{
+		myTopLevelSdk = topLevelSdk;
+	}
 
-    public void setTopLevelCmdOptions(@NotNull final String cmdParams) {
-        myTopLevelCmdParams = cmdParams;
-    }
+	public void setTopLevelCmdOptions(@NotNull final String cmdParams)
+	{
+		myTopLevelCmdParams = cmdParams;
+	}
 
-    @NotNull
-    public String getTopLevelCmdOptions() {
-        return myTopLevelCmdParams;
-    }
+	@NotNull
+	public String getTopLevelCmdOptions()
+	{
+		return myTopLevelCmdParams;
+	}
 
-    public void setTopLevelCmdWorkingDir(@NotNull final String dir) {
-        myTopLevelCmdWorkingDir = dir;
-    }
+	public void setTopLevelCmdWorkingDir(@NotNull final String dir)
+	{
+		myTopLevelCmdWorkingDir = dir;
+	}
 
-    @NotNull
-    public String getTopLevelCmdWorkingDir() {
-        return myTopLevelCmdWorkingDir;
-    }
+	@NotNull
+	public String getTopLevelCmdWorkingDir()
+	{
+		return myTopLevelCmdWorkingDir;
+	}
 
-    @NotNull
-    public String getComponentName() {
-        return "OCamlSettings";
-    }
+	@NotNull
+	public String getComponentName()
+	{
+		return "OCamlSettings";
+	}
 
-    public void initComponent() {
-    }
+	public void initComponent()
+	{
+	}
 
-    public void disposeComponent() {
-    }
+	public void disposeComponent()
+	{
+	}
 
-    public void projectOpened() {
-    }
+	public void projectOpened()
+	{
+	}
 
-    public void projectClosed() {
-    }
+	public void projectClosed()
+	{
+	}
 }

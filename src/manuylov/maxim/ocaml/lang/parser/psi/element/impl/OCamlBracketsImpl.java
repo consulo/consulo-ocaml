@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlBrackets;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 22.03.2009
  */
-public class OCamlBracketsImpl extends BaseOCamlElement implements OCamlBrackets {
-    public OCamlBracketsImpl(@NotNull final ASTNode astNode) {
-        super(astNode);
-    }
+public class OCamlBracketsImpl extends BaseOCamlElement implements OCamlBrackets
+{
+	public OCamlBracketsImpl(@NotNull final ASTNode astNode)
+	{
+		super(astNode);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RBRACKET);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RBRACKET);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitBrackets(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitBrackets(this);
+	}
 }

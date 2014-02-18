@@ -18,46 +18,62 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.rename;
 
+import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
 import manuylov.maxim.ocaml.lang.Keywords;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 26.04.2010
  */
-public class OCamlNamesValidator implements NamesValidator {
-    @NotNull private static final Set<String> ourKeywords = new HashSet<String>();
+public class OCamlNamesValidator implements NamesValidator
+{
+	@NotNull
+	private static final Set<String> ourKeywords = new HashSet<String>();
 
-    public boolean isKeyword(final String name, final Project project) {
-        return isKeyword(name);
-    }
+	public boolean isKeyword(final String name, final Project project)
+	{
+		return isKeyword(name);
+	}
 
-    public static boolean isKeyword(@NotNull final String name) {
-        initializeKeywordsSetIfNeeded();
-        return ourKeywords.contains(name);
-    }
+	public static boolean isKeyword(@NotNull final String name)
+	{
+		initializeKeywordsSetIfNeeded();
+		return ourKeywords.contains(name);
+	}
 
-    public boolean isIdentifier(final String name, final Project project) {
-        for (final NameType nameType : NameType.values()) {
-            if (nameType.isNameIsCorrect(name)) return true;
-        }
-        return false;
-    }
+	public boolean isIdentifier(final String name, final Project project)
+	{
+		for(final NameType nameType : NameType.values())
+		{
+			if(nameType.isNameIsCorrect(name))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    private static void initializeKeywordsSetIfNeeded() {
-        if (ourKeywords.isEmpty()) {
-            for (final Field field : Keywords.class.getFields()) {
-                try {
-                    ourKeywords.add(String.valueOf(field.get(null)));
-                } catch (final IllegalAccessException ignore) {}
-            }
-        }
-    }
+	private static void initializeKeywordsSetIfNeeded()
+	{
+		if(ourKeywords.isEmpty())
+		{
+			for(final Field field : Keywords.class.getFields())
+			{
+				try
+				{
+					ourKeywords.add(String.valueOf(field.get(null)));
+				}
+				catch(final IllegalAccessException ignore)
+				{
+				}
+			}
+		}
+	}
 }

@@ -18,59 +18,73 @@
 
 package manuylov.maxim.ocaml.settings;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
-public class OCamlState {
-    @Nullable private String myTopLevelSdkHomePath = null;
-    @NotNull private String myTopLevelCmdParams = "";
-    @NotNull private String myTopLevelCmdWorkingDir = "";
-    @NotNull private Map<String, Boolean> myExeFileStates = new HashMap<String, Boolean>();
+public class OCamlState
+{
+	@Nullable
+	private String myTopLevelSdkHomePath = null;
+	@NotNull
+	private String myTopLevelCmdParams = "";
+	@NotNull
+	private String myTopLevelCmdWorkingDir = "";
+	@NotNull
+	private Map<String, Boolean> myExeFileStates = new HashMap<String, Boolean>();
 
-    @Nullable
-    public String getTopLevelSdkHomePath() {
-        return myTopLevelSdkHomePath;
-    }
+	@Nullable
+	public String getTopLevelSdkHomePath()
+	{
+		return myTopLevelSdkHomePath;
+	}
 
-    public void setTopLevelSdkHomePath(@Nullable final String topLevelSdkHomePath) {
-        myTopLevelSdkHomePath = topLevelSdkHomePath;
-    }
+	public void setTopLevelSdkHomePath(@Nullable final String topLevelSdkHomePath)
+	{
+		myTopLevelSdkHomePath = topLevelSdkHomePath;
+	}
 
-    @NotNull
-    public Map<String, Boolean> getExeFileStates() {
-        return myExeFileStates;
-    }
+	@NotNull
+	public Map<String, Boolean> getExeFileStates()
+	{
+		return myExeFileStates;
+	}
 
-    public void setExeFileStates(@NotNull final Map<String, Boolean> exeFileStates) {
-        myExeFileStates = exeFileStates;
-    }
+	public void setExeFileStates(@NotNull final Map<String, Boolean> exeFileStates)
+	{
+		myExeFileStates = exeFileStates;
+	}
 
-    public void putExeFileState(@NotNull final String exeFilePath, final boolean flag) {
-        myExeFileStates.put(exeFilePath, flag);
-    }
+	public void putExeFileState(@NotNull final String exeFilePath, final boolean flag)
+	{
+		myExeFileStates.put(exeFilePath, flag);
+	}
 
-    public void setTopLevelCmdOptions(@NotNull final String cmdParams) {
-        myTopLevelCmdParams = cmdParams;
-    }
+	public void setTopLevelCmdOptions(@NotNull final String cmdParams)
+	{
+		myTopLevelCmdParams = cmdParams;
+	}
 
-    @NotNull
-    public String getTopLevelCmdOptions() {
-        return myTopLevelCmdParams;
-    }
+	@NotNull
+	public String getTopLevelCmdOptions()
+	{
+		return myTopLevelCmdParams;
+	}
 
-    public void setTopLevelCmdWorkingDir(@NotNull final String dir) {
-        myTopLevelCmdWorkingDir = dir;
-    }
+	public void setTopLevelCmdWorkingDir(@NotNull final String dir)
+	{
+		myTopLevelCmdWorkingDir = dir;
+	}
 
-    @NotNull
-    public String getTopLevelCmdWorkingDir() {
-        return myTopLevelCmdWorkingDir;
-    }
+	@NotNull
+	public String getTopLevelCmdWorkingDir()
+	{
+		return myTopLevelCmdWorkingDir;
+	}
 }

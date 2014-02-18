@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 21.05.2010
  */
-public interface OCamlObjectSelfSpecification extends OCamlElement {
+public interface OCamlObjectSelfSpecification extends OCamlElement
+{
 }

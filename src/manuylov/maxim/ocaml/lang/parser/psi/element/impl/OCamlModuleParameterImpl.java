@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -30,54 +32,62 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleParameter;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 24.05.2009
  */
-public class OCamlModuleParameterImpl extends BaseOCamlResolvedReference implements OCamlModuleParameter {
-    public OCamlModuleParameterImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlModuleParameterImpl extends BaseOCamlResolvedReference implements OCamlModuleParameter
+{
+	public OCamlModuleParameterImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitModuleParameter(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitModuleParameter(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleType.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleType.class);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.MODULE_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.MODULE_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.UpperCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.UpperCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "module";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "module";
+	}
 
-    @Nullable
-    public OCamlModuleExpression getExpression() {
-        return null;
-    }
+	@Nullable
+	public OCamlModuleExpression getExpression()
+	{
+		return null;
+	}
 
-    @Nullable
-    public OCamlModuleType getTypeExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlModuleType.class);
-    }
+	@Nullable
+	public OCamlModuleType getTypeExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlModuleType.class);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInStructuredBinding(builder, this);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInStructuredBinding(builder, this);
+	}
 }

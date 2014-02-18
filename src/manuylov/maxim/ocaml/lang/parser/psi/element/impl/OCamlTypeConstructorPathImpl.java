@@ -18,6 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -25,30 +28,32 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeConstructorName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeConstructorPath;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlTypeConstructorPathImpl extends BaseOCamlElement implements OCamlTypeConstructorPath {
-    public OCamlTypeConstructorPathImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlTypeConstructorPathImpl extends BaseOCamlElement implements OCamlTypeConstructorPath
+{
+	public OCamlTypeConstructorPathImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitTypeConstructorPath(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitTypeConstructorPath(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeConstructorName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeConstructorName.class);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getLastChildOfType(this, OCamlTypeConstructorName.class));
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getLastChildOfType(this, OCamlTypeConstructorName.class));
+	}
 }

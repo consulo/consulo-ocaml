@@ -22,5 +22,6 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 20.04.2010
  */
-public interface OCamlLetBindingPattern extends OCamlPattern {
+public interface OCamlLetBindingPattern extends OCamlPattern
+{
 }

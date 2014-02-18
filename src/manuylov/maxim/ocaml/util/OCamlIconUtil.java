@@ -18,56 +18,71 @@
 
 package manuylov.maxim.ocaml.util;
 
-import com.intellij.openapi.util.IconLoader;
-import org.jetbrains.annotations.NotNull;
+import javax.swing.Icon;
 
-import javax.swing.*;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.IconLoader;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
-public class OCamlIconUtil {
-    @NotNull private static final Icon ourMLFileIcon = IconLoader.getIcon("/img/ml-file.png");
-    @NotNull private static final Icon ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
-    @NotNull private static final Icon ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
-    @NotNull private static final Icon ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
-    @NotNull private static final Icon ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
-    @NotNull private static final Icon ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
-    @NotNull private static final Icon ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
+public class OCamlIconUtil
+{
+	@NotNull
+	private static final Icon ourMLFileIcon = IconLoader.getIcon("/img/ml-file.png");
+	@NotNull
+	private static final Icon ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
+	@NotNull
+	private static final Icon ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
+	@NotNull
+	private static final Icon ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
+	@NotNull
+	private static final Icon ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
+	@NotNull
+	private static final Icon ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
+	@NotNull
+	private static final Icon ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
 
-    @NotNull
-    public static Icon getSmallOCamlIcon() {
-        return ourOCamlSmallIcon;
-    }
+	@NotNull
+	public static Icon getSmallOCamlIcon()
+	{
+		return ourOCamlSmallIcon;
+	}
 
-    @NotNull
-    public static Icon getBigOCamlIcon() {
-        return ourOCamlBigIcon;
-    }
+	@NotNull
+	public static Icon getBigOCamlIcon()
+	{
+		return ourOCamlBigIcon;
+	}
 
-    @NotNull
-    public static Icon getMLFileIcon() {
-        return ourMLFileIcon;
-    }
+	@NotNull
+	public static Icon getMLFileIcon()
+	{
+		return ourMLFileIcon;
+	}
 
-    @NotNull
-    public static Icon getMLIFileIcon() {
-        return ourMLIFileIcon;
-    }
+	@NotNull
+	public static Icon getMLIFileIcon()
+	{
+		return ourMLIFileIcon;
+	}
 
-    @NotNull
-    public static Icon getOpenConsoleIcon() {
-        return ourOpenConsoleIcon;
-    }
+	@NotNull
+	public static Icon getOpenConsoleIcon()
+	{
+		return ourOpenConsoleIcon;
+	}
 
-    @NotNull
-    public static Icon getCloseViewIcon() {
-        return ourCloseViewIcon;
-    }
+	@NotNull
+	public static Icon getCloseViewIcon()
+	{
+		return ourCloseViewIcon;
+	}
 
-    @NotNull
-    public static Icon getSettingsIcon() {
-        return ourSettingsIcon;
-    }
+	@NotNull
+	public static Icon getSettingsIcon()
+	{
+		return ourSettingsIcon;
+	}
 }

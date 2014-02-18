@@ -18,17 +18,19 @@
 
 package manuylov.maxim.ocaml.lang.lexer;
 
+import java.io.Reader;
+
 import com.intellij.lexer.FlexAdapter;
 import manuylov.maxim.ocaml.lang.lexer.flex.OCamlParsingFlexLexer;
-
-import java.io.Reader;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 06.02.2009
  */
-public class OCamlParsingLexer extends FlexAdapter {
-    public OCamlParsingLexer() {
-        super(new OCamlParsingFlexLexer((Reader) null));
-    }
+public class OCamlParsingLexer extends FlexAdapter
+{
+	public OCamlParsingLexer()
+	{
+		super(new OCamlParsingFlexLexer((Reader) null));
+	}
 }

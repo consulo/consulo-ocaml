@@ -18,55 +18,68 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.List;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlForExpressionIndexVariableName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlInstVarNameDefinition;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLabelDefinition;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueNamePattern;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlValueNameImpl extends BaseOCamlReference implements OCamlValueName {
-    public OCamlValueNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlValueNameImpl extends BaseOCamlReference implements OCamlValueName
+{
+	public OCamlValueNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitValueName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitValueName(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.ValueName;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.ValueName;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "variable";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "variable";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Arrays.asList(OCamlInstVarNameDefinition.class,
-            OCamlValueNamePattern.class, OCamlForExpressionIndexVariableName.class, OCamlLabelDefinition.class);
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Arrays.asList(OCamlInstVarNameDefinition.class, OCamlValueNamePattern.class, OCamlForExpressionIndexVariableName.class,
+				OCamlLabelDefinition.class);
+	}
 
-    @NotNull
-    public List<OCamlExtendedModuleName> getModulePath() {
-        return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);
-    }
+	@NotNull
+	public List<OCamlExtendedModuleName> getModulePath()
+	{
+		return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);
+	}
 }

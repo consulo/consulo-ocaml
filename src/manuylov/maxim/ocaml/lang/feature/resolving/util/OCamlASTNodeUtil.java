@@ -18,27 +18,30 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageASTFactory;
 import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 27.03.2009
  */
-public class OCamlASTNodeUtil {
-    @NotNull
-    public static ASTNode createLeaf(@NotNull final IElementType elementType, @NotNull final String token) {
-        final LeafElement createdNode = LanguageASTFactory.INSTANCE.forLanguage(elementType.getLanguage()).createLeaf(elementType, token);
-        CodeEditUtil.setNodeGenerated(createdNode, true);
-        //noinspection ConstantConditions
-        return createdNode;
-    }
+public class OCamlASTNodeUtil
+{
+	@NotNull
+	public static ASTNode createLeaf(@NotNull final IElementType elementType, @NotNull final String token)
+	{
+		final LeafElement createdNode = LanguageASTFactory.INSTANCE.forLanguage(elementType.getLanguage()).createLeaf(elementType, token);
+		CodeEditUtil.setNodeGenerated(createdNode, true);
+		//noinspection ConstantConditions
+		return createdNode;
+	}
 
-    public static void replaceLeafText(@NotNull final ASTNode leaf, @NotNull final String text) {
-        leaf.getTreeParent().replaceChild(leaf, createLeaf(leaf.getElementType(), text));
-    }
+	public static void replaceLeafText(@NotNull final ASTNode leaf, @NotNull final String text)
+	{
+		leaf.getTreeParent().replaceChild(leaf, createLeaf(leaf.getElementType(), text));
+	}
 }

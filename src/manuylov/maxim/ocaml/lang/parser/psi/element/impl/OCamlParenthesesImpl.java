@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -28,32 +33,31 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParentheses;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlParenthesesImpl extends BaseOCamlElement implements OCamlParentheses {
-    public OCamlParenthesesImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlParenthesesImpl extends BaseOCamlElement implements OCamlParentheses
+{
+	public OCamlParenthesesImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitParentheses(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitParentheses(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
+	}
 
 /*
-    @NotNull
+	@NotNull
     public List<OCamlResolvedMethod> getAvailableMethods() {
         final OCamlExpression internalElement = getInternalElement(OCamlExpression.class);
         return internalElement == null ? Collections.<OCamlResolvedMethod>emptyList() : internalElement.getAvailableMethods();
@@ -61,19 +65,22 @@ public class OCamlParenthesesImpl extends BaseOCamlElement implements OCamlParen
 
 */
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlElement.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlElement.class);
+	}
 
-    @Nullable
-    public <T extends OCamlElement> T getInternalElement(@NotNull final Class<T> type) {
-        final Iterator<T> it = OCamlPsiUtil.getChildrenOfType(this, type).iterator();
-        return it.hasNext() ? it.next() : null;
-    }
+	@Nullable
+	public <T extends OCamlElement> T getInternalElement(@NotNull final Class<T> type)
+	{
+		final Iterator<T> it = OCamlPsiUtil.getChildrenOfType(this, type).iterator();
+		return it.hasNext() ? it.next() : null;
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(getInternalElement(OCamlStructuredElement.class));
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(getInternalElement(OCamlStructuredElement.class));
+	}
 }

@@ -18,30 +18,34 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnderscoreTypeExpression;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.05.2010
  */
-public class OCamlUnderscoreTypeExpressionImpl extends BaseOCamlElement implements OCamlUnderscoreTypeExpression {
-    public OCamlUnderscoreTypeExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlUnderscoreTypeExpressionImpl extends BaseOCamlElement implements OCamlUnderscoreTypeExpression
+{
+	public OCamlUnderscoreTypeExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return Collections.<OCamlStructuredElement>singletonList(this);
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return Collections.<OCamlStructuredElement>singletonList(this);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitUnderscoreTypeExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitUnderscoreTypeExpression(this);
+	}
 }

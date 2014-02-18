@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -29,48 +31,56 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldPath;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordFieldInitializationInPattern;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 17.04.2010
  */
-public class OCamlRecordFieldInitializationInPatternImpl extends BaseOCamlResolvedReference implements OCamlRecordFieldInitializationInPattern {
-    public OCamlRecordFieldInitializationInPatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlRecordFieldInitializationInPatternImpl extends BaseOCamlResolvedReference implements OCamlRecordFieldInitializationInPattern
+{
+	public OCamlRecordFieldInitializationInPatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPattern.class);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        final OCamlFieldPath fieldPath = OCamlPsiUtil.getFirstChildOfType(this, OCamlFieldPath.class);
-        if (fieldPath == null) return null;
-        final OCamlFieldName fieldName = fieldPath.getFieldName();
-        return fieldName == null ? null : fieldName.getNameElement();
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		final OCamlFieldPath fieldPath = OCamlPsiUtil.getFirstChildOfType(this, OCamlFieldPath.class);
+		if(fieldPath == null)
+		{
+			return null;
+		}
+		final OCamlFieldName fieldName = fieldPath.getFieldName();
+		return fieldName == null ? null : fieldName.getNameElement();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "field";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "field";
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitRecordFieldInitializationInPattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitRecordFieldInitializationInPattern(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return builder.getProcessor().process(this)
-            || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return builder.getProcessor().process(this) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
+	}
 }

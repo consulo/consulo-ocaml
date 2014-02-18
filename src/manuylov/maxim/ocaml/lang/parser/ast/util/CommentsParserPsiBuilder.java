@@ -41,47 +41,57 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  * @author Maxim.Manuylov
  *         Date: 13.06.2009
  */
-public class CommentsParserPsiBuilder implements PsiBuilder {
-    @NotNull private final PsiBuilder myBuilder;
+public class CommentsParserPsiBuilder implements PsiBuilder
+{
+	@NotNull
+	private final PsiBuilder myBuilder;
 
-    public CommentsParserPsiBuilder(@NotNull final PsiBuilder builder) {
-        myBuilder = builder;
-        myBuilder.enforceCommentTokens(TokenSet.create());
-    }
+	public CommentsParserPsiBuilder(@NotNull final PsiBuilder builder)
+	{
+		myBuilder = builder;
+		myBuilder.enforceCommentTokens(TokenSet.create());
+	}
 
-    public void advanceLexer() {
-        tryParseComments();
-        myBuilder.advanceLexer();
-    }
+	public void advanceLexer()
+	{
+		tryParseComments();
+		myBuilder.advanceLexer();
+	}
 
-    public IElementType getTokenType() {
-        tryParseComments();
-        return myBuilder.getTokenType();
-    }
+	public IElementType getTokenType()
+	{
+		tryParseComments();
+		return myBuilder.getTokenType();
+	}
 
-    public String getTokenText() {
-        tryParseComments();
-        return myBuilder.getTokenText();
-    }
+	public String getTokenText()
+	{
+		tryParseComments();
+		return myBuilder.getTokenText();
+	}
 
-    public int getCurrentOffset() {
-        tryParseComments();
-        return myBuilder.getCurrentOffset();
-    }
+	public int getCurrentOffset()
+	{
+		tryParseComments();
+		return myBuilder.getCurrentOffset();
+	}
 
-    public Marker mark() {
-        return myBuilder.mark();
-    }
+	public Marker mark()
+	{
+		return myBuilder.mark();
+	}
 
-    public void error(final String messageText) {
-        tryParseComments();
-        myBuilder.error(messageText);
-    }
+	public void error(final String messageText)
+	{
+		tryParseComments();
+		myBuilder.error(messageText);
+	}
 
-    public boolean eof() {
-        tryParseComments();
-        return myBuilder.eof();
-    }
+	public boolean eof()
+	{
+		tryParseComments();
+		return myBuilder.eof();
+	}
 
 	@Override
 	public Project getProject()
@@ -89,13 +99,15 @@ public class CommentsParserPsiBuilder implements PsiBuilder {
 		return myBuilder.getProject();
 	}
 
-	public CharSequence getOriginalText() {
-        return myBuilder.getOriginalText();
-    }
+	public CharSequence getOriginalText()
+	{
+		return myBuilder.getOriginalText();
+	}
 
-    public void setTokenTypeRemapper(final ITokenTypeRemapper remapper) {
-        myBuilder.setTokenTypeRemapper(remapper);
-    }
+	public void setTokenTypeRemapper(final ITokenTypeRemapper remapper)
+	{
+		myBuilder.setTokenTypeRemapper(remapper);
+	}
 
 	@Override
 	public void remapCurrentToken(IElementType elementType)
@@ -129,71 +141,95 @@ public class CommentsParserPsiBuilder implements PsiBuilder {
 		return 0;
 	}
 
-	public ASTNode getTreeBuilt() {
-        return myBuilder.getTreeBuilt();
-    }
+	public ASTNode getTreeBuilt()
+	{
+		return myBuilder.getTreeBuilt();
+	}
 
-    public FlyweightCapableTreeStructure<LighterASTNode> getLightTree() {
-        return myBuilder.getLightTree();
-    }
+	public FlyweightCapableTreeStructure<LighterASTNode> getLightTree()
+	{
+		return myBuilder.getLightTree();
+	}
 
-    public void setDebugMode(final boolean dbgMode) {
-        myBuilder.setDebugMode(dbgMode);
-    }
+	public void setDebugMode(final boolean dbgMode)
+	{
+		myBuilder.setDebugMode(dbgMode);
+	}
 
-    public void enforceCommentTokens(final TokenSet tokens) {
-        myBuilder.enforceCommentTokens(tokens);
-    }
+	public void enforceCommentTokens(final TokenSet tokens)
+	{
+		myBuilder.enforceCommentTokens(tokens);
+	}
 
-    public LighterASTNode getLatestDoneMarker() {
-        try {
-            return (LighterASTNode) myBuilder.getClass().getMethod("getLatestDoneMarker").invoke(myBuilder);
-        } catch (final IllegalAccessException e) {
-            return null;
-        } catch (InvocationTargetException e) {
-            return null;
-        } catch (NoSuchMethodException e) {
-            return null;
-        }
-    }
+	public LighterASTNode getLatestDoneMarker()
+	{
+		try
+		{
+			return (LighterASTNode) myBuilder.getClass().getMethod("getLatestDoneMarker").invoke(myBuilder);
+		}
+		catch(final IllegalAccessException e)
+		{
+			return null;
+		}
+		catch(InvocationTargetException e)
+		{
+			return null;
+		}
+		catch(NoSuchMethodException e)
+		{
+			return null;
+		}
+	}
 
-    public <T> T getUserData(@NotNull final Key<T> key) {
-        return myBuilder.getUserData(key);
-    }
+	public <T> T getUserData(@NotNull final Key<T> key)
+	{
+		return myBuilder.getUserData(key);
+	}
 
-    public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value) {
-        myBuilder.putUserData(key, value);
-    }
+	public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value)
+	{
+		myBuilder.putUserData(key, value);
+	}
 
-    private void tryParseComments() {
-        while (myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN) {
-            parseComment();
-        }
-    }
+	private void tryParseComments()
+	{
+		while(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN)
+		{
+			parseComment();
+		}
+	}
 
-    private void parseComment() {
-        final Stack<Marker> markers = new Stack<PsiBuilder.Marker>();
+	private void parseComment()
+	{
+		final Stack<Marker> markers = new Stack<PsiBuilder.Marker>();
 
-        do {
-            if (myBuilder.getTokenType() == null) {
-                while (markers.size() > 0) {
-                    markers.pop().done(OCamlElementTypes.UNCLOSED_COMMENT);
-                }
-                myBuilder.error(Strings.UNCLOSED_COMMENT);
-            }
-            else if (myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN) {
-                markers.push(myBuilder.mark());
-                myBuilder.advanceLexer();
-            }
-            else if (myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_END) {
-                myBuilder.advanceLexer();
-                markers.pop().done(OCamlElementTypes.COMMENT_BLOCK);
-            }
-            else if (myBuilder.getTokenType() == OCamlTokenTypes.COMMENT) {
-                myBuilder.advanceLexer();
-            }
-        } while (markers.size() > 0);
-    }
+		do
+		{
+			if(myBuilder.getTokenType() == null)
+			{
+				while(markers.size() > 0)
+				{
+					markers.pop().done(OCamlElementTypes.UNCLOSED_COMMENT);
+				}
+				myBuilder.error(Strings.UNCLOSED_COMMENT);
+			}
+			else if(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN)
+			{
+				markers.push(myBuilder.mark());
+				myBuilder.advanceLexer();
+			}
+			else if(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_END)
+			{
+				myBuilder.advanceLexer();
+				markers.pop().done(OCamlElementTypes.COMMENT_BLOCK);
+			}
+			else if(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT)
+			{
+				myBuilder.advanceLexer();
+			}
+		}
+		while(markers.size() > 0);
+	}
 
 	@Nullable
 	@Override

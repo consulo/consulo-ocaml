@@ -18,21 +18,24 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-public class OCamlConstructorNameExpressionImpl extends BaseOCamlConstructorName implements OCamlConstructorNameExpression {
-    public OCamlConstructorNameExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlConstructorNameExpressionImpl extends BaseOCamlConstructorName implements OCamlConstructorNameExpression
+{
+	public OCamlConstructorNameExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitConstructorNameExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitConstructorNameExpression(this);
+	}
 }

@@ -18,24 +18,27 @@
 
 package manuylov.maxim.ocaml.fileType.ml.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlFile;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 22.02.2009
  */
-public class MLFile extends BaseOCamlFile {
-    public MLFile(@NotNull final FileViewProvider fileViewProvider) {
-        super(fileViewProvider, MLFileTypeLanguage.INSTANCE);
-    }
+public class MLFile extends BaseOCamlFile
+{
+	public MLFile(@NotNull final FileViewProvider fileViewProvider)
+	{
+		super(fileViewProvider, MLFileTypeLanguage.INSTANCE);
+	}
 
-    @NotNull
-    public FileType getFileType() {
-        return MLFileType.INSTANCE;
-    }
+	@NotNull
+	public FileType getFileType()
+	{
+		return MLFileType.INSTANCE;
+	}
 }

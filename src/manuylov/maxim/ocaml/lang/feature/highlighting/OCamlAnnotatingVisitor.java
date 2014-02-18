@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.feature.highlighting;
 
+import java.awt.Color;
+import java.awt.Font;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
@@ -29,37 +33,41 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementProcessor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitorAdapter;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnknownElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 22.03.2009
  */
-public class OCamlAnnotatingVisitor extends OCamlElementVisitorAdapter implements Annotator, OCamlElementProcessor {
-    @NotNull private AnnotationHolder myAnnotationHolder;
+public class OCamlAnnotatingVisitor extends OCamlElementVisitorAdapter implements Annotator, OCamlElementProcessor
+{
+	@NotNull
+	private AnnotationHolder myAnnotationHolder;
 
-    public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder) {
-        myAnnotationHolder = holder;
-        psiElement.accept(this);
-    }
+	public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder)
+	{
+		myAnnotationHolder = holder;
+		psiElement.accept(this);
+	}
 
-    @Override
-    public void visitUnknownElement(@NotNull final OCamlUnknownElement psiElement) {
-        final ASTNode node = psiElement.getNode();
-        final Annotation annotation = myAnnotationHolder
-            .createErrorAnnotation(psiElement, "OCaml element was not created properly: " + (node == null ? "null, ": node.getElementType().toString() + ", ") + psiElement.toString());
-        annotation.setEnforcedTextAttributes(new TextAttributes(Color.black, Color.red.darker(), null, null, Font.PLAIN));
-    }
+	@Override
+	public void visitUnknownElement(@NotNull final OCamlUnknownElement psiElement)
+	{
+		final ASTNode node = psiElement.getNode();
+		final Annotation annotation = myAnnotationHolder.createErrorAnnotation(psiElement, "OCaml element was not created properly: " + (node == null ?
+				"null, " : node.getElementType().toString() + ", ") + psiElement.toString());
+		annotation.setEnforcedTextAttributes(new TextAttributes(Color.black, Color.red.darker(), null, null, Font.PLAIN));
+	}
 
-    public void process(@NotNull final OCamlElement psiElement) {
-        if (psiElement instanceof OCamlReference) {
-            final OCamlReference ref = (OCamlReference) psiElement;
-            if (!ref.isSoft() && !ref.isBundled() && ref.resolve() == null) {
-                final Annotation annotation = myAnnotationHolder.createErrorAnnotation(psiElement, "Unknown " + ref.getDescription());
-                annotation.setEnforcedTextAttributes(new TextAttributes(Color.red, null, null, null, Font.PLAIN));
-            }
-        }
-    }
+	public void process(@NotNull final OCamlElement psiElement)
+	{
+		if(psiElement instanceof OCamlReference)
+		{
+			final OCamlReference ref = (OCamlReference) psiElement;
+			if(!ref.isSoft() && !ref.isBundled() && ref.resolve() == null)
+			{
+				final Annotation annotation = myAnnotationHolder.createErrorAnnotation(psiElement, "Unknown " + ref.getDescription());
+				annotation.setEnforcedTextAttributes(new TextAttributes(Color.red, null, null, null, Font.PLAIN));
+			}
+		}
+	}
 }

@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
@@ -32,56 +34,64 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleDefinitionBinding
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParentheses;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.05.2009
  */
-public class OCamlModuleDefinitionBindingImpl extends BaseOCamlResolvedReference implements OCamlModuleDefinitionBinding {
-    public OCamlModuleDefinitionBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlModuleDefinitionBindingImpl extends BaseOCamlResolvedReference implements OCamlModuleDefinitionBinding
+{
+	public OCamlModuleDefinitionBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleExpression.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitModuleDefinitionBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitModuleDefinitionBinding(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.MODULE_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.MODULE_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.UpperCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.UpperCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "module";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "module";
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInStructuredBinding(builder, this) 
-            || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlParentheses.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInStructuredBinding(builder, this) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder,
+				this, OCamlParentheses.class);
+	}
 
-    @Nullable
-    public OCamlModuleExpression getExpression() {
-        final PsiElement lastChild = OCamlPsiUtil.getNonWhiteSpaceLastChild(this, false);
-        return lastChild instanceof OCamlModuleExpression ? (OCamlModuleExpression) lastChild : null;
-    }
+	@Nullable
+	public OCamlModuleExpression getExpression()
+	{
+		final PsiElement lastChild = OCamlPsiUtil.getNonWhiteSpaceLastChild(this, false);
+		return lastChild instanceof OCamlModuleExpression ? (OCamlModuleExpression) lastChild : null;
+	}
 
-    @Nullable
-    public OCamlModuleType getTypeExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlModuleType.class);
-    }
+	@Nullable
+	public OCamlModuleType getTypeExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlModuleType.class);
+	}
 }

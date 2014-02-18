@@ -18,21 +18,24 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParenthesesPattern;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.05.2010
  */
-public class OCamlParenthesesPatternImpl extends OCamlParenthesesImpl implements OCamlParenthesesPattern {
-    public OCamlParenthesesPatternImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlParenthesesPatternImpl extends OCamlParenthesesImpl implements OCamlParenthesesPattern
+{
+	public OCamlParenthesesPatternImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitParenthesesPattern(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitParenthesesPattern(this);
+	}
 }

@@ -18,36 +18,40 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.surroundWith.SurroundDescriptor;
 import com.intellij.lang.surroundWith.Surrounder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-abstract class BaseOCamlSurroundDescriptor implements SurroundDescriptor {
-    @NotNull private final Surrounder[] mySurrounders;
-    private final Class<? extends OCamlElement> myElementClass;
+abstract class BaseOCamlSurroundDescriptor implements SurroundDescriptor
+{
+	@NotNull
+	private final Surrounder[] mySurrounders;
+	private final Class<? extends OCamlElement> myElementClass;
 
-    public BaseOCamlSurroundDescriptor(@NotNull final Class<? extends OCamlElement> elementClass,
-                                       @NotNull final Surrounder... surrounders) {
-        myElementClass = elementClass;
-        mySurrounders = surrounders;
-    }
+	public BaseOCamlSurroundDescriptor(@NotNull final Class<? extends OCamlElement> elementClass, @NotNull final Surrounder... surrounders)
+	{
+		myElementClass = elementClass;
+		mySurrounders = surrounders;
+	}
 
-    @NotNull
-    public PsiElement[] getElementsToSurround(@NotNull final PsiFile file, final int startOffset, final int endOffset) {
-        final PsiElement element = OCamlPsiUtil.findElementOfTypeInRange(file, myElementClass, startOffset, endOffset, true);
-        return element == null ? PsiElement.EMPTY_ARRAY : new PsiElement[] { element };
-    }
+	@NotNull
+	public PsiElement[] getElementsToSurround(@NotNull final PsiFile file, final int startOffset, final int endOffset)
+	{
+		final PsiElement element = OCamlPsiUtil.findElementOfTypeInRange(file, myElementClass, startOffset, endOffset, true);
+		return element == null ? PsiElement.EMPTY_ARRAY : new PsiElement[]{element};
+	}
 
-    @NotNull
-    public Surrounder[] getSurrounders() {
-      return mySurrounders;
-    }
+	@NotNull
+	public Surrounder[] getSurrounders()
+	{
+		return mySurrounders;
+	}
 }

@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -25,57 +29,66 @@ import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.List;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlResolvedClassName;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlClassNameImpl extends BaseOCamlReference implements OCamlClassName {
-    public OCamlClassNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlClassNameImpl extends BaseOCamlReference implements OCamlClassName
+{
+	public OCamlClassNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitClassName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitClassName(this);
+	}
 
-    @NotNull
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	@NotNull
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "class";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "class";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlResolvedClassName.class);
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlResolvedClassName.class);
+	}
 
-    @NotNull
-    public List<OCamlModuleName> getModulePath() {
-        return OCamlPsiUtil.getModulePath(this, OCamlModuleName.class);
-    }
+	@NotNull
+	public List<OCamlModuleName> getModulePath()
+	{
+		return OCamlPsiUtil.getModulePath(this, OCamlModuleName.class);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return OCamlResolvingUtil.findActualDefinitionsOfStructuredElementReference(this);
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return OCamlResolvingUtil.findActualDefinitionsOfStructuredElementReference(this);
+	}
 
-    @NotNull
-    public OCamlClassName getClassName() {
-        return this;
-    }
+	@NotNull
+	public OCamlClassName getClassName()
+	{
+		return this;
+	}
 }

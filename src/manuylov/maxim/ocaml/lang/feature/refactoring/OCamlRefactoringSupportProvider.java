@@ -24,6 +24,7 @@ import com.intellij.lang.refactoring.DefaultRefactoringSupportProvider;
  * @author Maxim.Manuylov
  *         Date: 26.04.2010
  */
-public class OCamlRefactoringSupportProvider extends DefaultRefactoringSupportProvider {
-    
+public class OCamlRefactoringSupportProvider extends DefaultRefactoringSupportProvider
+{
+
 }

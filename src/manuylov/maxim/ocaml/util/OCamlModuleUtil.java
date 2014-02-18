@@ -18,22 +18,25 @@
 
 package manuylov.maxim.ocaml.util;
 
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import manuylov.maxim.ocaml.module.OCamlModuleType;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 29.04.2010
  */
-public class OCamlModuleUtil {
-    public static boolean isOCamlSdk(@Nullable final Sdk sdk) {
-        return sdk != null && sdk.getSdkType() instanceof OCamlSdkType;
-    }
+public class OCamlModuleUtil
+{
+	public static boolean isOCamlSdk(@Nullable final Sdk sdk)
+	{
+		return sdk != null && sdk.getSdkType() instanceof OCamlSdkType;
+	}
 
-    public static boolean isOCamlModule(@Nullable final Module module) {
-        return module != null && OCamlModuleType.ID.equals(module.getModuleType().getId());
-    }
+	public static boolean isOCamlModule(@Nullable final Module module)
+	{
+		return module != null && OCamlModuleType.ID.equals(module.getModuleType().getId());
+	}
 }

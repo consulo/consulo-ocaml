@@ -18,33 +18,38 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlSelfResolvedReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlInstVarNameDefinition;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.04.2010
  */
-public class OCamlInstVarNameDefinitionImpl extends BaseOCamlSelfResolvedReference implements OCamlInstVarNameDefinition {
-    public OCamlInstVarNameDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlInstVarNameDefinitionImpl extends BaseOCamlSelfResolvedReference implements OCamlInstVarNameDefinition
+{
+	public OCamlInstVarNameDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitInstVarNameDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitInstVarNameDefinition(this);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "instance variable";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "instance variable";
+	}
 }

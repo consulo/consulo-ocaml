@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ElementPosition;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -27,32 +31,33 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFileModuleExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 24.05.2009
  */
-public class OCamlFileModuleExpressionImpl extends BaseOCamlElement implements OCamlFileModuleExpression {
-    public OCamlFileModuleExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlFileModuleExpressionImpl extends BaseOCamlElement implements OCamlFileModuleExpression
+{
+	public OCamlFileModuleExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitFileModuleExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitFileModuleExpression(this);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return builder.getLastParentPosition() == ElementPosition.Sibling
-            && OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlDefinition.class, OCamlExpression.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return builder.getLastParentPosition() == ElementPosition.Sibling && OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this,
+				OCamlDefinition.class, OCamlExpression.class);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return Collections.<OCamlStructuredElement>singletonList(this);
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return Collections.<OCamlStructuredElement>singletonList(this);
+	}
 }

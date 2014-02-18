@@ -18,47 +18,59 @@
 
 package manuylov.maxim.ocaml.fileType.ml;
 
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
 import manuylov.maxim.ocaml.fileType.OCamlFileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 05.02.2009
  */
-public class MLFileType extends OCamlFileType {
-    @NotNull public static final MLFileType INSTANCE = new MLFileType();
+public class MLFileType extends OCamlFileType
+{
+	@NotNull
+	public static final MLFileType INSTANCE = new MLFileType();
 
-    private MLFileType() {
-        super(MLFileTypeLanguage.INSTANCE);
-    }
+	private MLFileType()
+	{
+		super(MLFileTypeLanguage.INSTANCE);
+	}
 
-    @NotNull
-    public String getName() {
-        return "OCAML_ML_FILE";
-    }
+	@Override
+	@NotNull
+	public String getName()
+	{
+		return "OCAML_ML_FILE";
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "OCaml module implementation files";
-    }
+	@Override
+	@NotNull
+	public String getDescription()
+	{
+		return "OCaml module implementation files";
+	}
 
-    @NotNull
-    public String getDefaultExtension() {
-        return "ml";
-    }
+	@Override
+	@NotNull
+	public String getDefaultExtension()
+	{
+		return "ml";
+	}
 
-    @NotNull
-    public Icon getIcon() {
-        return OCamlIconUtil.getMLFileIcon();
-    }
+	@Override
+	@NotNull
+	public Icon getIcon()
+	{
+		return OCamlIconUtil.getMLFileIcon();
+	}
 
-    @NotNull
-    @Override
-    public OCamlFileType getAnotherFileType() {
-        return MLIFileType.INSTANCE;
-    }
+	@NotNull
+	@Override
+	public OCamlFileType getAnotherFileType()
+	{
+		return MLIFileType.INSTANCE;
+	}
 }

@@ -18,15 +18,16 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element;
 
+import org.jetbrains.annotations.Nullable;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 15.04.2010
  */
-public interface OCamlBinding<T extends OCamlElement> extends OCamlResolvedReference {
-    @Nullable
-    T getExpression();
+public interface OCamlBinding<T extends OCamlElement> extends OCamlResolvedReference
+{
+	@Nullable
+	T getExpression();
 }

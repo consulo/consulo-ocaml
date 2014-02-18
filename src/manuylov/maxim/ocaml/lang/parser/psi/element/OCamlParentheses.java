@@ -18,15 +18,16 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element;
 
-import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlParentheses extends OCamlElement {
-    @Nullable
-    <T extends OCamlElement> T getInternalElement(@NotNull final Class<T> type);
+public interface OCamlParentheses extends OCamlElement
+{
+	@Nullable
+	<T extends OCamlElement> T getInternalElement(@NotNull final Class<T> type);
 }

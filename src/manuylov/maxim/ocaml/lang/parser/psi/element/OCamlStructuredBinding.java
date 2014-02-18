@@ -24,10 +24,11 @@ import org.jetbrains.annotations.Nullable;
  * @author Maxim.Manuylov
  *         Date: 15.04.2010
  */
-public interface OCamlStructuredBinding<T extends OCamlStructuredElement, Q extends OCamlStructuredElement> extends OCamlBinding<T> {
-    @Nullable
-    T getExpression();
+public interface OCamlStructuredBinding<T extends OCamlStructuredElement, Q extends OCamlStructuredElement> extends OCamlBinding<T>
+{
+	@Nullable
+	T getExpression();
 
-    @Nullable
-    Q getTypeExpression();
+	@Nullable
+	Q getTypeExpression();
 }

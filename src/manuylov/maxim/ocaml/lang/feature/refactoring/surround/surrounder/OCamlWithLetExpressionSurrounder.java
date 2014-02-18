@@ -24,21 +24,25 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithLetExpressionSurrounder extends BaseOCamlSurrounderWithNavigation {
-    private static final String START = "let ";
+public class OCamlWithLetExpressionSurrounder extends BaseOCamlSurrounderWithNavigation
+{
+	private static final String START = "let ";
 
-    public OCamlWithLetExpressionSurrounder() {
-        super("let / in");
-    }
+	public OCamlWithLetExpressionSurrounder()
+	{
+		super("let / in");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return START + " =  in (" + text + ")";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return START + " =  in (" + text + ")";
+	}
 
-    @Override
-    protected int getOffset(@NotNull final String surroundedText) {
-        return START.length();
-    }
+	@Override
+	protected int getOffset(@NotNull final String surroundedText)
+	{
+		return START.length();
+	}
 }

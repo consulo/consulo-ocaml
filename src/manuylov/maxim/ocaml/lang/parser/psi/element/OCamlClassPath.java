@@ -24,7 +24,8 @@ import org.jetbrains.annotations.Nullable;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlClassPath extends OCamlClassExpression, OCamlClassBodyType, OCamlPathElement {
-    @Nullable
-    OCamlClassName getClassName();    
+public interface OCamlClassPath extends OCamlClassExpression, OCamlClassBodyType, OCamlPathElement
+{
+	@Nullable
+	OCamlClassName getClassName();
 }

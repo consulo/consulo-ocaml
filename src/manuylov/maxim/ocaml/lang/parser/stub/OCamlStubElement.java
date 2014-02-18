@@ -25,5 +25,6 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 30.04.2010
  */
-public interface OCamlStubElement<T extends OCamlElement> extends StubElement<T> {    
+public interface OCamlStubElement<T extends OCamlElement> extends StubElement<T>
+{
 }

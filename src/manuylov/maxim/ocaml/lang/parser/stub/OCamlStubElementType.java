@@ -24,9 +24,10 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 30.04.2010
  */
-public class OCamlStubElementType<Stub extends OCamlStubElement<Psi>, Psi extends OCamlElement> {//extends IStubElementType<Stub, Psi> {
+public class OCamlStubElementType<Stub extends OCamlStubElement<Psi>, Psi extends OCamlElement>
+{//extends IStubElementType<Stub, Psi> {
 /*
-    public OCamlStubElementType(@NotNull final String elementName) {
+	public OCamlStubElementType(@NotNull final String elementName) {
         //super(elementName, MLFileTypeLanguage.INSTANCE); //todo base language or two different element types, see OCamlElementType
     }
 

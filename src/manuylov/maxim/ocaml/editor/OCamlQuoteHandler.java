@@ -18,56 +18,71 @@
 
 package manuylov.maxim.ocaml.editor;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.codeInsight.editorActions.QuoteHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlQuoteHandler implements QuoteHandler {
-    public boolean isClosingQuote(@NotNull final HighlighterIterator iterator, final int offset) {
-        return isClosingQuote(iterator);
-    }
+public class OCamlQuoteHandler implements QuoteHandler
+{
+	public boolean isClosingQuote(@NotNull final HighlighterIterator iterator, final int offset)
+	{
+		return isClosingQuote(iterator);
+	}
 
-    public boolean isOpeningQuote(@NotNull final HighlighterIterator iterator, final int offset) {
-        return isOpeningQuote(iterator);
-    }
+	public boolean isOpeningQuote(@NotNull final HighlighterIterator iterator, final int offset)
+	{
+		return isOpeningQuote(iterator);
+	}
 
-    public boolean hasNonClosedLiteral(@NotNull final Editor editor, @NotNull final HighlighterIterator iterator, final int offset) {
-        int start = iterator.getStart();
-        try {
-            if (isOpeningQuote(iterator)) {
-                iterator.advance();
-            }
+	public boolean hasNonClosedLiteral(@NotNull final Editor editor, @NotNull final HighlighterIterator iterator, final int offset)
+	{
+		int start = iterator.getStart();
+		try
+		{
+			if(isOpeningQuote(iterator))
+			{
+				iterator.advance();
+			}
 
-            while (!iterator.atEnd() && isStringLiteral(iterator)) {
-                iterator.advance();
-            }
+			while(!iterator.atEnd() && isStringLiteral(iterator))
+			{
+				iterator.advance();
+			}
 
-            return iterator.atEnd() || !isClosingQuote(iterator);  
-        }
-        finally {
-            while (iterator.atEnd() || iterator.getStart() != start) iterator.retreat();
-        }        
-    }
+			return iterator.atEnd() || !isClosingQuote(iterator);
+		}
+		finally
+		{
+			while(iterator.atEnd() || iterator.getStart() != start)
+			{
+				iterator.retreat();
+			}
+		}
+	}
 
-    public boolean isInsideLiteral(@NotNull final HighlighterIterator iterator) {
-        return isStringLiteral(iterator) || isClosingQuote(iterator);
-    }
+	public boolean isInsideLiteral(@NotNull final HighlighterIterator iterator)
+	{
+		return isStringLiteral(iterator) || isClosingQuote(iterator);
+	}
 
-    private boolean isOpeningQuote(@NotNull final HighlighterIterator iterator) {
-        return OCamlTokenTypes.QH_OPENING_QUOTES.contains(iterator.getTokenType());
-    }
+	private boolean isOpeningQuote(@NotNull final HighlighterIterator iterator)
+	{
+		return OCamlTokenTypes.QH_OPENING_QUOTES.contains(iterator.getTokenType());
+	}
 
-    private boolean isClosingQuote(@NotNull final HighlighterIterator iterator) {
-        return OCamlTokenTypes.QH_CLOSING_QUOTES.contains(iterator.getTokenType());
-    }
+	private boolean isClosingQuote(@NotNull final HighlighterIterator iterator)
+	{
+		return OCamlTokenTypes.QH_CLOSING_QUOTES.contains(iterator.getTokenType());
+	}
 
-    private boolean isStringLiteral(@NotNull final HighlighterIterator iterator) {
-        return OCamlTokenTypes.QH_STRING_LITERALS.contains(iterator.getTokenType());
-    }
+	private boolean isStringLiteral(@NotNull final HighlighterIterator iterator)
+	{
+		return OCamlTokenTypes.QH_STRING_LITERALS.contains(iterator.getTokenType());
+	}
 }

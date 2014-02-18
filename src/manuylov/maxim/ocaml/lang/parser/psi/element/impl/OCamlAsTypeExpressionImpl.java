@@ -18,6 +18,11 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -28,48 +33,51 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlAsTypeExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterDefinition;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlAsTypeExpressionImpl extends BaseOCamlResolvedReference implements OCamlAsTypeExpression {
-    public OCamlAsTypeExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlAsTypeExpressionImpl extends BaseOCamlResolvedReference implements OCamlAsTypeExpression
+{
+	public OCamlAsTypeExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitAsTypeExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitAsTypeExpression(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeParameterDefinition.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeParameterDefinition.class);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        final ASTNode node = OCamlASTTreeUtil.checkNodeType(getNode().getLastChildNode(), OCamlElementTypes.TYPE_PARAMETER_DEFINITION);
-        return node == null ? null : OCamlASTTreeUtil.checkNodeType(node.getLastChildNode(), OCamlElementTypes.TYPE_PARAMETER_NAME);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		final ASTNode node = OCamlASTTreeUtil.checkNodeType(getNode().getLastChildNode(), OCamlElementTypes.TYPE_PARAMETER_DEFINITION);
+		return node == null ? null : OCamlASTTreeUtil.checkNodeType(node.getLastChildNode(), OCamlElementTypes.TYPE_PARAMETER_NAME);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.AnyCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.AnyCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "type parameter";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "type parameter";
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return Collections.<OCamlStructuredElement>singletonList(this);
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return Collections.<OCamlStructuredElement>singletonList(this);
+	}
 }

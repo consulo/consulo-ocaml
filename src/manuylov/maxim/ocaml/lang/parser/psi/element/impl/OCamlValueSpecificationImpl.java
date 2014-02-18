@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -29,44 +31,50 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueSpecification;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlValueSpecificationImpl extends BaseOCamlElement implements OCamlValueSpecification {
-    public OCamlValueSpecificationImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlValueSpecificationImpl extends BaseOCamlElement implements OCamlValueSpecification
+{
+	public OCamlValueSpecificationImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitValueSpecification(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitValueSpecification(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.VALUE_NAME_PATTERN);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.VALUE_NAME_PATTERN);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.ValueName;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.ValueName;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "variable";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "variable";
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
+	}
 }

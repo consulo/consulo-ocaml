@@ -18,36 +18,43 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.content.ContentManager;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
-abstract class BaseOCamlToolWindowView extends JPanel implements Disposable {
-    @NotNull private final ContentManager myContentManager;
-    @NotNull private final Project myProject;
+abstract class BaseOCamlToolWindowView extends JPanel implements Disposable
+{
+	@NotNull
+	private final ContentManager myContentManager;
+	@NotNull
+	private final Project myProject;
 
-    protected BaseOCamlToolWindowView(@NotNull final Project project, @NotNull final ContentManager contentManager) {
-        myContentManager = contentManager;
-        myProject = project;
-    }
+	protected BaseOCamlToolWindowView(@NotNull final Project project, @NotNull final ContentManager contentManager)
+	{
+		myContentManager = contentManager;
+		myProject = project;
+	}
 
-    @NotNull
-    public OCamlToolWindowOpenCloseAction getOCamlToolWindowOpenCloseAction(final boolean openConsole, final boolean closeView) {
-        return new OCamlToolWindowOpenCloseAction(myProject, myContentManager, openConsole, closeView);
-    }
+	@NotNull
+	public OCamlToolWindowOpenCloseAction getOCamlToolWindowOpenCloseAction(final boolean openConsole, final boolean closeView)
+	{
+		return new OCamlToolWindowOpenCloseAction(myProject, myContentManager, openConsole, closeView);
+	}
 
-    @NotNull
-    public OCamlToolWindowSettingsAction getOCamlToolWindowSettingsAction() {
-        return new OCamlToolWindowSettingsAction(myProject, null);
-    }
+	@NotNull
+	public OCamlToolWindowSettingsAction getOCamlToolWindowSettingsAction()
+	{
+		return new OCamlToolWindowSettingsAction(myProject, null);
+	}
 
-    public void dispose() {
-    }
+	public void dispose()
+	{
+	}
 }

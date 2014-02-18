@@ -18,6 +18,12 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
@@ -27,64 +33,69 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterName;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public class OCamlTypeParameterNameImpl extends BaseOCamlReference implements OCamlTypeParameterName {
-    public OCamlTypeParameterNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlTypeParameterNameImpl extends BaseOCamlReference implements OCamlTypeParameterName
+{
+	public OCamlTypeParameterNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitTypeParameterName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitTypeParameterName(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.AnyCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.AnyCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "type parameter";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "type parameter";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlTypeParameterDefinition.class);
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlTypeParameterDefinition.class);
+	}
 
-    @NotNull
-    public List<OCamlExtendedModuleName> getModulePath() {
-        return Collections.emptyList();
-    }
+	@NotNull
+	public List<OCamlExtendedModuleName> getModulePath()
+	{
+		return Collections.emptyList();
+	}
 
-    @Override
-    public OCamlResolvedReference resolve() {
-        return null; //todo
-    }
+	@Override
+	public OCamlResolvedReference resolve()
+	{
+		return null; //todo
+	}
 
-    @Override
-    public boolean isSoft() {
-        return true; // todo
-    }
+	@Override
+	public boolean isSoft()
+	{
+		return true; // todo
+	}
 
-    @NotNull
-    @Override
-    public LookupElement[] getVariants() {
-        return new LookupElement[0]; //todo
-    }
+	@NotNull
+	@Override
+	public LookupElement[] getVariants()
+	{
+		return new LookupElement[0]; //todo
+	}
 }

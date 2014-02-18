@@ -18,22 +18,26 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import com.intellij.lang.Language;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.Language;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlLanguage extends Language {
-    @NotNull public static final OCamlLanguage INSTANCE = new OCamlLanguage();
+public class OCamlLanguage extends Language
+{
+	@NotNull
+	public static final OCamlLanguage INSTANCE = new OCamlLanguage();
 
-    private OCamlLanguage() {
-        super("OCAML_BASE");
-    }
+	private OCamlLanguage()
+	{
+		super("OCAML_BASE");
+	}
 
-    @Override
-    public boolean isCaseSensitive() {
-        return true;
-    }
+	@Override
+	public boolean isCaseSensitive()
+	{
+		return true;
+	}
 }

@@ -24,8 +24,10 @@ import manuylov.maxim.ocaml.lang.parser.stub.index.OCamlSymbolIndex;
  * @author Maxim.Manuylov
  *         Date: 27.04.2010
  */
-public class OCamlGoToSymbolContributor extends BaseOCamlChooseByNameContributor {
-    public OCamlGoToSymbolContributor() {
-        super(OCamlSymbolIndex.KEY);
-    }
+public class OCamlGoToSymbolContributor extends BaseOCamlChooseByNameContributor
+{
+	public OCamlGoToSymbolContributor()
+	{
+		super(OCamlSymbolIndex.KEY);
+	}
 }

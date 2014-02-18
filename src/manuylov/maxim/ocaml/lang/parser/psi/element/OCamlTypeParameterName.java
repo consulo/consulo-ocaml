@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlReference;
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public interface OCamlTypeParameterName extends OCamlReference {
+public interface OCamlTypeParameterName extends OCamlReference
+{
 }

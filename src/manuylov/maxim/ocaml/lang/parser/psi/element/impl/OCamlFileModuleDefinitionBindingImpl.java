@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
@@ -28,50 +30,68 @@ import manuylov.maxim.ocaml.fileType.mli.parser.psi.element.impl.MLIFile;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import manuylov.maxim.ocaml.lang.parser.psi.element.*;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFileModuleDefinitionBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFileModuleExpression;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleExpression;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleSpecificationBinding;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 30.04.2010
  */
-public class OCamlFileModuleDefinitionBindingImpl extends BaseOCamlFileModuleBinding<OCamlModuleExpression> implements OCamlFileModuleDefinitionBinding {
-    public OCamlFileModuleDefinitionBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlFileModuleDefinitionBindingImpl extends BaseOCamlFileModuleBinding<OCamlModuleExpression> implements
+		OCamlFileModuleDefinitionBinding
+{
+	public OCamlFileModuleDefinitionBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.UpperCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.UpperCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "module";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "module";
+	}
 
-    @Nullable
-    public OCamlModuleExpression getExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlFileModuleExpression.class);
-    }
+	@Nullable
+	public OCamlModuleExpression getExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlFileModuleExpression.class);
+	}
 
-    @Nullable
-    public OCamlModuleType getTypeExpression() {
-        final VirtualFile mliVirtualFile = OCamlFileUtil.getAnotherFile(getVirtualFile());
-        if (mliVirtualFile == null) return null;
-        final PsiFile mliFile = ApplicationManager.getApplication().runReadAction(new Computable<PsiFile>() {
-            public PsiFile compute() {
-                return PsiManager.getInstance(getProject()).findFile(mliVirtualFile);
-            }
-        });
-        if (mliFile == null || !(mliFile instanceof MLIFile)) return null;
-        final OCamlModuleSpecificationBinding moduleSpecificationBinding = ((MLIFile) mliFile).getModuleBinding(OCamlModuleSpecificationBinding.class);
-        return moduleSpecificationBinding == null ? null : moduleSpecificationBinding.getExpression();
-    }
+	@Nullable
+	public OCamlModuleType getTypeExpression()
+	{
+		final VirtualFile mliVirtualFile = OCamlFileUtil.getAnotherFile(getVirtualFile());
+		if(mliVirtualFile == null)
+		{
+			return null;
+		}
+		final PsiFile mliFile = ApplicationManager.getApplication().runReadAction(new Computable<PsiFile>()
+		{
+			public PsiFile compute()
+			{
+				return PsiManager.getInstance(getProject()).findFile(mliVirtualFile);
+			}
+		});
+		if(mliFile == null || !(mliFile instanceof MLIFile))
+		{
+			return null;
+		}
+		final OCamlModuleSpecificationBinding moduleSpecificationBinding = ((MLIFile) mliFile).getModuleBinding(OCamlModuleSpecificationBinding.class);
+		return moduleSpecificationBinding == null ? null : moduleSpecificationBinding.getExpression();
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitFileModuleDefinitionBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitFileModuleDefinitionBinding(this);
+	}
 }

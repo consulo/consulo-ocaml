@@ -25,5 +25,6 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 14.06.2009
  */
-public interface OCamlCommentBlock extends PsiComment, OCamlElement {
+public interface OCamlCommentBlock extends PsiComment, OCamlElement
+{
 }

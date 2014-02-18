@@ -18,24 +18,27 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround.surrounder;
 
-import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.TextRange;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-abstract class BaseOCamlSurrounderWithNavigation extends BaseOCamlSurrounder {
-    public BaseOCamlSurrounderWithNavigation(@NotNull final String description) {
-        super(description);
-    }
+abstract class BaseOCamlSurrounderWithNavigation extends BaseOCamlSurrounder
+{
+	public BaseOCamlSurrounderWithNavigation(@NotNull final String description)
+	{
+		super(description);
+	}
 
-    @NotNull
-    @Override
-    protected TextRange getTextRange(final int startPos, @NotNull final String surroundedText) {
-        final int pos = startPos + getOffset(surroundedText);
-        return new TextRange(pos, pos);
-    }
+	@NotNull
+	@Override
+	protected TextRange getTextRange(final int startPos, @NotNull final String surroundedText)
+	{
+		final int pos = startPos + getOffset(surroundedText);
+		return new TextRange(pos, pos);
+	}
 
-    protected abstract int getOffset(@NotNull final String surroundedText);
+	protected abstract int getOffset(@NotNull final String surroundedText);
 }

@@ -24,5 +24,6 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 25.04.2010
  */
-public interface OCamlTypeParameterizedBinding extends OCamlElement {
+public interface OCamlTypeParameterizedBinding extends OCamlElement
+{
 }

@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -27,56 +31,62 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFieldName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordFieldDefinition;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlFieldNameImpl extends BaseOCamlReference implements OCamlFieldName {
-    public OCamlFieldNameImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlFieldNameImpl extends BaseOCamlReference implements OCamlFieldName
+{
+	public OCamlFieldNameImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitFieldName(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitFieldName(this);
+	}
 
-    @NotNull
-    public ASTNode getNameElement() {
-        return getNode();
-    }
+	@NotNull
+	public ASTNode getNameElement()
+	{
+		return getNode();
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.LowerCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.LowerCase;
+	}
 
-    @Override
-    public boolean isSoft() {
-        return true; // todo
-    }
+	@Override
+	public boolean isSoft()
+	{
+		return true; // todo
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "field";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "field";
+	}
 
-    @NotNull
-    public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes() {
-        return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlRecordFieldDefinition.class);
-    }
+	@NotNull
+	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
+	{
+		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlRecordFieldDefinition.class);
+	}
 
-    @NotNull
-    public List<OCamlModuleName> getModulePath() {
-        return OCamlPsiUtil.getModulePath(this, OCamlModuleName.class);
-    }
+	@NotNull
+	public List<OCamlModuleName> getModulePath()
+	{
+		return OCamlPsiUtil.getModulePath(this, OCamlModuleName.class);
+	}
 
-    @NotNull
-    public OCamlFieldName getFieldName() {
-        return this;
-    }
+	@NotNull
+	public OCamlFieldName getFieldName()
+	{
+		return this;
+	}
 }

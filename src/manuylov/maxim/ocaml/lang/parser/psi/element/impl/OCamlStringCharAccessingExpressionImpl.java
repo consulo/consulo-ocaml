@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlBrackets;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStringCharAccessingExpression;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlStringCharAccessingExpressionImpl extends BaseOCamlElement implements OCamlStringCharAccessingExpression {
-    public OCamlStringCharAccessingExpressionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlStringCharAccessingExpressionImpl extends BaseOCamlElement implements OCamlStringCharAccessingExpression
+{
+	public OCamlStringCharAccessingExpressionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlBrackets.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlBrackets.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitStringCharAccessingExpression(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitStringCharAccessingExpression(this);
+	}
 }

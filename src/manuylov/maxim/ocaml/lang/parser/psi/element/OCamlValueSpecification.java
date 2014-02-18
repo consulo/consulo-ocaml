@@ -22,7 +22,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlValueSpecification extends OCamlSpecification {
+public interface OCamlValueSpecification extends OCamlSpecification
+{
 }
 
 //todo see also OCamlValueClassFieldSpecification and other keywords (method, ...) class def, module def etc.

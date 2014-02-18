@@ -24,9 +24,10 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlExpression extends OCamlElement {
+public interface OCamlExpression extends OCamlElement
+{
 /*
-    @NotNull
+	@NotNull
     List<OCamlResolvedMethod> getAvailableMethods();
 */
 }

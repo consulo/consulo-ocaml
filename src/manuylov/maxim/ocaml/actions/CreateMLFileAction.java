@@ -18,27 +18,31 @@
 
 package manuylov.maxim.ocaml.actions;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.04.2010
  */
-public class CreateMLFileAction extends BaseCreateOCamlFileAction {
-    protected CreateMLFileAction() {
-        super("OCaml Module Implementation", "Create New OCaml Module Implementation File", OCamlIconUtil.getMLFileIcon());
-    }
+public class CreateMLFileAction extends BaseCreateOCamlFileAction
+{
+	protected CreateMLFileAction()
+	{
+		super("OCaml Module Implementation", "Create New OCaml Module Implementation File", OCamlIconUtil.getMLFileIcon());
+	}
 
-    @NotNull
-    protected String getCapitalizedType() {
-        return "Implementation";
-    }
+	@NotNull
+	protected String getCapitalizedType()
+	{
+		return "Implementation";
+	}
 
-    @NotNull
-    protected FileType getFileType() {
-        return MLFileType.INSTANCE;
-    }
+	@NotNull
+	protected FileType getFileType()
+	{
+		return MLFileType.INSTANCE;
+	}
 }

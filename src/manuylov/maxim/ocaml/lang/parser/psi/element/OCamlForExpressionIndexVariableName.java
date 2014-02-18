@@ -25,5 +25,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public interface OCamlForExpressionIndexVariableName extends OCamlReference, OCamlResolvedReference {
+public interface OCamlForExpressionIndexVariableName extends OCamlReference, OCamlResolvedReference
+{
 }

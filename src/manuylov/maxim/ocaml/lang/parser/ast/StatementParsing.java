@@ -18,252 +18,325 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.PsiBuilder;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 10.02.2009
  */
-public class StatementParsing extends Parsing {
-    public static void parseDefinitionsAndExpressions(@NotNull final PsiBuilder builder, @NotNull final Condition exitCondition) {
-        final Appearance[] lastDoubleSemicolon = { Appearance.None };
+public class StatementParsing extends Parsing
+{
+	public static void parseDefinitionsAndExpressions(@NotNull final PsiBuilder builder, @NotNull final Condition exitCondition)
+	{
+		final Appearance[] lastDoubleSemicolon = {Appearance.None};
 
-        final Runnable parsing = new Runnable() {
-            public void run() {
-                if (!tryParseDefinition(builder)) {
-                    final PsiBuilder.Marker tempMarker = builder.mark();
+		final Runnable parsing = new Runnable()
+		{
+			public void run()
+			{
+				if(!tryParseDefinition(builder))
+				{
+					final PsiBuilder.Marker tempMarker = builder.mark();
 
-                    if (tryParseExpressionStatement(builder)) {
-                        if (lastDoubleSemicolon[0] == Appearance.No) {
-                            tempMarker.rollbackTo();
-                            builder.mark().error(Strings.SEMICOLON_SEMICOLON_EXPECTED);
-                            parseExpressionStatement(builder);
-                        }
-                        else {
-                            tempMarker.drop();
-                        }
-                    }
-                    else {
-                        tempMarker.error(Strings.DEFINITION_OR_EXPRESSION_EXPECTED);
-                    }
-                }
+					if(tryParseExpressionStatement(builder))
+					{
+						if(lastDoubleSemicolon[0] == Appearance.No)
+						{
+							tempMarker.rollbackTo();
+							builder.mark().error(Strings.SEMICOLON_SEMICOLON_EXPECTED);
+							parseExpressionStatement(builder);
+						}
+						else
+						{
+							tempMarker.drop();
+						}
+					}
+					else
+					{
+						tempMarker.error(Strings.DEFINITION_OR_EXPRESSION_EXPECTED);
+					}
+				}
 
-                lastDoubleSemicolon[0] = Appearance.create(ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON));
-            }
-        };
+				lastDoubleSemicolon[0] = Appearance.create(ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON));
+			}
+		};
 
-        if (ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON)) {
-            lastDoubleSemicolon[0] = Appearance.Yes;
-        }
+		if(ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON))
+		{
+			lastDoubleSemicolon[0] = Appearance.Yes;
+		}
 
-        while (!exitCondition.test()) {
-            advanceLexerIfNothingWasParsed(builder, parsing);
-        }
-    }
+		while(!exitCondition.test())
+		{
+			advanceLexerIfNothingWasParsed(builder, parsing);
+		}
+	}
 
-    public static void parseSpecifications(@NotNull final PsiBuilder builder, @NotNull final Condition exitCondition) {
-        final Runnable parsing = new Runnable() {
-            public void run() {
-                if (!tryParseSpecification(builder)) {
-                    builder.error(Strings.SPECIFICATION_EXPECTED);
-                }
+	public static void parseSpecifications(@NotNull final PsiBuilder builder, @NotNull final Condition exitCondition)
+	{
+		final Runnable parsing = new Runnable()
+		{
+			public void run()
+			{
+				if(!tryParseSpecification(builder))
+				{
+					builder.error(Strings.SPECIFICATION_EXPECTED);
+				}
 
-                ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON);
-            }
-        };
+				ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON);
+			}
+		};
 
-        ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON);
+		ignore(builder, OCamlTokenTypes.SEMICOLON_SEMICOLON);
 
-        while (!exitCondition.test()) {
-            advanceLexerIfNothingWasParsed(builder, parsing);
-        }
-    }
+		while(!exitCondition.test())
+		{
+			advanceLexerIfNothingWasParsed(builder, parsing);
+		}
+	}
 
-    private static boolean tryParseExpressionStatement(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker marker = builder.mark();
+	private static boolean tryParseExpressionStatement(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker marker = builder.mark();
 
-        if (ExpressionParsing.tryParseExpression(builder)) {
-            marker.done(OCamlElementTypes.EXPRESSION_STATEMENT);
-            return true;
-        }
+		if(ExpressionParsing.tryParseExpression(builder))
+		{
+			marker.done(OCamlElementTypes.EXPRESSION_STATEMENT);
+			return true;
+		}
 
-        marker.rollbackTo();
-        return false;
-    }
+		marker.rollbackTo();
+		return false;
+	}
 
-    private static void parseExpressionStatement(@NotNull final PsiBuilder builder) {
-        if (!tryParseExpressionStatement(builder)) {
-            builder.error(Strings.EXPRESSION_EXPECTED);
-        }
-    }
+	private static void parseExpressionStatement(@NotNull final PsiBuilder builder)
+	{
+		if(!tryParseExpressionStatement(builder))
+		{
+			builder.error(Strings.EXPRESSION_EXPECTED);
+		}
+	}
 
-    private static boolean tryParseSpecification(@NotNull final PsiBuilder builder) {
-        if (builder.getTokenType() == OCamlTokenTypes.VAL_KEYWORD) {
-            parseValueSpecification(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.EXTERNAL_KEYWORD) {
-            parseExternalDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.TYPE_KEYWORD) {
-            TypeParsing.parseTypeDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.EXCEPTION_KEYWORD) {
-            parseExceptionSpecification(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.CLASS_KEYWORD) {
-            ClassParsing.parseClassSpecificationOrClassTypeDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.MODULE_KEYWORD) {
-            ModuleParsing.parseModuleOrModuleTypeSpecification(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.OPEN_KEYWORD) {
-            parseOpenDirective(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.INCLUDE_KEYWORD) {
-            parseIncludeSpecification(builder);
-        } else {
-            return false;
-        }
+	private static boolean tryParseSpecification(@NotNull final PsiBuilder builder)
+	{
+		if(builder.getTokenType() == OCamlTokenTypes.VAL_KEYWORD)
+		{
+			parseValueSpecification(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.EXTERNAL_KEYWORD)
+		{
+			parseExternalDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.TYPE_KEYWORD)
+		{
+			TypeParsing.parseTypeDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.EXCEPTION_KEYWORD)
+		{
+			parseExceptionSpecification(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.CLASS_KEYWORD)
+		{
+			ClassParsing.parseClassSpecificationOrClassTypeDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.MODULE_KEYWORD)
+		{
+			ModuleParsing.parseModuleOrModuleTypeSpecification(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.OPEN_KEYWORD)
+		{
+			parseOpenDirective(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.INCLUDE_KEYWORD)
+		{
+			parseIncludeSpecification(builder);
+		}
+		else
+		{
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    private static boolean tryParseDefinition(@NotNull final PsiBuilder builder) {
-        if (builder.getTokenType() == OCamlTokenTypes.LET_KEYWORD) {
-            return LetParsing.tryParseLetStatement(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.EXTERNAL_KEYWORD) {
-            parseExternalDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.TYPE_KEYWORD) {
-            TypeParsing.parseTypeDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.EXCEPTION_KEYWORD) {
-            parseExceptionDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.CLASS_KEYWORD) {
-            ClassParsing.parseClassOrClassTypeDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.MODULE_KEYWORD) {
-            ModuleParsing.parseModuleOrModuleTypeDefinition(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.OPEN_KEYWORD) {
-            parseOpenDirective(builder);
-        } else if (builder.getTokenType() == OCamlTokenTypes.INCLUDE_KEYWORD) {
-            parseIncludeDefinition(builder);
-        } else {
-            return false;
-        }
+	private static boolean tryParseDefinition(@NotNull final PsiBuilder builder)
+	{
+		if(builder.getTokenType() == OCamlTokenTypes.LET_KEYWORD)
+		{
+			return LetParsing.tryParseLetStatement(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.EXTERNAL_KEYWORD)
+		{
+			parseExternalDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.TYPE_KEYWORD)
+		{
+			TypeParsing.parseTypeDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.EXCEPTION_KEYWORD)
+		{
+			parseExceptionDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.CLASS_KEYWORD)
+		{
+			ClassParsing.parseClassOrClassTypeDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.MODULE_KEYWORD)
+		{
+			ModuleParsing.parseModuleOrModuleTypeDefinition(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.OPEN_KEYWORD)
+		{
+			parseOpenDirective(builder);
+		}
+		else if(builder.getTokenType() == OCamlTokenTypes.INCLUDE_KEYWORD)
+		{
+			parseIncludeDefinition(builder);
+		}
+		else
+		{
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    private static void parseValueSpecification(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker valueSpecificationMarker = builder.mark();
+	private static void parseValueSpecification(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker valueSpecificationMarker = builder.mark();
 
-        checkMatches(builder, OCamlTokenTypes.VAL_KEYWORD, Strings.VAL_KEYWORD_EXPECTED);
+		checkMatches(builder, OCamlTokenTypes.VAL_KEYWORD, Strings.VAL_KEYWORD_EXPECTED);
 
-        NameParsing.parseValueName(builder, NameParsing.NameType.PATTERN);
+		NameParsing.parseValueName(builder, NameParsing.NameType.PATTERN);
 
-        checkMatches(builder, OCamlTokenTypes.COLON, Strings.COLON_EXPECTED);
+		checkMatches(builder, OCamlTokenTypes.COLON, Strings.COLON_EXPECTED);
 
-        TypeParsing.parseTypeExpression(builder);
+		TypeParsing.parseTypeExpression(builder);
 
-        valueSpecificationMarker.done(OCamlElementTypes.VALUE_SPECIFICATION);
-    }
+		valueSpecificationMarker.done(OCamlElementTypes.VALUE_SPECIFICATION);
+	}
 
-    private static void parseIncludeSpecification(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker includeSpecificationMarker = builder.mark();
+	private static void parseIncludeSpecification(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker includeSpecificationMarker = builder.mark();
 
-        checkMatches(builder, OCamlTokenTypes.INCLUDE_KEYWORD, Strings.INCLUDE_KEYWORD_EXPECTED);
+		checkMatches(builder, OCamlTokenTypes.INCLUDE_KEYWORD, Strings.INCLUDE_KEYWORD_EXPECTED);
 
-        ModuleParsing.parseModuleType(builder);
+		ModuleParsing.parseModuleType(builder);
 
-        includeSpecificationMarker.done(OCamlElementTypes.INCLUDE_DIRECTIVE_SPECIFICATION);
-    }
+		includeSpecificationMarker.done(OCamlElementTypes.INCLUDE_DIRECTIVE_SPECIFICATION);
+	}
 
-    private static void parseExceptionSpecification(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker exceptionSpecificationMarker = builder.mark();
+	private static void parseExceptionSpecification(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker exceptionSpecificationMarker = builder.mark();
 
-        doParseExceptionSpecification(builder);
+		doParseExceptionSpecification(builder);
 
-        if (ignore(builder, OCamlTokenTypes.OF_KEYWORD)) {
-            TypeParsing.parseTypeExpression(builder);
-        }
-        
-        exceptionSpecificationMarker.done(OCamlElementTypes.EXCEPTION_SPECIFICATION);
-    }
+		if(ignore(builder, OCamlTokenTypes.OF_KEYWORD))
+		{
+			TypeParsing.parseTypeExpression(builder);
+		}
 
-    private static void parseIncludeDefinition(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker includeDirectiveMarker = builder.mark();
+		exceptionSpecificationMarker.done(OCamlElementTypes.EXCEPTION_SPECIFICATION);
+	}
 
-        checkMatches(builder, OCamlTokenTypes.INCLUDE_KEYWORD, Strings.INCLUDE_KEYWORD_EXPECTED);
+	private static void parseIncludeDefinition(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker includeDirectiveMarker = builder.mark();
 
-        ModuleParsing.parseModuleExpression(builder);
+		checkMatches(builder, OCamlTokenTypes.INCLUDE_KEYWORD, Strings.INCLUDE_KEYWORD_EXPECTED);
 
-        includeDirectiveMarker.done(OCamlElementTypes.INCLUDE_DIRECTIVE_DEFINITION);
-    }
+		ModuleParsing.parseModuleExpression(builder);
 
-    private static void parseOpenDirective(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker openDirectiveMarker = builder.mark();
+		includeDirectiveMarker.done(OCamlElementTypes.INCLUDE_DIRECTIVE_DEFINITION);
+	}
 
-        checkMatches(builder, OCamlTokenTypes.OPEN_KEYWORD, Strings.OPEN_KEYWORD_EXPECTED);
+	private static void parseOpenDirective(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker openDirectiveMarker = builder.mark();
 
-        NameParsing.parseModulePath(builder);
+		checkMatches(builder, OCamlTokenTypes.OPEN_KEYWORD, Strings.OPEN_KEYWORD_EXPECTED);
 
-        openDirectiveMarker.done(OCamlElementTypes.OPEN_DIRECTIVE);
-    }
+		NameParsing.parseModulePath(builder);
 
-    private static void parseExceptionDefinition(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker exceptionDefinitionMarker = builder.mark();
+		openDirectiveMarker.done(OCamlElementTypes.OPEN_DIRECTIVE);
+	}
 
-        doParseExceptionSpecification(builder);
+	private static void parseExceptionDefinition(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker exceptionDefinitionMarker = builder.mark();
 
-        if (ignore(builder, OCamlTokenTypes.EQ)) {
-            NameParsing.parseConstructorPath(builder, NameParsing.NameType.NONE);
-        }
-        else if (ignore(builder, OCamlTokenTypes.OF_KEYWORD)) {
-            TypeParsing.parseTypeExpression(builder);
-        }
+		doParseExceptionSpecification(builder);
 
-        exceptionDefinitionMarker.done(OCamlElementTypes.EXCEPTION_DEFINITION);
-    }
+		if(ignore(builder, OCamlTokenTypes.EQ))
+		{
+			NameParsing.parseConstructorPath(builder, NameParsing.NameType.NONE);
+		}
+		else if(ignore(builder, OCamlTokenTypes.OF_KEYWORD))
+		{
+			TypeParsing.parseTypeExpression(builder);
+		}
 
-    private static void parseExternalDefinition(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker externalDefinitionMarker = builder.mark();
+		exceptionDefinitionMarker.done(OCamlElementTypes.EXCEPTION_DEFINITION);
+	}
 
-        checkMatches(builder, OCamlTokenTypes.EXTERNAL_KEYWORD, Strings.EXTERNAL_KEYWORD_EXPECTED);
+	private static void parseExternalDefinition(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker externalDefinitionMarker = builder.mark();
 
-        NameParsing.parseValueName(builder, NameParsing.NameType.PATTERN);
+		checkMatches(builder, OCamlTokenTypes.EXTERNAL_KEYWORD, Strings.EXTERNAL_KEYWORD_EXPECTED);
 
-        checkMatches(builder, OCamlTokenTypes.COLON, Strings.COLON_EXPECTED);
+		NameParsing.parseValueName(builder, NameParsing.NameType.PATTERN);
 
-        TypeParsing.parseTypeExpression(builder);
+		checkMatches(builder, OCamlTokenTypes.COLON, Strings.COLON_EXPECTED);
 
-        checkMatches(builder, OCamlTokenTypes.EQ, Strings.EQ_EXPECTED);
+		TypeParsing.parseTypeExpression(builder);
 
-        parseExternalDeclaration(builder);
+		checkMatches(builder, OCamlTokenTypes.EQ, Strings.EQ_EXPECTED);
 
-        externalDefinitionMarker.done(OCamlElementTypes.EXTERNAL_DEFINITION);
-    }
+		parseExternalDeclaration(builder);
 
-    private static void parseExternalDeclaration(@NotNull final PsiBuilder builder) {
-        final PsiBuilder.Marker externalDeclarationMarker = builder.mark();
+		externalDefinitionMarker.done(OCamlElementTypes.EXTERNAL_DEFINITION);
+	}
 
-        while (ignore(builder, OCamlTokenTypes.STRING_LITERAL)) {}
+	private static void parseExternalDeclaration(@NotNull final PsiBuilder builder)
+	{
+		final PsiBuilder.Marker externalDeclarationMarker = builder.mark();
 
-        externalDeclarationMarker.done(OCamlElementTypes.EXTERNAL_DECLARATION);
-    }
+		while(ignore(builder, OCamlTokenTypes.STRING_LITERAL))
+		{
+		}
 
-    private static void doParseExceptionSpecification(@NotNull final PsiBuilder builder) {
-        checkMatches(builder, OCamlTokenTypes.EXCEPTION_KEYWORD, Strings.EXCEPTION_KEYWORD_EXPECTED);
+		externalDeclarationMarker.done(OCamlElementTypes.EXTERNAL_DECLARATION);
+	}
 
-        NameParsing.parseConstructorName(builder, NameParsing.NameType.DEFINITION);
-    }
+	private static void doParseExceptionSpecification(@NotNull final PsiBuilder builder)
+	{
+		checkMatches(builder, OCamlTokenTypes.EXCEPTION_KEYWORD, Strings.EXCEPTION_KEYWORD_EXPECTED);
 
-    public static interface Condition {
-        boolean test();
-    }
+		NameParsing.parseConstructorName(builder, NameParsing.NameType.DEFINITION);
+	}
 
-    private static enum Appearance {
-        None,
-        Yes,
-        No;
+	public static interface Condition
+	{
+		boolean test();
+	}
 
-        @NotNull
-        public static Appearance create(final boolean appearance) {
-            return appearance ? Yes : No;
-        }
-    }
+	private static enum Appearance
+	{
+		None,
+		Yes,
+		No;
+
+		@NotNull
+		public static Appearance create(final boolean appearance)
+		{
+			return appearance ? Yes : No;
+		}
+	}
 }

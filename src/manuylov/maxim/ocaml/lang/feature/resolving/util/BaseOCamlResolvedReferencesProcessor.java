@@ -18,47 +18,59 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReferencesProcessor;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 28.03.2009
  */
-abstract class BaseOCamlResolvedReferencesProcessor implements OCamlResolvedReferencesProcessor {
-    @NotNull private final List<Class<? extends OCamlResolvedReference>> myTypes;
+abstract class BaseOCamlResolvedReferencesProcessor implements OCamlResolvedReferencesProcessor
+{
+	@NotNull
+	private final List<Class<? extends OCamlResolvedReference>> myTypes;
 
-    private ResolvingBuilder myBuilder = null;
+	private ResolvingBuilder myBuilder = null;
 
-    public void setResolvingBuilder(@NotNull final ResolvingBuilder resolvingBuilder) {
-        myBuilder = resolvingBuilder;
-    }
+	public void setResolvingBuilder(@NotNull final ResolvingBuilder resolvingBuilder)
+	{
+		myBuilder = resolvingBuilder;
+	}
 
-    public BaseOCamlResolvedReferencesProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types) {
-        myTypes = types;
-    }
+	public BaseOCamlResolvedReferencesProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types)
+	{
+		myTypes = types;
+	}
 
-    public boolean process(@NotNull final OCamlResolvedReference psiElement) {
-        if (myBuilder != null && myBuilder.canProcessElement()) {
-            for (final Class<? extends OCamlResolvedReference> type : myTypes) {
-                if (type.isInstance(psiElement)) {
-                    if (doProcess(psiElement)) return true;
-                }
-            }
-        }
+	public boolean process(@NotNull final OCamlResolvedReference psiElement)
+	{
+		if(myBuilder != null && myBuilder.canProcessElement())
+		{
+			for(final Class<? extends OCamlResolvedReference> type : myTypes)
+			{
+				if(type.isInstance(psiElement))
+				{
+					if(doProcess(psiElement))
+					{
+						return true;
+					}
+				}
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Nullable
-    protected String getSourceElementName() {
-        return myBuilder == null ? null : myBuilder.getContext().getSourceElement().getName();
-    }
+	@Nullable
+	protected String getSourceElementName()
+	{
+		return myBuilder == null ? null : myBuilder.getContext().getSourceElement().getName();
+	}
 
-    protected abstract boolean doProcess(@NotNull final OCamlResolvedReference psiElement);
+	protected abstract boolean doProcess(@NotNull final OCamlResolvedReference psiElement);
 }

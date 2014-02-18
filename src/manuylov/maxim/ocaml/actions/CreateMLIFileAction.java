@@ -18,27 +18,31 @@
 
 package manuylov.maxim.ocaml.actions;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.04.2010
  */
-public class CreateMLIFileAction extends BaseCreateOCamlFileAction {
-    protected CreateMLIFileAction() {
-        super("OCaml Module Interface", "Create New OCaml Module Interface File", OCamlIconUtil.getMLIFileIcon());
-    }
+public class CreateMLIFileAction extends BaseCreateOCamlFileAction
+{
+	protected CreateMLIFileAction()
+	{
+		super("OCaml Module Interface", "Create New OCaml Module Interface File", OCamlIconUtil.getMLIFileIcon());
+	}
 
-    @NotNull
-    protected String getCapitalizedType() {
-        return "Interface";
-    }
+	@NotNull
+	protected String getCapitalizedType()
+	{
+		return "Interface";
+	}
 
-    @NotNull
-    protected FileType getFileType() {
-        return MLIFileType.INSTANCE;
-    }
+	@NotNull
+	protected FileType getFileType()
+	{
+		return MLIFileType.INSTANCE;
+	}
 }

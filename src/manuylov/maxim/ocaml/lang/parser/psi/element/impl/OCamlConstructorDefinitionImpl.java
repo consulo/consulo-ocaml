@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -29,44 +31,51 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlConstructorDefinitionImpl extends BaseOCamlResolvedReference implements OCamlConstructorDefinition {
-    public OCamlConstructorDefinitionImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlConstructorDefinitionImpl extends BaseOCamlResolvedReference implements OCamlConstructorDefinition
+{
+	public OCamlConstructorDefinitionImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        if (getNode().findChildByType(OCamlTokenTypes.OF_KEYWORD) != null) {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
-        }
-        else {
-            return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorNameDefinition.class);
-        }
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		if(getNode().findChildByType(OCamlTokenTypes.OF_KEYWORD) != null)
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
+		}
+		else
+		{
+			return OCamlPsiUtil.endsCorrectlyWith(this, OCamlConstructorNameDefinition.class);
+		}
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitConstructorDefinition(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitConstructorDefinition(this);
+	}
 
-    @Nullable
-    public ASTNode getNameElement() {
-        return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.CONSTRUCTOR_NAME_DEFINITION);
-    }
+	@Nullable
+	public ASTNode getNameElement()
+	{
+		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.CONSTRUCTOR_NAME_DEFINITION);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.UpperCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.UpperCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "constructor";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "constructor";
+	}
 }

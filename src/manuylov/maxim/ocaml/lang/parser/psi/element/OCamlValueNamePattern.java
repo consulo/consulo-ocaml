@@ -25,5 +25,6 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
  * @author Maxim.Manuylov
  *         Date: 15.04.2010
  */
-public interface OCamlValueNamePattern extends OCamlPattern, OCamlReference, OCamlResolvedReference {
+public interface OCamlValueNamePattern extends OCamlPattern, OCamlReference, OCamlResolvedReference
+{
 }

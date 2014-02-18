@@ -18,6 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -28,36 +32,38 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassFieldSpecification
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlObjectEndClassBodyType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlObjectSelfDefinition;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlObjectEndClassBodyTypeImpl extends BaseOCamlElement implements OCamlObjectEndClassBodyType {
-    public OCamlObjectEndClassBodyTypeImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlObjectEndClassBodyTypeImpl extends BaseOCamlElement implements OCamlObjectEndClassBodyType
+{
+	public OCamlObjectEndClassBodyTypeImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitObjectEndClassBodyType(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitObjectEndClassBodyType(this);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.END_KEYWORD);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.END_KEYWORD);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlClassFieldSpecification.class, OCamlObjectSelfDefinition.class);
-    }
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlClassFieldSpecification.class, OCamlObjectSelfDefinition.class);
+	}
 
-    @NotNull
-    public List<OCamlStructuredElement> findActualDefinitions() {
-        return Collections.<OCamlStructuredElement>singletonList(this);
-    }
+	@NotNull
+	public List<OCamlStructuredElement> findActualDefinitions()
+	{
+		return Collections.<OCamlStructuredElement>singletonList(this);
+	}
 }

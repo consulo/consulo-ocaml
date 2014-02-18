@@ -18,56 +18,62 @@
 
 package manuylov.maxim.ocaml.module;
 
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.openapi.project.Project;
-import manuylov.maxim.ocaml.module.OCamlSdkChooserPanel;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
+import com.intellij.ide.util.projectWizard.ModuleWizardStep;
+import com.intellij.openapi.project.Project;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 03.04.2010
  */
-class OCamlSdkSelectStep extends ModuleWizardStep {
-    private final OCamlModuleBuilder myModuleBuilder;
-    private final OCamlSdkChooserPanel myPanel;
-    private final String myHelp;
-    private final Icon myIcon;
+class OCamlSdkSelectStep extends ModuleWizardStep
+{
+	private final OCamlModuleBuilder myModuleBuilder;
+	private final OCamlSdkChooserPanel myPanel;
+	private final String myHelp;
+	private final Icon myIcon;
 
-    public OCamlSdkSelectStep(@NotNull final OCamlModuleBuilder moduleBuilder,
-                              @Nullable final Icon icon,
-                              @Nullable final String helpId,
-                              @Nullable final Project project) {
-        super();
-        myIcon = icon;
-        myModuleBuilder = moduleBuilder;
-        myPanel = new OCamlSdkChooserPanel(project);
-        myHelp = helpId;
-    }
+	public OCamlSdkSelectStep(@NotNull final OCamlModuleBuilder moduleBuilder, @Nullable final Icon icon, @Nullable final String helpId,
+			@Nullable final Project project)
+	{
+		super();
+		myIcon = icon;
+		myModuleBuilder = moduleBuilder;
+		myPanel = new OCamlSdkChooserPanel(project);
+		myHelp = helpId;
+	}
 
-    public String getHelpId() {
-        return myHelp;
-    }
+	public String getHelpId()
+	{
+		return myHelp;
+	}
 
-    public JComponent getPreferredFocusedComponent() {
-        return myPanel.getPreferredFocusedComponent();
-    }
+	public JComponent getPreferredFocusedComponent()
+	{
+		return myPanel.getPreferredFocusedComponent();
+	}
 
-    public JComponent getComponent() {
-        return myPanel;
-    }
+	public JComponent getComponent()
+	{
+		return myPanel;
+	}
 
-    public void updateDataModel() {
-        myModuleBuilder.setSdk(myPanel.getChosenJdk());
-    }
+	public void updateDataModel()
+	{
+		myModuleBuilder.setSdk(myPanel.getChosenJdk());
+	}
 
-    public Icon getIcon() {
-        return myIcon;
-    }
+	public Icon getIcon()
+	{
+		return myIcon;
+	}
 
-    public boolean validate() {
-        return true;
-    }
+	public boolean validate()
+	{
+		return true;
+	}
 }

@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
@@ -29,62 +30,79 @@ import com.intellij.ui.content.ContentManager;
 import manuylov.maxim.ocaml.settings.OCamlSettings;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class OCamlToolWindowOpenCloseAction extends AnAction {
-    @NotNull private final ContentManager myContentManager;
-    @NotNull private final Project myProject;
-    private final boolean myOpenConsole;
-    private final boolean myCloseView;
+public class OCamlToolWindowOpenCloseAction extends AnAction
+{
+	@NotNull
+	private final ContentManager myContentManager;
+	@NotNull
+	private final Project myProject;
+	private final boolean myOpenConsole;
+	private final boolean myCloseView;
 
-    public OCamlToolWindowOpenCloseAction(@NotNull final Project project, @NotNull final ContentManager contentManager, final boolean openConsole, final boolean closeView) {
-        super(null, openConsole ? (closeView ? "Open OCaml top level interactive console" : "Open one more OCaml top level interactive console") : "Close",
-            openConsole ? OCamlIconUtil.getOpenConsoleIcon() : OCamlIconUtil.getCloseViewIcon());
-        myContentManager = contentManager;
-        myProject = project;
-        myOpenConsole = openConsole;
-        myCloseView = closeView;
-    }
+	public OCamlToolWindowOpenCloseAction(@NotNull final Project project, @NotNull final ContentManager contentManager, final boolean openConsole,
+			final boolean closeView)
+	{
+		super(null, openConsole ? (closeView ? "Open OCaml top level interactive console" : "Open one more OCaml top level interactive console") :
+				"Close", openConsole ? OCamlIconUtil.getOpenConsoleIcon() : OCamlIconUtil.getCloseViewIcon());
+		myContentManager = contentManager;
+		myProject = project;
+		myOpenConsole = openConsole;
+		myCloseView = closeView;
+	}
 
-    @Override
-    public void actionPerformed(final AnActionEvent e) {
-        if (myOpenConsole) {
-            final Sdk topLevelSdk = OCamlSettings.getInstance().getTopLevelSdk();
-            if (topLevelSdk == null) {
-                final Sdk projectSdk = ProjectRootManager.getInstance(myProject).getProjectJdk();
-                if (!OCamlModuleUtil.isOCamlSdk(projectSdk)) {
-                    Messages.showErrorDialog("Please select OCaml SDK to run top level interactive console (project default SDK is not a valid OCaml SDK).", "Error");
-                    final OCamlToolWindowSettingsAction settingsAction = new OCamlToolWindowSettingsAction(myProject, new Runnable() {
-                        public void run() {
-                            Sdk choosenSdk = OCamlSettings.getInstance().getTopLevelSdk();
-                            if (choosenSdk == null) {
-                                choosenSdk = ProjectRootManager.getInstance(myProject).getProjectJdk();
-                            }
-                            if (choosenSdk != null) {
-                                OCamlToolWindowUtil.addAndSelectTopLevelConsoleContent(myProject, myContentManager, choosenSdk);
-                            }
-                        }
-                    });
-                    settingsAction.showSettingsDialog();
-                }
-                else {
-                    OCamlToolWindowUtil.addAndSelectTopLevelConsoleContent(myProject, myContentManager, projectSdk);
-                }
-            }
-            else {
-                OCamlToolWindowUtil.addAndSelectTopLevelConsoleContent(myProject, myContentManager, topLevelSdk);
-            }
-        }
-        if (myCloseView && myContentManager.isSingleSelection()) {
-            final Content selectedContent = myContentManager.getSelectedContent();
-            if (selectedContent != null) {
-                myContentManager.removeContent(selectedContent, true);
-            }
-        }
-    }
+	@Override
+	public void actionPerformed(final AnActionEvent e)
+	{
+		if(myOpenConsole)
+		{
+			final Sdk topLevelSdk = OCamlSettings.getInstance().getTopLevelSdk();
+			if(topLevelSdk == null)
+			{
+				final Sdk projectSdk = ProjectRootManager.getInstance(myProject).getProjectJdk();
+				if(!OCamlModuleUtil.isOCamlSdk(projectSdk))
+				{
+					Messages.showErrorDialog("Please select OCaml SDK to run top level interactive console (project default SDK is not a valid OCaml SDK).",
+							"Error");
+					final OCamlToolWindowSettingsAction settingsAction = new OCamlToolWindowSettingsAction(myProject, new Runnable()
+					{
+						public void run()
+						{
+							Sdk choosenSdk = OCamlSettings.getInstance().getTopLevelSdk();
+							if(choosenSdk == null)
+							{
+								choosenSdk = ProjectRootManager.getInstance(myProject).getProjectJdk();
+							}
+							if(choosenSdk != null)
+							{
+								OCamlToolWindowUtil.addAndSelectTopLevelConsoleContent(myProject, myContentManager, choosenSdk);
+							}
+						}
+					});
+					settingsAction.showSettingsDialog();
+				}
+				else
+				{
+					OCamlToolWindowUtil.addAndSelectTopLevelConsoleContent(myProject, myContentManager, projectSdk);
+				}
+			}
+			else
+			{
+				OCamlToolWindowUtil.addAndSelectTopLevelConsoleContent(myProject, myContentManager, topLevelSdk);
+			}
+		}
+		if(myCloseView && myContentManager.isSingleSelection())
+		{
+			final Content selectedContent = myContentManager.getSelectedContent();
+			if(selectedContent != null)
+			{
+				myContentManager.removeContent(selectedContent, true);
+			}
+		}
+	}
 }

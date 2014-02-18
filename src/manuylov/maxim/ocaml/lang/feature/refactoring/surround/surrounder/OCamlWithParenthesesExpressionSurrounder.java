@@ -24,14 +24,17 @@ import org.jetbrains.annotations.NotNull;
  * @author Maxim.Manuylov
  *         Date: 08.05.2010
  */
-public class OCamlWithParenthesesExpressionSurrounder extends BaseOCamlSurrounder {
-    public OCamlWithParenthesesExpressionSurrounder() {
-        super("(...)");
-    }
+public class OCamlWithParenthesesExpressionSurrounder extends BaseOCamlSurrounder
+{
+	public OCamlWithParenthesesExpressionSurrounder()
+	{
+		super("(...)");
+	}
 
-    @NotNull
-    @Override
-    protected String doSurround(@NotNull final CharSequence text) {
-        return "(" + text + ")";
-    }
+	@NotNull
+	@Override
+	protected String doSurround(@NotNull final CharSequence text)
+	{
+		return "(" + text + ")";
+	}
 }

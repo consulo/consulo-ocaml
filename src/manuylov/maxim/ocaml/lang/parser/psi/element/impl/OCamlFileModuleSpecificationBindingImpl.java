@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -25,39 +27,45 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFileModuleSpecificationBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFileModuleType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 01.05.2010
  */
-public class OCamlFileModuleSpecificationBindingImpl extends BaseOCamlFileModuleBinding<OCamlModuleType> implements OCamlFileModuleSpecificationBinding {
-    public OCamlFileModuleSpecificationBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlFileModuleSpecificationBindingImpl extends BaseOCamlFileModuleBinding<OCamlModuleType> implements
+		OCamlFileModuleSpecificationBinding
+{
+	public OCamlFileModuleSpecificationBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @NotNull
-    public NameType getNameType() {
-        return NameType.AnyCase;
-    }
+	@NotNull
+	public NameType getNameType()
+	{
+		return NameType.AnyCase;
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "module type";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "module type";
+	}
 
-    @Nullable
-    public OCamlModuleType getExpression() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlFileModuleType.class);
-    }
+	@Nullable
+	public OCamlModuleType getExpression()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlFileModuleType.class);
+	}
 
-    @Nullable
-    public OCamlModuleType getTypeExpression() {
-        return null;
-    }
+	@Nullable
+	public OCamlModuleType getTypeExpression()
+	{
+		return null;
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitFileModuleSpecificationBinding(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitFileModuleSpecificationBinding(this);
+	}
 }

@@ -18,6 +18,16 @@
 
 package manuylov.maxim.ocaml.compile;
 
+import static com.intellij.openapi.compiler.CompilerMessageCategory.ERROR;
+
+import java.io.DataInput;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -37,151 +47,172 @@ import manuylov.maxim.ocaml.entity.CyclicDependencyException;
 import manuylov.maxim.ocaml.entity.OCamlModule;
 import manuylov.maxim.ocaml.run.OCamlRunConfiguration;
 import manuylov.maxim.ocaml.util.OCamlSystemUtil;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.DataInput;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static com.intellij.openapi.compiler.CompilerMessageCategory.ERROR;
-import static com.intellij.openapi.compiler.CompilerMessageCategory.INFORMATION;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.04.2010
  */
-public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumentingCompiler {
-    @NotNull
-    public ProcessingItem[] getProcessingItems(@NotNull final CompileContext context) {
-        final ProgressIndicator progressIndicator = context.getProgressIndicator();
-        progressIndicator.setIndeterminate(true);
-        progressIndicator.setText("Preparing files for linking...");
+public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumentingCompiler
+{
+	@NotNull
+	public ProcessingItem[] getProcessingItems(@NotNull final CompileContext context)
+	{
+		final ProgressIndicator progressIndicator = context.getProgressIndicator();
+		progressIndicator.setIndeterminate(true);
+		progressIndicator.setText("Preparing files for linking...");
 
-        final OCamlCompileContext ocamlContext = OCamlCompileContext.createOn(context);
-        if (!ocamlContext.isStandaloneCompile()) {
-            return new ProcessingItem[] { createProcessingItem(context, ocamlContext, getMainOCamlModule(ocamlContext)) };
-        }
-        
-        final ArrayList<ProcessingItem> items = new ArrayList<ProcessingItem>();
-        final RunConfiguration[] configurations = RunManager.getInstance(context.getProject()).getAllConfigurations();
-        for (final RunConfiguration configuration : configurations) {
-            if (!(configuration instanceof OCamlRunConfiguration)) continue;
-            final OCamlModule ocamlModule = ((OCamlRunConfiguration) configuration).getMainOCamlModule();
-            if (ocamlModule == null) continue;
-            items.add(createProcessingItem(context, ocamlContext, ocamlModule));
-        }
-        
-        return items.toArray(new ProcessingItem[items.size()]);
-    }
+		final OCamlCompileContext ocamlContext = OCamlCompileContext.createOn(context);
+		if(!ocamlContext.isStandaloneCompile())
+		{
+			return new ProcessingItem[]{createProcessingItem(context, ocamlContext, getMainOCamlModule(ocamlContext))};
+		}
 
-    @NotNull
-    public ProcessingItem[] process(@NotNull final CompileContext context, @NotNull final ProcessingItem[] items) {
-        final ProgressIndicator progressIndicator = context.getProgressIndicator();
-        progressIndicator.setIndeterminate(false);
-        progressIndicator.setText("Linking...");
+		final ArrayList<ProcessingItem> items = new ArrayList<ProcessingItem>();
+		final RunConfiguration[] configurations = RunManager.getInstance(context.getProject()).getAllConfigurations();
+		for(final RunConfiguration configuration : configurations)
+		{
+			if(!(configuration instanceof OCamlRunConfiguration))
+			{
+				continue;
+			}
+			final OCamlModule ocamlModule = ((OCamlRunConfiguration) configuration).getMainOCamlModule();
+			if(ocamlModule == null)
+			{
+				continue;
+			}
+			items.add(createProcessingItem(context, ocamlContext, ocamlModule));
+		}
 
-        final double allCount = items.length;
-        int processedCount = -1;
+		return items.toArray(new ProcessingItem[items.size()]);
+	}
 
-        final ArrayList<ProcessingItem> processedItems = new ArrayList<ProcessingItem>();
-        final ProjectFileIndex fileIndex = ProjectRootManager.getInstance(context.getProject()).getFileIndex();
-        final OCamlCompileContext ocamlContext = OCamlCompileContext.createOn(context);
+	@NotNull
+	public ProcessingItem[] process(@NotNull final CompileContext context, @NotNull final ProcessingItem[] items)
+	{
+		final ProgressIndicator progressIndicator = context.getProgressIndicator();
+		progressIndicator.setIndeterminate(false);
+		progressIndicator.setText("Linking...");
 
-        for (final ProcessingItem item : items) {
-            progressIndicator.setText2("");
-            processedCount++;
-            progressIndicator.setFraction(processedCount / allCount);
+		final double allCount = items.length;
+		int processedCount = -1;
 
-            if (!(item instanceof OCamlLinkerProcessingItem)) continue;
-            final OCamlModule mainOCamlModule = ((OCamlLinkerProcessingItem) item).getOCamlModule();
-            if (mainOCamlModule == null) continue;
+		final ArrayList<ProcessingItem> processedItems = new ArrayList<ProcessingItem>();
+		final ProjectFileIndex fileIndex = ProjectRootManager.getInstance(context.getProject()).getFileIndex();
+		final OCamlCompileContext ocamlContext = OCamlCompileContext.createOn(context);
 
-            final String exeFilePath = mainOCamlModule.getCompiledExecutableFile().getAbsolutePath();
-            progressIndicator.setText2(exeFilePath);
+		for(final ProcessingItem item : items)
+		{
+			progressIndicator.setText2("");
+			processedCount++;
+			progressIndicator.setFraction(processedCount / allCount);
 
-            try {
-                link(mainOCamlModule, fileIndex, context, ocamlContext);
-            } catch (final CyclicDependencyException e) {
-                context.addMessage(ERROR, e.getMessage(), null, -1, -1);
-                continue;
-            }
+			if(!(item instanceof OCamlLinkerProcessingItem))
+			{
+				continue;
+			}
+			final OCamlModule mainOCamlModule = ((OCamlLinkerProcessingItem) item).getOCamlModule();
+			if(mainOCamlModule == null)
+			{
+				continue;
+			}
 
-            processedItems.add(item);
-        }
+			final String exeFilePath = mainOCamlModule.getCompiledExecutableFile().getAbsolutePath();
+			progressIndicator.setText2(exeFilePath);
 
-        return processedItems.toArray(new ProcessingItem[processedItems.size()]);
-    }
+			try
+			{
+				link(mainOCamlModule, fileIndex, context, ocamlContext);
+			}
+			catch(final CyclicDependencyException e)
+			{
+				context.addMessage(ERROR, e.getMessage(), null, -1, -1);
+				continue;
+			}
 
-    private void link(@NotNull final OCamlModule ocamlModule,
-                      @NotNull final ProjectFileIndex fileIndex,
-                      @NotNull final CompileContext context,
-                      final OCamlCompileContext ocamlContext) throws CyclicDependencyException {
-        final GeneralCommandLine cmd = getBaseCompilerCommandLineForFile(ocamlModule.getSourcesDir(), fileIndex, context, ocamlContext.isDebugMode());
-        if (cmd == null) return;
+			processedItems.add(item);
+		}
 
-        cmd.addParameter("-o");
-        cmd.addParameter(ocamlModule.getCompiledExecutableFile().getAbsolutePath());
+		return processedItems.toArray(new ProcessingItem[processedItems.size()]);
+	}
 
-        if (!ocamlContext.isStandaloneCompile()) {
-            cmd.getParametersList().addParametersString(getRunConfiguration(ocamlContext).getLinkerOptions());
-        }
+	private void link(@NotNull final OCamlModule ocamlModule, @NotNull final ProjectFileIndex fileIndex, @NotNull final CompileContext context,
+			final OCamlCompileContext ocamlContext) throws CyclicDependencyException
+	{
+		final GeneralCommandLine cmd = getBaseCompilerCommandLineForFile(ocamlModule.getSourcesDir(), fileIndex, context, ocamlContext.isDebugMode());
+		if(cmd == null)
+		{
+			return;
+		}
 
-        final List<OCamlModule> dependencies = ocamlModule.collectAllDependencies();
-        Collections.reverse(dependencies);
-        
-        for (final OCamlModule dependency : dependencies) {
-            cmd.addParameter(dependency.getCompiledImplementationFile().getAbsolutePath());
-        }
+		cmd.addParameter("-o");
+		cmd.addParameter(ocamlModule.getCompiledExecutableFile().getAbsolutePath());
 
-        cmd.addParameter(ocamlModule.getCompiledImplementationFile().getAbsolutePath());
+		if(!ocamlContext.isStandaloneCompile())
+		{
+			cmd.getParametersList().addParametersString(getRunConfiguration(ocamlContext).getLinkerOptions());
+		}
 
-        try {
-            final ProcessOutput processOutput = OCamlSystemUtil.execute(cmd);
-            processInfoLines(processOutput.getStdoutLines(), context, null);
-            processErrorAndWarningLines(processOutput.getStderrLines(), context, null);
-        }
-        catch (final ExecutionException e) {
-            context.addMessage(ERROR, e.getLocalizedMessage(), null, -1, -1);
-        }
+		final List<OCamlModule> dependencies = ocamlModule.collectAllDependencies();
+		Collections.reverse(dependencies);
+
+		for(final OCamlModule dependency : dependencies)
+		{
+			cmd.addParameter(dependency.getCompiledImplementationFile().getAbsolutePath());
+		}
+
+		cmd.addParameter(ocamlModule.getCompiledImplementationFile().getAbsolutePath());
+
+		try
+		{
+			final ProcessOutput processOutput = OCamlSystemUtil.execute(cmd);
+			processInfoLines(processOutput.getStdoutLines(), context, null);
+			processErrorAndWarningLines(processOutput.getStderrLines(), context, null);
+		}
+		catch(final ExecutionException e)
+		{
+			context.addMessage(ERROR, e.getLocalizedMessage(), null, -1, -1);
+		}
 
 
-        //todo OCamlSystemUtil.addStdPaths(cmd, sdk);
+		//todo OCamlSystemUtil.addStdPaths(cmd, sdk);
 
-                //todo libraries!!! maybe in OCamlModule
-    }
+		//todo libraries!!! maybe in OCamlModule
+	}
 
-    @NotNull
-    public ValidityState createValidityState(@NotNull final DataInput in) throws IOException {
-        return OCamlValidityState.load(in);
-    }
+	@NotNull
+	public ValidityState createValidityState(@NotNull final DataInput in) throws IOException
+	{
+		return OCamlValidityState.load(in);
+	}
 
-    @NotNull
-    private ProcessingItem createProcessingItem(@NotNull final CompileContext context,
-                                                @NotNull final OCamlCompileContext ocamlContext,
-                                                @NotNull final OCamlModule mainOCamlModule) {
-        final File cmoFile = mainOCamlModule.getCompiledImplementationFile();
-        VirtualFile file = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(cmoFile);
-        if (file == null) {
-            context.addMessage(ERROR, "File \"" + FileUtil.toSystemDependentName(cmoFile.getAbsolutePath()) + "\" was not created. Rebuild the project.", null, -1, -1);
-            return createFakeProcessingItem(mainOCamlModule.getSourcesDir());
-        }
+	@NotNull
+	private ProcessingItem createProcessingItem(@NotNull final CompileContext context, @NotNull final OCamlCompileContext ocamlContext,
+			@NotNull final OCamlModule mainOCamlModule)
+	{
+		final File cmoFile = mainOCamlModule.getCompiledImplementationFile();
+		VirtualFile file = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(cmoFile);
+		if(file == null)
+		{
+			context.addMessage(ERROR, "File \"" + FileUtil.toSystemDependentName(cmoFile.getAbsolutePath()) + "\" was not created. Rebuild the project.",
+					null, -1, -1);
+			return createFakeProcessingItem(mainOCamlModule.getSourcesDir());
+		}
 
-        final File exeFile = mainOCamlModule.getCompiledExecutableFile();
-        final Boolean thereWasRecompilation = context.getUserData(THERE_WAS_RECOMPILATION);
-        final boolean forceRecompilation = (thereWasRecompilation != null && thereWasRecompilation) || context.isRebuild();
+		final File exeFile = mainOCamlModule.getCompiledExecutableFile();
+		final Boolean thereWasRecompilation = context.getUserData(THERE_WAS_RECOMPILATION);
+		final boolean forceRecompilation = (thereWasRecompilation != null && thereWasRecompilation) || context.isRebuild();
 
-        return createProcessingItem(mainOCamlModule, file, exeFile, ocamlContext.isDebugMode(), forceRecompilation);
-    }
+		return createProcessingItem(mainOCamlModule, file, exeFile, ocamlContext.isDebugMode(), forceRecompilation);
+	}
 
-    @NotNull
-    public String getDescription() {
-        return "OCaml Linker";
-    }
+	@NotNull
+	public String getDescription()
+	{
+		return "OCaml Linker";
+	}
 
-    public boolean validateConfiguration(@NotNull final CompileScope scope) {
-        return true;
-    }
+	public boolean validateConfiguration(@NotNull final CompileScope scope)
+	{
+		return true;
+	}
 }

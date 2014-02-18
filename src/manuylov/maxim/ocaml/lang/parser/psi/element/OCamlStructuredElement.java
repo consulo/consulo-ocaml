@@ -18,16 +18,17 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element;
 
-import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 15.04.2010
  */
-public interface OCamlStructuredElement extends OCamlElement {
-    @NotNull
-    List<OCamlStructuredElement> findActualDefinitions();
+public interface OCamlStructuredElement extends OCamlElement
+{
+	@NotNull
+	List<OCamlStructuredElement> findActualDefinitions();
 }

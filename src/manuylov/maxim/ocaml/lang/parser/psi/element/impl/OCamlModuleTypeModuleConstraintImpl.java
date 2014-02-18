@@ -18,28 +18,32 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModulePath;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleTypeModuleConstraint;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlModuleTypeModuleConstraintImpl extends BaseOCamlElement implements OCamlModuleTypeModuleConstraint {
-    public OCamlModuleTypeModuleConstraintImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlModuleTypeModuleConstraintImpl extends BaseOCamlElement implements OCamlModuleTypeModuleConstraint
+{
+	public OCamlModuleTypeModuleConstraintImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExtendedModulePath.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExtendedModulePath.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitModuleTypeModuleConstraint(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitModuleTypeModuleConstraint(this);
+	}
 }

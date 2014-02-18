@@ -18,6 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -28,29 +29,33 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlForExpressionBinding;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlForExpressionIndexVariableName;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public class OCamlForExpressionBindingImpl extends BaseOCamlElement implements OCamlForExpressionBinding {
-    public OCamlForExpressionBindingImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlForExpressionBindingImpl extends BaseOCamlElement implements OCamlForExpressionBinding
+{
+	public OCamlForExpressionBindingImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return getNode().findChildByType(TokenSet.create(OCamlTokenTypes.TO_KEYWORD, OCamlTokenTypes.DOWNTO_KEYWORD)) != null
-            && OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
-    }
-    
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitForExpressionBinding(this);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return getNode().findChildByType(TokenSet.create(OCamlTokenTypes.TO_KEYWORD, OCamlTokenTypes.DOWNTO_KEYWORD)) != null && OCamlPsiUtil
+				.endsCorrectlyWith(this, OCamlExpression.class);
+	}
 
-    @Override
-    public boolean processDeclarations(@NotNull final ResolvingBuilder builder) {
-        return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlForExpressionIndexVariableName.class);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitForExpressionBinding(this);
+	}
+
+	@Override
+	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	{
+		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlForExpressionIndexVariableName.class);
+	}
 }

@@ -18,58 +18,67 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogBuilder;
 import manuylov.maxim.ocaml.settings.OCamlSettings;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
 @SuppressWarnings({"ComponentNotRegistered"})
-public class OCamlToolWindowSettingsAction extends AnAction {
-    @NotNull private final Project myProject;
-    @Nullable private final Runnable myAction;
+public class OCamlToolWindowSettingsAction extends AnAction
+{
+	@NotNull
+	private final Project myProject;
+	@Nullable
+	private final Runnable myAction;
 
-    public OCamlToolWindowSettingsAction(@NotNull final Project project, @Nullable final Runnable action) {
-        super(null, "Configure settings", OCamlIconUtil.getSettingsIcon());
-        myProject = project;
-        myAction = action;
-    }
+	public OCamlToolWindowSettingsAction(@NotNull final Project project, @Nullable final Runnable action)
+	{
+		super(null, "Configure settings", OCamlIconUtil.getSettingsIcon());
+		myProject = project;
+		myAction = action;
+	}
 
-    @Override
-    public void actionPerformed(final AnActionEvent e) {
-        showSettingsDialog();
-    }
+	@Override
+	public void actionPerformed(final AnActionEvent e)
+	{
+		showSettingsDialog();
+	}
 
-    public void showSettingsDialog() {
-        final OCamlToolWindowSettingsForm settingsForm = new OCamlToolWindowSettingsForm(myProject);
-        settingsForm.setSelectedSdk(OCamlSettings.getInstance().getTopLevelSdk());
-        settingsForm.setCmdParams(OCamlSettings.getInstance().getTopLevelCmdOptions());
-        settingsForm.setWorkingDirectory(OCamlSettings.getInstance().getTopLevelCmdWorkingDir());
+	public void showSettingsDialog()
+	{
+		final OCamlToolWindowSettingsForm settingsForm = new OCamlToolWindowSettingsForm(myProject);
+		settingsForm.setSelectedSdk(OCamlSettings.getInstance().getTopLevelSdk());
+		settingsForm.setCmdParams(OCamlSettings.getInstance().getTopLevelCmdOptions());
+		settingsForm.setWorkingDirectory(OCamlSettings.getInstance().getTopLevelCmdWorkingDir());
 
-        final DialogBuilder dialogBuilder = new DialogBuilder(myProject);
-        dialogBuilder.setCenterPanel(settingsForm.getRootPanel());
-        dialogBuilder.addOkAction().setText("Ok");
-        dialogBuilder.addCancelAction().setText("Cancel");
-        dialogBuilder.setPreferedFocusComponent(settingsForm.getSdkComboBox());
-        dialogBuilder.setTitle("OCaml Top Level Console Settings");
-        dialogBuilder.setOkOperation(new Runnable() {
-            public void run() {
-                OCamlSettings.getInstance().setTopLevelSdk(settingsForm.getSelectedSdk());
-                OCamlSettings.getInstance().setTopLevelCmdOptions(settingsForm.getCmdParams());
-                OCamlSettings.getInstance().setTopLevelCmdWorkingDir(settingsForm.getWorkingDirectory());
-                dialogBuilder.getWindow().setVisible(false);
-                if (myAction != null) {
-                    myAction.run();
-                }
-            }
-        });
-        dialogBuilder.show();
-    }
+		final DialogBuilder dialogBuilder = new DialogBuilder(myProject);
+		dialogBuilder.setCenterPanel(settingsForm.getRootPanel());
+		dialogBuilder.addOkAction().setText("Ok");
+		dialogBuilder.addCancelAction().setText("Cancel");
+		dialogBuilder.setPreferedFocusComponent(settingsForm.getSdkComboBox());
+		dialogBuilder.setTitle("OCaml Top Level Console Settings");
+		dialogBuilder.setOkOperation(new Runnable()
+		{
+			public void run()
+			{
+				OCamlSettings.getInstance().setTopLevelSdk(settingsForm.getSelectedSdk());
+				OCamlSettings.getInstance().setTopLevelCmdOptions(settingsForm.getCmdParams());
+				OCamlSettings.getInstance().setTopLevelCmdWorkingDir(settingsForm.getWorkingDirectory());
+				dialogBuilder.getWindow().setVisible(false);
+				if(myAction != null)
+				{
+					myAction.run();
+				}
+			}
+		});
+		dialogBuilder.show();
+	}
 }

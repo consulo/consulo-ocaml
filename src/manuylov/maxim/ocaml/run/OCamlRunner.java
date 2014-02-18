@@ -18,6 +18,8 @@
 
 package manuylov.maxim.ocaml.run;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
@@ -25,35 +27,40 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 10.04.2010
  */
-public class OCamlRunner extends DefaultProgramRunner {
-    @Nullable private static Executor ourCurrentExecutor = null;
+public class OCamlRunner extends DefaultProgramRunner
+{
+	@Nullable
+	private static Executor ourCurrentExecutor = null;
 
-    @NotNull
-    public String getRunnerId() {
-        return "OCamlRunner";
-    }
+	@NotNull
+	public String getRunnerId()
+	{
+		return "OCamlRunner";
+	}
 
-    public boolean canRun(@NotNull final String executorId, @NotNull final RunProfile profile) {
-        return profile instanceof OCamlRunConfiguration &&
-            (executorId.equals(DefaultRunExecutor.EXECUTOR_ID) || executorId.equals(DefaultDebugExecutor.EXECUTOR_ID));
-    }
+	public boolean canRun(@NotNull final String executorId, @NotNull final RunProfile profile)
+	{
+		return profile instanceof OCamlRunConfiguration && (executorId.equals(DefaultRunExecutor.EXECUTOR_ID) || executorId.equals(DefaultDebugExecutor
+				.EXECUTOR_ID));
+	}
 
-    @Override
-    public void execute(@NotNull final Executor executor, @NotNull final ExecutionEnvironment env, @Nullable final Callback callback) throws ExecutionException {
-        ourCurrentExecutor = executor;
-        super.execute(executor, env, callback);
-        ourCurrentExecutor = null;
-    }
+	@Override
+	public void execute(@NotNull final Executor executor, @NotNull final ExecutionEnvironment env, @Nullable final Callback callback) throws
+			ExecutionException
+	{
+		ourCurrentExecutor = executor;
+		super.execute(executor, env, callback);
+		ourCurrentExecutor = null;
+	}
 
-    @Nullable
-    public static Executor getCurrentExecutor() {
-        return ourCurrentExecutor;
-    }
+	@Nullable
+	public static Executor getCurrentExecutor()
+	{
+		return ourCurrentExecutor;
+	}
 }

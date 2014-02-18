@@ -18,34 +18,39 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModulePath;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public class OCamlExtendedModulePathImpl extends BaseOCamlElement implements OCamlExtendedModulePath {
-    public OCamlExtendedModulePathImpl(@NotNull final ASTNode node) {
-        super(node);
-    }
+public class OCamlExtendedModulePathImpl extends BaseOCamlElement implements OCamlExtendedModulePath
+{
+	public OCamlExtendedModulePathImpl(@NotNull final ASTNode node)
+	{
+		super(node);
+	}
 
-    @Override
-    public boolean endsCorrectly() {
-        return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExtendedModuleName.class);
-    }
+	@Override
+	public boolean endsCorrectly()
+	{
+		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExtendedModuleName.class);
+	}
 
-    public void visit(@NotNull final OCamlElementVisitor visitor) {
-        visitor.visitExtendedModulePath(this);
-    }
+	public void visit(@NotNull final OCamlElementVisitor visitor)
+	{
+		visitor.visitExtendedModulePath(this);
+	}
 
-    @Nullable
-    public OCamlExtendedModuleName getModuleName() {
-        return OCamlPsiUtil.getLastChildOfType(this, OCamlExtendedModuleName.class);
-    }
+	@Nullable
+	public OCamlExtendedModuleName getModuleName()
+	{
+		return OCamlPsiUtil.getLastChildOfType(this, OCamlExtendedModuleName.class);
+	}
 }

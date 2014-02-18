@@ -18,35 +18,40 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
-import com.intellij.openapi.util.Comparing;
-import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
+import com.intellij.openapi.util.Comparing;
+import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 28.03.2009
  */
-class ResolvingProcessor extends BaseOCamlResolvedReferencesProcessor {
-    private OCamlResolvedReference myResolvedReference = null;
+class ResolvingProcessor extends BaseOCamlResolvedReferencesProcessor
+{
+	private OCamlResolvedReference myResolvedReference = null;
 
-    public ResolvingProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types) {
-        super(types);
-    }
+	public ResolvingProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types)
+	{
+		super(types);
+	}
 
-    public boolean doProcess(@NotNull final OCamlResolvedReference psiElement) {
-        if (Comparing.equal(psiElement.getName(), getSourceElementName())) {
-            myResolvedReference = psiElement;
-            return true;
-        }
+	public boolean doProcess(@NotNull final OCamlResolvedReference psiElement)
+	{
+		if(Comparing.equal(psiElement.getName(), getSourceElementName()))
+		{
+			myResolvedReference = psiElement;
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    @Nullable
-    public OCamlResolvedReference getResolvedReference() {
-        return myResolvedReference;
-    }
+	@Nullable
+	public OCamlResolvedReference getResolvedReference()
+	{
+		return myResolvedReference;
+	}
 }

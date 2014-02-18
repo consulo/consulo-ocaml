@@ -24,7 +24,8 @@ import org.jetbrains.annotations.Nullable;
  * @author Maxim.Manuylov
  *         Date: 21.03.2009
  */
-public interface OCamlExtendedModuleName extends OCamlExtendedModulePath {
-    @Nullable
-    String getName();
+public interface OCamlExtendedModuleName extends OCamlExtendedModulePath
+{
+	@Nullable
+	String getName();
 }
