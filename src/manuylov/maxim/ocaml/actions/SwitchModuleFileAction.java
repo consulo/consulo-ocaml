@@ -82,7 +82,7 @@ public class SwitchModuleFileAction extends AnAction
 		{
 			final String anotherFilePath = FileUtil.toSystemDependentName(anotherFile.getAbsolutePath());
 			final Module module = ModuleUtil.findModuleForFile(file, project);
-			if(OCamlModuleUtil.isOCamlModule(module) && ModuleRootManager.getInstance(module).getFileIndex().isInSourceContent(file))
+			if(OCamlModuleUtil.hasOCamlExtension(module) && ModuleRootManager.getInstance(module).getFileIndex().isInSourceContent(file))
 			{
 				if(Messages.showYesNoCancelDialog(project, "File \"" + anotherFilePath + "\" does not exist. Do you want to create it?",
 						"Open file \"" + anotherFilePath + "\"", Messages.getQuestionIcon()) != 0)

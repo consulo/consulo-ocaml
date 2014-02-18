@@ -64,6 +64,7 @@ public class OCamlSdkType extends SdkType
 		super("OCaml SDK");
 	}
 
+	@Override
 	@NotNull
 	public Icon getIcon()
 	{
@@ -71,12 +72,6 @@ public class OCamlSdkType extends SdkType
 	}
 
 	@Override
-	@NotNull
-	public Icon getIconForAddAction()
-	{
-		return getIcon();
-	}
-
 	@Nullable
 	public String suggestHomePath()
 	{
@@ -91,6 +86,7 @@ public class OCamlSdkType extends SdkType
 		return null;
 	}
 
+	@Override
 	public boolean isValidSdkHome(@NotNull final String path)
 	{
 		final File ocaml = getTopLevelExecutable(path);
@@ -131,6 +127,7 @@ public class OCamlSdkType extends SdkType
 		return getExecutable(sdkHome, "ocamlopt");
 	}
 
+	@Override
 	@NotNull
 	public String suggestSdkName(@Nullable final String currentSdkName, @NotNull final String sdkHome)
 	{
@@ -142,6 +139,7 @@ public class OCamlSdkType extends SdkType
 		return "OCaml " + version;
 	}
 
+	@Override
 	@Nullable
 	public String getVersionString(@NotNull final String sdkHome)
 	{
@@ -163,22 +161,26 @@ public class OCamlSdkType extends SdkType
 		return stdout.isEmpty() ? null : stdout;
 	}
 
+	@Override
 	@Nullable
 	public AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull final SdkModel sdkModel, @NotNull final SdkModificator sdkModificator)
 	{
 		return null;
 	}
 
+	@Override
 	public void saveAdditionalData(@NotNull final SdkAdditionalData additionalData, @NotNull final Element additional)
 	{
 	}
 
+	@Override
 	@NonNls
 	public String getPresentableName()
 	{
 		return "OCaml SDK";
 	}
 
+	@Override
 	public void setupSdkPaths(@NotNull final Sdk sdk)
 	{
 		final SdkModificator[] sdkModificatorHolder = new SdkModificator[]{null};
@@ -186,6 +188,7 @@ public class OCamlSdkType extends SdkType
 		final Project project = PlatformDataKeys.PROJECT.getData(DataManager.getInstance().getDataContext());
 		final Task.Modal setupTask = new Task.Modal(project, "Setting up library files", false)
 		{
+			@Override
 			public void run(@NotNull final ProgressIndicator indicator)
 			{
 				sdkModificatorHolder[0] = setupSdkPathsUnderProgress(sdk);

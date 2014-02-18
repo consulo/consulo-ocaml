@@ -19,9 +19,10 @@
 package manuylov.maxim.ocaml.util;
 
 import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
-import manuylov.maxim.ocaml.module.OCamlModuleType;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 
 /**
@@ -35,8 +36,8 @@ public class OCamlModuleUtil
 		return sdk != null && sdk.getSdkType() instanceof OCamlSdkType;
 	}
 
-	public static boolean isOCamlModule(@Nullable final Module module)
+	public static boolean hasOCamlExtension(@Nullable final Module module)
 	{
-		return module != null && OCamlModuleType.ID.equals(module.getModuleType().getId());
+		return module != null && ModuleUtilCore.getExtension(module, OCamlModuleExtension.class) != null;
 	}
 }

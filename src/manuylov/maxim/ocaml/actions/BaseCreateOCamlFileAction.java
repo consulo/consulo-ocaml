@@ -40,7 +40,6 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
 
@@ -72,16 +71,6 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 		Messages.showInputDialog(project, "Enter module name:", "New OCaml Module " + getCapitalizedType() + " File", Messages.getQuestionIcon(), null,
 				validator);
 		return validator.getCreatedElements();
-	}
-
-	@Override
-	protected void checkBeforeCreate(@NotNull final String newName, @NotNull final PsiDirectory directory) throws IncorrectOperationException
-	{
-		if(!MODULE_NAME_PATTERN.matcher(newName).matches())
-		{
-			throw new IncorrectOperationException("Incorrect module name");
-		}
-		directory.checkCreateFile(getFileName(newName));
 	}
 
 	@NotNull
@@ -127,7 +116,7 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 
 		final Module module = ModuleUtil.findModuleForFile(virtualDir, project);
 		//noinspection SimplifiableIfStatement
-		if(!OCamlModuleUtil.isOCamlModule(module))
+		if(!OCamlModuleUtil.hasOCamlExtension(module))
 		{
 			return false;
 		}

@@ -36,13 +36,13 @@ import javax.swing.JTextField;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.projectRoots.impl.SdkListCellRenderer;
-import com.intellij.openapi.projectRoots.ui.ProjectJdksEditor;
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -138,7 +138,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 				else
 				{
 					final Module module = (Module) value;
-					setIcon(module.getModuleType().getNodeIcon(false));
+					setIcon(AllIcons.Nodes.Module);
 					append(module.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
 				}
 			}
@@ -152,10 +152,10 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 			}
 		});
 
-		final List<Sdk> allSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
+		final List<Sdk> allSdks = SdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
 		allSdks.add(0, null);
 		mySpecifiedSdkComboBox.setModel(new CollectionComboBoxModel(allSdks, null));
-		mySpecifiedSdkComboBox.setRenderer(new SdkListCellRenderer("<Project Default>"));
+		mySpecifiedSdkComboBox.setRenderer(new SdkListCellRenderer("<None>"));
 		mySpecifiedSdkComboBox.addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(@NotNull final ItemEvent e)
@@ -169,12 +169,13 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		{
 			public void actionPerformed(@NotNull final ActionEvent e)
 			{
-				final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySpecifiedSdkComboBox.getSelectedItem(), myProject, mySpecifiedSdkComboBox);
+			/*	final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySpecifiedSdkComboBox.getSelectedItem(), myProject,
+					mySpecifiedSdkComboBox);
 				editor.show();
 				if(editor.isOK())
 				{
-					setSpecifiedSdk(editor.getSelectedJdk());
-				}
+				setSpecifiedSdk(editor.getSelectedJdk());
+				}*/
 			}
 		});
 

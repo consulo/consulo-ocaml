@@ -24,6 +24,7 @@ import java.util.List;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
@@ -35,11 +36,10 @@ import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizerUtil;
@@ -87,7 +87,7 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 		final List<Module> result = new ArrayList<Module>();
 		for(final Module module : modules)
 		{
-			if(OCamlModuleUtil.isOCamlModule(module))
+			if(OCamlModuleUtil.hasOCamlExtension(module))
 			{
 				result.add(module);
 			}
@@ -134,7 +134,7 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 			final String sdkHomePath = FileUtil.toSystemDependentName(systemIndependentSdkHomePath);
 			if(sdkHomePath != null)
 			{
-				final List<Sdk> sdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
+				final List<Sdk> sdks = SdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
 				for(final Sdk sdk : sdks)
 				{
 					if(sdkHomePath.equals(sdk.getHomePath()))
@@ -192,7 +192,7 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 			{
 				throw new RuntimeConfigurationException("Please choose the valid OCaml module or select the \"Use specified SDK\" option.");
 			}
-			final Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
+			final Sdk sdk = ModuleUtilCore.getSdk(module, OCamlModuleExtension.class);
 			if(!OCamlModuleUtil.isOCamlSdk(sdk))
 			{
 				throw new RuntimeConfigurationException("There is no valid OCaml SDK in the specified module.");
@@ -200,15 +200,7 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 		}
 		else
 		{
-			if(mySpecifiedSdk == null)
-			{
-				final Sdk projectSdk = ProjectRootManager.getInstance(getProject()).getProjectJdk();
-				if(!OCamlModuleUtil.isOCamlSdk(projectSdk))
-				{
-					throw new RuntimeConfigurationException("Project default SDK is not a valid OCaml SDK.");
-				}
-			}
-			else if(!OCamlModuleUtil.isOCamlSdk(mySpecifiedSdk))
+			if(mySpecifiedSdk == null || !OCamlModuleUtil.isOCamlSdk(mySpecifiedSdk))
 			{
 				throw new RuntimeConfigurationException("The specified SDK is not a valid OCaml SDK.");
 			}

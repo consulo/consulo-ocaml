@@ -18,16 +18,14 @@
 
 package manuylov.maxim.ocaml.lang.feature.highlighting;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.lexer.OCamlHighlightingLexer;
@@ -44,22 +42,22 @@ class OCamlSyntaxHighlighter extends SyntaxHighlighterBase
 
 	@NotNull
 	public static final TextAttributesKey OCAML_KEYWORD = TextAttributesKey.createTextAttributesKey("OCAML.KEYWORD",
-			getTextAttributes(Color.blue.darker(), Font.BOLD));
+			DefaultLanguageHighlighterColors.KEYWORD);
 	@NotNull
-	public static final TextAttributesKey OCAML_STRING = TextAttributesKey.createTextAttributesKey("OCAML.STRING", getTextAttributes(Color.green,
-			Font.BOLD));
+	public static final TextAttributesKey OCAML_STRING = TextAttributesKey.createTextAttributesKey("OCAML.STRING",
+			DefaultLanguageHighlighterColors.STRING);
 	@NotNull
-	public static final TextAttributesKey OCAML_ESCAPE = TextAttributesKey.createTextAttributesKey("OCAML.ESCAPE", getTextAttributes(Color.blue,
-			Font.BOLD));
+	public static final TextAttributesKey OCAML_ESCAPE = TextAttributesKey.createTextAttributesKey("OCAML.ESCAPE",
+			DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
 	@NotNull
-	public static final TextAttributesKey OCAML_NUMBER = TextAttributesKey.createTextAttributesKey("OCAML.NUMBER", getTextAttributes(Color.blue,
-			Font.PLAIN));
+	public static final TextAttributesKey OCAML_NUMBER = TextAttributesKey.createTextAttributesKey("OCAML.NUMBER",
+			DefaultLanguageHighlighterColors.NUMBER);
 	@NotNull
-	public static final TextAttributesKey OCAML_COMMENT = TextAttributesKey.createTextAttributesKey("OCAML.COMMENT", getTextAttributes(Color.gray,
-			Font.PLAIN));
+	public static final TextAttributesKey OCAML_COMMENT = TextAttributesKey.createTextAttributesKey("OCAML.COMMENT",
+			DefaultLanguageHighlighterColors.LINE_COMMENT);
 	@NotNull
 	public static final TextAttributesKey OCAML_SYNTAX_SYMBOL = TextAttributesKey.createTextAttributesKey("OCAML.SYNTAX.SYMBOL",
-			getTextAttributes(Color.black, Font.BOLD));
+			DefaultLanguageHighlighterColors.LABEL);
 
 	@NotNull
 	public Lexer getHighlightingLexer()
@@ -89,11 +87,5 @@ class OCamlSyntaxHighlighter extends SyntaxHighlighterBase
 		keys.put(OCamlTokenTypes.SEMICOLON_SEMICOLON, OCAML_SYNTAX_SYMBOL);
 
 		keys.put(OCamlTokenTypes.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
-	}
-
-	@NotNull
-	private static TextAttributes getTextAttributes(@NotNull final Color color, final int fontType)
-	{
-		return new TextAttributes(color, null, null, null, fontType);
 	}
 }

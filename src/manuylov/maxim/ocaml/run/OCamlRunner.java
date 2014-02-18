@@ -50,11 +50,10 @@ public class OCamlRunner extends DefaultProgramRunner
 	}
 
 	@Override
-	public void execute(@NotNull final Executor executor, @NotNull final ExecutionEnvironment env, @Nullable final Callback callback) throws
-			ExecutionException
+	public void execute(@NotNull ExecutionEnvironment env, @Nullable Callback callback) throws ExecutionException
 	{
-		ourCurrentExecutor = executor;
-		super.execute(executor, env, callback);
+		ourCurrentExecutor = env.getExecutor();
+		super.execute(env, callback);
 		ourCurrentExecutor = null;
 	}
 

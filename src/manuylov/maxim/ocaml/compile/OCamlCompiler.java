@@ -131,7 +131,7 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		final Module[] modules = ModuleManager.getInstance(project).getModules();
 		for(final Module module : modules)
 		{
-			if(!OCamlModuleUtil.isOCamlModule(module))
+			if(!OCamlModuleUtil.hasOCamlExtension(module))
 			{
 				continue;
 			}

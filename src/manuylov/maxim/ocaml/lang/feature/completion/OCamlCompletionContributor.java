@@ -33,7 +33,6 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.codeInsight.completion.DummyIdentifierPatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInsight.lookup.TailTypeDecorator;
@@ -85,7 +84,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 	@Override
 	public void beforeCompletion(@NotNull final CompletionInitializationContext context)
 	{
-		context.setFileCopyPatcher(new DummyIdentifierPatcher(LOWER_CASE_DUMMY_IDENTIFIER));
+		context.setDummyIdentifier(LOWER_CASE_DUMMY_IDENTIFIER);
 	}
 
 	@Override
@@ -340,7 +339,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 			return null;
 		}
 
-		final PsiElement root = OCamlPsiUtil.parse(textToParse, parserDefinition, file.getProject(), false);
+		final PsiElement root = OCamlPsiUtil.parse(textToParse, parserDefinition, file.getProject(), false, file.getLanguageVersion());
 		if(root instanceof OCamlUnknownElementImpl)
 		{
 			((OCamlUnknownElementImpl) root).setFile(file);
@@ -391,7 +390,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 	{
 		for(final String word : words)
 		{
-			result.addElement(TailTypeDecorator.withTail(LookupElementBuilder.create(word).setBold(), tail));
+			result.addElement(TailTypeDecorator.withTail(LookupElementBuilder.create(word).bold(), tail));
 		}
 	}
 }

@@ -21,6 +21,7 @@ package manuylov.maxim.ocaml.run;
 import java.io.File;
 
 import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
@@ -31,10 +32,9 @@ import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
 import manuylov.maxim.ocaml.entity.OCamlModule;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
@@ -111,15 +111,11 @@ public class OCamlCommandLineState extends CommandLineState
 		{
 			final Module module = myConfig.getModule();
 			assert module != null;
-			sdk = ModuleRootManager.getInstance(module).getSdk();
+			sdk = ModuleUtilCore.getSdk(module, OCamlModuleExtension.class);
 		}
 		else
 		{
 			sdk = myConfig.getSpecifiedSdk();
-			if(sdk == null)
-			{
-				sdk = ProjectRootManager.getInstance(myProject).getProjectJdk();
-			}
 		}
 		assert OCamlModuleUtil.isOCamlSdk(sdk);
 		//noinspection ConstantConditions

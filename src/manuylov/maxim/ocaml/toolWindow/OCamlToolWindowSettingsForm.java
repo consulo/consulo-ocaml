@@ -31,10 +31,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.projectRoots.impl.SdkListCellRenderer;
-import com.intellij.openapi.projectRoots.ui.ProjectJdksEditor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.RawCommandLineEditor;
@@ -59,7 +58,7 @@ public class OCamlToolWindowSettingsForm
 	{
 		myProject = project;
 
-		final List<Sdk> allSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
+		final List<Sdk> allSdks = SdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
 		allSdks.add(0, null);
 		mySdkComboBox.setModel(new CollectionComboBoxModel(allSdks, null));
 		mySdkComboBox.setRenderer(new SdkListCellRenderer("<Project Default>"));
@@ -68,12 +67,12 @@ public class OCamlToolWindowSettingsForm
 		{
 			public void actionPerformed(@NotNull final ActionEvent e)
 			{
-				final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySdkComboBox.getSelectedItem(), myProject, mySdkComboBox);
+				/*final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySdkComboBox.getSelectedItem(), myProject, mySdkComboBox);
 				editor.show();
 				if(editor.isOK())
 				{
 					setSelectedSdk(editor.getSelectedJdk());
-				}
+				} */
 			}
 		});
 

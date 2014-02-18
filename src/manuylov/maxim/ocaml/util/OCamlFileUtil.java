@@ -21,11 +21,12 @@ package manuylov.maxim.ocaml.util;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.consulo.compiler.ModuleCompilerPathsManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.CompilerModuleExtension;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -74,9 +75,9 @@ public class OCamlFileUtil
 
 		final Module module = fileIndex.getModuleForFile(sourcesDir);
 		assert module != null;
-		final CompilerModuleExtension compilerModuleExtension = CompilerModuleExtension.getInstance(module);
-		assert compilerModuleExtension != null;
-		final VirtualFile outputRoot = compilerModuleExtension.getCompilerOutputPath();
+		final ModuleCompilerPathsManager compilerModuleExtension = ModuleCompilerPathsManager.getInstance(module);
+
+		final VirtualFile outputRoot = compilerModuleExtension.getCompilerOutput(ProductionContentFolderTypeProvider.getInstance());
 		assert outputRoot != null && outputRoot.isDirectory();
 
 		File destDir = new File(outputRoot.getPath());

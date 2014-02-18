@@ -28,8 +28,8 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StorageScheme;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.util.io.FileUtil;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
@@ -92,7 +92,7 @@ public class OCamlSettings implements ProjectComponent, PersistentStateComponent
 		}
 		else
 		{
-			final List<Sdk> ocamlSdks = ProjectJdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
+			final List<Sdk> ocamlSdks = SdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
 			for(final Sdk ocamlSdk : ocamlSdks)
 			{
 				if(systemIndependentHomePath.equals(FileUtil.toSystemIndependentName(ocamlSdk.getHomePath())))

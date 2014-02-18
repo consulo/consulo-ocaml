@@ -42,6 +42,12 @@ abstract class BaseOCamlSurroundDescriptor implements SurroundDescriptor
 		mySurrounders = surrounders;
 	}
 
+	@Override
+	public boolean isExclusive()
+	{
+		return false;
+	}
+
 	@NotNull
 	public PsiElement[] getElementsToSurround(@NotNull final PsiFile file, final int startOffset, final int endOffset)
 	{

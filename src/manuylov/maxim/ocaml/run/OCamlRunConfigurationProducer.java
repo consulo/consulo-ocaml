@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.run;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.Location;
+import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
 import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
@@ -55,7 +55,7 @@ public class OCamlRunConfigurationProducer extends RuntimeConfigurationProducer 
 	}
 
 	@Nullable
-	protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(@NotNull final Location location,
+	protected RunnerAndConfigurationSettings createConfigurationByElement(@NotNull final Location location,
 			@NotNull final ConfigurationContext context)
 	{
 		final PsiFile psiFile = location.getPsiElement().getContainingFile();
@@ -76,7 +76,7 @@ public class OCamlRunConfigurationProducer extends RuntimeConfigurationProducer 
 		}
 		mySourceFile = psiFile;
 
-		final RunnerAndConfigurationSettingsImpl settings = cloneTemplateConfiguration(project, context);
+		final RunnerAndConfigurationSettings settings = cloneTemplateConfiguration(project, context);
 		final OCamlRunConfiguration configuration = (OCamlRunConfiguration) settings.getConfiguration();
 		configuration.setMainOCamlModule(ocamlModule);
 		configuration.setWorkingDirectory(FileUtil.toSystemDependentName(ocamlModule.getSourcesDir().getPath()));
@@ -84,7 +84,6 @@ public class OCamlRunConfigurationProducer extends RuntimeConfigurationProducer 
 		final Module module = ModuleUtil.findModuleForPsiElement(psiFile);
 		configuration.setUsedModuleSdk(module != null);
 		configuration.setModule(module);
-		copyStepsBeforeRun(project, configuration);
 		return settings;
 	}
 

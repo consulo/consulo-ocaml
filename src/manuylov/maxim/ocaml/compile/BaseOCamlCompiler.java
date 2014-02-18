@@ -28,14 +28,15 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.compiler.FileProcessingCompiler;
 import com.intellij.openapi.compiler.ValidityState;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -94,7 +95,7 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 			return null;
 		}
 
-		final Sdk sdk = ModuleRootManager.getInstance(module).getSdk();
+		final Sdk sdk = ModuleUtilCore.getSdk(module, OCamlModuleExtension.class);
 		if(!OCamlModuleUtil.isOCamlSdk(sdk))
 		{
 			context.addMessage(ERROR, "Sdk of module \"" + module.getName() + "\" is invalid.", file.getUrl(), INVALID_INT, INVALID_INT);

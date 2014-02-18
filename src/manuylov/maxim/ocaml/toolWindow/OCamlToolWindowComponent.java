@@ -140,7 +140,7 @@ public class OCamlToolWindowComponent implements ProjectComponent
 		final Module[] modules = ModuleManager.getInstance(myProject).getModules();
 		for(final Module module : modules)
 		{
-			if(OCamlModuleUtil.isOCamlModule(module))
+			if(OCamlModuleUtil.hasOCamlExtension(module))
 			{
 				return true;
 			}

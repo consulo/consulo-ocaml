@@ -30,19 +30,19 @@ import com.intellij.openapi.util.IconLoader;
 public class OCamlIconUtil
 {
 	@NotNull
-	private static final Icon ourMLFileIcon = IconLoader.getIcon("/img/ml-file.png");
+	public static final Icon ourMLFileIcon = IconLoader.getIcon("/img/ml-file.png");
 	@NotNull
-	private static final Icon ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
+	public static final Icon ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
 	@NotNull
-	private static final Icon ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
+	public static final Icon ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
 	@NotNull
-	private static final Icon ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
+	public static final Icon ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
 	@NotNull
-	private static final Icon ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
+	public static final Icon ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
 	@NotNull
-	private static final Icon ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
+	public static final Icon ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
 	@NotNull
-	private static final Icon ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
+	public static final Icon ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
 
 	@NotNull
 	public static Icon getSmallOCamlIcon()
