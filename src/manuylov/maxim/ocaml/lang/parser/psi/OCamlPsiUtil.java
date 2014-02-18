@@ -316,8 +316,7 @@ public class OCamlPsiUtil
 	}
 
 	@NotNull
-	public static List<? extends OCamlElement> getChildrenOfTypes(@NotNull final OCamlElement parent, @NotNull final Class<? extends OCamlElement>..
-			. types)
+	public static List<? extends OCamlElement> getChildrenOfTypes(@NotNull final OCamlElement parent, @NotNull final Class<? extends OCamlElement>... types)
 	{
 		final List<OCamlElement> result = new ArrayList<OCamlElement>();
 

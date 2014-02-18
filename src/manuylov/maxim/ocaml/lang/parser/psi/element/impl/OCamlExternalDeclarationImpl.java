@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
 import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.util.PsiUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExternalDeclaration;
 
@@ -38,7 +38,7 @@ public class OCamlExternalDeclarationImpl extends BaseOCamlElement implements OC
 	@Override
 	public boolean endsCorrectly()
 	{
-		return !PsiUtil.hasErrorElementChild(this);
+		return !PsiUtilCore.hasErrorElementChild(this);
 	}
 
 	public void visit(@NotNull final OCamlElementVisitor visitor)

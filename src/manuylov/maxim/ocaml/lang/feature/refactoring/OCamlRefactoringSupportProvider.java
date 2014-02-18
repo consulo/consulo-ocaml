@@ -18,13 +18,13 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring;
 
-import com.intellij.lang.refactoring.DefaultRefactoringSupportProvider;
+import com.intellij.lang.refactoring.RefactoringSupportProvider;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 26.04.2010
  */
-public class OCamlRefactoringSupportProvider extends DefaultRefactoringSupportProvider
+public class OCamlRefactoringSupportProvider extends RefactoringSupportProvider
 {
 
 }
