@@ -35,30 +35,31 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  */
 public class OCamlFindUsagesProvider implements FindUsagesProvider
 {
-	@NotNull
-	private static final DefaultWordsScanner DEFAULT_WORDS_SCANNER = new DefaultWordsScanner(new OCamlHighlightingLexer(),
-			OCamlTokenTypes.DWS_IDENTIFIERS, OCamlTokenTypes.DWS_COMMENTS, OCamlTokenTypes.DWS_LITERALS)
-	{{
-			setMayHaveFileRefsInLiterals(true);
-		}};
-
+	@Override
 	@NotNull
 	public WordsScanner getWordsScanner()
 	{
-		return DEFAULT_WORDS_SCANNER;
+		DefaultWordsScanner defaultWordsScanner = new DefaultWordsScanner(new OCamlHighlightingLexer(), OCamlTokenTypes.DWS_IDENTIFIERS,
+				OCamlTokenTypes.DWS_COMMENTS, OCamlTokenTypes.DWS_LITERALS);
+		defaultWordsScanner.setMayHaveFileRefsInLiterals(true);
+
+		return defaultWordsScanner;
 	}
 
+	@Override
 	public boolean canFindUsagesFor(@NotNull final PsiElement psiElement)
 	{
 		return true;
 	}
 
+	@Override
 	@Nullable
 	public String getHelpId(@NotNull final PsiElement psiElement)
 	{
 		return null;
 	}
 
+	@Override
 	@NotNull
 	public String getType(@NotNull final PsiElement element)
 	{
@@ -69,12 +70,14 @@ public class OCamlFindUsagesProvider implements FindUsagesProvider
 		return "";
 	}
 
+	@Override
 	@NotNull
 	public String getDescriptiveName(@NotNull final PsiElement element)
 	{
 		return getName(element);
 	}
 
+	@Override
 	@NotNull
 	public String getNodeText(@NotNull final PsiElement element, final boolean useFullName)
 	{
