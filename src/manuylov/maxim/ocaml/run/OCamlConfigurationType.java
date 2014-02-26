@@ -21,6 +21,8 @@ package manuylov.maxim.ocaml.run;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.module.extension.ModuleExtensionHelper;
+import org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -45,8 +47,7 @@ public class OCamlConfigurationType implements ConfigurationType
 				return (OCamlConfigurationType) configurationType;
 			}
 		}
-		assert false;
-		return null;
+		throw new Error();
 	}
 
 	@NotNull
@@ -57,32 +58,43 @@ public class OCamlConfigurationType implements ConfigurationType
 		{
 			return new OCamlRunConfiguration(new RunConfigurationModule(project), this, "");
 		}
+
+		@Override
+		public boolean isApplicable(@NotNull Project project)
+		{
+			return ModuleExtensionHelper.getInstance(project).hasModuleExtension(OCamlModuleExtension.class);
+		}
 	};
 
+	@Override
 	@NotNull
 	public String getDisplayName()
 	{
 		return "OCaml Application";
 	}
 
+	@Override
 	@NotNull
 	public String getConfigurationTypeDescription()
 	{
 		return "OCaml application run configuration";
 	}
 
+	@Override
 	@NotNull
 	public Icon getIcon()
 	{
 		return OCamlIconUtil.getSmallOCamlIcon();
 	}
 
+	@Override
 	@NotNull
 	public String getId()
 	{
 		return "OCAML_CONFIGURATION_TYPE";
 	}
 
+	@Override
 	@NotNull
 	public ConfigurationFactory[] getConfigurationFactories()
 	{
