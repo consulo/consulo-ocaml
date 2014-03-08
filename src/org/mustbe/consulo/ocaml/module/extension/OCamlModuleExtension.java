@@ -2,8 +2,8 @@ package org.mustbe.consulo.ocaml.module.extension;
 
 import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.roots.ModifiableRootModel;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 
 /**
@@ -12,7 +12,7 @@ import manuylov.maxim.ocaml.sdk.OCamlSdkType;
  */
 public class OCamlModuleExtension extends ModuleExtensionWithSdkImpl<OCamlModuleExtension>
 {
-	public OCamlModuleExtension(@NotNull String id, @NotNull Module module)
+	public OCamlModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}

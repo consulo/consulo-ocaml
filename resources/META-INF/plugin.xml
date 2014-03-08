@@ -32,11 +32,15 @@
 		</component>
 	</project-components>
 
-	<extensions xmlns="com.intellij">
+	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="manuylov.maxim.ocaml.fileType.OCamlFileTypeFactory"/>
 
-		<moduleExtensionProvider key="ocaml" allow-mixin="true"
-								 implementationClass="org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtensionProvider"/>
+		<moduleExtensionProvider key="ocaml"
+								 allowMixin="true"
+								 icon="/img/ocaml-small.png"
+								 name="OCaml"
+								 immutableClass="org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension"
+								 mutableClass="org.mustbe.consulo.ocaml.module.extension.OCamlMutableModuleExtension"/>
 
 		<lang.syntaxHighlighterFactory key="OCAML_ML"
 									   implementationClass="manuylov.maxim.ocaml.lang.feature.highlighting.OCamlSyntaxHighlighterFactory"/>
