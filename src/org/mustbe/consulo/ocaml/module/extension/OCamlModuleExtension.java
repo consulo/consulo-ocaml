@@ -17,8 +17,9 @@ public class OCamlModuleExtension extends ModuleExtensionWithSdkImpl<OCamlModule
 		super(id, module);
 	}
 
+	@NotNull
 	@Override
-	protected Class<? extends SdkType> getSdkTypeClass()
+	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return OCamlSdkType.class;
 	}
