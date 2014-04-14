@@ -77,7 +77,7 @@ public class OCamlToolWindowSettingsForm
 		});
 
 		final FileChooserDescriptor workingDirChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
-		workingDirChooserDescriptor.setRoot(myProject.getBaseDir());
+		workingDirChooserDescriptor.setRoots(myProject.getBaseDir());
 		myWorkingDirectoryEditor.addBrowseFolderListener("Select Working Directory", "", myProject, workingDirChooserDescriptor);
 	}
 

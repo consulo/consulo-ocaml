@@ -63,7 +63,7 @@ public class OCamlToolWindowSettingsAction extends AnAction
 		dialogBuilder.setCenterPanel(settingsForm.getRootPanel());
 		dialogBuilder.addOkAction().setText("Ok");
 		dialogBuilder.addCancelAction().setText("Cancel");
-		dialogBuilder.setPreferedFocusComponent(settingsForm.getSdkComboBox());
+		dialogBuilder.setPreferredFocusComponent(settingsForm.getSdkComboBox());
 		dialogBuilder.setTitle("OCaml Top Level Console Settings");
 		dialogBuilder.setOkOperation(new Runnable()
 		{
