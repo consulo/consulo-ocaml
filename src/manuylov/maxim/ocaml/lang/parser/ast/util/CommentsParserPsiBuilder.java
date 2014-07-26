@@ -141,6 +141,12 @@ public class CommentsParserPsiBuilder implements PsiBuilder
 		return 0;
 	}
 
+	@Override
+	public int rawTokenIndex()
+	{
+		return 0;
+	}
+
 	public ASTNode getTreeBuilt()
 	{
 		return myBuilder.getTreeBuilt();
