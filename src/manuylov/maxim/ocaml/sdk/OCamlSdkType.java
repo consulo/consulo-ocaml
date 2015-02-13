@@ -38,7 +38,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.types.BinariesOrderRootType;
+import com.intellij.openapi.roots.types.SourcesOrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -258,8 +259,8 @@ public class OCamlSdkType extends SdkType
 		final VirtualFile dir = LocalFileSystem.getInstance().findFileByIoFile(stdLibDir);
 		if(dir != null)
 		{
-			sdkModificator.addRoot(dir, OrderRootType.SOURCES);
-			sdkModificator.addRoot(dir, OrderRootType.CLASSES);
+			sdkModificator.addRoot(dir, SourcesOrderRootType.getInstance());
+			sdkModificator.addRoot(dir, BinariesOrderRootType.getInstance());
 		}
 		return true;
 	}
