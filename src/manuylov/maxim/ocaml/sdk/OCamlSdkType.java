@@ -19,10 +19,11 @@
 package manuylov.maxim.ocaml.sdk;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.List;
 
 import javax.swing.Icon;
 
-import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,16 +35,14 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkAdditionalData;
-import com.intellij.openapi.projectRoots.SdkModel;
 import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.SmartList;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 import manuylov.maxim.ocaml.util.OCamlSystemUtil;
 
@@ -56,7 +55,7 @@ public class OCamlSdkType extends SdkType
 	@NotNull
 	public static OCamlSdkType getInstance()
 	{
-		return SdkType.findInstance(OCamlSdkType.class);
+		return EP_NAME.findExtension(OCamlSdkType.class);
 	}
 
 	public OCamlSdkType()
@@ -71,19 +70,20 @@ public class OCamlSdkType extends SdkType
 		return OCamlIconUtil.getSmallOCamlIcon();
 	}
 
+	@NotNull
 	@Override
-	@Nullable
-	public String suggestHomePath()
+	public Collection<String> suggestHomePaths()
 	{
+		List<String> list = new SmartList<String>();
 		if(SystemInfo.isWindows)
 		{
-			return "C:\\cygwin\\bin";
+			list.add("C:\\cygwin\\bin");
 		}
 		else if(SystemInfo.isLinux)
 		{
-			return "/usr/bin";
+			list.add("/usr/bin");
 		}
-		return null;
+		return list;
 	}
 
 	@Override
@@ -161,18 +161,7 @@ public class OCamlSdkType extends SdkType
 		return stdout.isEmpty() ? null : stdout;
 	}
 
-	@Override
-	@Nullable
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull final SdkModel sdkModel, @NotNull final SdkModificator sdkModificator)
-	{
-		return null;
-	}
-
-	@Override
-	public void saveAdditionalData(@NotNull final SdkAdditionalData additionalData, @NotNull final Element additional)
-	{
-	}
-
+	@NotNull
 	@Override
 	@NonNls
 	public String getPresentableName()
