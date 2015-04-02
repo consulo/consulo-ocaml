@@ -119,7 +119,7 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 			throw new IncorrectOperationException("Incorrect " + getDescription() + " name element");
 		}
 
-		OCamlASTNodeUtil.replaceLeafText(nameElement.getFirstChildNode(), name);
+		OCamlASTNodeUtil.replaceLeafText(nameElement.getFirstChildNode(), getLanguageVersion(), name);
 	}
 
 	@Override
