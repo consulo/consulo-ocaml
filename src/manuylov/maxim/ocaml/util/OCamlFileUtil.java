@@ -21,16 +21,16 @@ package manuylov.maxim.ocaml.util;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.consulo.compiler.ModuleCompilerPathsManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import consulo.compiler.ModuleCompilerPathsManager;
+import consulo.roots.impl.ProductionContentFolderTypeProvider;
 import manuylov.maxim.ocaml.fileType.OCamlFileType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;

@@ -106,9 +106,9 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 				.BrowseFolderActionListener<JTextField>("Select OCaml Application Main File", "", myMainFileEditor, myProject, mlFileChooserDescriptor,
 				TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT)
 		{
-			protected void onFileChoosen(@NotNull final VirtualFile chosenFile)
+			protected void onFileChosen(@NotNull final VirtualFile chosenFile)
 			{
-				super.onFileChoosen(chosenFile);
+				super.onFileChosen(chosenFile);
 				setWorkingDirectory(chosenFile.getParent().getPath());
 			}
 		};

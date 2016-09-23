@@ -19,12 +19,12 @@
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
 import org.jetbrains.annotations.NotNull;
-import com.intellij.lang.ASTLeafFactory;
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
+import consulo.lang.LanguageVersion;
+import consulo.psi.tree.ASTLeafFactory;
 
 /**
  * @author Maxim.Manuylov

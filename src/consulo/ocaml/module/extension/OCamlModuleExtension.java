@@ -1,9 +1,9 @@
-package org.mustbe.consulo.ocaml.module.extension;
+package consulo.ocaml.module.extension;
 
-import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.roots.ModuleRootLayer;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 
 /**

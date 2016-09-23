@@ -27,7 +27,6 @@ import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilderFactory;
@@ -44,7 +43,8 @@ import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.LanguageVersionUtil;
+import consulo.lang.LanguageVersion;
+import consulo.lang.util.LanguageVersionUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleName;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPathElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStatement;
@@ -456,8 +456,8 @@ public class OCamlPsiUtil
 	public static PsiElement parse(@NotNull final CharSequence text, @NotNull final ParserDefinition parserDefinition,
 			@NotNull final Project project, final boolean isTestMode, LanguageVersion languageVersion)
 	{
-		final Lexer lexer = parserDefinition.createLexer(project, languageVersion);
-		final PsiParser parser = parserDefinition.createParser(project, languageVersion);
+		final Lexer lexer = parserDefinition.createLexer(languageVersion);
+		final PsiParser parser = parserDefinition.createParser(languageVersion);
 		final PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, lexer, languageVersion, text);
 		builder.setDebugMode(isTestMode);
 		return parserDefinition.createElement(parser.parse(parserDefinition.getFileNodeType(), builder, languageVersion));

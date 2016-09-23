@@ -16,8 +16,8 @@
   -->
 
 <idea-plugin>
+	<id>consulo.ocaml</id>
 	<name>OCaml Support</name>
-	<id>OCamlSupport</id>
 	<description>OCaml language support</description>
 	<version>SNAPSHOT</version>
 	<vendor email="maxim.manuylov@gmail.com">Maxim Manuylov</vendor>
@@ -39,8 +39,8 @@
 								 allowMixin="true"
 								 icon="/img/ocaml-small.png"
 								 name="OCaml"
-								 immutableClass="org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension"
-								 mutableClass="org.mustbe.consulo.ocaml.module.extension.OCamlMutableModuleExtension"/>
+								 immutableClass="consulo.ocaml.module.extension.OCamlModuleExtension"
+								 mutableClass="consulo.ocaml.module.extension.OCamlMutableModuleExtension"/>
 
 		<lang.syntaxHighlighterFactory key="OCAML_ML"
 									   implementationClass="manuylov.maxim.ocaml.lang.feature.highlighting.OCamlSyntaxHighlighterFactory"/>

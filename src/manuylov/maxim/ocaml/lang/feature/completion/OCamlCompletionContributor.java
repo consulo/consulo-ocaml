@@ -30,7 +30,7 @@ import com.intellij.codeInsight.TailType;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionProvider;
+import consulo.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -113,10 +113,10 @@ public class OCamlCompletionContributor extends CompletionContributor
 
 		extend(CompletionType.BASIC, OCAML_ELEMENT.and(isEndAfterStructOrSig()), createCompletionProvider(TailType.SPACE, Keywords.END_KEYWORD));
 
-		extend(CompletionType.BASIC, psiElement(), new CompletionProvider<CompletionParameters>()
+		extend(CompletionType.BASIC, psiElement(), new CompletionProvider()
 		{
 			@Override
-			protected void addCompletions(@NotNull final CompletionParameters parameters, @NotNull final ProcessingContext context,
+			public void addCompletions(@NotNull final CompletionParameters parameters, @NotNull final ProcessingContext context,
 					@NotNull final CompletionResultSet result)
 			{
 				processUpperCaseVariants(parameters, result);
@@ -372,13 +372,13 @@ public class OCamlCompletionContributor extends CompletionContributor
 	}
 
 	@NotNull
-	private static CompletionProvider<CompletionParameters> createCompletionProvider(@NotNull final TailType tailType,
+	private static CompletionProvider createCompletionProvider(@NotNull final TailType tailType,
 			@NotNull final String... keywords)
 	{
-		return new CompletionProvider<CompletionParameters>()
+		return new CompletionProvider()
 		{
 			@Override
-			protected void addCompletions(@NotNull final CompletionParameters parameters, @NotNull final ProcessingContext context,
+			public void addCompletions(@NotNull final CompletionParameters parameters, @NotNull final ProcessingContext context,
 					@NotNull final CompletionResultSet result)
 			{
 				putKeywords(result, tailType, keywords);

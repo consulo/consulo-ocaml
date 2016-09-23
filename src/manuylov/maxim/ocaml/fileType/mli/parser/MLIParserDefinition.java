@@ -19,13 +19,11 @@
 package manuylov.maxim.ocaml.fileType.mli.parser;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.PsiParser;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
+import consulo.lang.LanguageVersion;
 import manuylov.maxim.ocaml.fileType.mli.parser.psi.element.impl.MLIFile;
 import manuylov.maxim.ocaml.lang.parser.BaseParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
@@ -38,7 +36,7 @@ public class MLIParserDefinition extends BaseParserDefinition
 {
 	@Override
 	@NotNull
-	public PsiParser createParser(@Nullable final Project project, @NotNull LanguageVersion languageVersion)
+	public PsiParser createParser(@NotNull LanguageVersion languageVersion)
 	{
 		return new MLIParser();
 	}

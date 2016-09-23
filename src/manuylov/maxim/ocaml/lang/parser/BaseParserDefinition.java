@@ -19,15 +19,13 @@
 package manuylov.maxim.ocaml.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageUtil;
-import com.intellij.lang.LanguageVersion;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
+import consulo.lang.LanguageVersion;
 import manuylov.maxim.ocaml.lang.lexer.OCamlParsingLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
@@ -41,7 +39,7 @@ public abstract class BaseParserDefinition implements ParserDefinition
 {
 	@Override
 	@NotNull
-	public Lexer createLexer(@Nullable final Project project, @NotNull LanguageVersion languageVersion)
+	public Lexer createLexer(@NotNull LanguageVersion languageVersion)
 	{
 		return doCreateLexer();
 	}

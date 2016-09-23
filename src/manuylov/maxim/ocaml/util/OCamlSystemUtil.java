@@ -75,7 +75,7 @@ public class OCamlSystemUtil
 	@NotNull
 	public static ProcessOutput execute(@NotNull final GeneralCommandLine cmd, final int timeout) throws ExecutionException
 	{
-		final CapturingProcessHandler processHandler = new CapturingProcessHandler(cmd.createProcess());
+		final CapturingProcessHandler processHandler = new CapturingProcessHandler(cmd);
 		return timeout < 0 ? processHandler.runProcess() : processHandler.runProcess(timeout);
 	}
 

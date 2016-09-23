@@ -21,7 +21,7 @@ package manuylov.maxim.ocaml.run;
 import java.io.File;
 
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.ocaml.module.extension.OCamlModuleExtension;
+import consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
