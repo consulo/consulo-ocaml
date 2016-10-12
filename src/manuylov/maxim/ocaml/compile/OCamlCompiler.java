@@ -185,7 +185,8 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 			processedCount++;
 			progressIndicator.setFraction(processedCount / allCount);
 
-			final VirtualFile file = item.getFile();
+			final File ioFile = item.getFile();
+			VirtualFile file = LocalFileSystem.getInstance().findFileByIoFile(ioFile);
 			progressIndicator.setText2(OCamlFileUtil.getPathToDisplay(file));
 
 			final VirtualFile destDir = getDestination(file, fileIndex);
