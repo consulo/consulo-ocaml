@@ -20,7 +20,6 @@ package manuylov.maxim.ocaml.toolWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -32,11 +31,11 @@ import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
-import com.intellij.openapi.projectRoots.impl.SdkListCellRenderer;
+import com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectSdksModel;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.ui.CollectionComboBoxModel;
+import com.intellij.openapi.util.Conditions;
 import com.intellij.ui.RawCommandLineEditor;
+import consulo.roots.ui.configuration.SdkComboBox;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 
 /**
@@ -46,7 +45,7 @@ import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 public class OCamlToolWindowSettingsForm
 {
 	private RawCommandLineEditor myCommandLineParamsEditor;
-	private JComboBox mySdkComboBox;
+	private consulo.roots.ui.configuration.SdkComboBox mySdkComboBox;
 	private JButton myConfigureButton;
 	private JPanel myRootPanel;
 	private TextFieldWithBrowseButton myWorkingDirectoryEditor;
@@ -57,11 +56,6 @@ public class OCamlToolWindowSettingsForm
 	public OCamlToolWindowSettingsForm(@NotNull final Project project)
 	{
 		myProject = project;
-
-		final List<Sdk> allSdks = SdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
-		allSdks.add(0, null);
-		mySdkComboBox.setModel(new CollectionComboBoxModel(allSdks, null));
-		mySdkComboBox.setRenderer(new SdkListCellRenderer("<Project Default>"));
 
 		myConfigureButton.addActionListener(new ActionListener()
 		{
@@ -139,5 +133,12 @@ public class OCamlToolWindowSettingsForm
 				return;
 			}
 		}
+	}
+
+	private void createUIComponents()
+	{
+		ProjectSdksModel model = new ProjectSdksModel();
+		model.reset();
+		mySdkComboBox = new SdkComboBox(model, Conditions.equalTo(OCamlSdkType.getInstance()), true);
 	}
 }

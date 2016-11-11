@@ -29,30 +29,28 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.icons.AllIcons;
+import com.intellij.application.options.ModuleListCellRenderer;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTable;
-import com.intellij.openapi.projectRoots.impl.SdkListCellRenderer;
+import com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectSdksModel;
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
 import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.Conditions;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.CollectionComboBoxModel;
-import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.RawCommandLineEditor;
-import com.intellij.ui.SimpleTextAttributes;
+import consulo.roots.ui.configuration.SdkComboBox;
 import manuylov.maxim.ocaml.entity.OCamlModule;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
@@ -83,7 +81,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 	@NotNull
 	private JComboBox myModuleComboBox;
 	@NotNull
-	private JComboBox mySpecifiedSdkComboBox;
+	private consulo.roots.ui.configuration.SdkComboBox mySpecifiedSdkComboBox;
 	private JButton myConfigureSdkButton;
 
 	@NotNull
@@ -125,24 +123,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		});
 		validModules.add(0, null);
 		myModuleComboBox.setModel(new CollectionComboBoxModel(validModules, null));
-		myModuleComboBox.setRenderer(new ColoredListCellRenderer()
-		{
-			@Override
-			protected void customizeCellRenderer(@NotNull final JList list, @Nullable final Object value, final int index, final boolean selected,
-					final boolean hasFocus)
-			{
-				if(value == null)
-				{
-					append("[none]", SimpleTextAttributes.REGULAR_ATTRIBUTES);
-				}
-				else
-				{
-					final Module module = (Module) value;
-					setIcon(AllIcons.Nodes.Module);
-					append(module.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
-				}
-			}
-		});
+		myModuleComboBox.setRenderer(new ModuleListCellRenderer());
 		myModuleComboBox.addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(@NotNull final ItemEvent e)
@@ -152,10 +133,6 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 			}
 		});
 
-		final List<Sdk> allSdks = SdkTable.getInstance().getSdksOfType(OCamlSdkType.getInstance());
-		allSdks.add(0, null);
-		mySpecifiedSdkComboBox.setModel(new CollectionComboBoxModel(allSdks, null));
-		mySpecifiedSdkComboBox.setRenderer(new SdkListCellRenderer("<None>"));
 		mySpecifiedSdkComboBox.addItemListener(new ItemListener()
 		{
 			public void itemStateChanged(@NotNull final ItemEvent e)
@@ -323,5 +300,12 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 	public void setWorkingDirectory(@NotNull final String dirPath)
 	{
 		myWorkingDirectoryEditor.setText(FileUtil.toSystemDependentName(dirPath));
+	}
+
+	private void createUIComponents()
+	{
+		ProjectSdksModel model = new ProjectSdksModel();
+		model.reset();
+		mySpecifiedSdkComboBox = new SdkComboBox(model, Conditions.equalTo(OCamlSdkType.getInstance()), true);
 	}
 }
