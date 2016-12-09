@@ -33,7 +33,7 @@ import consulo.psi.tree.ASTLeafFactory;
 public class OCamlASTNodeUtil
 {
 	@NotNull
-	public static ASTNode createLeaf(@NotNull final IElementType elementType, @NotNull LanguageVersion<?> languageVersion, @NotNull final String token)
+	public static ASTNode createLeaf(@NotNull final IElementType elementType, @NotNull LanguageVersion languageVersion, @NotNull final String token)
 	{
 		final LeafElement createdNode = ASTLeafFactory.EP.getValue(elementType).createLeaf(elementType, languageVersion, token);
 		CodeEditUtil.setNodeGenerated(createdNode, true);
@@ -41,7 +41,7 @@ public class OCamlASTNodeUtil
 		return createdNode;
 	}
 
-	public static void replaceLeafText(@NotNull final ASTNode leaf, @NotNull LanguageVersion<?> languageVersion, @NotNull final String text)
+	public static void replaceLeafText(@NotNull final ASTNode leaf, @NotNull LanguageVersion languageVersion, @NotNull final String text)
 	{
 		leaf.getTreeParent().replaceChild(leaf, createLeaf(leaf.getElementType(), languageVersion, text));
 	}
