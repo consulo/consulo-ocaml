@@ -34,7 +34,7 @@ abstract class BaseOCamlToolWindowView extends JPanel implements Disposable
 	@NotNull
 	private final ContentManager myContentManager;
 	@NotNull
-	private final Project myProject;
+	protected final Project myProject;
 
 	protected BaseOCamlToolWindowView(@NotNull final Project project, @NotNull final ContentManager contentManager)
 	{

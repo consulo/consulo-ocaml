@@ -22,11 +22,8 @@
 	<version>SNAPSHOT</version>
 	<vendor email="maxim.manuylov@gmail.com">Maxim Manuylov</vendor>
 	<category>Custom Languages</category>
-	<project-components>
-		<component>
-			<implementation-class>manuylov.maxim.ocaml.settings.OCamlSettings</implementation-class>
-		</component>
 
+	<project-components>
 		<component>
 			<implementation-class>manuylov.maxim.ocaml.toolWindow.OCamlToolWindowComponent</implementation-class>
 		</component>
@@ -34,6 +31,7 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="manuylov.maxim.ocaml.fileType.OCamlFileTypeFactory"/>
+		<projectService serviceImplementation="manuylov.maxim.ocaml.settings.OCamlSettings" />
 
 		<moduleExtensionProvider key="ocaml"
 								 allowMixin="true"

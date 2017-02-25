@@ -59,7 +59,7 @@ public class OCamlToolWindowOpenCloseAction extends AnAction
 	{
 		if(myOpenConsole)
 		{
-			final Sdk topLevelSdk = OCamlSettings.getInstance().getTopLevelSdk();
+			final Sdk topLevelSdk = OCamlSettings.getInstance(e.getProject()).getTopLevelSdk();
 			if(topLevelSdk == null)
 			{
 				Messages.showErrorDialog("Please select OCaml SDK to run top level interactive console (project default SDK is not a valid OCaml SDK).",
@@ -68,7 +68,7 @@ public class OCamlToolWindowOpenCloseAction extends AnAction
 				{
 					public void run()
 					{
-						Sdk choosenSdk = OCamlSettings.getInstance().getTopLevelSdk();
+						Sdk choosenSdk = OCamlSettings.getInstance(e.getProject()).getTopLevelSdk();
 
 						if(choosenSdk != null)
 						{

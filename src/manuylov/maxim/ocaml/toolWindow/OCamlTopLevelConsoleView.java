@@ -94,7 +94,7 @@ class OCamlTopLevelConsoleView extends BaseOCamlToolWindowView
 		final String sdkHomePath = topLevelSdk.getHomePath();
 		final String consoleExePath = OCamlSdkType.getTopLevelExecutable(sdkHomePath).getAbsolutePath();
 		final GeneralCommandLine cmd = new GeneralCommandLine();
-		final OCamlSettings settings = OCamlSettings.getInstance();
+		final OCamlSettings settings = OCamlSettings.getInstance(myProject);
 		final String workingDir = settings.getTopLevelCmdWorkingDir().trim();
 		cmd.setWorkDirectory(workingDir.isEmpty() ? sdkHomePath : workingDir);
 		cmd.setExePath(consoleExePath);

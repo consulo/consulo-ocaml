@@ -24,9 +24,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StorageScheme;
+import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTable;
@@ -38,12 +39,7 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  * @author Maxim.Manuylov
  *         Date: 04.04.2010
  */
-@State(
-		name = "OCamlSettings",
-		storages = {
-				@Storage(id = "default", file = "$PROJECT_FILE$"),
-				@Storage(id = "dir", file = "$PROJECT_CONFIG_DIR$/ocaml_settings.xml", scheme = StorageScheme.DIRECTORY_BASED)
-		})
+@State(name = "OCamlSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/ocaml.xml"))
 public class OCamlSettings implements ProjectComponent, PersistentStateComponent<OCamlState>
 {
 	@NotNull
@@ -56,18 +52,14 @@ public class OCamlSettings implements ProjectComponent, PersistentStateComponent
 	private String myTopLevelCmdWorkingDir = "";
 
 	@NotNull
-	private static OCamlSettings ourInstance;
-
-	@NotNull
-	public static OCamlSettings getInstance()
+	public static OCamlSettings getInstance(@NotNull Project project)
 	{
-		return ourInstance;
+		return ServiceManager.getService(project, OCamlSettings.class);
 	}
 
 	public OCamlSettings(@NotNull final Project project)
 	{
 		myProject = project;
-		ourInstance = this;
 	}
 
 	@NotNull

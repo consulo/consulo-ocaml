@@ -54,10 +54,11 @@ public class OCamlToolWindowSettingsAction extends AnAction
 
 	public void showSettingsDialog()
 	{
+		final OCamlSettings settings = OCamlSettings.getInstance(myProject);
 		final OCamlToolWindowSettingsForm settingsForm = new OCamlToolWindowSettingsForm(myProject);
-		settingsForm.setSelectedSdk(OCamlSettings.getInstance().getTopLevelSdk());
-		settingsForm.setCmdParams(OCamlSettings.getInstance().getTopLevelCmdOptions());
-		settingsForm.setWorkingDirectory(OCamlSettings.getInstance().getTopLevelCmdWorkingDir());
+		settingsForm.setSelectedSdk(settings.getTopLevelSdk());
+		settingsForm.setCmdParams(settings.getTopLevelCmdOptions());
+		settingsForm.setWorkingDirectory(settings.getTopLevelCmdWorkingDir());
 
 		final DialogBuilder dialogBuilder = new DialogBuilder(myProject);
 		dialogBuilder.setCenterPanel(settingsForm.getRootPanel());
@@ -69,9 +70,9 @@ public class OCamlToolWindowSettingsAction extends AnAction
 		{
 			public void run()
 			{
-				OCamlSettings.getInstance().setTopLevelSdk(settingsForm.getSelectedSdk());
-				OCamlSettings.getInstance().setTopLevelCmdOptions(settingsForm.getCmdParams());
-				OCamlSettings.getInstance().setTopLevelCmdWorkingDir(settingsForm.getWorkingDirectory());
+				settings.setTopLevelSdk(settingsForm.getSelectedSdk());
+				settings.setTopLevelCmdOptions(settingsForm.getCmdParams());
+				settings.setTopLevelCmdWorkingDir(settingsForm.getWorkingDirectory());
 				dialogBuilder.getWindow().setVisible(false);
 				if(myAction != null)
 				{
