@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.compiler.CompileContext;
-import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.compiler.FileProcessingCompiler;
 import com.intellij.openapi.compiler.ValidityState;
 import com.intellij.openapi.module.Module;
@@ -76,12 +75,6 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		final OCamlRunConfiguration runConfiguration = ocamlContext.getRunConfiguration();
 		assert runConfiguration != null;
 		return runConfiguration;
-	}
-
-	@Override
-	public void init(@NotNull CompilerManager compilerManager)
-	{
-
 	}
 
 	@Nullable
