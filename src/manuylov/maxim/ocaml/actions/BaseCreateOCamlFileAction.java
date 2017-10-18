@@ -89,7 +89,7 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 	@Override
 	protected boolean isAvailable(@NotNull final DataContext dataContext)
 	{
-		final Project project = PlatformDataKeys.PROJECT.getData(dataContext);
+		final Project project = dataContext.getData(PlatformDataKeys.PROJECT);
 		if(project == null)
 		{
 			return false;
@@ -100,7 +100,7 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 			return false;
 		}
 
-		final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
+		final IdeView view = dataContext.getData(LangDataKeys.IDE_VIEW);
 		if(view == null || view.getDirectories().length == 0)
 		{
 			return false;

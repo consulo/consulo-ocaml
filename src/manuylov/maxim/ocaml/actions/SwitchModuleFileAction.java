@@ -24,7 +24,6 @@ import java.io.IOException;
 import com.intellij.ide.IdeView;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
@@ -49,21 +48,19 @@ public class SwitchModuleFileAction extends AnAction
 {
 	public void actionPerformed(final AnActionEvent e)
 	{
-		final DataContext dataContext = e.getDataContext();
-
-		final Project project = PlatformDataKeys.PROJECT.getData(dataContext);
+		final Project project = e.getProject();
 		if(project == null)
 		{
 			return;
 		}
 
-		final IdeView view = LangDataKeys.IDE_VIEW.getData(dataContext);
+		final IdeView view = e.getData(LangDataKeys.IDE_VIEW);
 		if(view == null)
 		{
 			return;
 		}
 
-		final VirtualFile file = PlatformDataKeys.VIRTUAL_FILE.getData(dataContext);
+		final VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
 		if(file == null)
 		{
 			return;

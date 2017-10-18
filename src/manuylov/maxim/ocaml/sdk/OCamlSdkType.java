@@ -175,7 +175,7 @@ public class OCamlSdkType extends SdkType
 	{
 		final SdkModificator[] sdkModificatorHolder = new SdkModificator[]{null};
 		final ProgressManager progressManager = ProgressManager.getInstance();
-		final Project project = PlatformDataKeys.PROJECT.getData(DataManager.getInstance().getDataContext());
+		final Project project = DataManager.getInstance().getDataContext().getData(PlatformDataKeys.PROJECT);
 		final Task.Modal setupTask = new Task.Modal(project, "Setting up library files", false)
 		{
 			@Override
