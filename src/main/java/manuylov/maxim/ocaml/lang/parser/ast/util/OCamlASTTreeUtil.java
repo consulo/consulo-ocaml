@@ -18,10 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
-import com.sun.istack.internal.NotNull;
 
 /**
  * @author Maxim.Manuylov
