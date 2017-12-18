@@ -18,113 +18,133 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.COLON;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.EXCEPTION_KEYWORD;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.INCLUDE_KEYWORD;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.LCFC_IDENTIFIER;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.OF_KEYWORD;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.SEMICOLON_SEMICOLON;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.UCFC_IDENTIFIER;
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.VAL_KEYWORD;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
+
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
-import manuylov.maxim.ocaml.fileType.mli.MLIFileTypeLanguage;
+import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.TreeStringBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.Test;
-
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.03.2009
  */
-@Test
-public class SpecificationParsingTest extends BaseStatementParsingTest {
-    public void testDoubleSemicolon() throws Exception {
-        myTree.addNode(3, VALUE_SPECIFICATION);
-        myTree.addNode(4, VAL_KEYWORD);
-        myTree.addNode(4, VALUE_NAME_PATTERN);
-        myTree.addNode(5, LCFC_IDENTIFIER, "a");
-        myTree.addNode(4, COLON);
-        myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
-        myTree.addNode(5, LCFC_IDENTIFIER, "int");
-        myTree.addNode(3, VALUE_SPECIFICATION);
-        myTree.addNode(4, VAL_KEYWORD);
-        myTree.addNode(4, VALUE_NAME_PATTERN);
-        myTree.addNode(5, LCFC_IDENTIFIER, "b");
-        myTree.addNode(4, COLON);
-        myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
-        myTree.addNode(5, LCFC_IDENTIFIER, "int");
-        myTree.addNode(3, SEMICOLON_SEMICOLON);
-        myTree.addNode(3, VALUE_SPECIFICATION);
-        myTree.addNode(4, VAL_KEYWORD);
-        myTree.addNode(4, VALUE_NAME_PATTERN);
-        myTree.addNode(5, LCFC_IDENTIFIER, "c");
-        myTree.addNode(4, COLON);
-        myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
-        myTree.addNode(5, LCFC_IDENTIFIER, "int");
+public class SpecificationParsingTest extends BaseStatementParsingTest
+{
+	@Test
+	public void testDoubleSemicolon() throws Exception
+	{
+		myTree.addNode(3, VALUE_SPECIFICATION);
+		myTree.addNode(4, VAL_KEYWORD);
+		myTree.addNode(4, VALUE_NAME_PATTERN);
+		myTree.addNode(5, LCFC_IDENTIFIER, "a");
+		myTree.addNode(4, COLON);
+		myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
+		myTree.addNode(5, LCFC_IDENTIFIER, "int");
+		myTree.addNode(3, VALUE_SPECIFICATION);
+		myTree.addNode(4, VAL_KEYWORD);
+		myTree.addNode(4, VALUE_NAME_PATTERN);
+		myTree.addNode(5, LCFC_IDENTIFIER, "b");
+		myTree.addNode(4, COLON);
+		myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
+		myTree.addNode(5, LCFC_IDENTIFIER, "int");
+		myTree.addNode(3, SEMICOLON_SEMICOLON);
+		myTree.addNode(3, VALUE_SPECIFICATION);
+		myTree.addNode(4, VAL_KEYWORD);
+		myTree.addNode(4, VALUE_NAME_PATTERN);
+		myTree.addNode(5, LCFC_IDENTIFIER, "c");
+		myTree.addNode(4, COLON);
+		myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
+		myTree.addNode(5, LCFC_IDENTIFIER, "int");
 
-        doTest("val a : int val b : int;; val c : int", myTree.getStringRepresentation());
-    }
+		doTest("val a : int val b : int;; val c : int", myTree.getStringRepresentation());
+	}
 
-    public void testValueSpecification() throws Exception {
-        myTree.addNode(3, VALUE_SPECIFICATION);
-        myTree.addNode(4, VAL_KEYWORD);
-        myTree.addNode(4, VALUE_NAME_PATTERN);
-        myTree.addNode(5, LCFC_IDENTIFIER, "a");
-        myTree.addNode(4, COLON);
-        myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
-        myTree.addNode(5, LCFC_IDENTIFIER, "int");
+	@Test
+	public void testValueSpecification() throws Exception
+	{
+		myTree.addNode(3, VALUE_SPECIFICATION);
+		myTree.addNode(4, VAL_KEYWORD);
+		myTree.addNode(4, VALUE_NAME_PATTERN);
+		myTree.addNode(5, LCFC_IDENTIFIER, "a");
+		myTree.addNode(4, COLON);
+		myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
+		myTree.addNode(5, LCFC_IDENTIFIER, "int");
 
-        doTest("val a : int", myTree.getStringRepresentation());
-    }
+		doTest("val a : int", myTree.getStringRepresentation());
+	}
 
-    public void testExceptionSpecification() throws Exception {
-        myTree.addNode(3, EXCEPTION_SPECIFICATION);
-        myTree.addNode(4, EXCEPTION_KEYWORD);
-        myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error");
+	@Test
+	public void testExceptionSpecification() throws Exception
+	{
+		myTree.addNode(3, EXCEPTION_SPECIFICATION);
+		myTree.addNode(4, EXCEPTION_KEYWORD);
+		myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error");
 
-        doTest("exception Error", myTree.getStringRepresentation());
+		doTest("exception Error", myTree.getStringRepresentation());
 
-        recreateTree();
+		recreateTree();
 
-        myTree.addNode(3, EXCEPTION_SPECIFICATION);
-        myTree.addNode(4, EXCEPTION_KEYWORD);
-        myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error");
-        myTree.addNode(4, OF_KEYWORD);
-        myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
-        myTree.addNode(5, LCFC_IDENTIFIER, "int");
+		myTree.addNode(3, EXCEPTION_SPECIFICATION);
+		myTree.addNode(4, EXCEPTION_KEYWORD);
+		myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error");
+		myTree.addNode(4, OF_KEYWORD);
+		myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
+		myTree.addNode(5, LCFC_IDENTIFIER, "int");
 
-        doTest("exception Error of int", myTree.getStringRepresentation());
-    }
+		doTest("exception Error of int", myTree.getStringRepresentation());
+	}
 
-    public void testIncludeSpecification() throws Exception {
-        myTree.addNode(3, INCLUDE_DIRECTIVE_SPECIFICATION);
-        myTree.addNode(4, INCLUDE_KEYWORD);
-        myTree.addNode(4, MODULE_TYPE_NAME);
-        myTree.addNode(5, UCFC_IDENTIFIER, "ModuleType");
+	@Test
+	public void testIncludeSpecification() throws Exception
+	{
+		myTree.addNode(3, INCLUDE_DIRECTIVE_SPECIFICATION);
+		myTree.addNode(4, INCLUDE_KEYWORD);
+		myTree.addNode(4, MODULE_TYPE_NAME);
+		myTree.addNode(5, UCFC_IDENTIFIER, "ModuleType");
 
-        doTest("include ModuleType", myTree.getStringRepresentation());
-    }
+		doTest("include ModuleType", myTree.getStringRepresentation());
+	}
 
-    public void testEmptyFile() throws Exception {
-        myTree = new TreeStringBuilder(false);
-        myTree.addNode(0, MLI_FILE);
-        myTree.addNode(1, FILE_MODULE_SPECIFICATION_BINDING);
-        myTree.addNode(2, FILE_MODULE_TYPE, "");
+	@Test
+	public void testEmptyFile() throws Exception
+	{
+		myTree = new TreeStringBuilder(false);
+		myTree.addNode(0, MLI_FILE);
+		myTree.addNode(1, FILE_MODULE_SPECIFICATION_BINDING);
+		myTree.addNode(2, FILE_MODULE_TYPE, "");
 
-        doTest("", myTree.getStringRepresentation());
-    }
+		doTest("", myTree.getStringRepresentation());
+	}
 
-    @NotNull
-    protected ParserDefinition getParserDefinition() {
-        return MLIFileTypeLanguage.INSTANCE.getParserDefinition();
-    }
+	@NotNull
+	protected ParserDefinition getParserDefinition()
+	{
+		return new MLIParserDefinition();
+	}
 
-    @NotNull
-    protected IElementType getModuleExpressionNodeType() {
-        return OCamlElementTypes.FILE_MODULE_TYPE;
-    }
+	@NotNull
+	protected IElementType getModuleExpressionNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_TYPE;
+	}
 
-    @NotNull
-    protected IElementType getModuleBindingNodeType() {
-        return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;
-    }
+	@NotNull
+	protected IElementType getModuleBindingNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;
+	}
 }

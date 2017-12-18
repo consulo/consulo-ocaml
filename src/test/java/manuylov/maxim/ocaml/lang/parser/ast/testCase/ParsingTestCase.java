@@ -18,6 +18,13 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.testCase;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.junit.Before;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
@@ -28,21 +35,15 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementFactory;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.util.ParserTestUtil;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.List;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.02.2009
  */
-@Test
 public abstract class ParsingTestCase extends BaseOCamlTestCase {
     protected TreeStringBuilder myTree;
 
-    @BeforeMethod
+    @Before
     public void setUp() {
         super.setUp();
         recreateTree();
@@ -74,7 +75,7 @@ public abstract class ParsingTestCase extends BaseOCamlTestCase {
     private void checkAllNodesEndCorrectly(@NotNull final OCamlElement root) {
         final ASTNode node = root.getNode();
         assert node != null : root.toString();
-        assertEquals(root.endsCorrectly(), node.getElementType() != OCamlElementTypes.UNCLOSED_COMMENT, "type: " + node.getElementType());
+        assertEquals("type: " + node.getElementType(), root.endsCorrectly(), node.getElementType() != OCamlElementTypes.UNCLOSED_COMMENT);
         final List<OCamlElement> children = OCamlPsiUtil.getChildren(root);
         for (final OCamlElement child : children) {
             checkAllNodesEndCorrectly(child);

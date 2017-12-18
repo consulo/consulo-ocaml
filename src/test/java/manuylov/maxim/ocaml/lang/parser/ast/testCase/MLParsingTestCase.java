@@ -18,11 +18,12 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.testCase;
 
+import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class MLParsingTestCase extends ParsingTestCase {
     @NotNull
     protected ParserDefinition getParserDefinition() {
-        return MLFileTypeLanguage.INSTANCE.getParserDefinition();
+        return LanguageParserDefinitions.INSTANCE.findSingle(MLFileTypeLanguage.INSTANCE);
     }
 
     @NotNull

@@ -18,35 +18,38 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import com.intellij.lang.ASTFactory;
-import com.intellij.lang.LanguageASTFactory;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Assert;
+import org.junit.Before;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.openapi.application.ex.ApplicationManagerEx;
+import com.intellij.openapi.application.impl.ApplicationImpl;
+import com.intellij.openapi.util.Ref;
 import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
+import manuylov.maxim.ocaml.fileType.ml.parser.MLParserDefinition;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileTypeLanguage;
-import org.jetbrains.annotations.NotNull;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 17.05.2010
  */
-@Test
-public class BaseOCamlTestCase extends Assert {
-    @BeforeMethod
-    public void setUp() {
-        if (ApplicationManagerEx.getApplication() == null) {
-            ApplicationManagerEx.createApplication(true, false, false, false, "Test Application");
-            register(MLFileTypeLanguage.INSTANCE);
-            register(MLIFileTypeLanguage.INSTANCE);
-        }
-    }
+public class BaseOCamlTestCase extends Assert
+{
+	@Before
+	public void setUp()
+	{
+		if(ApplicationManagerEx.getApplication() == null)
+		{
+			new ApplicationImpl(true, Ref.create());
+			register(MLFileTypeLanguage.INSTANCE);
+			register(MLIFileTypeLanguage.INSTANCE);
+		}
+	}
 
-    private void register(@NotNull final OCamlFileTypeLanguage language) {
-        LanguageParserDefinitions.INSTANCE.addExplicitExtension(language, language.getParserDefinition());
-        LanguageASTFactory.INSTANCE.addExplicitExtension(language, ASTFactory.DEFAULT);
-    }
+	private void register(@NotNull final OCamlFileTypeLanguage language)
+	{
+		LanguageParserDefinitions.INSTANCE.addExplicitExtension(language, new MLParserDefinition());
+		//LanguageASTFactory.INSTANCE.addExplicitExtension(language, ASTFactory.DEFAULT);
+	}
 }

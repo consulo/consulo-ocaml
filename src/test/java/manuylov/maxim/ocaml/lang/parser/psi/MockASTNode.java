@@ -18,142 +18,191 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public class MockASTNode implements ASTNode {
-    private final IElementType myElementType;
+public class MockASTNode implements ASTNode
+{
+	private final IElementType myElementType;
 
-    public MockASTNode(@NotNull final IElementType elementType) {
-        myElementType = elementType;
-    }
+	public MockASTNode(@NotNull final IElementType elementType)
+	{
+		myElementType = elementType;
+	}
 
-    @NotNull
-    public IElementType getElementType() {
-        return myElementType;
-    }
+	@NotNull
+	public IElementType getElementType()
+	{
+		return myElementType;
+	}
 
-    public String getText() {
-        return null;
-    }
+	public String getText()
+	{
+		return null;
+	}
 
-    public CharSequence getChars() {
-        return null;
-    }
+	public CharSequence getChars()
+	{
+		return null;
+	}
 
-    public boolean textContains(final char c) {
-        return false;
-    }
+	public boolean textContains(final char c)
+	{
+		return false;
+	}
 
-    public int getStartOffset() {
-        return 0;
-    }
+	public int getStartOffset()
+	{
+		return 0;
+	}
 
-    public int getTextLength() {
-        return 0;
-    }
+	public int getTextLength()
+	{
+		return 0;
+	}
 
-    public TextRange getTextRange() {
-        return null;
-    }
+	public TextRange getTextRange()
+	{
+		return null;
+	}
 
-    public ASTNode getTreeParent() {
-        return null;
-    }
+	public ASTNode getTreeParent()
+	{
+		return null;
+	}
 
-    public ASTNode getFirstChildNode() {
-        return null;
-    }
+	public ASTNode getFirstChildNode()
+	{
+		return null;
+	}
 
-    public ASTNode getLastChildNode() {
-        return null;
-    }
+	public ASTNode getLastChildNode()
+	{
+		return null;
+	}
 
-    public ASTNode getTreeNext() {
-        return null;
-    }
+	public ASTNode getTreeNext()
+	{
+		return null;
+	}
 
-    public ASTNode getTreePrev() {
-        return null;
-    }
+	public ASTNode getTreePrev()
+	{
+		return null;
+	}
 
-    public ASTNode[] getChildren(@Nullable final TokenSet filter) {
-        return new ASTNode[0];
-    }
+	public ASTNode[] getChildren(@Nullable final TokenSet filter)
+	{
+		return new ASTNode[0];
+	}
 
-    public void addChild(@NotNull final ASTNode child) {
-    }
+	public void addChild(@NotNull final ASTNode child)
+	{
+	}
 
-    public void addChild(@NotNull final ASTNode child, final ASTNode anchorBefore) {
-    }
+	public void addChild(@NotNull final ASTNode child, final ASTNode anchorBefore)
+	{
+	}
 
-    public void addLeaf(@NotNull final IElementType leafType, final CharSequence leafText, final ASTNode anchorBefore) {
-    }
+	public void addLeaf(@NotNull final IElementType leafType, final CharSequence leafText, final ASTNode anchorBefore)
+	{
+	}
 
-    public void removeChild(@NotNull final ASTNode child) {
-    }
+	public void removeChild(@NotNull final ASTNode child)
+	{
+	}
 
-    public void removeRange(@NotNull final ASTNode firstNodeToRemove, final ASTNode firstNodeToKeep) {
-    }
+	public void removeRange(@NotNull final ASTNode firstNodeToRemove, final ASTNode firstNodeToKeep)
+	{
+	}
 
-    public void replaceChild(@NotNull final ASTNode oldChild, @NotNull final ASTNode newChild) {
-    }
+	public void replaceChild(@NotNull final ASTNode oldChild, @NotNull final ASTNode newChild)
+	{
+	}
 
-    public void replaceAllChildrenToChildrenOf(final ASTNode anotherParent) {
-    }
+	public void replaceAllChildrenToChildrenOf(final ASTNode anotherParent)
+	{
+	}
 
-    public void addChildren(final ASTNode firstChild, final ASTNode firstChildToNotAdd, final ASTNode anchorBefore) {
-    }
+	public void addChildren(final ASTNode firstChild, final ASTNode firstChildToNotAdd, final ASTNode anchorBefore)
+	{
+	}
 
-    public Object clone() {
-        return null;
-    }
+	public Object clone()
+	{
+		return null;
+	}
 
-    public ASTNode copyElement() {
-        return null;
-    }
+	public ASTNode copyElement()
+	{
+		return null;
+	}
 
-    public ASTNode findLeafElementAt(final int offset) {
-        return null;
-    }
+	public ASTNode findLeafElementAt(final int offset)
+	{
+		return null;
+	}
 
-    public <T> T getCopyableUserData(final Key<T> key) {
-        return null;
-    }
+	public <T> T getCopyableUserData(final Key<T> key)
+	{
+		return null;
+	}
 
-    public <T> void putCopyableUserData(final Key<T> key, final T value) {
-    }
+	public <T> void putCopyableUserData(final Key<T> key, final T value)
+	{
+	}
 
-    public ASTNode findChildByType(final IElementType type) {
-        return null;
-    }
+	public ASTNode findChildByType(final IElementType type)
+	{
+		return null;
+	}
 
-    public ASTNode findChildByType(@NotNull final TokenSet typesSet) {
-        return null;
-    }
+	@Nullable
+	@Override
+	public ASTNode findChildByType(IElementType iElementType, @Nullable ASTNode astNode)
+	{
+		return null;
+	}
 
-    public ASTNode findChildByType(@NotNull final TokenSet typesSet, @Nullable final ASTNode anchor) {
-        return null;
-    }
+	public ASTNode findChildByType(@NotNull final TokenSet typesSet)
+	{
+		return null;
+	}
 
-    public PsiElement getPsi() {
-        return null;
-    }
+	public ASTNode findChildByType(@NotNull final TokenSet typesSet, @Nullable final ASTNode anchor)
+	{
+		return null;
+	}
 
-    public <T> T getUserData(final Key<T> key) {
-        return null;
-    }
+	public PsiElement getPsi()
+	{
+		return null;
+	}
 
-    public <T> void putUserData(final Key<T> key, final T value) {
-    }
+	@Nullable
+	@Override
+	public <T extends PsiElement> T getPsi(Class<T> aClass)
+	{
+		return null;
+	}
+
+
+	public <T> T getUserData(final Key<T> key)
+	{
+		return null;
+	}
+
+	public <T> void putUserData(final Key<T> key, final T value)
+	{
+	}
 }

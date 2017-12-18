@@ -18,11 +18,13 @@
 
 package manuylov.maxim.ocaml.lang.parser.util;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.command.impl.DummyProject;
+import consulo.lang.util.LanguageVersionUtil;
+import manuylov.maxim.ocaml.lang.OCamlLanguage;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Maxim.Manuylov
@@ -31,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 public class ParserTestUtil {
     @NotNull
     public static ASTNode buildTree(@NotNull final String text, @NotNull final ParserDefinition parserDefinition) throws Exception {
-        final ASTNode root = OCamlPsiUtil.parse(text, parserDefinition, DummyProject.getInstance(), true).getNode();
+        final ASTNode root = OCamlPsiUtil.parse(text, parserDefinition, DummyProject.getInstance(), true, LanguageVersionUtil.findDefaultVersion(OCamlLanguage.INSTANCE)).getNode();
         assert root != null;
         return root;
     }

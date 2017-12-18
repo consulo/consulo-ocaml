@@ -18,101 +18,40 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.junit.Test;
 import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-@Test
-public class ModuleTypeNameResolvingTest extends ResolvingTestCase {
-    public void testModuleTypeResolving() throws Exception {
-        doTest(1, "" +
-            "module type {{M = M1}};;" +
-            "module type M2 = }{M;;");
+public class ModuleTypeNameResolvingTest extends ResolvingTestCase
+{
+	@Test
+	public void testModuleTypeResolving() throws Exception
+	{
+		doTest(1, "" + "module type {{M = M1}};;" + "module type M2 = }{M;;");
 
-        doTest(2, "module type M = }{M1;;");
+		doTest(2, "module type M = }{M1;;");
 
-        doTest(3, "" +
-            "module M = " +
-            "struct " +
-            "  module type {{M1 = sig end}};; " +
-            "end;; " +
-            "module type M2 = M.}{M1;;");
+		doTest(3, "" + "module M = " + "struct " + "  module type {{M1 = sig end}};; " + "end;; " + "module type M2 = M.}{M1;;");
 
-        doTest(4, "" +
-            "module M = " +
-            "struct " +
-            "  module M1 = " +
-            "  struct " +
-            "    module type {{M3 = sig end}};;" +
-            "  end;; " +
-            "end;; " +
-            "module type M2 = M.M1.}{M3;;");
+		doTest(4, "" + "module M = " + "struct " + "  module M1 = " + "  struct " + "    module type {{M3 = sig end}};;" + "  end;; " + "end;; " + "module type M2 = M.M1.}{M3;;");
 
-        doTest(5, "" +
-            "module type Main = " +
-            "sig " +
-            "  module type M = " +
-            "  sig " +
-            "    module type M1 = sig end;; " +
-            "  end;; " +
-            "  module type M2 = }{M1;; " +
-            "end;;");
+		doTest(5, "" + "module type Main = " + "sig " + "  module type M = " + "  sig " + "    module type M1 = sig end;; " + "  end;; " + "  module type M2 = }{M1;; " + "end;;");
 
-        doTest(6, "" +
-            "module type Main = " +
-            "sig " +
-            "  module type M = " +
-            "  sig " +
-            "    module type M1 = sig end;; " +
-            "  end;; " +
-            "  open M;; " +
-            "  module type M2 = }{M1;; " +
-            "end;;");
+		doTest(6, "" + "module type Main = " + "sig " + "  module type M = " + "  sig " + "    module type M1 = sig end;; " + "  end;; " + "  open M;; " + "  module type M2 = }{M1;; " + "end;;");
 
-        doTest(7, "" +
-            "module type Main = " +
-            "sig " +
-            "  module type M = " +
-            "  sig " +
-            "    module type M1 = sig end;; " +
-            "  end;; " +
-            "  open }{M;; " +
-            "  module type M2 = M1;; " +
-            "end;;");
+		doTest(7, "" + "module type Main = " + "sig " + "  module type M = " + "  sig " + "    module type M1 = sig end;; " + "  end;; " + "  open }{M;; " + "  module type M2 = M1;; " + "end;;");
 
-        doTest(8, "" +
-            "module type Main = " +
-            "sig " +
-            "  module type M = " +
-            "  sig " +
-            "    module type {{M1 = sig end}};; " +
-            "  end;; " +
-            "  include M;; " +
-            "  module type M2 = }{M1;; " +
-            "end;;");
+		doTest(8, "" + "module type Main = " + "sig " + "  module type M = " + "  sig " + "    module type {{M1 = sig end}};; " + "  end;; " + "  include M;; " + "  module type M2 = }{M1;; " + "end;" +
+				";");
 
-        doTest(9, "" +
-            "module type Main = " +
-            "sig " +
-            "  module type {{M = " +
-            "  sig " +
-            "    module type M1 = sig end;; " +
-            "  end}};; " +
-            "  include }{M;; " +
-            "  module type M2 = M1;; " +
-            "end;;");
+		doTest(9, "" + "module type Main = " + "sig " + "  module type {{M = " + "  sig " + "    module type M1 = sig end;; " + "  end}};; " + "  include }{M;; " + "  module type M2 = M1;; " + "end;" +
+				";");
 
-        doTest(10, "" +
-            "module type M = " +
-            "sig " +
-            "  module type M1 = sig end;; " +
-            "end;; " +
-            "module M2 = }{M1;;");
+		doTest(10, "" + "module type M = " + "sig " + "  module type M1 = sig end;; " + "end;; " + "module M2 = }{M1;;");
 
-        doTest(11, "" +
-            "module type {{}{M = sig end}};;");
-    }
+		doTest(11, "" + "module type {{}{M = sig end}};;");
+	}
 }

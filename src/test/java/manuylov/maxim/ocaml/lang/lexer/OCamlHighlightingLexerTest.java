@@ -18,49 +18,62 @@
 
 package manuylov.maxim.ocaml.lang.lexer;
 
+import org.junit.Test;
 import com.intellij.lexer.Lexer;
 import manuylov.maxim.ocaml.lang.Keywords;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 23.02.2009
  */
-@Test
-public class OCamlHighlightingLexerTest extends BaseLexerTest {
-    public void testCharLiteral() {
-        doTest("'a", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.LCFC_IDENTIFIER, "a"));
-        doTest("'a'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "a"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\\\'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\\\"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\\"'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\\""), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\''", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\'"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\n'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\n"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\t'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\t"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\b'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\b"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\r'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\r"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\ '", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\ "), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\123'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\123"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-        doTest("'\\xBD'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\xBD"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-    }
+public class OCamlHighlightingLexerTest extends BaseLexerTest
+{
+	@Test
+	public void testCharLiteral()
+	{
+		doTest("'a", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.LCFC_IDENTIFIER, "a"));
+		doTest("'a'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "a"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\\\'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\\\"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\\"'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\\""), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\''", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\'"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\n'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\n"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\t'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\t"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\b'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\b"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\r'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\r"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\ '", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\ "), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\123'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\123"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+		doTest("'\\xBD'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\xBD"), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+	}
 
-    public void testStringLiteral() {
-        doTest("\"a", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "a"));
-        doTest("\"a\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "a"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE));
-        doTest("\"abcdefskdn3\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "abcdefskdn3"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE));
-        doTest("\"abc\\n\\t\\rdef\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "abc"), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\n\\t\\r"), token(OCamlTokenTypes.REGULAR_CHARS, "def"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE));
-        doTest("\"abc\\\n   \t \\rdef\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "abc"), token(OCamlTokenTypes.ESCAPE_SEQUENCES, "\\\n   \t \\r"), token(OCamlTokenTypes.REGULAR_CHARS, "def"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE));
-    }
+	@Test
+	public void testStringLiteral()
+	{
+		doTest("\"a", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "a"));
+		doTest("\"a\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "a"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords
+				.DOUBLE_QUOTE));
+		doTest("\"abcdefskdn3\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "abcdefskdn3"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE,
+				Keywords.DOUBLE_QUOTE));
+		doTest("\"abc\\n\\t\\rdef\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "abc"), token(OCamlTokenTypes.ESCAPE_SEQUENCES,
+				"\\n\\t\\r"), token(OCamlTokenTypes.REGULAR_CHARS, "def"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE));
+		doTest("\"abc\\\n   \t \\rdef\"", token(OCamlTokenTypes.OPENING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE), token(OCamlTokenTypes.REGULAR_CHARS, "abc"), token(OCamlTokenTypes.ESCAPE_SEQUENCES,
+				"\\\n   \t \\r"), token(OCamlTokenTypes.REGULAR_CHARS, "def"), token(OCamlTokenTypes.CLOSING_DOUBLE_QUOTE, Keywords.DOUBLE_QUOTE));
+	}
 
-    public void testQuote() {
-        doTest("'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE));
-    }
+	@Test
+	public void testQuote()
+	{
+		doTest("'", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE));
+	}
 
-    public void testEmptyChar() {
-        doTest("''", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
-    }
+	@Test
+	public void testEmptyChar()
+	{
+		doTest("''", token(OCamlTokenTypes.OPENING_QUOTE, Keywords.QUOTE), token(OCamlTokenTypes.CLOSING_QUOTE, Keywords.QUOTE));
+	}
 
-    protected Lexer createLexer() {
-        return new OCamlHighlightingLexer();
-    }
+	protected Lexer createLexer()
+	{
+		return new OCamlHighlightingLexer();
+	}
 }

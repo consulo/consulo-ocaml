@@ -18,48 +18,57 @@
 
 package manuylov.maxim.ocaml.lang.lexer.testCase;
 
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.tree.IElementType;
-import manuylov.maxim.ocaml.lang.BaseOCamlTestCase;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+import com.intellij.lexer.Lexer;
+import com.intellij.psi.tree.IElementType;
+import manuylov.maxim.ocaml.lang.BaseOCamlTestCase;
+
 /**
  * @author Maxim.Manuylov
  *         Date: 23.02.2009
  */
-@Test
-public abstract class LexerTestCase extends BaseOCamlTestCase {
-    protected void doTest(@NotNull final String text, @NotNull final String... expectedTokens) {
-        final List<String> expectedTokensStr = new ArrayList<String>(expectedTokens.length);
-        expectedTokensStr.addAll(Arrays.asList(expectedTokens));
-        doTest(text, expectedTokensStr);
-    }
+public abstract class LexerTestCase extends BaseOCamlTestCase
+{
+	protected void doTest(@NotNull final String text, @NotNull final String... expectedTokens)
+	{
+		final List<String> expectedTokensStr = new ArrayList<String>(expectedTokens.length);
+		expectedTokensStr.addAll(Arrays.asList(expectedTokens));
+		doTest(text, expectedTokensStr);
+	}
 
-    protected String token(@NotNull final IElementType tokenType, @NotNull final String tokenText) {
-        return tokenType.toString() + "('" + tokenText + "')";
-    }
+	protected String token(@NotNull final IElementType tokenType, @NotNull final String tokenText)
+	{
+		return tokenType.toString() + "('" + tokenText + "')";
+	}
 
-    private void doTest(@NotNull final String text, @NotNull final List<String> expectedTokens) {
-        final Lexer lexer = createLexer();
-        lexer.start(text);
-        final List<String> actualTokens = new ArrayList<String>();
-        while (true) {
-            final IElementType tokenType = lexer.getTokenType();
-            if (tokenType == null) break;
-            actualTokens.add(token(tokenType, getTokenText(lexer)));
-            lexer.advance();
-        }
-        assertEquals(actualTokens, expectedTokens);
-    }
+	private void doTest(@NotNull final String text, @NotNull final List<String> expectedTokens)
+	{
+		final Lexer lexer = createLexer();
+		lexer.start(text);
+		final List<String> actualTokens = new ArrayList<String>();
+		while(true)
+		{
+			final IElementType tokenType = lexer.getTokenType();
+			if(tokenType == null)
+			{
+				break;
+			}
+			actualTokens.add(token(tokenType, getTokenText(lexer)));
+			lexer.advance();
+		}
+		assertEquals(actualTokens, expectedTokens);
+	}
 
-    private String getTokenText(@NotNull final Lexer lexer) {
-        return lexer.getBufferSequence().subSequence(lexer.getTokenStart(), lexer.getTokenEnd()).toString();
-    }
+	private String getTokenText(@NotNull final Lexer lexer)
+	{
+		return lexer.getBufferSequence().subSequence(lexer.getTokenStart(), lexer.getTokenEnd()).toString();
+	}
 
-    protected abstract Lexer createLexer();
+	protected abstract Lexer createLexer();
 }

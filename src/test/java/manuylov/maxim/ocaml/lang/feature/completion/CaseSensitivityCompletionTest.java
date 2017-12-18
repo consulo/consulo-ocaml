@@ -18,71 +18,81 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
-import com.intellij.codeInsight.completion.*;
+import static org.junit.Assert.assertEquals;
+
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
+import com.intellij.codeInsight.completion.CompletionInitializationContext;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.completion.FileCopyPatcher;
+import com.intellij.codeInsight.completion.OffsetMap;
 import com.intellij.mock.MockDocument;
-import com.intellij.openapi.command.impl.DummyProject;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.impl.EditorImpl;
 import com.intellij.psi.PsiFile;
 import manuylov.maxim.ocaml.lang.feature.completion.testCase.CompletionTestCase;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.MockASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.OCamlUnknownElementImpl;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.Test;
-
-import static manuylov.maxim.ocaml.lang.Keywords.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-@Test
-public class CaseSensitivityCompletionTest extends CompletionTestCase {
-    public void testUpperCase() throws Exception {
-        setVariants("One", "Two");
+public class CaseSensitivityCompletionTest extends CompletionTestCase
+{
+	@Test
+	public void testUpperCase() throws Exception
+	{
+		setVariants("One", "Two");
 
-        doTest(1, "" +
-            "type t = One | Two;; " +
-            "let a = }{", true);
-        doTest(2, "" +
-            "let a = }{", false);
-    }
-    
-    public void testLowerCase() throws Exception {
-        new OCamlCompletionContributor().beforeCompletion(new CompletionInitializationContext(createDummyEditor(), createFakeFile(), CompletionType.BASIC) {
-            @Override
-            public void setFileCopyPatcher(@NotNull final FileCopyPatcher fileCopyPatcher) {
-                final MockDocument document = new MyMockDocument() {
-                    @Override
-                    public void replaceString(final int startOffset, final int endOffset, @NotNull final CharSequence s) {
-                        assertEquals(OCamlCompletionContributor.LOWER_CASE_DUMMY_IDENTIFIER, s);
-                    }
-                };
-                final OffsetMap offsetMap = new OffsetMap(document);
-                offsetMap.addOffset(CompletionInitializationContext.START_OFFSET, 0);
-                offsetMap.addOffset(CompletionInitializationContext.SELECTION_END_OFFSET, 0);
-                fileCopyPatcher.patchFileCopy(createFakeFile(), document, offsetMap);
-            }
-        });
-    }
+		doTest(1, "" + "type t = One | Two;; " + "let a = }{", true);
+		doTest(2, "" + "let a = }{", false);
+	}
 
-    private Editor createDummyEditor() {
-        return new MockEditor();
-    }
+	@Test
+	public void testLowerCase() throws Exception
+	{
+		Editor dummyEditor = createDummyEditor();
+		new OCamlCompletionContributor().beforeCompletion(new CompletionInitializationContext(dummyEditor, dummyEditor.getCaretModel().getCurrentCaret(), createFakeFile(), CompletionType.BASIC, 0)
+		{
+			public void setFileCopyPatcher(@NotNull final FileCopyPatcher fileCopyPatcher)
+			{
+				final MockDocument document = new MyMockDocument()
+				{
+					@Override
+					public void replaceString(final int startOffset, final int endOffset, @NotNull final CharSequence s)
+					{
+						assertEquals(OCamlCompletionContributor.LOWER_CASE_DUMMY_IDENTIFIER, s);
+					}
+				};
+				final OffsetMap offsetMap = new OffsetMap(document);
+				offsetMap.addOffset(CompletionInitializationContext.START_OFFSET, 0);
+				offsetMap.addOffset(CompletionInitializationContext.SELECTION_END_OFFSET, 0);
+				fileCopyPatcher.patchFileCopy(createFakeFile(), document, offsetMap);
+			}
+		});
+	}
 
-    private PsiFile createFakeFile() {
-        return createFakeFile(new OCamlUnknownElementImpl(new MockASTNode(OCamlElementTypes.ML_FILE)));
-    }
+	private Editor createDummyEditor()
+	{
+		return new MockEditor();
+	}
 
-    @NotNull
-    @Override
-    protected CompletionType getCompletionType() {
-        return CompletionType.BASIC;
-    }
+	private PsiFile createFakeFile()
+	{
+		return createFakeFile(new OCamlUnknownElementImpl(new MockASTNode(OCamlElementTypes.ML_FILE)));
+	}
 
-    @Override
-    protected int getInvocationCount() {
-        return 1;
-    }
+	@NotNull
+	@Override
+	protected CompletionType getCompletionType()
+	{
+		return CompletionType.BASIC;
+	}
+
+	@Override
+	protected int getInvocationCount()
+	{
+		return 1;
+	}
 }

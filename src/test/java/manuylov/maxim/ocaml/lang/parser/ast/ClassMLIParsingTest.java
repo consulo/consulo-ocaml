@@ -18,107 +18,118 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.BRACKETS;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.CLASS_NAME;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.CLASS_SPECIFICATION;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.CLASS_SPECIFICATION_BINDING;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.OBJECT_END_CLASS_BODY_TYPE;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.TYPE_PARAMETER_DEFINITION;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.TYPE_PARAMETER_NAME;
+
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
-import manuylov.maxim.ocaml.fileType.mli.MLIFileTypeLanguage;
+import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.Test;
-
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.03.2009
  */
-@Test
-public class ClassMLIParsingTest extends BaseClassParsingTest {
-    public void testSeveralSpecificationBindings() throws Exception {
-        myTree.addNode(3, CLASS_SPECIFICATION);
-        myTree.addNode(4, CLASS_KEYWORD);
-        myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
-        myTree.addNode(5, CLASS_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "class1");
-        myTree.addNode(5, COLON);
-        myTree.addNode(5, CLASS_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "class0");
-        myTree.addNode(4, AND_KEYWORD);
-        myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
-        myTree.addNode(5, VIRTUAL_KEYWORD);
-        myTree.addNode(5, CLASS_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "class1");
-        myTree.addNode(5, COLON);
-        myTree.addNode(5, OBJECT_END_CLASS_BODY_TYPE);
-        myTree.addNode(6, OBJECT_KEYWORD);
-        myTree.addNode(6, END_KEYWORD);
-        myTree.addNode(4, AND_KEYWORD);
-        myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
-        myTree.addNode(5, BRACKETS);
-        myTree.addNode(6, LBRACKET);
-        myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
-        myTree.addNode(7, QUOTE);
-        myTree.addNode(7, TYPE_PARAMETER_NAME);
-        myTree.addNode(8, LCFC_IDENTIFIER, "a");
-        myTree.addNode(6, COMMA);
-        myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
-        myTree.addNode(7, QUOTE);
-        myTree.addNode(7, TYPE_PARAMETER_NAME);
-        myTree.addNode(8, LCFC_IDENTIFIER, "b");
-        myTree.addNode(6, COMMA);
-        myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
-        myTree.addNode(7, QUOTE);
-        myTree.addNode(7, TYPE_PARAMETER_NAME);
-        myTree.addNode(8, LCFC_IDENTIFIER, "c");
-        myTree.addNode(6, RBRACKET);
-        myTree.addNode(5, CLASS_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "class1");
-        myTree.addNode(5, COLON);
-        myTree.addNode(5, OBJECT_END_CLASS_BODY_TYPE);
-        myTree.addNode(6, OBJECT_KEYWORD);
-        myTree.addNode(6, END_KEYWORD);
-        myTree.addNode(4, AND_KEYWORD);
-        myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
-        myTree.addNode(5, VIRTUAL_KEYWORD);
-        myTree.addNode(5, BRACKETS);
-        myTree.addNode(6, LBRACKET);
-        myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
-        myTree.addNode(7, QUOTE);
-        myTree.addNode(7, TYPE_PARAMETER_NAME);
-        myTree.addNode(8, LCFC_IDENTIFIER, "a");
-        myTree.addNode(6, COMMA);
-        myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
-        myTree.addNode(7, QUOTE);
-        myTree.addNode(7, TYPE_PARAMETER_NAME);
-        myTree.addNode(8, LCFC_IDENTIFIER, "b");
-        myTree.addNode(6, COMMA);
-        myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
-        myTree.addNode(7, QUOTE);
-        myTree.addNode(7, TYPE_PARAMETER_NAME);
-        myTree.addNode(8, LCFC_IDENTIFIER, "c");
-        myTree.addNode(6, RBRACKET);
-        myTree.addNode(5, CLASS_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "class1");
-        myTree.addNode(5, COLON);
-        myTree.addNode(5, OBJECT_END_CLASS_BODY_TYPE);
-        myTree.addNode(6, OBJECT_KEYWORD);
-        myTree.addNode(6, END_KEYWORD);
+public class ClassMLIParsingTest extends BaseClassParsingTest
+{
+	@Test
+	public void testSeveralSpecificationBindings() throws Exception
+	{
+		myTree.addNode(3, CLASS_SPECIFICATION);
+		myTree.addNode(4, CLASS_KEYWORD);
+		myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
+		myTree.addNode(5, CLASS_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "class1");
+		myTree.addNode(5, COLON);
+		myTree.addNode(5, CLASS_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "class0");
+		myTree.addNode(4, AND_KEYWORD);
+		myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
+		myTree.addNode(5, VIRTUAL_KEYWORD);
+		myTree.addNode(5, CLASS_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "class1");
+		myTree.addNode(5, COLON);
+		myTree.addNode(5, OBJECT_END_CLASS_BODY_TYPE);
+		myTree.addNode(6, OBJECT_KEYWORD);
+		myTree.addNode(6, END_KEYWORD);
+		myTree.addNode(4, AND_KEYWORD);
+		myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
+		myTree.addNode(5, BRACKETS);
+		myTree.addNode(6, LBRACKET);
+		myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
+		myTree.addNode(7, QUOTE);
+		myTree.addNode(7, TYPE_PARAMETER_NAME);
+		myTree.addNode(8, LCFC_IDENTIFIER, "a");
+		myTree.addNode(6, COMMA);
+		myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
+		myTree.addNode(7, QUOTE);
+		myTree.addNode(7, TYPE_PARAMETER_NAME);
+		myTree.addNode(8, LCFC_IDENTIFIER, "b");
+		myTree.addNode(6, COMMA);
+		myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
+		myTree.addNode(7, QUOTE);
+		myTree.addNode(7, TYPE_PARAMETER_NAME);
+		myTree.addNode(8, LCFC_IDENTIFIER, "c");
+		myTree.addNode(6, RBRACKET);
+		myTree.addNode(5, CLASS_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "class1");
+		myTree.addNode(5, COLON);
+		myTree.addNode(5, OBJECT_END_CLASS_BODY_TYPE);
+		myTree.addNode(6, OBJECT_KEYWORD);
+		myTree.addNode(6, END_KEYWORD);
+		myTree.addNode(4, AND_KEYWORD);
+		myTree.addNode(4, CLASS_SPECIFICATION_BINDING);
+		myTree.addNode(5, VIRTUAL_KEYWORD);
+		myTree.addNode(5, BRACKETS);
+		myTree.addNode(6, LBRACKET);
+		myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
+		myTree.addNode(7, QUOTE);
+		myTree.addNode(7, TYPE_PARAMETER_NAME);
+		myTree.addNode(8, LCFC_IDENTIFIER, "a");
+		myTree.addNode(6, COMMA);
+		myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
+		myTree.addNode(7, QUOTE);
+		myTree.addNode(7, TYPE_PARAMETER_NAME);
+		myTree.addNode(8, LCFC_IDENTIFIER, "b");
+		myTree.addNode(6, COMMA);
+		myTree.addNode(6, TYPE_PARAMETER_DEFINITION);
+		myTree.addNode(7, QUOTE);
+		myTree.addNode(7, TYPE_PARAMETER_NAME);
+		myTree.addNode(8, LCFC_IDENTIFIER, "c");
+		myTree.addNode(6, RBRACKET);
+		myTree.addNode(5, CLASS_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "class1");
+		myTree.addNode(5, COLON);
+		myTree.addNode(5, OBJECT_END_CLASS_BODY_TYPE);
+		myTree.addNode(6, OBJECT_KEYWORD);
+		myTree.addNode(6, END_KEYWORD);
 
-        doTest("class class1 : class0 and virtual class1 : object end and ['a, 'b, 'c] class1 : object end and virtual ['a, 'b, 'c] class1 : object end", myTree.getStringRepresentation());
-    }
-    
-    @NotNull
-    protected ParserDefinition getParserDefinition() {
-        return MLIFileTypeLanguage.INSTANCE.getParserDefinition();
-    }
+		doTest("class class1 : class0 and virtual class1 : object end and ['a, 'b, 'c] class1 : object end and virtual ['a, 'b, 'c] class1 : object end", myTree.getStringRepresentation());
+	}
 
-    @NotNull
-    protected IElementType getModuleExpressionNodeType() {
-        return OCamlElementTypes.FILE_MODULE_TYPE;
-    }
+	@NotNull
+	protected ParserDefinition getParserDefinition()
+	{
+		return new MLIParserDefinition();
+	}
 
-    @NotNull
-    protected IElementType getModuleBindingNodeType() {
-        return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;
-    }
+	@NotNull
+	protected IElementType getModuleExpressionNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_TYPE;
+	}
+
+	@NotNull
+	protected IElementType getModuleBindingNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;
+	}
 }

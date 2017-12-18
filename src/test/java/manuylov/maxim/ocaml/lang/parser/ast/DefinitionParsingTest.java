@@ -18,178 +18,189 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import com.intellij.lang.ParserDefinition;
-import com.intellij.psi.tree.IElementType;
-import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
-import manuylov.maxim.ocaml.lang.Strings;
-import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import manuylov.maxim.ocaml.lang.parser.ast.util.TreeStringBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.Test;
-
 import static com.intellij.psi.TokenType.ERROR_ELEMENT;
 import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
+
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.psi.tree.IElementType;
+import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
+import manuylov.maxim.ocaml.lang.Strings;
+import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
+import manuylov.maxim.ocaml.lang.parser.ast.util.TreeStringBuilder;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 28.02.2009
  */
-@Test
-public class DefinitionParsingTest extends BaseStatementParsingTest {
-    public void testDoubleSemicolon() throws Exception {
-        myTree.addNode(3, LET_STATEMENT);
-        myTree.addNode(4, LET_KEYWORD);
-        myTree.addNode(4, LET_BINDING);
-        myTree.addNode(5, LET_BINDING_PATTERN);
-        myTree.addNode(6, VALUE_NAME_PATTERN);
-        myTree.addNode(7, LCFC_IDENTIFIER, "a");
-        myTree.addNode(5, EQ);
-        myTree.addNode(5, CONSTANT_EXPRESSION);
-        myTree.addNode(6, INTEGER_LITERAL, "7");
-        myTree.addNode(3, LET_STATEMENT);
-        myTree.addNode(4, LET_KEYWORD);
-        myTree.addNode(4, LET_BINDING);
-        myTree.addNode(5, LET_BINDING_PATTERN);
-        myTree.addNode(6, VALUE_NAME_PATTERN);
-        myTree.addNode(7, LCFC_IDENTIFIER, "c");
-        myTree.addNode(5, EQ);
-        myTree.addNode(5, CONSTANT_EXPRESSION);
-        myTree.addNode(6, INTEGER_LITERAL, "0");
-        myTree.addNode(3, SEMICOLON_SEMICOLON);
-        myTree.addNode(3, EXPRESSION_STATEMENT);
-        myTree.addNode(4, CONSTANT_EXPRESSION);
-        myTree.addNode(5, INTEGER_LITERAL, "4");
+public class DefinitionParsingTest extends BaseStatementParsingTest
+{
+	@Test
+	public void testDoubleSemicolon() throws Exception
+	{
+		myTree.addNode(3, LET_STATEMENT);
+		myTree.addNode(4, LET_KEYWORD);
+		myTree.addNode(4, LET_BINDING);
+		myTree.addNode(5, LET_BINDING_PATTERN);
+		myTree.addNode(6, VALUE_NAME_PATTERN);
+		myTree.addNode(7, LCFC_IDENTIFIER, "a");
+		myTree.addNode(5, EQ);
+		myTree.addNode(5, CONSTANT_EXPRESSION);
+		myTree.addNode(6, INTEGER_LITERAL, "7");
+		myTree.addNode(3, LET_STATEMENT);
+		myTree.addNode(4, LET_KEYWORD);
+		myTree.addNode(4, LET_BINDING);
+		myTree.addNode(5, LET_BINDING_PATTERN);
+		myTree.addNode(6, VALUE_NAME_PATTERN);
+		myTree.addNode(7, LCFC_IDENTIFIER, "c");
+		myTree.addNode(5, EQ);
+		myTree.addNode(5, CONSTANT_EXPRESSION);
+		myTree.addNode(6, INTEGER_LITERAL, "0");
+		myTree.addNode(3, SEMICOLON_SEMICOLON);
+		myTree.addNode(3, EXPRESSION_STATEMENT);
+		myTree.addNode(4, CONSTANT_EXPRESSION);
+		myTree.addNode(5, INTEGER_LITERAL, "4");
 
-        doTest("let a = 7 let c = 0;; 4", myTree.getStringRepresentation());
+		doTest("let a = 7 let c = 0;; 4", myTree.getStringRepresentation());
 
-        recreateTree();
+		recreateTree();
 
-        myTree.addNode(3, LET_STATEMENT);
-        myTree.addNode(4, LET_KEYWORD);
-        myTree.addNode(4, LET_BINDING);
-        myTree.addNode(5, LET_BINDING_PATTERN);
-        myTree.addNode(6, VALUE_NAME_PATTERN);
-        myTree.addNode(7, LCFC_IDENTIFIER, "c");
-        myTree.addNode(5, EQ);
-        myTree.addNode(5, CONSTANT_EXPRESSION);
-        myTree.addNode(6, INTEGER_LITERAL, "0");
-        myTree.addNode(3, ERROR_ELEMENT, Strings.SEMICOLON_SEMICOLON_EXPECTED);
-        myTree.addNode(3, EXPRESSION_STATEMENT);
-        myTree.addNode(4, LET_EXPRESSION);
-        myTree.addNode(5, LET_KEYWORD);
-        myTree.addNode(5, LET_BINDING);
-        myTree.addNode(6, LET_BINDING_PATTERN);
-        myTree.addNode(7, VALUE_NAME_PATTERN);
-        myTree.addNode(8, LCFC_IDENTIFIER, "s");
-        myTree.addNode(6, EQ);
-        myTree.addNode(6, CONSTANT_EXPRESSION);
-        myTree.addNode(7, INTEGER_LITERAL, "2");
-        myTree.addNode(5, IN_KEYWORD);
-        myTree.addNode(5, VALUE_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "s");
+		myTree.addNode(3, LET_STATEMENT);
+		myTree.addNode(4, LET_KEYWORD);
+		myTree.addNode(4, LET_BINDING);
+		myTree.addNode(5, LET_BINDING_PATTERN);
+		myTree.addNode(6, VALUE_NAME_PATTERN);
+		myTree.addNode(7, LCFC_IDENTIFIER, "c");
+		myTree.addNode(5, EQ);
+		myTree.addNode(5, CONSTANT_EXPRESSION);
+		myTree.addNode(6, INTEGER_LITERAL, "0");
+		myTree.addNode(3, ERROR_ELEMENT, Strings.SEMICOLON_SEMICOLON_EXPECTED);
+		myTree.addNode(3, EXPRESSION_STATEMENT);
+		myTree.addNode(4, LET_EXPRESSION);
+		myTree.addNode(5, LET_KEYWORD);
+		myTree.addNode(5, LET_BINDING);
+		myTree.addNode(6, LET_BINDING_PATTERN);
+		myTree.addNode(7, VALUE_NAME_PATTERN);
+		myTree.addNode(8, LCFC_IDENTIFIER, "s");
+		myTree.addNode(6, EQ);
+		myTree.addNode(6, CONSTANT_EXPRESSION);
+		myTree.addNode(7, INTEGER_LITERAL, "2");
+		myTree.addNode(5, IN_KEYWORD);
+		myTree.addNode(5, VALUE_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "s");
 
-        doTest("let c = 0 let s = 2 in s", myTree.getStringRepresentation());
+		doTest("let c = 0 let s = 2 in s", myTree.getStringRepresentation());
 
-        recreateTree();
+		recreateTree();
 
-        myTree.addNode(3, EXPRESSION_STATEMENT);
-        myTree.addNode(4, WHILE_EXPRESSION);
-        myTree.addNode(5, WHILE_KEYWORD);
-        myTree.addNode(5, VALUE_NAME);
-        myTree.addNode(6, LCFC_IDENTIFIER, "a");
-        myTree.addNode(5, DO_KEYWORD);
-        myTree.addNode(5, CONSTANT_EXPRESSION);
-        myTree.addNode(6, LPAR);
-        myTree.addNode(6, RPAR);
-        myTree.addNode(5, DONE_KEYWORD);
-        myTree.addNode(3, ERROR_ELEMENT, Strings.SEMICOLON_SEMICOLON_EXPECTED);
-        myTree.addNode(3, EXPRESSION_STATEMENT);
-        myTree.addNode(4, CONSTANT_EXPRESSION);
-        myTree.addNode(5, INTEGER_LITERAL, "4");
+		myTree.addNode(3, EXPRESSION_STATEMENT);
+		myTree.addNode(4, WHILE_EXPRESSION);
+		myTree.addNode(5, WHILE_KEYWORD);
+		myTree.addNode(5, VALUE_NAME);
+		myTree.addNode(6, LCFC_IDENTIFIER, "a");
+		myTree.addNode(5, DO_KEYWORD);
+		myTree.addNode(5, CONSTANT_EXPRESSION);
+		myTree.addNode(6, LPAR);
+		myTree.addNode(6, RPAR);
+		myTree.addNode(5, DONE_KEYWORD);
+		myTree.addNode(3, ERROR_ELEMENT, Strings.SEMICOLON_SEMICOLON_EXPECTED);
+		myTree.addNode(3, EXPRESSION_STATEMENT);
+		myTree.addNode(4, CONSTANT_EXPRESSION);
+		myTree.addNode(5, INTEGER_LITERAL, "4");
 
-        doTest("while a do () done 4", myTree.getStringRepresentation());
-    }
+		doTest("while a do () done 4", myTree.getStringRepresentation());
+	}
 
-    public void testIncludeDefinition() throws Exception {
-        myTree.addNode(3, INCLUDE_DIRECTIVE_DEFINITION);
-        myTree.addNode(4, INCLUDE_KEYWORD);
-        myTree.addNode(4, MODULE_NAME);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Module");
+	@Test
+	public void testIncludeDefinition() throws Exception
+	{
+		myTree.addNode(3, INCLUDE_DIRECTIVE_DEFINITION);
+		myTree.addNode(4, INCLUDE_KEYWORD);
+		myTree.addNode(4, MODULE_NAME);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Module");
 
-        doTest("include Module", myTree.getStringRepresentation());
-    }
+		doTest("include Module", myTree.getStringRepresentation());
+	}
 
-    public void testExceptionDefinition() throws Exception {
-        myTree.addNode(3, EXCEPTION_DEFINITION);
-        myTree.addNode(4, EXCEPTION_KEYWORD);
-        myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error");
+	@Test
+	public void testExceptionDefinition() throws Exception
+	{
+		myTree.addNode(3, EXCEPTION_DEFINITION);
+		myTree.addNode(4, EXCEPTION_KEYWORD);
+		myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error");
 
-        doTest("exception Error", myTree.getStringRepresentation());
+		doTest("exception Error", myTree.getStringRepresentation());
 
-        recreateTree();
+		recreateTree();
 
-        myTree.addNode(3, EXCEPTION_DEFINITION);
-        myTree.addNode(4, EXCEPTION_KEYWORD);
-        myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error1");
-        myTree.addNode(4, EQ);
-        myTree.addNode(4, CONSTRUCTOR_NAME);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error");
+		myTree.addNode(3, EXCEPTION_DEFINITION);
+		myTree.addNode(4, EXCEPTION_KEYWORD);
+		myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error1");
+		myTree.addNode(4, EQ);
+		myTree.addNode(4, CONSTRUCTOR_NAME);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error");
 
-        doTest("exception Error1 = Error", myTree.getStringRepresentation());
+		doTest("exception Error1 = Error", myTree.getStringRepresentation());
 
-        recreateTree();
+		recreateTree();
 
-        myTree.addNode(3, EXCEPTION_DEFINITION);
-        myTree.addNode(4, EXCEPTION_KEYWORD);
-        myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error1");
-        myTree.addNode(4, EQ);
-        myTree.addNode(4, CONSTRUCTOR_PATH);
-        myTree.addNode(5, MODULE_NAME);
-        myTree.addNode(6, UCFC_IDENTIFIER, "Module1");
-        myTree.addNode(5, DOT);
-        myTree.addNode(5, CONSTRUCTOR_NAME);
-        myTree.addNode(6, UCFC_IDENTIFIER, "Error");
+		myTree.addNode(3, EXCEPTION_DEFINITION);
+		myTree.addNode(4, EXCEPTION_KEYWORD);
+		myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error1");
+		myTree.addNode(4, EQ);
+		myTree.addNode(4, CONSTRUCTOR_PATH);
+		myTree.addNode(5, MODULE_NAME);
+		myTree.addNode(6, UCFC_IDENTIFIER, "Module1");
+		myTree.addNode(5, DOT);
+		myTree.addNode(5, CONSTRUCTOR_NAME);
+		myTree.addNode(6, UCFC_IDENTIFIER, "Error");
 
-        doTest("exception Error1 = Module1.Error", myTree.getStringRepresentation());
+		doTest("exception Error1 = Module1.Error", myTree.getStringRepresentation());
 
-        recreateTree();
+		recreateTree();
 
-        myTree.addNode(3, EXCEPTION_DEFINITION);
-        myTree.addNode(4, EXCEPTION_KEYWORD);
-        myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
-        myTree.addNode(5, UCFC_IDENTIFIER, "Error");
-        myTree.addNode(4, OF_KEYWORD);
-        myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
-        myTree.addNode(5, LCFC_IDENTIFIER, "int");
+		myTree.addNode(3, EXCEPTION_DEFINITION);
+		myTree.addNode(4, EXCEPTION_KEYWORD);
+		myTree.addNode(4, CONSTRUCTOR_NAME_DEFINITION);
+		myTree.addNode(5, UCFC_IDENTIFIER, "Error");
+		myTree.addNode(4, OF_KEYWORD);
+		myTree.addNode(4, TYPE_CONSTRUCTOR_NAME);
+		myTree.addNode(5, LCFC_IDENTIFIER, "int");
 
-        doTest("exception Error of int", myTree.getStringRepresentation());
-    }
+		doTest("exception Error of int", myTree.getStringRepresentation());
+	}
 
-    public void testEmptyFile() throws Exception {
-        myTree = new TreeStringBuilder(false);
-        myTree.addNode(0, ML_FILE);
-        myTree.addNode(1, FILE_MODULE_DEFINITION_BINDING);
-        myTree.addNode(2, FILE_MODULE_EXPRESSION, "");
+	@Test
+	public void testEmptyFile() throws Exception
+	{
+		myTree = new TreeStringBuilder(false);
+		myTree.addNode(0, ML_FILE);
+		myTree.addNode(1, FILE_MODULE_DEFINITION_BINDING);
+		myTree.addNode(2, FILE_MODULE_EXPRESSION, "");
 
-        doTest("", myTree.getStringRepresentation());
-    }
+		doTest("", myTree.getStringRepresentation());
+	}
 
-    @NotNull
-    protected ParserDefinition getParserDefinition() {
-        return MLFileTypeLanguage.INSTANCE.getParserDefinition();
-    }
+	@NotNull
+	protected ParserDefinition getParserDefinition()
+	{
+		return new MLIParserDefinition();
+	}
 
-    @NotNull
-    protected IElementType getModuleExpressionNodeType() {
-        return OCamlElementTypes.FILE_MODULE_EXPRESSION;
-    }
+	@NotNull
+	protected IElementType getModuleExpressionNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_EXPRESSION;
+	}
 
-    @NotNull
-    protected IElementType getModuleBindingNodeType() {
-        return OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING;
-    }
+	@NotNull
+	protected IElementType getModuleBindingNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING;
+	}
 }

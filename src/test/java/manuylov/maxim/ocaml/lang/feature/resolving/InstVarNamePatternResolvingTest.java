@@ -18,20 +18,18 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.junit.Test;
 import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-@Test
-public class InstVarNamePatternResolvingTest extends ResolvingTestCase {
-    public void testInstVarNamePatternResolving() throws Exception {
-        doTest(1, "" +
-             "class clazz = " +
-             "object " +
-             "  val {{}{x}} = 12 " +
-             "end;;");
-    }
+public class InstVarNamePatternResolvingTest extends ResolvingTestCase
+{
+	@Test
+	public void testInstVarNamePatternResolving() throws Exception
+	{
+		doTest(1, "" + "class clazz = " + "object " + "  val {{}{x}} = 12 " + "end;;");
+	}
 }

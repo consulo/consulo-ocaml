@@ -18,17 +18,18 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.junit.Test;
 import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-@Test
-public class ForExpressionIndexVariableNameResolvingTest extends ResolvingTestCase {
-    public void testForExpressionIndexVariableNameResolving() throws Exception {
-        doTest(1, "" +
-            "for {{}{i}} = 1 to 2 do done;;");
-    }
+public class ForExpressionIndexVariableNameResolvingTest extends ResolvingTestCase
+{
+	@Test
+	public void testForExpressionIndexVariableNameResolving() throws Exception
+	{
+		doTest(1, "" + "for {{}{i}} = 1 to 2 do done;;");
+	}
 }

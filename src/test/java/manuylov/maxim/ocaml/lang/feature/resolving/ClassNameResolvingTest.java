@@ -18,37 +18,26 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.junit.Test;
 import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-@Test
-public class ClassNameResolvingTest extends ResolvingTestCase {
-    public void testClassNameResolving() throws Exception {
-        doTest(1, "" +
-            "class {{c1 = object end}};; " +
-            "class c2 = }{c1;;");
+public class ClassNameResolvingTest extends ResolvingTestCase
+{
+	@Test
+	public void testClassNameResolving() throws Exception
+	{
+		doTest(1, "" + "class {{c1 = object end}};; " + "class c2 = }{c1;;");
 
-        doTest(2, "" +
-            "module M = " +
-            "struct " +
-            "  class {{c1 = object end}};; " +
-            "end;; " +
-            "class c2 = M.}{c1;;");
+		doTest(2, "" + "module M = " + "struct " + "  class {{c1 = object end}};; " + "end;; " + "class c2 = M.}{c1;;");
 
-        doTest(3, "" +
-            "class {{}{c = object end}};;");
+		doTest(3, "" + "class {{}{c = object end}};;");
 
-        doTest(4, "" +
-            "module M : sig" +
-            "             class {{c1 : object end}};; " +
-            "           end = struct end;; " +
-            "class c2 = M.}{c1;;");
+		doTest(4, "" + "module M : sig" + "             class {{c1 : object end}};; " + "           end = struct end;; " + "class c2 = M.}{c1;;");
 
-        doTest(5, "" +
-            "class {{['a] }{t = object end}};;");
-    }
+		doTest(5, "" + "class {{['a] }{t = object end}};;");
+	}
 }

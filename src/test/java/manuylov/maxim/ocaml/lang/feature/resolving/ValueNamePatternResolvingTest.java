@@ -18,20 +18,20 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.junit.Test;
 import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-@Test
-public class ValueNamePatternResolvingTest extends ResolvingTestCase {
-    public void testValueNamePatternResolving() throws Exception {
-        doTest(1, "" +
-            "let {{}{a}} = b;;");
+public class ValueNamePatternResolvingTest extends ResolvingTestCase
+{
+	@Test
+	public void testValueNamePatternResolving() throws Exception
+	{
+		doTest(1, "" + "let {{}{a}} = b;;");
 
-        doTest(2, "" +
-            "external {{}{a}} : int = \"sss\";;");
-     }
+		doTest(2, "" + "external {{}{a}} : int = \"sss\";;");
+	}
 }

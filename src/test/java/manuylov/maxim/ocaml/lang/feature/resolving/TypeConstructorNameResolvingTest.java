@@ -18,128 +18,54 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
+import org.junit.Test;
 import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-@Test
-public class TypeConstructorNameResolvingTest extends ResolvingTestCase {
-    public void testTypeConstructorNameResolving() throws Exception {
-        doTest(1, "" +
-            "type {{t = One}};; " +
-            "type t2 = }{t;;");
+public class TypeConstructorNameResolvingTest extends ResolvingTestCase
+{
+	@Test
+	public void testTypeConstructorNameResolving() throws Exception
+	{
+		doTest(1, "" + "type {{t = One}};; " + "type t2 = }{t;;");
 
-        doTest(2, "" +
-            "type {{}{t = One}};;");
+		doTest(2, "" + "type {{}{t = One}};;");
 
-        doTest(3, "" +
-            "module M = " +
-            "struct " +
-            "  type {{t = One}};; " +
-            "end;; " +
-            "type t2 = M.}{t;;");
+		doTest(3, "" + "module M = " + "struct " + "  type {{t = One}};; " + "end;; " + "type t2 = M.}{t;;");
 
-        doTest(4, "" +
-            "module M = " +
-            "struct " +
-            "  type t = One;; " +
-            "end;; " +
-            "type t2 = }{t;;");
+		doTest(4, "" + "module M = " + "struct " + "  type t = One;; " + "end;; " + "type t2 = }{t;;");
 
-        doTest(5, "" +
-            "module M : sig " +
-            "             type {{t = One}};; " +
-            "           end = struct end;; " +
-            "type t2 = M.}{t;;");
+		doTest(5, "" + "module M : sig " + "             type {{t = One}};; " + "           end = struct end;; " + "type t2 = M.}{t;;");
 
-        doTest(6, "" +
-            "module M = " +
-            "struct " +
-            "  module M1 = " +
-            "  struct " +
-            "    type {{t = One}};; " +
-            "  end;; " +
-            "end;; " +
-            "type t2 = M.M1.}{t;;");
+		doTest(6, "" + "module M = " + "struct " + "  module M1 = " + "  struct " + "    type {{t = One}};; " + "  end;; " + "end;; " + "type t2 = M.M1.}{t;;");
 
-        doTest(7, "" +
-            "class {{t = object end}};; " +
-            "type t2 = }{t;;");
+		doTest(7, "" + "class {{t = object end}};; " + "type t2 = }{t;;");
 
-        doTest(8, "" +
-            "class {{}{t = object end}};;");
+		doTest(8, "" + "class {{}{t = object end}};;");
 
-        doTest(9, "" +
-            "module M = " +
-            "struct " +
-            "  class {{t = object end}};; " +
-            "end;; " +
-            "type t2 = M.}{t;;");
+		doTest(9, "" + "module M = " + "struct " + "  class {{t = object end}};; " + "end;; " + "type t2 = M.}{t;;");
 
-        doTest(10, "" +
-            "module M = " +
-            "struct " +
-            "  class t = object end;; " +
-            "end;; " +
-            "type t2 = }{t;;");
+		doTest(10, "" + "module M = " + "struct " + "  class t = object end;; " + "end;; " + "type t2 = }{t;;");
 
-        doTest(11, "" +
-            "module M : sig " +
-            "             class {{t : object end}};; " +
-            "           end = struct end;; " +
-            "type t2 = M.}{t;;");
+		doTest(11, "" + "module M : sig " + "             class {{t : object end}};; " + "           end = struct end;; " + "type t2 = M.}{t;;");
 
-        doTest(12, "" +
-            "module M = " +
-            "struct " +
-            "  module M1 = " +
-            "  struct " +
-            "    class {{t = object end}};; " +
-            "  end;; " +
-            "end;; " +
-            "type t2 = M.M1.}{t;;");
+		doTest(12, "" + "module M = " + "struct " + "  module M1 = " + "  struct " + "    class {{t = object end}};; " + "  end;; " + "end;; " + "type t2 = M.M1.}{t;;");
 
-        doTest(13, "" +
-            "class type {{t = object end}};; " +
-            "type t2 = }{t;;");
+		doTest(13, "" + "class type {{t = object end}};; " + "type t2 = }{t;;");
 
-        doTest(14, "" +
-            "class type {{}{t = object end}};;");
+		doTest(14, "" + "class type {{}{t = object end}};;");
 
-        doTest(15, "" +
-            "module M = " +
-            "struct " +
-            "  class type {{t = object end}};; " +
-            "end;; " +
-            "type t2 = M.}{t;;");
+		doTest(15, "" + "module M = " + "struct " + "  class type {{t = object end}};; " + "end;; " + "type t2 = M.}{t;;");
 
-        doTest(16, "" +
-            "module M = " +
-            "struct " +
-            "  class type t = object end;; " +
-            "end;; " +
-            "type t2 = }{t;;");
+		doTest(16, "" + "module M = " + "struct " + "  class type t = object end;; " + "end;; " + "type t2 = }{t;;");
 
-        doTest(17, "" +
-            "module M : sig " +
-            "             class type {{t = object end}};; " +
-            "           end = struct end;; " +
-            "type t2 = M.}{t;;");
+		doTest(17, "" + "module M : sig " + "             class type {{t = object end}};; " + "           end = struct end;; " + "type t2 = M.}{t;;");
 
-        doTest(18, "" +
-            "module M = " +
-            "struct " +
-            "  module M1 = " +
-            "  struct " +
-            "    class type {{t = object end}};; " +
-            "  end;; " +
-            "end;; " +
-            "type t2 = M.M1.}{t;;");
+		doTest(18, "" + "module M = " + "struct " + "  module M1 = " + "  struct " + "    class type {{t = object end}};; " + "  end;; " + "end;; " + "type t2 = M.M1.}{t;;");
 
-        doTest(19, "" +
-            "type 'a {{}{t = One}};;");
-   }
+		doTest(19, "" + "type 'a {{}{t = One}};;");
+	}
 }

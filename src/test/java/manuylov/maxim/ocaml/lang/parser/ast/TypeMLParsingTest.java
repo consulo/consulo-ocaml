@@ -18,31 +18,33 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
-import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
+import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
-import org.testng.annotations.Test;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 18.03.2009
  */
-@Test
-public class TypeMLParsingTest extends BaseTypeParsingTest {
-    @NotNull
-    protected ParserDefinition getParserDefinition() {
-        return MLFileTypeLanguage.INSTANCE.getParserDefinition();
-    }
+public class TypeMLParsingTest extends BaseTypeParsingTest
+{
+	@NotNull
+	protected ParserDefinition getParserDefinition()
+	{
+		return new MLIParserDefinition();
+	}
 
-    @NotNull
-    protected IElementType getModuleExpressionNodeType() {
-        return OCamlElementTypes.FILE_MODULE_EXPRESSION;
-    }
+	@NotNull
+	protected IElementType getModuleExpressionNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_EXPRESSION;
+	}
 
-    @NotNull
-    protected IElementType getModuleBindingNodeType() {
-        return OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING;
-    }
+	@NotNull
+	protected IElementType getModuleBindingNodeType()
+	{
+		return OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING;
+	}
 }

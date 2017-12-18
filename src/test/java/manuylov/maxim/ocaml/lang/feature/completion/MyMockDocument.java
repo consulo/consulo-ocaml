@@ -18,63 +18,82 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.mock.MockDocument;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.RangeMarker;
 import com.intellij.openapi.util.Key;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 26.05.2010
  */
-public class MyMockDocument extends MockDocument {
-    public MyMockDocument() {
-        super("");
-    }
+public class MyMockDocument extends MockDocument
+{
+	public MyMockDocument()
+	{
+	}
 
-    @NotNull
-    @Override
-    public RangeMarker createRangeMarker(final int startOffset, final int endOffset) {
-        return new RangeMarker() {
-            @NotNull
-            public Document getDocument() {
-                return MyMockDocument.this;
-            }
+	@NotNull
+	@Override
+	public RangeMarker createRangeMarker(final int startOffset, final int endOffset)
+	{
+		return new RangeMarker()
+		{
+			@NotNull
+			public Document getDocument()
+			{
+				return MyMockDocument.this;
+			}
 
-            public int getStartOffset() {
-                return 0;
-            }
+			public int getStartOffset()
+			{
+				return 0;
+			}
 
-            public int getEndOffset() {
-                return 0;
-            }
+			public int getEndOffset()
+			{
+				return 0;
+			}
 
-            public boolean isValid() {
-                return false;
-            }
+			public boolean isValid()
+			{
+				return false;
+			}
 
-            public void setGreedyToLeft(final boolean greedy) {
-            }
+			public void setGreedyToLeft(final boolean greedy)
+			{
+			}
 
-            public void setGreedyToRight(final boolean greedy) {
-            }
+			public void setGreedyToRight(final boolean greedy)
+			{
+			}
 
-            public boolean isGreedyToRight() {
-                return false;
-            }
+			public boolean isGreedyToRight()
+			{
+				return false;
+			}
 
-            public boolean isGreedyToLeft() {
-                return false;
-            }
+			public boolean isGreedyToLeft()
+			{
+				return false;
+			}
 
-            public <T> T getUserData(@NotNull final Key<T> key) {
-                return null;
-            }
+			@Override
+			public void dispose()
+			{
 
-            public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value) {              
-            }
-        };
-    }
+			}
+
+			public <T> T getUserData(@NotNull final Key<T> key)
+			{
+				return null;
+			}
+
+			public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value)
+			{
+			}
+		};
+	}
 }
