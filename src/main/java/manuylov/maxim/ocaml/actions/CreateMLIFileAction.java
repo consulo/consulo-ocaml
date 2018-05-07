@@ -20,6 +20,7 @@ package manuylov.maxim.ocaml.actions;
 
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileType;
+import consulo.awt.TargetAWT;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 
@@ -31,7 +32,7 @@ public class CreateMLIFileAction extends BaseCreateOCamlFileAction
 {
 	protected CreateMLIFileAction()
 	{
-		super("OCaml Module Interface", "Create New OCaml Module Interface File", OCamlIconUtil.getMLIFileIcon());
+		super("OCaml Module Interface", "Create New OCaml Module Interface File", TargetAWT.to(OCamlIconUtil.getMLIFileIcon()));
 	}
 
 	@NotNull

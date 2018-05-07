@@ -18,10 +18,7 @@
 
 package manuylov.maxim.ocaml.run;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
-import consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -29,6 +26,8 @@ import com.intellij.execution.configurations.RunConfigurationModule;
 import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.project.Project;
 import consulo.module.extension.ModuleExtensionHelper;
+import consulo.ocaml.module.extension.OCamlModuleExtension;
+import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 
 /**
@@ -82,7 +81,7 @@ public class OCamlConfigurationType implements ConfigurationType
 
 	@Override
 	@NotNull
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return OCamlIconUtil.getSmallOCamlIcon();
 	}

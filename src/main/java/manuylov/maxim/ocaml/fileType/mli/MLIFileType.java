@@ -18,9 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType.mli;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NotNull;
+import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.fileType.OCamlFileType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
@@ -62,7 +61,7 @@ public class MLIFileType extends OCamlFileType
 
 	@Override
 	@NotNull
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return OCamlIconUtil.getMLIFileIcon();
 	}

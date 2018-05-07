@@ -22,8 +22,6 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.Icon;
-
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +42,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.SmartList;
 import consulo.roots.types.BinariesOrderRootType;
 import consulo.roots.types.SourcesOrderRootType;
+import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 import manuylov.maxim.ocaml.util.OCamlSystemUtil;
 
@@ -66,7 +65,7 @@ public class OCamlSdkType extends SdkType
 
 	@Override
 	@NotNull
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return OCamlIconUtil.getSmallOCamlIcon();
 	}

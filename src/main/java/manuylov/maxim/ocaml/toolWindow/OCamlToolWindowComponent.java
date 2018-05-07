@@ -32,6 +32,7 @@ import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.content.ContentManagerAdapter;
 import com.intellij.ui.content.ContentManagerEvent;
 import com.intellij.util.messages.MessageBusConnection;
+import consulo.awt.TargetAWT;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
 
@@ -105,7 +106,7 @@ public class OCamlToolWindowComponent implements ProjectComponent
 		}
 
 		final ToolWindow toolWindow = myToolWindowManager.registerToolWindow(TOOL_WINDOW_ID, true, ToolWindowAnchor.BOTTOM, false);
-		toolWindow.setIcon(OCamlIconUtil.getSmallOCamlIcon());
+		toolWindow.setIcon(TargetAWT.to(OCamlIconUtil.getSmallOCamlIcon()));
 		toolWindow.setTitle(TOOL_WINDOW_ID);
 
 		myToolWindowWasRegistered = true;
