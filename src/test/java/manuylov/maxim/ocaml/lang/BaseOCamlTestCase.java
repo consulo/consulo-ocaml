@@ -23,8 +23,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.openapi.application.ex.ApplicationManagerEx;
-import com.intellij.openapi.application.impl.ApplicationImpl;
-import com.intellij.openapi.util.Ref;
 import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
 import manuylov.maxim.ocaml.fileType.ml.parser.MLParserDefinition;
@@ -41,7 +39,7 @@ public class BaseOCamlTestCase extends Assert
 	{
 		if(ApplicationManagerEx.getApplication() == null)
 		{
-			new ApplicationImpl(true, Ref.create());
+			//new ApplicationImpl(true, Ref.create());
 			register(MLFileTypeLanguage.INSTANCE);
 			register(MLIFileTypeLanguage.INSTANCE);
 		}
