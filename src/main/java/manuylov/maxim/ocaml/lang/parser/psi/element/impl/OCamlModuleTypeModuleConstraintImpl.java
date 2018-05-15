@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleTypeModuleConstra
  */
 public class OCamlModuleTypeModuleConstraintImpl extends BaseOCamlElement implements OCamlModuleTypeModuleConstraint
 {
-	public OCamlModuleTypeModuleConstraintImpl(@NotNull final ASTNode node)
+	public OCamlModuleTypeModuleConstraintImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +43,7 @@ public class OCamlModuleTypeModuleConstraintImpl extends BaseOCamlElement implem
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExtendedModulePath.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitModuleTypeModuleConstraint(this);
 	}

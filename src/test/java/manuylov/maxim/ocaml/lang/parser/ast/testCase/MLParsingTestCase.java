@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.testCase;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
@@ -30,17 +30,17 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  *         Date: 28.02.2009
  */
 public abstract class MLParsingTestCase extends ParsingTestCase {
-    @NotNull
+    @Nonnull
     protected ParserDefinition getParserDefinition() {
         return LanguageParserDefinitions.INSTANCE.findSingle(MLFileTypeLanguage.INSTANCE);
     }
 
-    @NotNull
+    @Nonnull
     protected IElementType getModuleExpressionNodeType() {
         return OCamlElementTypes.FILE_MODULE_EXPRESSION;
     }
 
-    @NotNull
+    @Nonnull
     protected IElementType getModuleBindingNodeType() {
         return OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING;
     }

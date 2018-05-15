@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.feature.braceMatching;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
@@ -32,7 +33,7 @@ import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
  */
 public class OCamlBraceMatcher implements PairedBraceMatcher
 {
-	@NotNull
+	@Nonnull
 	private final BracePair[] myBracePairs = new BracePair[]{
 			new BracePair(OCamlTokenTypes.LPAR, OCamlTokenTypes.RPAR, false),
 			new BracePair(OCamlTokenTypes.LBRACE, OCamlTokenTypes.RBRACE, false),
@@ -48,18 +49,18 @@ public class OCamlBraceMatcher implements PairedBraceMatcher
 			new BracePair(OCamlTokenTypes.OBJECT_KEYWORD, OCamlTokenTypes.END_KEYWORD, true),
 	};
 
-	@NotNull
+	@Nonnull
 	public BracePair[] getPairs()
 	{
 		return myBracePairs;
 	}
 
-	public boolean isPairedBracesAllowedBeforeType(@NotNull final IElementType lbraceType, @Nullable final IElementType contextType)
+	public boolean isPairedBracesAllowedBeforeType(@Nonnull final IElementType lbraceType, @Nullable final IElementType contextType)
 	{
 		return true;
 	}
 
-	public int getCodeConstructStart(@NotNull final PsiFile file, final int openingBraceOffset)
+	public int getCodeConstructStart(@Nonnull final PsiFile file, final int openingBraceOffset)
 	{
 		return openingBraceOffset;
 	}

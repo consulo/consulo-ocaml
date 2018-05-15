@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
 
@@ -28,7 +29,7 @@ import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
  */
 public class OCamlElementType extends IElementType
 {
-	public OCamlElementType(@NotNull final String elementName)
+	public OCamlElementType(@Nonnull final String elementName)
 	{
 		super(elementName, MLFileTypeLanguage.INSTANCE); //todo base language or two different element types, see OCamlStubElementType
 	}

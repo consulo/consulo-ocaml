@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * @author Maxim.Manuylov

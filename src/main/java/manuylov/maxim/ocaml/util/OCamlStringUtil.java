@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.util;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Maxim.Manuylov
@@ -27,14 +27,14 @@ import org.jetbrains.annotations.Nullable;
  */
 public class OCamlStringUtil
 {
-	@NotNull
+	@Nonnull
 	public static String getNotNull(@Nullable final String string)
 	{
 		return string == null ? "" : string;
 	}
 
-	@NotNull
-	public static String firstLetterToUpperCase(@NotNull final String string)
+	@Nonnull
+	public static String firstLetterToUpperCase(@Nonnull final String string)
 	{
 		if(string.length() == 0)
 		{
@@ -43,8 +43,8 @@ public class OCamlStringUtil
 		return Character.toUpperCase(string.charAt(0)) + string.substring(1);
 	}
 
-	@NotNull
-	public static String firstLetterToLowerCase(@NotNull final String string)
+	@Nonnull
+	public static String firstLetterToLowerCase(@Nonnull final String string)
 	{
 		if(string.length() == 0)
 		{
@@ -53,7 +53,7 @@ public class OCamlStringUtil
 		return Character.toLowerCase(string.charAt(0)) + string.substring(1);
 	}
 
-	@NotNull
+	@Nonnull
 	public static String changeFirstLetterCase(final String string)
 	{
 		if(string.length() == 0)
@@ -63,8 +63,8 @@ public class OCamlStringUtil
 		return changeLetterCase(string.charAt(0)) + string.substring(1);
 	}
 
-	@NotNull
-	public static String makeFirstLetterCaseTheSame(@NotNull final String string, @NotNull final String pattern)
+	@Nonnull
+	public static String makeFirstLetterCaseTheSame(@Nonnull final String string, @Nonnull final String pattern)
 	{
 		return isUpperCase(pattern.charAt(0)) ? firstLetterToUpperCase(string) : firstLetterToLowerCase(string);
 	}
@@ -79,7 +79,7 @@ public class OCamlStringUtil
 		return letter == Character.toUpperCase(letter);
 	}
 
-	public static void insert(@NotNull final StringBuilder builder, final int position, @NotNull final String textToInsert)
+	public static void insert(@Nonnull final StringBuilder builder, final int position, @Nonnull final String textToInsert)
 	{
 		if(position == builder.length())
 		{

@@ -22,7 +22,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -37,22 +38,22 @@ import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
  */
 public class StubIndexHelper<Key, Psi extends PsiElement>
 {
-	@NotNull
+	@Nonnull
 	private final StubIndexKey<Key, Psi> myIndexKey;
 
-	private StubIndexHelper(@NotNull final StubIndexKey<Key, Psi> indexKey)
+	private StubIndexHelper(@Nonnull final StubIndexKey<Key, Psi> indexKey)
 	{
 		myIndexKey = indexKey;
 	}
 
-	@NotNull
-	public static <Key, Psi extends PsiElement> StubIndexHelper<Key, Psi> getInstance(@NotNull final StubIndexKey<Key, Psi> indexKey)
+	@Nonnull
+	public static <Key, Psi extends PsiElement> StubIndexHelper<Key, Psi> getInstance(@Nonnull final StubIndexKey<Key, Psi> indexKey)
 	{
 		return new StubIndexHelper<Key, Psi>(indexKey);
 	}
 
-	@NotNull
-	public Collection<Key> getAllKeysInScope(@NotNull final Project project, @NotNull final GlobalSearchScope scope)
+	@Nonnull
+	public Collection<Key> getAllKeysInScope(@Nonnull final Project project, @Nonnull final GlobalSearchScope scope)
 	{
 		final StubIndex stubIndex = StubIndex.getInstance();
 
@@ -72,14 +73,14 @@ public class StubIndexHelper<Key, Psi extends PsiElement>
 		return allKeys;
 	}
 
-	@NotNull
-	public Collection<Key> getAllKeys(@NotNull final Project project, final boolean includeNonProjectItems)
+	@Nonnull
+	public Collection<Key> getAllKeys(@Nonnull final Project project, final boolean includeNonProjectItems)
 	{
 		return getAllKeysInScope(project, createScope(project, includeNonProjectItems));
 	}
 
-	@NotNull
-	public static GlobalSearchScope createScope(@NotNull final Project project, final boolean includeNonProjectItems)
+	@Nonnull
+	public static GlobalSearchScope createScope(@Nonnull final Project project, final boolean includeNonProjectItems)
 	{
 		final GlobalSearchScope baseScope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
 		return GlobalSearchScope.getScopeRestrictedByFileTypes(baseScope, MLFileType.INSTANCE, MLIFileType.INSTANCE);

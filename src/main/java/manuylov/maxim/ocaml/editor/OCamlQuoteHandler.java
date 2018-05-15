@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.editor;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.editorActions.QuoteHandler;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
@@ -30,17 +31,17 @@ import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
  */
 public class OCamlQuoteHandler implements QuoteHandler
 {
-	public boolean isClosingQuote(@NotNull final HighlighterIterator iterator, final int offset)
+	public boolean isClosingQuote(@Nonnull final HighlighterIterator iterator, final int offset)
 	{
 		return isClosingQuote(iterator);
 	}
 
-	public boolean isOpeningQuote(@NotNull final HighlighterIterator iterator, final int offset)
+	public boolean isOpeningQuote(@Nonnull final HighlighterIterator iterator, final int offset)
 	{
 		return isOpeningQuote(iterator);
 	}
 
-	public boolean hasNonClosedLiteral(@NotNull final Editor editor, @NotNull final HighlighterIterator iterator, final int offset)
+	public boolean hasNonClosedLiteral(@Nonnull final Editor editor, @Nonnull final HighlighterIterator iterator, final int offset)
 	{
 		int start = iterator.getStart();
 		try
@@ -66,22 +67,22 @@ public class OCamlQuoteHandler implements QuoteHandler
 		}
 	}
 
-	public boolean isInsideLiteral(@NotNull final HighlighterIterator iterator)
+	public boolean isInsideLiteral(@Nonnull final HighlighterIterator iterator)
 	{
 		return isStringLiteral(iterator) || isClosingQuote(iterator);
 	}
 
-	private boolean isOpeningQuote(@NotNull final HighlighterIterator iterator)
+	private boolean isOpeningQuote(@Nonnull final HighlighterIterator iterator)
 	{
 		return OCamlTokenTypes.QH_OPENING_QUOTES.contains(iterator.getTokenType());
 	}
 
-	private boolean isClosingQuote(@NotNull final HighlighterIterator iterator)
+	private boolean isClosingQuote(@Nonnull final HighlighterIterator iterator)
 	{
 		return OCamlTokenTypes.QH_CLOSING_QUOTES.contains(iterator.getTokenType());
 	}
 
-	private boolean isStringLiteral(@NotNull final HighlighterIterator iterator)
+	private boolean isStringLiteral(@Nonnull final HighlighterIterator iterator)
 	{
 		return OCamlTokenTypes.QH_STRING_LITERALS.contains(iterator.getTokenType());
 	}

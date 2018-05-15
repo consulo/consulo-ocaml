@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
@@ -36,14 +37,14 @@ import manuylov.maxim.ocaml.util.OCamlIconUtil;
 @SuppressWarnings({"ComponentNotRegistered"})
 public class OCamlToolWindowOpenCloseAction extends AnAction
 {
-	@NotNull
+	@Nonnull
 	private final ContentManager myContentManager;
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 	private final boolean myOpenConsole;
 	private final boolean myCloseView;
 
-	public OCamlToolWindowOpenCloseAction(@NotNull final Project project, @NotNull final ContentManager contentManager, final boolean openConsole,
+	public OCamlToolWindowOpenCloseAction(@Nonnull final Project project, @Nonnull final ContentManager contentManager, final boolean openConsole,
 			final boolean closeView)
 	{
 		super(null, openConsole ? (closeView ? "Open OCaml top level interactive console" : "Open one more OCaml top level interactive console") :

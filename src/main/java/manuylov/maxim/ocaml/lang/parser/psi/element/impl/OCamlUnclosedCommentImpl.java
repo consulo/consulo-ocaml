@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnclosedComment;
  */
 public class OCamlUnclosedCommentImpl extends BaseOCamlElement implements OCamlUnclosedComment
 {
-	public OCamlUnclosedCommentImpl(@NotNull final ASTNode node)
+	public OCamlUnclosedCommentImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,12 +43,12 @@ public class OCamlUnclosedCommentImpl extends BaseOCamlElement implements OCamlU
 		return false;
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitUnclosedComment(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public IElementType getTokenType()
 	{
 		return OCamlElementTypes.UNCLOSED_COMMENT;

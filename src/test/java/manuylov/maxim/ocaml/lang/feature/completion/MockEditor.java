@@ -24,11 +24,11 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.event.CaretListener;
@@ -48,7 +48,7 @@ import com.intellij.openapi.util.Key;
 @SuppressWarnings({"ConstantConditions"})
 public class MockEditor implements Editor
 {
-	@NotNull
+	@Nonnull
 	public Document getDocument()
 	{
 		return new MyMockDocument();
@@ -59,13 +59,13 @@ public class MockEditor implements Editor
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	public JComponent getComponent()
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public JComponent getContentComponent()
 	{
 		return null;
@@ -83,7 +83,7 @@ public class MockEditor implements Editor
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public SelectionModel getSelectionModel()
 	{
 		return new SelectionModel()
@@ -206,13 +206,13 @@ public class MockEditor implements Editor
 				return false;
 			}
 
-			@NotNull
+			@Nonnull
 			public int[] getBlockSelectionStarts()
 			{
 				return new int[0];
 			}
 
-			@NotNull
+			@Nonnull
 			public int[] getBlockSelectionEnds()
 			{
 				return new int[0];
@@ -245,25 +245,25 @@ public class MockEditor implements Editor
 		};
 	}
 
-	@NotNull
+	@Nonnull
 	public MarkupModel getMarkupModel()
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public FoldingModel getFoldingModel()
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public ScrollingModel getScrollingModel()
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public CaretModel getCaretModel()
 	{
 		return new CaretModel()
@@ -340,14 +340,14 @@ public class MockEditor implements Editor
 				return false;
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
 			public Caret getCurrentCaret()
 			{
 				return null;
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
 			public Caret getPrimaryCaret()
 			{
@@ -360,7 +360,7 @@ public class MockEditor implements Editor
 				return 0;
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
 			public List<Caret> getAllCarets()
 			{
@@ -369,27 +369,27 @@ public class MockEditor implements Editor
 
 			@Nullable
 			@Override
-			public Caret getCaretAt(@NotNull VisualPosition visualPosition)
+			public Caret getCaretAt(@Nonnull VisualPosition visualPosition)
 			{
 				return null;
 			}
 
 			@Nullable
 			@Override
-			public Caret addCaret(@NotNull VisualPosition visualPosition)
+			public Caret addCaret(@Nonnull VisualPosition visualPosition)
 			{
 				return null;
 			}
 
 			@Nullable
 			@Override
-			public Caret addCaret(@NotNull VisualPosition visualPosition, boolean b)
+			public Caret addCaret(@Nonnull VisualPosition visualPosition, boolean b)
 			{
 				return null;
 			}
 
 			@Override
-			public boolean removeCaret(@NotNull Caret caret)
+			public boolean removeCaret(@Nonnull Caret caret)
 			{
 				return false;
 			}
@@ -401,18 +401,18 @@ public class MockEditor implements Editor
 			}
 
 			@Override
-			public void setCaretsAndSelections(@NotNull List<CaretState> list)
+			public void setCaretsAndSelections(@Nonnull List<CaretState> list)
 			{
 
 			}
 
 			@Override
-			public void setCaretsAndSelections(@NotNull List<CaretState> list, boolean b)
+			public void setCaretsAndSelections(@Nonnull List<CaretState> list, boolean b)
 			{
 
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
 			public List<CaretState> getCaretsAndSelections()
 			{
@@ -420,39 +420,39 @@ public class MockEditor implements Editor
 			}
 
 			@Override
-			public void runForEachCaret(@NotNull CaretAction caretAction)
+			public void runForEachCaret(@Nonnull CaretAction caretAction)
 			{
 
 			}
 
 			@Override
-			public void runForEachCaret(@NotNull CaretAction caretAction, boolean b)
+			public void runForEachCaret(@Nonnull CaretAction caretAction, boolean b)
 			{
 
 			}
 
 			@Override
-			public void runBatchCaretOperation(@NotNull Runnable runnable)
+			public void runBatchCaretOperation(@Nonnull Runnable runnable)
 			{
 
 			}
 		};
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public SoftWrapModel getSoftWrapModel()
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public EditorSettings getSettings()
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public EditorColorsScheme getColorsScheme()
 	{
 		return null;
@@ -463,96 +463,96 @@ public class MockEditor implements Editor
 		return 0;
 	}
 
-	@NotNull
-	public Point logicalPositionToXY(@NotNull final LogicalPosition pos)
+	@Nonnull
+	public Point logicalPositionToXY(@Nonnull final LogicalPosition pos)
 	{
 		return null;
 	}
 
-	public int logicalPositionToOffset(@NotNull final LogicalPosition pos)
+	public int logicalPositionToOffset(@Nonnull final LogicalPosition pos)
 	{
 		return 0;
 	}
 
-	@NotNull
-	public VisualPosition logicalToVisualPosition(@NotNull final LogicalPosition logicalPos)
+	@Nonnull
+	public VisualPosition logicalToVisualPosition(@Nonnull final LogicalPosition logicalPos)
 	{
 		return null;
 	}
 
-	@NotNull
-	public Point visualPositionToXY(@NotNull final VisualPosition visible)
+	@Nonnull
+	public Point visualPositionToXY(@Nonnull final VisualPosition visible)
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public Point2D visualPositionToPoint2D(@NotNull VisualPosition visualPosition)
+	public Point2D visualPositionToPoint2D(@Nonnull VisualPosition visualPosition)
 	{
 		return null;
 	}
 
-	@NotNull
-	public LogicalPosition visualToLogicalPosition(@NotNull final VisualPosition visiblePos)
+	@Nonnull
+	public LogicalPosition visualToLogicalPosition(@Nonnull final VisualPosition visiblePos)
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public LogicalPosition offsetToLogicalPosition(final int offset)
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public VisualPosition offsetToVisualPosition(final int offset)
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public VisualPosition offsetToVisualPosition(int i, boolean b, boolean b1)
 	{
 		return null;
 	}
 
-	@NotNull
-	public LogicalPosition xyToLogicalPosition(@NotNull final Point p)
+	@Nonnull
+	public LogicalPosition xyToLogicalPosition(@Nonnull final Point p)
 	{
 		return null;
 	}
 
-	@NotNull
-	public VisualPosition xyToVisualPosition(@NotNull final Point p)
+	@Nonnull
+	public VisualPosition xyToVisualPosition(@Nonnull final Point p)
 	{
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public VisualPosition xyToVisualPosition(@NotNull Point2D point2D)
+	public VisualPosition xyToVisualPosition(@Nonnull Point2D point2D)
 	{
 		return null;
 	}
 
-	public void addEditorMouseListener(@NotNull final EditorMouseListener listener)
+	public void addEditorMouseListener(@Nonnull final EditorMouseListener listener)
 	{
 
 	}
 
-	public void removeEditorMouseListener(@NotNull final EditorMouseListener listener)
+	public void removeEditorMouseListener(@Nonnull final EditorMouseListener listener)
 	{
 
 	}
 
-	public void addEditorMouseMotionListener(@NotNull final EditorMouseMotionListener listener)
+	public void addEditorMouseMotionListener(@Nonnull final EditorMouseMotionListener listener)
 	{
 
 	}
 
-	public void removeEditorMouseMotionListener(@NotNull final EditorMouseMotionListener listener)
+	public void removeEditorMouseMotionListener(@Nonnull final EditorMouseMotionListener listener)
 	{
 
 	}
@@ -582,13 +582,13 @@ public class MockEditor implements Editor
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	public EditorGutter getGutter()
 	{
 		return null;
 	}
 
-	public EditorMouseEventArea getMouseEventArea(@NotNull final MouseEvent e)
+	public EditorMouseEventArea getMouseEventArea(@Nonnull final MouseEvent e)
 	{
 		return null;
 	}
@@ -613,19 +613,19 @@ public class MockEditor implements Editor
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public InlayModel getInlayModel()
 	{
 		return null;
 	}
 
-	public <T> T getUserData(@NotNull final Key<T> key)
+	public <T> T getUserData(@Nonnull final Key<T> key)
 	{
 		return null;
 	}
 
-	public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value)
+	public <T> void putUserData(@Nonnull final Key<T> key, @Nullable final T value)
 	{
 
 	}

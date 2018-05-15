@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -33,14 +33,14 @@ import com.intellij.ui.content.ContentManager;
  */
 class OCamlToolWindowUtil
 {
-	public static void addAndSelectStartContent(@NotNull final Project project, @NotNull final ContentManager contentManager)
+	public static void addAndSelectStartContent(@Nonnull final Project project, @Nonnull final ContentManager contentManager)
 	{
 		final OCamlToolWindowStartView view = new OCamlToolWindowStartView(project, contentManager);
 		addAndSelectContent(contentManager, view, null, false);
 	}
 
-	public static void addAndSelectTopLevelConsoleContent(@NotNull final Project project, @NotNull final ContentManager contentManager,
-			@NotNull final Sdk topLevelSdk)
+	public static void addAndSelectTopLevelConsoleContent(@Nonnull final Project project, @Nonnull final ContentManager contentManager,
+			@Nonnull final Sdk topLevelSdk)
 	{
 		final OCamlTopLevelConsoleView view;
 		try
@@ -55,7 +55,7 @@ class OCamlToolWindowUtil
 		addAndSelectContent(contentManager, view, "Top Level #" + view.getConsoleNumber(), true);
 	}
 
-	private static void addAndSelectContent(@NotNull final ContentManager contentManager, @NotNull final BaseOCamlToolWindowView view,
+	private static void addAndSelectContent(@Nonnull final ContentManager contentManager, @Nonnull final BaseOCamlToolWindowView view,
 			@Nullable final String title, final boolean closable)
 	{
 		final Content content = contentManager.getFactory().createContent(view, title, false);

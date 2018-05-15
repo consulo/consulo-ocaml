@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlObjectClassBodyEndExpre
  */
 public class OCamlObjectClassBodyEndExpressionImpl extends BaseOCamlElement implements OCamlObjectClassBodyEndExpression
 {
-	public OCamlObjectClassBodyEndExpressionImpl(@NotNull final ASTNode node)
+	public OCamlObjectClassBodyEndExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +43,7 @@ public class OCamlObjectClassBodyEndExpressionImpl extends BaseOCamlElement impl
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.END_KEYWORD);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitObjectClassBodyEndExpression(this);
 	}

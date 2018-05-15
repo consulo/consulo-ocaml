@@ -22,9 +22,10 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.ide.DataManager;
@@ -52,7 +53,7 @@ import manuylov.maxim.ocaml.util.OCamlSystemUtil;
  */
 public class OCamlSdkType extends SdkType
 {
-	@NotNull
+	@Nonnull
 	public static OCamlSdkType getInstance()
 	{
 		return EP_NAME.findExtension(OCamlSdkType.class);
@@ -64,13 +65,13 @@ public class OCamlSdkType extends SdkType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Image getIcon()
 	{
 		return OCamlIconUtil.getSmallOCamlIcon();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Collection<String> suggestHomePaths()
 	{
@@ -87,7 +88,7 @@ public class OCamlSdkType extends SdkType
 	}
 
 	@Override
-	public boolean isValidSdkHome(@NotNull final String path)
+	public boolean isValidSdkHome(@Nonnull final String path)
 	{
 		final File ocaml = getTopLevelExecutable(path);
 		final File ocamlc = getByteCodeCompilerExecutable(path);
@@ -97,39 +98,39 @@ public class OCamlSdkType extends SdkType
 		return ocaml.canExecute() && ocamlc.canExecute() && ocamlrun.canExecute() && ocamlopt.canExecute() && ocamldebug.canExecute();
 	}
 
-	@NotNull
-	public static File getTopLevelExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getTopLevelExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(sdkHome, "ocaml");
 	}
 
-	@NotNull
-	public static File getByteCodeCompilerExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getByteCodeCompilerExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(sdkHome, "ocamlc");
 	}
 
-	@NotNull
-	public static File getByteCodeInterpreterExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getByteCodeInterpreterExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(sdkHome, "ocamlrun");
 	}
 
-	@NotNull
-	public static File getDebuggerExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getDebuggerExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(sdkHome, "ocamldebug");
 	}
 
-	@NotNull
-	public static File getNativeCompilerExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getNativeCompilerExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(sdkHome, "ocamlopt");
 	}
 
 	@Override
-	@NotNull
-	public String suggestSdkName(@Nullable final String currentSdkName, @NotNull final String sdkHome)
+	@Nonnull
+	public String suggestSdkName(@Nullable final String currentSdkName, @Nonnull final String sdkHome)
 	{
 		String version = getVersionString(sdkHome);
 		if(version == null)
@@ -141,7 +142,7 @@ public class OCamlSdkType extends SdkType
 
 	@Override
 	@Nullable
-	public String getVersionString(@NotNull final String sdkHome)
+	public String getVersionString(@Nonnull final String sdkHome)
 	{
 		final String exePath = getByteCodeCompilerExecutable(sdkHome).getAbsolutePath();
 		final ProcessOutput processOutput;
@@ -161,7 +162,7 @@ public class OCamlSdkType extends SdkType
 		return stdout.isEmpty() ? null : stdout;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	@NonNls
 	public String getPresentableName()
@@ -170,7 +171,7 @@ public class OCamlSdkType extends SdkType
 	}
 
 	@Override
-	public void setupSdkPaths(@NotNull final Sdk sdk)
+	public void setupSdkPaths(@Nonnull final Sdk sdk)
 	{
 		final SdkModificator[] sdkModificatorHolder = new SdkModificator[]{null};
 		final ProgressManager progressManager = ProgressManager.getInstance();
@@ -178,7 +179,7 @@ public class OCamlSdkType extends SdkType
 		final Task.Modal setupTask = new Task.Modal(project, "Setting up library files", false)
 		{
 			@Override
-			public void run(@NotNull final ProgressIndicator indicator)
+			public void run(@Nonnull final ProgressIndicator indicator)
 			{
 				sdkModificatorHolder[0] = setupSdkPathsUnderProgress(sdk);
 			}
@@ -190,15 +191,15 @@ public class OCamlSdkType extends SdkType
 		}
 	}
 
-	@NotNull
-	protected SdkModificator setupSdkPathsUnderProgress(@NotNull final Sdk sdk)
+	@Nonnull
+	protected SdkModificator setupSdkPathsUnderProgress(@Nonnull final Sdk sdk)
 	{
 		final SdkModificator sdkModificator = sdk.getSdkModificator();
 		doSetupSdkPaths(sdkModificator);
 		return sdkModificator;
 	}
 
-	public void doSetupSdkPaths(@NotNull final SdkModificator sdkModificator)
+	public void doSetupSdkPaths(@Nonnull final SdkModificator sdkModificator)
 	{
 		final String sdkHome = sdkModificator.getHomePath();
 
@@ -249,7 +250,7 @@ public class OCamlSdkType extends SdkType
 		tryToProcessAsStandardLibraryDir(sdkModificator, stdLibDir);
 	}
 
-	private boolean tryToProcessAsStandardLibraryDir(@NotNull final SdkModificator sdkModificator, @NotNull final File stdLibDir)
+	private boolean tryToProcessAsStandardLibraryDir(@Nonnull final SdkModificator sdkModificator, @Nonnull final File stdLibDir)
 	{
 		if(!isStandardLibraryDir(stdLibDir))
 		{
@@ -264,7 +265,7 @@ public class OCamlSdkType extends SdkType
 		return true;
 	}
 
-	private boolean isStandardLibraryDir(@NotNull final File dir)
+	private boolean isStandardLibraryDir(@Nonnull final File dir)
 	{
 		if(!dir.isDirectory())
 		{
@@ -277,8 +278,8 @@ public class OCamlSdkType extends SdkType
 		return pervasives_ml.isFile() && pervasives_mli.isFile() && pervasives_cmi.isFile() && pervasives_cmx.isFile();
 	}
 
-	@NotNull
-	private static File getExecutable(@NotNull final String path, @NotNull final String command)
+	@Nonnull
+	private static File getExecutable(@Nonnull final String path, @Nonnull final String command)
 	{
 		return new File(path, SystemInfo.isWindows ? command + ".exe" : command);
 	}

@@ -21,9 +21,9 @@ package manuylov.maxim.ocaml.actions;
 import java.io.File;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.ide.IdeView;
 import com.intellij.ide.actions.CreateElementActionBase;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -49,23 +49,23 @@ import manuylov.maxim.ocaml.util.OCamlModuleUtil;
  */
 abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 {
-	@NotNull
+	@Nonnull
 	private static final Pattern MODULE_NAME_PATTERN = Pattern.compile("[a-zA-Z][a-zA-Z0-9_']*");
 
-	protected BaseCreateOCamlFileAction(@NotNull final String text, @NotNull final String description, @NotNull final Icon icon)
+	protected BaseCreateOCamlFileAction(@Nonnull final String text, @Nonnull final String description, @Nonnull final Icon icon)
 	{
 		super(text, description, icon);
 	}
 
-	@NotNull
+	@Nonnull
 	protected abstract String getCapitalizedType();
 
-	@NotNull
+	@Nonnull
 	protected abstract FileType getFileType();
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected PsiElement[] invokeDialog(@NotNull final Project project, @NotNull final PsiDirectory directory)
+	protected PsiElement[] invokeDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory)
 	{
 		final MyInputValidator validator = new MyInputValidator(project, directory);
 		Messages.showInputDialog(project, "Enter module name:", "New OCaml Module " + getCapitalizedType() + " File", Messages.getQuestionIcon(), null,
@@ -73,13 +73,13 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 		return validator.getCreatedElements();
 	}
 
-	@NotNull
-	protected String getFileName(@NotNull final String newName)
+	@Nonnull
+	protected String getFileName(@Nonnull final String newName)
 	{
 		return OCamlFileUtil.getFileName(newName, getFileType());
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected PsiElement[] create(final String newName, final PsiDirectory directory) throws Exception
 	{
@@ -87,7 +87,7 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 	}
 
 	@Override
-	protected boolean isAvailable(@NotNull final DataContext dataContext)
+	protected boolean isAvailable(@Nonnull final DataContext dataContext)
 	{
 		final Project project = dataContext.getData(PlatformDataKeys.PROJECT);
 		if(project == null)
@@ -125,28 +125,28 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected String getErrorTitle()
 	{
 		return "Cannot create OCaml module " + getType() + " file";
 	}
 
-	@NotNull
+	@Nonnull
 	private String getType()
 	{
 		return getCapitalizedType().toLowerCase();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected String getCommandName()
 	{
 		return "Create OCaml module " + getType() + " file";
 	}
 
 	@Override
-	@NotNull
-	protected String getActionName(@NotNull final PsiDirectory directory, @NotNull final String newName)
+	@Nonnull
+	protected String getActionName(@Nonnull final PsiDirectory directory, @Nonnull final String newName)
 	{
 		return "Creating file \"" + FileUtil.toSystemDependentName(new File(directory.getVirtualFile().getPath(),
 				getFileName(newName)).getAbsolutePath()) + "\"...";

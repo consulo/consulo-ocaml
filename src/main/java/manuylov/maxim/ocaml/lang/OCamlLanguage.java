@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.Language;
 
 /**
@@ -27,7 +27,7 @@ import com.intellij.lang.Language;
  */
 public class OCamlLanguage extends Language
 {
-	@NotNull
+	@Nonnull
 	public static final OCamlLanguage INSTANCE = new OCamlLanguage();
 
 	private OCamlLanguage()

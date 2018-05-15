@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.stub.index;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlResolvedClassName;
@@ -29,10 +29,10 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlResolvedClassName;
  */
 public class OCamlClassIndex extends StringStubIndexExtension<OCamlResolvedClassName>
 {
-	@NotNull
+	@Nonnull
 	public static final StubIndexKey<String, OCamlResolvedClassName> KEY = StubIndexKey.createIndexKey("ocaml.class.shortname");
 
-	@NotNull
+	@Nonnull
 	public StubIndexKey<String, OCamlResolvedClassName> getKey()
 	{
 		return KEY;

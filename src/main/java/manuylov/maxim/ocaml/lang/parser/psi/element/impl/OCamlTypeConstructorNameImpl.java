@@ -23,8 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -46,7 +47,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeConstructorName;
  */
 public class OCamlTypeConstructorNameImpl extends BaseOCamlReference implements OCamlTypeConstructorName
 {
-	@NotNull
+	@Nonnull
 	private static final Set<String> ourBundledTypes = new HashSet<String>()
 	{{
 			add("array");
@@ -72,12 +73,12 @@ public class OCamlTypeConstructorNameImpl extends BaseOCamlReference implements 
 		return ourBundledTypes.contains(getName());
 	}
 
-	public OCamlTypeConstructorNameImpl(@NotNull final ASTNode node)
+	public OCamlTypeConstructorNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTypeConstructorName(this);
 	}
@@ -88,32 +89,32 @@ public class OCamlTypeConstructorNameImpl extends BaseOCamlReference implements 
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "type";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlTypeBinding.class, OCamlClassTypeBinding.class, OCamlClassBinding.class,
 				OCamlClassSpecificationBinding.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return OCamlResolvingUtil.findActualDefinitionsOfStructuredElementReference(this);

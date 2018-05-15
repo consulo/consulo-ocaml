@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -34,12 +35,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordFieldInitializati
  */
 public class OCamlInheritedRecordExpressionImpl extends BaseOCamlElement implements OCamlInheritedRecordExpression
 {
-	public OCamlInheritedRecordExpressionImpl(@NotNull final ASTNode node)
+	public OCamlInheritedRecordExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitInheritedRecordExpression(this);
 	}
@@ -51,7 +52,7 @@ public class OCamlInheritedRecordExpressionImpl extends BaseOCamlElement impleme
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlRecordFieldInitializationInExpression.class);
 	}

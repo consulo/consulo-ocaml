@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.compile;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.compiler.options.CompileStepBeforeRun;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -62,8 +62,8 @@ class OCamlCompileContext
 		return myIsDebugMode;
 	}
 
-	@NotNull
-	public static OCamlCompileContext createOn(@NotNull final CompileContext context)
+	@Nonnull
+	public static OCamlCompileContext createOn(@Nonnull final CompileContext context)
 	{
 		final RunConfiguration configuration = CompileStepBeforeRun.getRunConfiguration(context);
 		if(configuration == null || !(configuration instanceof OCamlRunConfiguration))

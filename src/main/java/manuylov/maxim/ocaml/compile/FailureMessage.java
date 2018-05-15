@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.compile;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Maxim.Manuylov
@@ -27,9 +27,9 @@ import org.jetbrains.annotations.Nullable;
  */
 class FailureMessage
 {
-	@NotNull
+	@Nonnull
 	private final Type myType;
-	@NotNull
+	@Nonnull
 	private final String myMessageText;
 	@Nullable
 	private final String myFilePath;
@@ -37,7 +37,7 @@ class FailureMessage
 	private final int myStartPosition;
 	private final int myEndPosition;
 
-	FailureMessage(@NotNull final Type type, @NotNull final String messageText, @Nullable final String filePath, final int lineNumber,
+	FailureMessage(@Nonnull final Type type, @Nonnull final String messageText, @Nullable final String filePath, final int lineNumber,
 			final int startPosition, final int endPosition)
 	{
 		myType = type;
@@ -48,13 +48,13 @@ class FailureMessage
 		myEndPosition = endPosition;
 	}
 
-	@NotNull
+	@Nonnull
 	public Type getType()
 	{
 		return myType;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getMessageText()
 	{
 		return myMessageText;

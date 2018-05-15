@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -33,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleExpression;
  */
 public class OCamlIncludeDirectiveDefinitionImpl extends BaseOCamlElement implements OCamlIncludeDirectiveDefinition
 {
-	public OCamlIncludeDirectiveDefinitionImpl(@NotNull final ASTNode node)
+	public OCamlIncludeDirectiveDefinitionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -44,13 +44,13 @@ public class OCamlIncludeDirectiveDefinitionImpl extends BaseOCamlElement implem
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitIncludeDirectiveDefinition(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		final OCamlModuleExpression expression = OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class);
 		return OCamlDeclarationsUtil.processDeclarationsInStructuredElement(builder, expression);

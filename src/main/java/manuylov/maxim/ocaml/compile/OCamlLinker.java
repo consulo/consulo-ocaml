@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.RunManager;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -54,8 +55,8 @@ import manuylov.maxim.ocaml.util.OCamlSystemUtil;
  */
 public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumentingCompiler
 {
-	@NotNull
-	public ProcessingItem[] getProcessingItems(@NotNull final CompileContext context)
+	@Nonnull
+	public ProcessingItem[] getProcessingItems(@Nonnull final CompileContext context)
 	{
 		final ProgressIndicator progressIndicator = context.getProgressIndicator();
 		progressIndicator.setIndeterminate(true);
@@ -86,8 +87,8 @@ public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumenting
 		return items.toArray(new ProcessingItem[items.size()]);
 	}
 
-	@NotNull
-	public ProcessingItem[] process(@NotNull final CompileContext context, @NotNull final ProcessingItem[] items)
+	@Nonnull
+	public ProcessingItem[] process(@Nonnull final CompileContext context, @Nonnull final ProcessingItem[] items)
 	{
 		final ProgressIndicator progressIndicator = context.getProgressIndicator();
 		progressIndicator.setIndeterminate(false);
@@ -135,7 +136,7 @@ public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumenting
 		return processedItems.toArray(new ProcessingItem[processedItems.size()]);
 	}
 
-	private void link(@NotNull final OCamlModule ocamlModule, @NotNull final ProjectFileIndex fileIndex, @NotNull final CompileContext context,
+	private void link(@Nonnull final OCamlModule ocamlModule, @Nonnull final ProjectFileIndex fileIndex, @Nonnull final CompileContext context,
 			final OCamlCompileContext ocamlContext) throws CyclicDependencyException
 	{
 		final GeneralCommandLine cmd = getBaseCompilerCommandLineForFile(ocamlModule.getSourcesDir(), fileIndex, context, ocamlContext.isDebugMode());
@@ -179,15 +180,15 @@ public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumenting
 		//todo libraries!!! maybe in OCamlModule
 	}
 
-	@NotNull
-	public ValidityState createValidityState(@NotNull final DataInput in) throws IOException
+	@Nonnull
+	public ValidityState createValidityState(@Nonnull final DataInput in) throws IOException
 	{
 		return OCamlValidityState.load(in);
 	}
 
-	@NotNull
-	private ProcessingItem createProcessingItem(@NotNull final CompileContext context, @NotNull final OCamlCompileContext ocamlContext,
-			@NotNull final OCamlModule mainOCamlModule)
+	@Nonnull
+	private ProcessingItem createProcessingItem(@Nonnull final CompileContext context, @Nonnull final OCamlCompileContext ocamlContext,
+			@Nonnull final OCamlModule mainOCamlModule)
 	{
 		final File cmoFile = mainOCamlModule.getCompiledImplementationFile();
 		VirtualFile file = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(cmoFile);
@@ -205,13 +206,13 @@ public class OCamlLinker extends BaseOCamlCompiler implements ClassInstrumenting
 		return createProcessingItem(mainOCamlModule, file, exeFile, ocamlContext.isDebugMode(), forceRecompilation);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "OCaml Linker";
 	}
 
-	public boolean validateConfiguration(@NotNull final CompileScope scope)
+	public boolean validateConfiguration(@Nonnull final CompileScope scope)
 	{
 		return true;
 	}

@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
@@ -30,19 +31,19 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 public class TypeMLIParsingTest extends BaseTypeParsingTest
 {
-	@NotNull
+	@Nonnull
 	protected ParserDefinition getParserDefinition()
 	{
 		return new MLIParserDefinition();
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleExpressionNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_TYPE;
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleBindingNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;

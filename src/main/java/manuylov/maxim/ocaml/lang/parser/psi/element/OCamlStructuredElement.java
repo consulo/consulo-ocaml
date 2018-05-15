@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.lang.parser.psi.element;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 
 /**
@@ -29,6 +29,6 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
  */
 public interface OCamlStructuredElement extends OCamlElement
 {
-	@NotNull
+	@Nonnull
 	List<OCamlStructuredElement> findActualDefinitions();
 }

@@ -22,7 +22,8 @@ import static com.intellij.psi.TokenType.ERROR_ELEMENT;
 import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.Strings;
@@ -248,7 +249,7 @@ public class NameParsingTest extends MLParsingTestCase
 		doTestOperatorName(ASR_KEYWORD, "asr");
 	}
 
-	private void doTestOperatorName(final IElementType operatorType, @NotNull final String operator) throws Exception
+	private void doTestOperatorName(final IElementType operatorType, @Nonnull final String operator) throws Exception
 	{
 		recreateTree();
 

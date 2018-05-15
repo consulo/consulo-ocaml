@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType.mli.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import consulo.lang.LanguageVersion;
 import com.intellij.lang.PsiBuilder;
@@ -34,8 +35,8 @@ import manuylov.maxim.ocaml.lang.parser.ast.util.CommentsParserPsiBuilder;
  */
 class MLIParser implements PsiParser
 {
-	@NotNull
-	public ASTNode parse(@NotNull final IElementType root, @NotNull final PsiBuilder builder, @NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public ASTNode parse(@Nonnull final IElementType root, @Nonnull final PsiBuilder builder, @Nonnull LanguageVersion languageVersion)
 	{
 		final PsiBuilder builderWrapper = new CommentsParserPsiBuilder(builder);
 

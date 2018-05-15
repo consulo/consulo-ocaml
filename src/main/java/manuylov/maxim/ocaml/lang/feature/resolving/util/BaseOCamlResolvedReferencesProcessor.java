@@ -20,8 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReferencesProcessor;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -32,22 +32,22 @@ import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
  */
 abstract class BaseOCamlResolvedReferencesProcessor implements OCamlResolvedReferencesProcessor
 {
-	@NotNull
+	@Nonnull
 	private final List<Class<? extends OCamlResolvedReference>> myTypes;
 
 	private ResolvingBuilder myBuilder = null;
 
-	public void setResolvingBuilder(@NotNull final ResolvingBuilder resolvingBuilder)
+	public void setResolvingBuilder(@Nonnull final ResolvingBuilder resolvingBuilder)
 	{
 		myBuilder = resolvingBuilder;
 	}
 
-	public BaseOCamlResolvedReferencesProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types)
+	public BaseOCamlResolvedReferencesProcessor(@Nonnull final List<Class<? extends OCamlResolvedReference>> types)
 	{
 		myTypes = types;
 	}
 
-	public boolean process(@NotNull final OCamlResolvedReference psiElement)
+	public boolean process(@Nonnull final OCamlResolvedReference psiElement)
 	{
 		if(myBuilder != null && myBuilder.canProcessElement())
 		{
@@ -72,5 +72,5 @@ abstract class BaseOCamlResolvedReferencesProcessor implements OCamlResolvedRefe
 		return myBuilder == null ? null : myBuilder.getContext().getSourceElement().getName();
 	}
 
-	protected abstract boolean doProcess(@NotNull final OCamlResolvedReference psiElement);
+	protected abstract boolean doProcess(@Nonnull final OCamlResolvedReference psiElement);
 }

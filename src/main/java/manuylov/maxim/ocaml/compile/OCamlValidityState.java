@@ -24,8 +24,9 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.compiler.TimestampValidityState;
 import com.intellij.openapi.compiler.ValidityState;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -37,11 +38,11 @@ import manuylov.maxim.ocaml.util.OCamlFileUtil;
  */
 class OCamlValidityState implements ValidityState
 {
-	@NotNull
+	@Nonnull
 	private final TimestampValidityState myTimestampValidityState;
 	private final boolean myIsDebugMode;
 
-	public OCamlValidityState(@NotNull final TimestampValidityState timestampValidityState, final boolean isDebugMode)
+	public OCamlValidityState(@Nonnull final TimestampValidityState timestampValidityState, final boolean isDebugMode)
 	{
 		myTimestampValidityState = timestampValidityState;
 		myIsDebugMode = isDebugMode;
@@ -57,14 +58,14 @@ class OCamlValidityState implements ValidityState
 		return myTimestampValidityState.equalsTo(thatState.myTimestampValidityState) && myIsDebugMode == thatState.myIsDebugMode;
 	}
 
-	public void save(@NotNull final DataOutput out) throws IOException
+	public void save(@Nonnull final DataOutput out) throws IOException
 	{
 		myTimestampValidityState.save(out);
 		out.writeBoolean(myIsDebugMode);
 	}
 
-	@NotNull
-	public static ValidityState load(@NotNull final DataInput in) throws IOException
+	@Nonnull
+	public static ValidityState load(@Nonnull final DataInput in) throws IOException
 	{
 		try
 		{
@@ -84,8 +85,8 @@ class OCamlValidityState implements ValidityState
 		}
 	}
 
-	@NotNull
-	public static ValidityState create(@NotNull final VirtualFile file, @NotNull final File compiledFile, final boolean isDebugMode,
+	@Nonnull
+	public static ValidityState create(@Nonnull final VirtualFile file, @Nonnull final File compiledFile, final boolean isDebugMode,
 			final boolean forceRecompilation)
 	{
 		final TimestampValidityState timestampValidityState = new TimestampValidityState(file.getTimeStamp());
@@ -105,15 +106,15 @@ class OCamlValidityState implements ValidityState
 
 	private static class NeedRecompilationValidityState implements ValidityState
 	{
-		@NotNull
+		@Nonnull
 		public static final NeedRecompilationValidityState INSTANCE = new NeedRecompilationValidityState();
 
-		public boolean equalsTo(@NotNull final ValidityState otherState)
+		public boolean equalsTo(@Nonnull final ValidityState otherState)
 		{
 			return false;
 		}
 
-		public void save(@NotNull final DataOutput out) throws IOException
+		public void save(@Nonnull final DataOutput out) throws IOException
 		{
 		}
 	}

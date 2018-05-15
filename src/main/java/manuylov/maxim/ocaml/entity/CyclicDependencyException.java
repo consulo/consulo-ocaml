@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.entity;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import manuylov.maxim.ocaml.util.TreeNode;
 
 /**
@@ -28,13 +29,13 @@ import manuylov.maxim.ocaml.util.TreeNode;
  */
 public class CyclicDependencyException extends Exception
 {
-	public CyclicDependencyException(@NotNull final TreeNode<OCamlModule> node)
+	public CyclicDependencyException(@Nonnull final TreeNode<OCamlModule> node)
 	{
 		super(generateMessage(node));
 	}
 
-	@NotNull
-	private static String generateMessage(@NotNull final TreeNode<OCamlModule> node)
+	@Nonnull
+	private static String generateMessage(@Nonnull final TreeNode<OCamlModule> node)
 	{
 		final StringBuilder sb = new StringBuilder();
 		final OCamlModule module = node.getData();
@@ -50,7 +51,7 @@ public class CyclicDependencyException extends Exception
 	}
 
 	@Nullable
-	private static TreeNode<OCamlModule> processNode(@NotNull final StringBuilder sb, @NotNull final TreeNode<OCamlModule> node)
+	private static TreeNode<OCamlModule> processNode(@Nonnull final StringBuilder sb, @Nonnull final TreeNode<OCamlModule> node)
 	{
 		sb.insert(0, node.getData().getName());
 		sb.insert(0, " -> ");

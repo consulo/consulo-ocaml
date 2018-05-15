@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -41,12 +41,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
  */
 public class OCamlModuleTypeNameImpl extends BaseOCamlReference implements OCamlModuleTypeName
 {
-	public OCamlModuleTypeNameImpl(@NotNull final ASTNode node)
+	public OCamlModuleTypeNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitModuleTypeName(this);
 	}
@@ -57,37 +57,37 @@ public class OCamlModuleTypeNameImpl extends BaseOCamlReference implements OCaml
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.AnyCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "module type";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlResolvedModuleTypeName.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlModuleTypeName getModuleTypeName()
 	{
 		return this;
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return OCamlResolvingUtil.findActualDefinitionsOfStructuredElementReference(this);

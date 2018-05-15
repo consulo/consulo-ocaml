@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -32,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTagName;
  */
 abstract class BaseOCamlConstant extends BaseOCamlElement implements OCamlConstant
 {
-	public BaseOCamlConstant(@NotNull final ASTNode node)
+	public BaseOCamlConstant(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}

@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -31,7 +31,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParentheses;
  */
 public class OCamlArrayElementAccessingExpressionImpl extends BaseOCamlElement implements OCamlArrayElementAccessingExpression
 {
-	public OCamlArrayElementAccessingExpressionImpl(@NotNull final ASTNode node)
+	public OCamlArrayElementAccessingExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +42,7 @@ public class OCamlArrayElementAccessingExpressionImpl extends BaseOCamlElement i
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlParentheses.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitArrayElementAccessingExpression(this);
 	}

@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Maxim.Manuylov
@@ -30,25 +30,25 @@ import org.jetbrains.annotations.Nullable;
  */
 public class TreeNode<T>
 {
-	@NotNull
+	@Nonnull
 	private final T myData;
 	@Nullable
 	private TreeNode<T> myParent = null;
-	@NotNull
+	@Nonnull
 	final private List<TreeNode<T>> myChildren = new ArrayList<TreeNode<T>>();
 
-	public TreeNode(@NotNull final T data)
+	public TreeNode(@Nonnull final T data)
 	{
 		myData = data;
 	}
 
-	@NotNull
+	@Nonnull
 	public T getData()
 	{
 		return myData;
 	}
 
-	@NotNull
+	@Nonnull
 	public List<TreeNode<T>> getChildren()
 	{
 		return myChildren;
@@ -60,7 +60,7 @@ public class TreeNode<T>
 		return myParent;
 	}
 
-	public void addChild(@NotNull final TreeNode<T> child)
+	public void addChild(@Nonnull final TreeNode<T> child)
 	{
 		child.myParent = this;
 		myChildren.add(child);

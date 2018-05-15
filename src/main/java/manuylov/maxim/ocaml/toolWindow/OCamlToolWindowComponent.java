@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.ProjectTopics;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.module.Module;
@@ -42,30 +43,30 @@ import manuylov.maxim.ocaml.util.OCamlModuleUtil;
  */
 public class OCamlToolWindowComponent implements ProjectComponent
 {
-	@NotNull
+	@Nonnull
 	private final ToolWindowManager myToolWindowManager;
-	@NotNull
+	@Nonnull
 	private final MessageBusConnection myConnection;
-	@NotNull
+	@Nonnull
 	private final Project myProject;
-	@NotNull
+	@Nonnull
 	private final String TOOL_WINDOW_ID = "OCaml";
 	private boolean myToolWindowWasRegistered = false;
 
-	public OCamlToolWindowComponent(@NotNull final Project project)
+	public OCamlToolWindowComponent(@Nonnull final Project project)
 	{
 		myToolWindowManager = ToolWindowManager.getInstance(project);
 		myConnection = project.getMessageBus().connect();
 		myConnection.subscribe(ProjectTopics.MODULES, new ModuleAdapter()
 		{
 			@Override
-			public void moduleAdded(@NotNull final Project project, @NotNull final Module module)
+			public void moduleAdded(@Nonnull final Project project, @Nonnull final Module module)
 			{
 				registerToolWindowIfNeeded();
 			}
 
 			@Override
-			public void moduleRemoved(@NotNull final Project project, @NotNull final Module module)
+			public void moduleRemoved(@Nonnull final Project project, @Nonnull final Module module)
 			{
 				unregisterToolWindowIfNeeded();
 			}
@@ -73,7 +74,7 @@ public class OCamlToolWindowComponent implements ProjectComponent
 		myProject = project;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getComponentName()
 	{
 		return "OCAML_TOOL_WINDOW";
@@ -115,7 +116,7 @@ public class OCamlToolWindowComponent implements ProjectComponent
 		contentManager.addContentManagerListener(new ContentManagerAdapter()
 		{
 			@Override
-			public void contentRemoved(@NotNull final ContentManagerEvent event)
+			public void contentRemoved(@Nonnull final ContentManagerEvent event)
 			{
 				if(contentManager.getContentCount() == 0)
 				{

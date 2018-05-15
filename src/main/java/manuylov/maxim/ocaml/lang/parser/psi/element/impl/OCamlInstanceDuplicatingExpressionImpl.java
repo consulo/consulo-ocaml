@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlInstanceDuplicatingExpr
  */
 public class OCamlInstanceDuplicatingExpressionImpl extends BaseOCamlElement implements OCamlInstanceDuplicatingExpression
 {
-	public OCamlInstanceDuplicatingExpressionImpl(@NotNull final ASTNode node)
+	public OCamlInstanceDuplicatingExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +43,7 @@ public class OCamlInstanceDuplicatingExpressionImpl extends BaseOCamlElement imp
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.GT_RBRACE);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitInstanceDuplicatingExpression(this);
 	}

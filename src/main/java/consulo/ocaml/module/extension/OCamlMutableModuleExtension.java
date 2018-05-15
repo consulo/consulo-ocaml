@@ -1,9 +1,9 @@
 package consulo.ocaml.module.extension;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
 import consulo.annotations.RequiredDispatchThread;
@@ -18,7 +18,7 @@ import consulo.roots.ModuleRootLayer;
  */
 public class OCamlMutableModuleExtension extends OCamlModuleExtension implements MutableModuleExtensionWithSdk<OCamlModuleExtension>
 {
-	public OCamlMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
+	public OCamlMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer module)
 	{
 		super(id, module);
 	}
@@ -31,7 +31,7 @@ public class OCamlMutableModuleExtension extends OCamlModuleExtension implements
 		return JBUI.Panels.simplePanel().addToTop(ModuleExtensionSdkBoxBuilder.createAndDefine(this, runnable).build());
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public MutableModuleInheritableNamedPointer<Sdk> getInheritableSdk()
 	{
@@ -45,7 +45,7 @@ public class OCamlMutableModuleExtension extends OCamlModuleExtension implements
 	}
 
 	@Override
-	public boolean isModified(@NotNull OCamlModuleExtension oCamlModuleExtension)
+	public boolean isModified(@Nonnull OCamlModuleExtension oCamlModuleExtension)
 	{
 		return isModifiedImpl(oCamlModuleExtension);
 	}

@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.editor;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.codeInsight.editorActions.BackspaceHandler;
 import com.intellij.codeInsight.editorActions.BackspaceHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
@@ -35,7 +35,7 @@ public class OCamlBackspaceHandler extends BackspaceHandlerDelegate
 {
 	private LogicalPosition myTargetPosition;
 
-	public void beforeCharDeleted(final char c, @NotNull final PsiFile file, @NotNull final Editor editor)
+	public void beforeCharDeleted(final char c, @Nonnull final PsiFile file, @Nonnull final Editor editor)
 	{
 		if(!OCamlFileUtil.isOCamlSourceFile(file.getFileType()))
 		{
@@ -44,7 +44,7 @@ public class OCamlBackspaceHandler extends BackspaceHandlerDelegate
 		myTargetPosition = BackspaceHandler.getBackspaceUnindentPosition(file, editor);
 	}
 
-	public boolean charDeleted(final char c, @NotNull final PsiFile file, @NotNull final Editor editor)
+	public boolean charDeleted(final char c, @Nonnull final PsiFile file, @Nonnull final Editor editor)
 	{
 		if(myTargetPosition != null)
 		{

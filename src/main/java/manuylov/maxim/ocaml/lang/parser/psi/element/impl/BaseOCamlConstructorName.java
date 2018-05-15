@@ -24,8 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -43,7 +43,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlResolvedMethod;
  */
 abstract class BaseOCamlConstructorName extends BaseOCamlReference implements OCamlConstructorName
 {
-	@NotNull
+	@Nonnull
 	private static final Set<String> ourBundledConstructors = new HashSet<String>()
 	{{
 			add("Division_by_zero");
@@ -61,7 +61,7 @@ abstract class BaseOCamlConstructorName extends BaseOCamlReference implements OC
 		return ourBundledConstructors.contains(getName());
 	}
 
-	public BaseOCamlConstructorName(@NotNull final ASTNode node)
+	public BaseOCamlConstructorName(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -72,31 +72,31 @@ abstract class BaseOCamlConstructorName extends BaseOCamlReference implements OC
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.UpperCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "constructor";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.asList(OCamlConstructorDefinition.class, OCamlConstructorNameDefinition.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlModuleName> getModulePath()
 	{
 		return OCamlPsiUtil.getModulePath(this, OCamlModuleName.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlResolvedMethod> getAvailableMethods()
 	{
 		return Collections.emptyList();

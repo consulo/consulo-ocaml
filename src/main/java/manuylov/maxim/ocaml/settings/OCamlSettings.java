@@ -20,8 +20,9 @@ package manuylov.maxim.ocaml.settings;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.ServiceManager;
@@ -42,27 +43,27 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
 @State(name = "OCamlSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/ocaml.xml"))
 public class OCamlSettings implements ProjectComponent, PersistentStateComponent<OCamlState>
 {
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 	@Nullable
 	private Sdk myTopLevelSdk = null;
-	@NotNull
+	@Nonnull
 	private String myTopLevelCmdParams = "";
-	@NotNull
+	@Nonnull
 	private String myTopLevelCmdWorkingDir = "";
 
-	@NotNull
-	public static OCamlSettings getInstance(@NotNull Project project)
+	@Nonnull
+	public static OCamlSettings getInstance(@Nonnull Project project)
 	{
 		return ServiceManager.getService(project, OCamlSettings.class);
 	}
 
-	public OCamlSettings(@NotNull final Project project)
+	public OCamlSettings(@Nonnull final Project project)
 	{
 		myProject = project;
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlState getState()
 	{
 		final OCamlState state = new OCamlState();
@@ -75,7 +76,7 @@ public class OCamlSettings implements ProjectComponent, PersistentStateComponent
 		return state;
 	}
 
-	public void loadState(@NotNull final OCamlState state)
+	public void loadState(@Nonnull final OCamlState state)
 	{
 		final String systemIndependentHomePath = state.getTopLevelSdkHomePath();
 		if(systemIndependentHomePath == null)
@@ -109,29 +110,29 @@ public class OCamlSettings implements ProjectComponent, PersistentStateComponent
 		myTopLevelSdk = topLevelSdk;
 	}
 
-	public void setTopLevelCmdOptions(@NotNull final String cmdParams)
+	public void setTopLevelCmdOptions(@Nonnull final String cmdParams)
 	{
 		myTopLevelCmdParams = cmdParams;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getTopLevelCmdOptions()
 	{
 		return myTopLevelCmdParams;
 	}
 
-	public void setTopLevelCmdWorkingDir(@NotNull final String dir)
+	public void setTopLevelCmdWorkingDir(@Nonnull final String dir)
 	{
 		myTopLevelCmdWorkingDir = dir;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getTopLevelCmdWorkingDir()
 	{
 		return myTopLevelCmdWorkingDir;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getComponentName()
 	{
 		return "OCamlSettings";

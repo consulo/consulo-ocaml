@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -26,196 +26,196 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface Strings
 {
-	@NotNull
+	@Nonnull
 	String CLASS_EXPECTED = "'class' expected";
-	@NotNull
+	@Nonnull
 	String CLASS_TYPE_EXPECTED = "Class type expected";
-	@NotNull
+	@Nonnull
 	String TYPE_EXPECTED = "'type' expected";
-	@NotNull
+	@Nonnull
 	String INITIALIZER_KEYWORD_EXPECTED = "'initializer' expected";
-	@NotNull
+	@Nonnull
 	String METHOD_KEYWORD_EXPECTED = "'method' expected";
-	@NotNull
+	@Nonnull
 	String OBJECT_KEYWORD_EXPECTED = "'object' expected";
-	@NotNull
+	@Nonnull
 	String INHERIT_KEYWORD_EXPECTED = "'inherit' expected";
-	@NotNull
+	@Nonnull
 	String CLASS_KEYWORD_EXPECTED = "'class' expected";
-	@NotNull
+	@Nonnull
 	String LBRACE_LT_EXPECTED = "'{<' expected";
-	@NotNull
+	@Nonnull
 	String GT_RBRACE_EXPECTED = "'>}' expected";
-	@NotNull
+	@Nonnull
 	String LBRACKET_VBAR_EXPECTED = "'[|' expected";
-	@NotNull
+	@Nonnull
 	String LBRACKET_EXPECTED = "'[' expected";
-	@NotNull
+	@Nonnull
 	String WHILE_KEYWORD_EXPECTED = "'while' expected";
-	@NotNull
+	@Nonnull
 	String FOR_KEYWORD_EXPECTED = "'for' expected";
-	@NotNull
+	@Nonnull
 	String DO_KEYWORD_EXPECTED = "'do' expected";
-	@NotNull
+	@Nonnull
 	String DONE_KEYWORD_EXPECTED = "'done' expected";
-	@NotNull
+	@Nonnull
 	String IF_KEYWORD_EXPECTED = "'if' expected";
-	@NotNull
+	@Nonnull
 	String THEN_KEYWORD_EXPECTED = "'then' expected";
-	@NotNull
+	@Nonnull
 	String TRY_KEYWORD_EXPECTED = "'try' expected";
-	@NotNull
+	@Nonnull
 	String FUNCTION_KEYWORD_EXPECTED = "'function' expected";
-	@NotNull
+	@Nonnull
 	String FUN_KEYWORD_EXPECTED = "'fun' expected";
-	@NotNull
+	@Nonnull
 	String MATCH_KEYWORD_EXPECTED = "'match' expected";
-	@NotNull
+	@Nonnull
 	String WITH_KEYWORD_EXPECTED = "'with' expected";
-	@NotNull
+	@Nonnull
 	String ASSERT_KEYWORD_EXPECTED = "'assert' expected";
-	@NotNull
+	@Nonnull
 	String LAZY_KEYWORD_EXPECTED = "'lazy' expected";
-	@NotNull
+	@Nonnull
 	String END_KEYWORD_EXPECTED = "'end' expected";
-	@NotNull
+	@Nonnull
 	String LET_KEYWORD_EXPECTED = "'let' expected";
-	@NotNull
+	@Nonnull
 	String IN_KEYWORD_EXPECTED = "'in' expected";
-	@NotNull
+	@Nonnull
 	String FUNCTOR_KEYWORD_EXPECTED = "'functor' expected";
-	@NotNull
+	@Nonnull
 	String SIG_KEYWORD_EXPECTED = "'sig' expected";
-	@NotNull
+	@Nonnull
 	String MINUS_GT_EXPECTED = "'->' expected";
-	@NotNull
+	@Nonnull
 	String LPAR_EXPECTED = "'(' expected";
-	@NotNull
+	@Nonnull
 	String MODULE_KEYWORD_EXPECTED = "'module' expected";
-	@NotNull
+	@Nonnull
 	String VBAR_RBRACKET_EXPECTED = "'|]' expected";
-	@NotNull
+	@Nonnull
 	String VAL_KEYWORD_EXPECTED = "'val' expected";
-	@NotNull
+	@Nonnull
 	String INCLUDE_KEYWORD_EXPECTED = "'include' expected";
-	@NotNull
+	@Nonnull
 	String OPEN_KEYWORD_EXPECTED = "'open' expected";
-	@NotNull
+	@Nonnull
 	String EXTERNAL_KEYWORD_EXPECTED = "'external' expected";
-	@NotNull
+	@Nonnull
 	String EXCEPTION_KEYWORD_EXPECTED = "'exception' expected";
-	@NotNull
+	@Nonnull
 	String TYPE_KEYWORD_EXPECTED = "'type' expected";
-	@NotNull
+	@Nonnull
 	String CONSTRAINT_KEYWORD_EXPECTED = "'constraint' expected";
-	@NotNull
+	@Nonnull
 	String QUOTE_EXPECTED = "''' expected";
-	@NotNull
+	@Nonnull
 	String EQ_EXPECTED = "'=' expected";
-	@NotNull
+	@Nonnull
 	String LBRACE_EXPECTED = "'{' expected";
-	@NotNull
+	@Nonnull
 	String RBRACE_EXPECTED = "'}' expected";
-	@NotNull
+	@Nonnull
 	String COLON_EXPECTED = "':' expected";
-	@NotNull
+	@Nonnull
 	String RPAR_EXPECTED = "')' expected";
-	@NotNull
+	@Nonnull
 	String ACCENT_EXPECTED = "'`' expected";
-	@NotNull
+	@Nonnull
 	String RBRACKET_EXPECTED = "']' expected";
-	@NotNull
+	@Nonnull
 	String GT_EXPECTED = "'>' expected";
-	@NotNull
+	@Nonnull
 	String CHAR_LITERAL_EXPECTED = "Character literal expected";
-	@NotNull
+	@Nonnull
 	String ILLEGAL_CHAR_LITERAL = "Illegal character literal";
-	@NotNull
+	@Nonnull
 	String DOT_EXPECTED = "'.' expected";
-	@NotNull
+	@Nonnull
 	String SEMICOLON_SEMICOLON_EXPECTED = "';;' expected";
-	@NotNull
+	@Nonnull
 	String INHERIT_OR_VAL_OR_METHOD_OR_CONSTRAINT_OR_INITIALIZER_EXPECTED = "'inherit', 'val', 'method', 'constraint' or 'initializer' expected";
-	@NotNull
+	@Nonnull
 	String EXPRESSION_EXPECTED = "Expression expected";
-	@NotNull
+	@Nonnull
 	String RPAR_OR_COLON_GT_EXPECTED = "')' or ':>' expected";
-	@NotNull
+	@Nonnull
 	String RPAR_OR_COLON_OR_COLON_GT_EXPECTED = "')', ':' or ':>' expected";
-	@NotNull
+	@Nonnull
 	String BEGIN_OR_LPAR_EXPECTED = "'begin' or '(' expected";
-	@NotNull
+	@Nonnull
 	String TO_OR_DOWNTO_EXPECTED = "'to' or 'downto' expected";
-	@NotNull
+	@Nonnull
 	String TYPE_OR_MODULE_EXPECTED = "'type' or 'module' expected";
-	@NotNull
+	@Nonnull
 	String MODULE_NAME_EXPECTED = "Module name expected";
-	@NotNull
+	@Nonnull
 	String MODULE_TYPE_EXPECTED = "Module type expected";
-	@NotNull
+	@Nonnull
 	String CONSTRUCTOR_PATH_EXPECTED = "Constructor path expected";
-	@NotNull
+	@Nonnull
 	String IDENTIFIER_EXPECTED = "Identifier expected";
-	@NotNull
+	@Nonnull
 	String CLASS_PATH_EXPECTED = "Class path expected";
-	@NotNull
+	@Nonnull
 	String METHOD_NAME_EXPECTED = "Method name expected";
-	@NotNull
+	@Nonnull
 	String LABEL_NAME_EXPECTED = "Label name expected";
-	@NotNull
+	@Nonnull
 	String MODULE_TYPE_NAME_EXPECTED = "Module type name expected";
-	@NotNull
+	@Nonnull
 	String MODULE_PATH_EXPECTED = "Module path expected";
-	@NotNull
+	@Nonnull
 	String MODULE_EXPRESSION_EXPECTED = "Module expression expected";
-	@NotNull
+	@Nonnull
 	String EXTENDED_MODULE_PATH_EXPECTED = "Extended module path expected";
-	@NotNull
+	@Nonnull
 	String EXTENDED_MODULE_NAME_EXPECTED = "Extended module name expected";
-	@NotNull
+	@Nonnull
 	String TYPE_CONSTRUCTOR_PATH_EXPECTED = "Type constructor path expected";
-	@NotNull
+	@Nonnull
 	String MODULE_TYPE_PATH_EXPECTED = "Module type path expected";
-	@NotNull
+	@Nonnull
 	String TYPE_CONSTRUCTOR_NAME_EXPECTED = "Type constructor name expected";
-	@NotNull
+	@Nonnull
 	String TAG_NAME_EXPECTED = "Tag name expected";
-	@NotNull
+	@Nonnull
 	String CLASS_NAME_EXPECTED = "Class name expected";
-	@NotNull
+	@Nonnull
 	String CONSTRUCTOR_NAME_EXPECTED = "Constructor name expected";
-	@NotNull
+	@Nonnull
 	String INSTANCE_VARIABLE_NAME_EXPECTED = "Instance variable name expected";
-	@NotNull
+	@Nonnull
 	String VALUE_NAME_EXPECTED = "Value name expected";
-	@NotNull
+	@Nonnull
 	String FIELD_NAME_EXPECTED = "Field name expected";
-	@NotNull
+	@Nonnull
 	String FIELD_PATH_EXPECTED = "Field path expected";
-	@NotNull
+	@Nonnull
 	String PATTERN_EXPECTED = "Pattern expected";
-	@NotNull
+	@Nonnull
 	String RPAR_OR_COLON_EXPECTED = "')' or ':' expected";
-	@NotNull
+	@Nonnull
 	String SPECIFICATION_EXPECTED = "Specification expected";
-	@NotNull
+	@Nonnull
 	String TYPE_EXPRESSION_EXPECTED = "Type expression expected";
-	@NotNull
+	@Nonnull
 	String POLYMORPHIC_TYPE_EXPRESSION_EXPECTED = "Polymorphic type expression expected";
-	@NotNull
+	@Nonnull
 	String TYPE_CONSTRUCTOR_OR_HASH_EXPECTED = "Type constructor or '#' expected";
-	@NotNull
+	@Nonnull
 	String STRUCT_KEYWORD_EXPECTED = "'struct' expected";
-	@NotNull
+	@Nonnull
 	String UNEXPECTED_TOKEN = "Unexpected token";
-	@NotNull
+	@Nonnull
 	String DEFINITION_OR_EXPRESSION_EXPECTED = "Definition or expression expected";
-	@NotNull
+	@Nonnull
 	String UNCLOSED_COMMENT = "Unclosed comment";
-	@NotNull
+	@Nonnull
 	String UNEXPECTED_END_OF_FILE = "Unexpected end of file";
-	@NotNull
+	@Nonnull
 	String CLASS_EXPRESSION_EXPECTED = "Class expression expected";
-	@NotNull
+	@Nonnull
 	String INDEX_VARIABLE_NAME_EXPECTED = "Index variable name expected";
 }

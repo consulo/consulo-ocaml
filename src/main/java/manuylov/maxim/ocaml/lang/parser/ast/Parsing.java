@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.Strings;
  */
 abstract class Parsing
 {
-	protected static void checkMatches(@NotNull final PsiBuilder builder, @NotNull final IElementType token, @NotNull final String message)
+	protected static void checkMatches(@Nonnull final PsiBuilder builder, @Nonnull final IElementType token, @Nonnull final String message)
 	{
 		if(!ignore(builder, token))
 		{
@@ -39,12 +40,12 @@ abstract class Parsing
 		}
 	}
 
-	protected static boolean ignore(@NotNull final PsiBuilder builder, @NotNull final IElementType token)
+	protected static boolean ignore(@Nonnull final PsiBuilder builder, @Nonnull final IElementType token)
 	{
 		return ignore(builder, TokenSet.create(token));
 	}
 
-	protected static boolean ignore(@NotNull final PsiBuilder builder, @NotNull final TokenSet tokens)
+	protected static boolean ignore(@Nonnull final PsiBuilder builder, @Nonnull final TokenSet tokens)
 	{
 		if(tokens.contains(builder.getTokenType()))
 		{
@@ -54,13 +55,13 @@ abstract class Parsing
 		return false;
 	}
 
-	protected static void advanceLexerIfNothingWasParsed(@NotNull final PsiBuilder builder, @NotNull final Runnable parsing)
+	protected static void advanceLexerIfNothingWasParsed(@Nonnull final PsiBuilder builder, @Nonnull final Runnable parsing)
 	{
 		advanceLexerIfNothingWasParsed(builder, new boolean[]{false}, parsing);
 	}
 
-	protected static void advanceLexerIfNothingWasParsed(@NotNull final PsiBuilder builder, @NotNull final boolean[] shouldBreak,
-			@NotNull final Runnable parsing)
+	protected static void advanceLexerIfNothingWasParsed(@Nonnull final PsiBuilder builder, @Nonnull final boolean[] shouldBreak,
+			@Nonnull final Runnable parsing)
 	{
 		final int offsetBefore = builder.getCurrentOffset();
 
@@ -82,13 +83,13 @@ abstract class Parsing
 	}
 
 	@Nullable
-	protected static IElementType getNextTokenType(@NotNull final PsiBuilder builder)
+	protected static IElementType getNextTokenType(@Nonnull final PsiBuilder builder)
 	{
 		return getTokenType(builder, 1);
 	}
 
 	@Nullable
-	private static IElementType getTokenType(@NotNull final PsiBuilder builder, final int skipTokensCount)
+	private static IElementType getTokenType(@Nonnull final PsiBuilder builder, final int skipTokensCount)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 

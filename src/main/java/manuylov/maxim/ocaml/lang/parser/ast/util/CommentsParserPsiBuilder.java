@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.ast.util;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ITokenTypeRemapper;
 import com.intellij.lang.LighterASTNode;
@@ -43,10 +43,10 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 public class CommentsParserPsiBuilder implements PsiBuilder
 {
-	@NotNull
+	@Nonnull
 	private final PsiBuilder myBuilder;
 
-	public CommentsParserPsiBuilder(@NotNull final PsiBuilder builder)
+	public CommentsParserPsiBuilder(@Nonnull final PsiBuilder builder)
 	{
 		myBuilder = builder;
 		myBuilder.enforceCommentTokens(TokenSet.create());
@@ -187,12 +187,12 @@ public class CommentsParserPsiBuilder implements PsiBuilder
 		}
 	}
 
-	public <T> T getUserData(@NotNull final Key<T> key)
+	public <T> T getUserData(@Nonnull final Key<T> key)
 	{
 		return myBuilder.getUserData(key);
 	}
 
-	public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value)
+	public <T> void putUserData(@Nonnull final Key<T> key, @Nullable final T value)
 	{
 		myBuilder.putUserData(key, value);
 	}
@@ -239,13 +239,13 @@ public class CommentsParserPsiBuilder implements PsiBuilder
 
 	@Nullable
 	@Override
-	public <T> T getUserDataUnprotected(@NotNull Key<T> tKey)
+	public <T> T getUserDataUnprotected(@Nonnull Key<T> tKey)
 	{
 		return null;
 	}
 
 	@Override
-	public <T> void putUserDataUnprotected(@NotNull Key<T> tKey, @Nullable T t)
+	public <T> void putUserDataUnprotected(@Nonnull Key<T> tKey, @Nullable T t)
 	{
 
 	}

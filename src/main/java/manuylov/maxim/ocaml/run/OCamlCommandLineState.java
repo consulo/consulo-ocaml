@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.run;
 
 import java.io.File;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -46,14 +47,14 @@ import manuylov.maxim.ocaml.util.OCamlModuleUtil;
  */
 public class OCamlCommandLineState extends CommandLineState
 {
-	@NotNull
+	@Nonnull
 	private final OCamlRunConfigurationParams myConfig;
-	@NotNull
+	@Nonnull
 	private final Executor myExecutor;
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 
-	public OCamlCommandLineState(@NotNull final OCamlRunConfiguration config, @NotNull final Executor executor, @NotNull final ExecutionEnvironment env)
+	public OCamlCommandLineState(@Nonnull final OCamlRunConfiguration config, @Nonnull final Executor executor, @Nonnull final ExecutionEnvironment env)
 	{
 		super(env);
 		myConfig = config;
@@ -63,7 +64,7 @@ public class OCamlCommandLineState extends CommandLineState
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected OSProcessHandler startProcess() throws ExecutionException
 	{
 		final GeneralCommandLine cmd = generateCommandLine();
@@ -72,7 +73,7 @@ public class OCamlCommandLineState extends CommandLineState
 		return processHandler;
 	}
 
-	@NotNull
+	@Nonnull
 	private GeneralCommandLine generateCommandLine()
 	{ //todo implement properly for debugging and add profiling
 		final Sdk sdk = getSdk();
@@ -103,7 +104,7 @@ public class OCamlCommandLineState extends CommandLineState
 		return cmd;
 	}
 
-	@NotNull
+	@Nonnull
 	private Sdk getSdk()
 	{
 		Sdk sdk;

@@ -22,7 +22,8 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
 import manuylov.maxim.ocaml.lang.Keywords;
@@ -34,7 +35,7 @@ import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
  */
 public class OCamlNamesValidator implements NamesValidator
 {
-	@NotNull
+	@Nonnull
 	private static final Set<String> ourKeywords = new HashSet<String>();
 
 	public boolean isKeyword(final String name, final Project project)
@@ -42,7 +43,7 @@ public class OCamlNamesValidator implements NamesValidator
 		return isKeyword(name);
 	}
 
-	public static boolean isKeyword(@NotNull final String name)
+	public static boolean isKeyword(@Nonnull final String name)
 	{
 		initializeKeywordsSetIfNeeded();
 		return ourKeywords.contains(name);

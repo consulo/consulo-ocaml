@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -39,12 +40,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
  */
 public class OCamlObjectEndClassBodyTypeImpl extends BaseOCamlElement implements OCamlObjectEndClassBodyType
 {
-	public OCamlObjectEndClassBodyTypeImpl(@NotNull final ASTNode node)
+	public OCamlObjectEndClassBodyTypeImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitObjectEndClassBodyType(this);
 	}
@@ -56,12 +57,12 @@ public class OCamlObjectEndClassBodyTypeImpl extends BaseOCamlElement implements
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlClassFieldSpecification.class, OCamlObjectSelfDefinition.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return Collections.<OCamlStructuredElement>singletonList(this);

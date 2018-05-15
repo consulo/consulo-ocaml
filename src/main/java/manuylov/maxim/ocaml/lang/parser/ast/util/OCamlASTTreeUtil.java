@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.util;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 
@@ -30,13 +30,13 @@ import com.intellij.psi.tree.IElementType;
 public class OCamlASTTreeUtil
 {
 	@Nullable
-	public static ASTNode checkNodeType(@Nullable final ASTNode node, @NotNull final IElementType type)
+	public static ASTNode checkNodeType(@Nullable final ASTNode node, @Nonnull final IElementType type)
 	{
 		return node != null && node.getElementType() == type ? node : null;
 	}
 
 	@Nullable
-	public static ASTNode findChildOfType(@NotNull final ASTNode parent, @NotNull final IElementType type)
+	public static ASTNode findChildOfType(@Nonnull final ASTNode parent, @Nonnull final IElementType type)
 	{
 		final ASTNode[] children = parent.getChildren(null);
 

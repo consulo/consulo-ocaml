@@ -28,8 +28,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -59,14 +60,14 @@ import manuylov.maxim.ocaml.util.TreeNode;
  */
 public class OCamlModule
 {
-	@NotNull
+	@Nonnull
 	private final Project myProject;
-	@NotNull
+	@Nonnull
 	private final VirtualFile mySourcesDir;
-	@NotNull
+	@Nonnull
 	private final String myName;
 
-	public OCamlModule(@NotNull final Project project, @NotNull final VirtualFile sourcesDir, @NotNull final String name)
+	public OCamlModule(@Nonnull final Project project, @Nonnull final VirtualFile sourcesDir, @Nonnull final String name)
 	{
 		myProject = project;
 		mySourcesDir = sourcesDir;
@@ -74,7 +75,7 @@ public class OCamlModule
 	}
 
 	@Nullable
-	public static OCamlModule getBySourceFile(@NotNull final VirtualFile file, @NotNull final Project project)
+	public static OCamlModule getBySourceFile(@Nonnull final VirtualFile file, @Nonnull final Project project)
 	{
 		if(!OCamlFileUtil.isOCamlSourceFile(file))
 		{
@@ -88,13 +89,13 @@ public class OCamlModule
 		return new OCamlModule(project, file.getParent(), file.getNameWithoutExtension());
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlModule> collectAllDependencies() throws CyclicDependencyException
 	{
 		return doCollectAllDependencies(false);
 	}
 
-	@NotNull
+	@Nonnull
 	public Collection<OCamlModule> collectAllDependenciesIgnoringCycles()
 	{
 		try
@@ -107,7 +108,7 @@ public class OCamlModule
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	private List<OCamlModule> doCollectAllDependencies(final boolean ignoreCycles) throws CyclicDependencyException
 	{
 		final List<OCamlModule> result = new ArrayList<OCamlModule>();
@@ -137,8 +138,8 @@ public class OCamlModule
 		return result;
 	}
 
-	private static void addDependencies(@NotNull final Queue<TreeNode<OCamlModule>> queue, @NotNull final TreeNode<OCamlModule> parent,
-			@NotNull final Collection<OCamlModule> modules)
+	private static void addDependencies(@Nonnull final Queue<TreeNode<OCamlModule>> queue, @Nonnull final TreeNode<OCamlModule> parent,
+			@Nonnull final Collection<OCamlModule> modules)
 	{
 		for(final OCamlModule module : modules)
 		{
@@ -148,7 +149,7 @@ public class OCamlModule
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public Collection<OCamlModule> collectExactDependencies()
 	{
 		final Set<OCamlModule> dependencies = new HashSet<OCamlModule>();
@@ -159,7 +160,7 @@ public class OCamlModule
 		//todo libraries (see DependnecyValidatorManager)
 	}
 
-	private void collectExactDependenciesFor(@Nullable final VirtualFile file, @NotNull final Set<OCamlModule> dependencies)
+	private void collectExactDependenciesFor(@Nullable final VirtualFile file, @Nonnull final Set<OCamlModule> dependencies)
 	{
 		if(file == null)
 		{
@@ -202,8 +203,8 @@ public class OCamlModule
 		}
 	}
 
-	@NotNull
-	public static List<OCamlModule> sortAccordingToDependencies(@NotNull final Collection<OCamlModule> ocamlModules) throws CyclicDependencyException
+	@Nonnull
+	public static List<OCamlModule> sortAccordingToDependencies(@Nonnull final Collection<OCamlModule> ocamlModules) throws CyclicDependencyException
 	{
 		final MultiMap<OCamlModule, OCamlModule> dependsOn = new MultiMap<OCamlModule, OCamlModule>();
 		for(final OCamlModule ocamlModule : ocamlModules)
@@ -236,8 +237,8 @@ public class OCamlModule
 		return result;
 	}
 
-	@NotNull
-	private static TreeNode<OCamlModule> findCycle(@NotNull final MultiMap<OCamlModule, OCamlModule> dependsOn)
+	@Nonnull
+	private static TreeNode<OCamlModule> findCycle(@Nonnull final MultiMap<OCamlModule, OCamlModule> dependsOn)
 	{
 		for(final OCamlModule startModule : dependsOn.keySet())
 		{
@@ -261,43 +262,43 @@ public class OCamlModule
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public VirtualFile getSourcesDir()
 	{
 		return mySourcesDir;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return myName.length() > 0 ? OCamlStringUtil.firstLetterToUpperCase(myName) : "";
 	}
 
-	@NotNull
+	@Nonnull
 	public File getImplementationFile()
 	{
 		return new File(mySourcesDir.getPath(), OCamlFileUtil.getFileName(myName, MLFileType.INSTANCE));
 	}
 
-	@NotNull
+	@Nonnull
 	public File getInterfaceFile()
 	{
 		return new File(mySourcesDir.getPath(), OCamlFileUtil.getFileName(myName, MLIFileType.INSTANCE));
 	}
 
-	@NotNull
+	@Nonnull
 	public File getCompiledExecutableFile()
 	{
 		return new File(getCompiledDir(), myName + (SystemInfo.isWindows ? ".exe" : ""));
 	}
 
-	@NotNull
+	@Nonnull
 	public File getCompiledImplementationFile()
 	{
 		return new File(getCompiledDir(), myName + ".cmo"); //todo CMOFileType
 	}
 
-	@NotNull
+	@Nonnull
 	public File getCompiledInterfaceFile()
 	{
 		return new File(getCompiledDir(), myName + ".cmi"); //todo CMIFileType

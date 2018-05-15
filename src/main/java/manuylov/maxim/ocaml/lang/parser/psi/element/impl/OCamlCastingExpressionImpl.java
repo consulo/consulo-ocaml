@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -31,7 +31,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlCastingExpression;
  */
 public class OCamlCastingExpressionImpl extends BaseOCamlElement implements OCamlCastingExpression
 {
-	public OCamlCastingExpressionImpl(@NotNull final ASTNode node)
+	public OCamlCastingExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +42,7 @@ public class OCamlCastingExpressionImpl extends BaseOCamlElement implements OCam
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitCastingExpression(this);
 	}

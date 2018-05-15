@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileTypes.FileType;
@@ -66,14 +66,14 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  */
 public class OCamlResolvingUtil
 {
-	@NotNull
+	@Nonnull
 	public static final String PERVASIVES = "Pervasives";
 
-	@NotNull
+	@Nonnull
 	private static Map<String, OCamlElement> ourFakeModules = new HashMap<String, OCamlElement>();
 
-	@NotNull
-	public static List<OCamlStructuredElement> findActualDefinitionsOfStructuredElementReference(@NotNull final OCamlReference reference)
+	@Nonnull
+	public static List<OCamlStructuredElement> findActualDefinitionsOfStructuredElementReference(@Nonnull final OCamlReference reference)
 	{
 		final OCamlResolvedReference resolvedReference = reference.resolve();
 		if(resolvedReference == null || !(resolvedReference instanceof OCamlStructuredBinding))
@@ -84,7 +84,7 @@ public class OCamlResolvingUtil
 		return OCamlCollectionsUtil.createNotNullValuesList(binding.getExpression(), binding.getTypeExpression());
 	}
 
-	@NotNull
+	@Nonnull
 	public static List<OCamlStructuredElement> collectActualDefinitionsOfStructuredElements(final OCamlStructuredElement... elements)
 	{
 		final List<OCamlStructuredElement> result = new ArrayList<OCamlStructuredElement>();
@@ -99,7 +99,7 @@ public class OCamlResolvingUtil
 	}
 
 	@Nullable
-	public static PsiElement resolveWithFakeModules(@NotNull final PsiReference reference, @NotNull final OCamlFile... fakeModules)
+	public static PsiElement resolveWithFakeModules(@Nonnull final PsiReference reference, @Nonnull final OCamlFile... fakeModules)
 	{
 		try
 		{
@@ -119,8 +119,8 @@ public class OCamlResolvingUtil
 		}
 	}
 
-	@NotNull
-	public static LookupElement[] getVariants(@NotNull final ResolvingContext context, @NotNull final List<Class<? extends OCamlResolvedReference>>
+	@Nonnull
+	public static LookupElement[] getVariants(@Nonnull final ResolvingContext context, @Nonnull final List<Class<? extends OCamlResolvedReference>>
 			types)
 	{
 		final VariantsCollectorProcessor processor = new VariantsCollectorProcessor(types);
@@ -129,7 +129,7 @@ public class OCamlResolvingUtil
 	}
 
 	@Nullable
-	public static OCamlResolvedReference resolve(@NotNull final ResolvingContext context, @NotNull final List<Class<? extends OCamlResolvedReference>>
+	public static OCamlResolvedReference resolve(@Nonnull final ResolvingContext context, @Nonnull final List<Class<? extends OCamlResolvedReference>>
 			types)
 	{
 		final ResolvingProcessor processor = new ResolvingProcessor(types);
@@ -137,7 +137,7 @@ public class OCamlResolvingUtil
 		return processor.getResolvedReference();
 	}
 
-	private static void treeWalkUp(@NotNull final ResolvingBuilder builder)
+	private static void treeWalkUp(@Nonnull final ResolvingBuilder builder)
 	{
 		OCamlElement parent = builder.getContext().getSourceElement();
 		builder.setLastParent(parent);
@@ -196,19 +196,19 @@ public class OCamlResolvingUtil
 		}
 	}
 
-	private static boolean processParent(@NotNull final OCamlElement parent, @NotNull final ResolvingBuilder builder)
+	private static boolean processParent(@Nonnull final OCamlElement parent, @Nonnull final ResolvingBuilder builder)
 	{
 		builder.setLastParentPosition(ElementPosition.Child);
 		return parent.processDeclarations(builder);
 	}
 
-	private static boolean processSibling(@NotNull final OCamlElement sibling, @NotNull final ResolvingBuilder builder)
+	private static boolean processSibling(@Nonnull final OCamlElement sibling, @Nonnull final ResolvingBuilder builder)
 	{
 		builder.setLastParentPosition(ElementPosition.Sibling);
 		return sibling.processDeclarations(builder);
 	}
 
-	private static boolean tryProcessPervasives(@NotNull final ResolvingBuilder builder, @NotNull final PsiFile sourceFile)
+	private static boolean tryProcessPervasives(@Nonnull final ResolvingBuilder builder, @Nonnull final PsiFile sourceFile)
 	{
 		final OCamlElement pervasivesModule = findFileModule(sourceFile, PERVASIVES);
 		if(pervasivesModule != null)
@@ -227,7 +227,7 @@ public class OCamlResolvingUtil
 	}
 
 	@Nullable
-	private static OCamlElement findFileModule(@NotNull final PsiFile sourceFile, @NotNull final String moduleName)
+	private static OCamlElement findFileModule(@Nonnull final PsiFile sourceFile, @Nonnull final String moduleName)
 	{
 		final OCamlElement fakeModule = ourFakeModules.get(moduleName);
 		if(fakeModule != null)
@@ -248,21 +248,21 @@ public class OCamlResolvingUtil
 	}
 
 	@Nullable
-	public static OCamlModuleDefinitionBinding findFileModuleDefinition(@NotNull final PsiFile sourceFile, @NotNull final String moduleName)
+	public static OCamlModuleDefinitionBinding findFileModuleDefinition(@Nonnull final PsiFile sourceFile, @Nonnull final String moduleName)
 	{
 		return doFindFileModule(sourceFile, moduleName, MLFileType.INSTANCE, OCamlModuleDefinitionBinding.class);
 	}
 
 	@Nullable
-	public static OCamlModuleSpecificationBinding findFileModuleSpecification(@NotNull final PsiFile sourceFile, @NotNull final String moduleName)
+	public static OCamlModuleSpecificationBinding findFileModuleSpecification(@Nonnull final PsiFile sourceFile, @Nonnull final String moduleName)
 	{
 		return doFindFileModule(sourceFile, moduleName, MLIFileType.INSTANCE, OCamlModuleSpecificationBinding.class);
 	}
 
 	@SuppressWarnings({"unchecked"})
 	@Nullable
-	private static <T extends OCamlStructuredBinding> T doFindFileModule(@NotNull final PsiFile sourceFile, @NotNull final String moduleName,
-			@NotNull final FileType fileType, @NotNull final Class<T> type)
+	private static <T extends OCamlStructuredBinding> T doFindFileModule(@Nonnull final PsiFile sourceFile, @Nonnull final String moduleName,
+			@Nonnull final FileType fileType, @Nonnull final Class<T> type)
 	{
 		final Project project = sourceFile.getProject();
 
@@ -279,8 +279,8 @@ public class OCamlResolvingUtil
 	}
 
 	@Nullable
-	private static <T extends OCamlStructuredBinding> T findFileModuleByFileName(@NotNull final Project project,
-			@NotNull final GlobalSearchScope scope, @NotNull final Class<T> type, @NotNull final String fileName)
+	private static <T extends OCamlStructuredBinding> T findFileModuleByFileName(@Nonnull final Project project,
+			@Nonnull final GlobalSearchScope scope, @Nonnull final Class<T> type, @Nonnull final String fileName)
 	{
 		final PsiFile[] files = ApplicationManager.getApplication().runReadAction(new Computable<PsiFile[]>()
 		{

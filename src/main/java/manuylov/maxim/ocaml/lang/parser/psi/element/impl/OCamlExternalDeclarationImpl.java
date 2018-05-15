@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.util.PsiUtilCore;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -30,7 +31,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExternalDeclaration;
  */
 public class OCamlExternalDeclarationImpl extends BaseOCamlElement implements OCamlExternalDeclaration
 {
-	public OCamlExternalDeclarationImpl(@NotNull final ASTNode node)
+	public OCamlExternalDeclarationImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -41,7 +42,7 @@ public class OCamlExternalDeclarationImpl extends BaseOCamlElement implements OC
 		return !PsiUtilCore.hasErrorElementChild(this);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitExternalDeclaration(this);
 	}

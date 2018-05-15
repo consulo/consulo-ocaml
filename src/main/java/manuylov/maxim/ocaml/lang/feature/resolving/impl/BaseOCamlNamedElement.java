@@ -18,10 +18,10 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.impl;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -44,7 +44,7 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  */
 public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements OCamlNamedElement
 {
-	protected BaseOCamlNamedElement(@NotNull final ASTNode node)
+	protected BaseOCamlNamedElement(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -56,7 +56,7 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 
 		final OCamlElementProcessorAdapter processor = new OCamlElementProcessorAdapter()
 		{
-			public void process(@NotNull final OCamlElement psiElement)
+			public void process(@Nonnull final OCamlElement psiElement)
 			{
 				if(psiElement instanceof OCamlModuleDefinitionBinding || psiElement instanceof OCamlModuleSpecificationBinding)
 				{
@@ -92,8 +92,8 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 		return nameElement == null ? 0 : nameElement.getStartOffset();
 	}
 
-	@NotNull
-	public PsiElement setName(@NotNull final String name) throws IncorrectOperationException
+	@Nonnull
+	public PsiElement setName(@Nonnull final String name) throws IncorrectOperationException
 	{
 		checkNameIsNotAKeyword(name);
 		getNameType().checkNameIsCorrect(this, name);
@@ -103,7 +103,7 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 		return this;
 	}
 
-	private void checkNameIsNotAKeyword(@NotNull final String name) throws IncorrectOperationException
+	private void checkNameIsNotAKeyword(@Nonnull final String name) throws IncorrectOperationException
 	{
 		if(OCamlNamesValidator.isKeyword(name))
 		{
@@ -111,7 +111,7 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 		}
 	}
 
-	protected void doSetName(@NotNull final String name) throws IncorrectOperationException
+	protected void doSetName(@Nonnull final String name) throws IncorrectOperationException
 	{
 		final ASTNode nameElement = getNameElement();
 		if(nameElement == null)
@@ -133,13 +133,13 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 	{
 		return new ItemPresentation()
 		{
-			@NotNull
+			@Nonnull
 			public String getPresentableText()
 			{
 				return getDescription() + ' ' + getName();
 			}
 
-			@NotNull
+			@Nonnull
 			public String getLocationString()
 			{
 				return '(' + getContainingFile().getName() + ')';

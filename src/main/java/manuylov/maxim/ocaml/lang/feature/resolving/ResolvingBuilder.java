@@ -20,8 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
@@ -32,9 +32,9 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
  */
 public class ResolvingBuilder
 {
-	@NotNull
+	@Nonnull
 	private final OCamlResolvedReferencesProcessor myProcessor;
-	@NotNull
+	@Nonnull
 	private ResolvingContext myContext;
 
 	private boolean myResolvingFinished = false;
@@ -44,20 +44,20 @@ public class ResolvingBuilder
 	private boolean myIsInPervasives = false;
 	private int myModulePathOffset = 0;
 
-	public ResolvingBuilder(@NotNull final OCamlResolvedReferencesProcessor processor, @NotNull final ResolvingContext context)
+	public ResolvingBuilder(@Nonnull final OCamlResolvedReferencesProcessor processor, @Nonnull final ResolvingContext context)
 	{
 		myProcessor = processor;
 		myContext = context;
 		myProcessor.setResolvingBuilder(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlResolvedReferencesProcessor getProcessor()
 	{
 		return myProcessor;
 	}
 
-	@NotNull
+	@Nonnull
 	public ResolvingContext getContext()
 	{
 		return myContext;
@@ -75,12 +75,12 @@ public class ResolvingBuilder
 		return myLastParentPosition;
 	}
 
-	public void setLastParent(@NotNull final OCamlElement lastParent)
+	public void setLastParent(@Nonnull final OCamlElement lastParent)
 	{
 		myLastParent = lastParent;
 	}
 
-	public void setLastParentPosition(@NotNull final ElementPosition lastParentPosition)
+	public void setLastParentPosition(@Nonnull final ElementPosition lastParentPosition)
 	{
 		myLastParentPosition = lastParentPosition;
 	}
@@ -113,12 +113,12 @@ public class ResolvingBuilder
 		return myModulePathOffset;
 	}
 
-	public boolean childWasAlreadyProcessed(@NotNull final OCamlElement childElement)
+	public boolean childWasAlreadyProcessed(@Nonnull final OCamlElement childElement)
 	{
 		return myLastParentPosition == ElementPosition.Child && myLastParent == childElement;
 	}
 
-	public boolean tryProcessModule(@NotNull final String moduleName, @NotNull final ModuleProcessor... processors)
+	public boolean tryProcessModule(@Nonnull final String moduleName, @Nonnull final ModuleProcessor... processors)
 	{
 		if(processModuleStart(moduleName))
 		{
@@ -141,7 +141,7 @@ public class ResolvingBuilder
 		return false;
 	}
 
-	private boolean processModuleStart(@NotNull final String moduleName)
+	private boolean processModuleStart(@Nonnull final String moduleName)
 	{
 		if(myIsPervasivesProcessing && !myIsInPervasives && myModulePathOffset == 0 && moduleName.equals(OCamlResolvingUtil.PERVASIVES))
 		{

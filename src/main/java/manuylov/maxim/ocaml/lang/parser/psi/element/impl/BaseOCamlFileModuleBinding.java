@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
@@ -41,7 +41,7 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
 abstract class BaseOCamlFileModuleBinding<T extends OCamlStructuredElement> extends BaseOCamlResolvedReference implements OCamlStructuredBinding<T,
 		OCamlModuleType>
 {
-	public BaseOCamlFileModuleBinding(@NotNull final ASTNode node)
+	public BaseOCamlFileModuleBinding(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -61,7 +61,7 @@ abstract class BaseOCamlFileModuleBinding<T extends OCamlStructuredElement> exte
 	}
 
 	@Override
-	protected void doSetName(@NotNull final String name) throws IncorrectOperationException
+	protected void doSetName(@Nonnull final String name) throws IncorrectOperationException
 	{
 		final OCamlFile file = getFile();
 		if(file == null)
@@ -79,7 +79,7 @@ abstract class BaseOCamlFileModuleBinding<T extends OCamlStructuredElement> exte
 		return null;
 	}
 
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInStructuredBinding(builder, this);
 	}

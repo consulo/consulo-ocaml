@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
 
 /**
@@ -29,24 +30,24 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
  */
 public class ResolvingContext
 {
-	@NotNull
+	@Nonnull
 	private final OCamlReference mySourceElement;
-	@NotNull
+	@Nonnull
 	private final List<? extends OCamlExtendedModuleName> myModulePath;
 
-	public ResolvingContext(@NotNull final OCamlReference sourceElement, @NotNull final List<? extends OCamlExtendedModuleName> modulePath)
+	public ResolvingContext(@Nonnull final OCamlReference sourceElement, @Nonnull final List<? extends OCamlExtendedModuleName> modulePath)
 	{
 		mySourceElement = sourceElement;
 		myModulePath = modulePath;
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlReference getSourceElement()
 	{
 		return mySourceElement;
 	}
 
-	@NotNull
+	@Nonnull
 	public List<? extends OCamlExtendedModuleName> getModulePath()
 	{
 		return myModulePath;

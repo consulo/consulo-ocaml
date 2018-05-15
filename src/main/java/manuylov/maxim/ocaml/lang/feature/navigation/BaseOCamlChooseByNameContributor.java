@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
@@ -39,15 +40,15 @@ import manuylov.maxim.ocaml.lang.parser.stub.index.StubIndexHelper;
  */
 abstract class BaseOCamlChooseByNameContributor implements ChooseByNameContributor
 {
-	@NotNull
+	@Nonnull
 	private final StubIndexKey<String, ? extends OCamlNamedElement>[] myIndexKeys;
 
-	protected BaseOCamlChooseByNameContributor(@NotNull final StubIndexKey<String, ? extends OCamlNamedElement>... indexKeys)
+	protected BaseOCamlChooseByNameContributor(@Nonnull final StubIndexKey<String, ? extends OCamlNamedElement>... indexKeys)
 	{
 		myIndexKeys = indexKeys;
 	}
 
-	public String[] getNames(@NotNull final Project project, final boolean includeNonProjectItems)
+	public String[] getNames(@Nonnull final Project project, final boolean includeNonProjectItems)
 	{
 		final Collection<String> names = new HashSet<String>();
 		for(final StubIndexKey<String, ?> indexKey : myIndexKeys)
@@ -57,7 +58,7 @@ abstract class BaseOCamlChooseByNameContributor implements ChooseByNameContribut
 		return ArrayUtil.toStringArray(names);
 	}
 
-	public NavigationItem[] getItemsByName(@NotNull final String name, @NotNull final String pattern, @NotNull final Project project,
+	public NavigationItem[] getItemsByName(@Nonnull final String name, @Nonnull final String pattern, @Nonnull final Project project,
 			final boolean includeNonProjectItems)
 	{
 		final GlobalSearchScope scope = StubIndexHelper.createScope(project, includeNonProjectItems);

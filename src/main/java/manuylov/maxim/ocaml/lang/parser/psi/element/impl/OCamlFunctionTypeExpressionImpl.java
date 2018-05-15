@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -35,12 +36,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
  */
 public class OCamlFunctionTypeExpressionImpl extends BaseOCamlElement implements OCamlFunctionTypeExpression
 {
-	public OCamlFunctionTypeExpressionImpl(@NotNull final ASTNode node)
+	public OCamlFunctionTypeExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitFunctionTypeExpression(this);
 	}
@@ -51,7 +52,7 @@ public class OCamlFunctionTypeExpressionImpl extends BaseOCamlElement implements
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return Collections.<OCamlStructuredElement>singletonList(this);

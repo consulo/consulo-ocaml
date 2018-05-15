@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstantPattern;
@@ -29,12 +29,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstantPattern;
  */
 public class OCamlConstantPatternImpl extends BaseOCamlConstant implements OCamlConstantPattern
 {
-	public OCamlConstantPatternImpl(@NotNull final ASTNode node)
+	public OCamlConstantPatternImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitConstantPattern(this);
 	}

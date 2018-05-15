@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.actions;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.fileTypes.FileType;
 import consulo.awt.TargetAWT;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
@@ -35,13 +36,13 @@ public class CreateMLFileAction extends BaseCreateOCamlFileAction
 		super("OCaml Module Implementation", "Create New OCaml Module Implementation File", TargetAWT.to(OCamlIconUtil.getMLFileIcon()));
 	}
 
-	@NotNull
+	@Nonnull
 	protected String getCapitalizedType()
 	{
 		return "Implementation";
 	}
 
-	@NotNull
+	@Nonnull
 	protected FileType getFileType()
 	{
 		return MLFileType.INSTANCE;

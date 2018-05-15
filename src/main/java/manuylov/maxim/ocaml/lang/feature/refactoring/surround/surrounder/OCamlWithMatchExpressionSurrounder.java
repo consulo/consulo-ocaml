@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround.surrounder;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -31,15 +31,15 @@ public class OCamlWithMatchExpressionSurrounder extends BaseOCamlSurrounderWithN
 		super("match / with");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected String doSurround(@NotNull final CharSequence text)
+	protected String doSurround(@Nonnull final CharSequence text)
 	{
 		return "match " + text + " with ";
 	}
 
 	@Override
-	protected int getOffset(@NotNull final String surroundedText)
+	protected int getOffset(@Nonnull final String surroundedText)
 	{
 		return surroundedText.length();
 	}

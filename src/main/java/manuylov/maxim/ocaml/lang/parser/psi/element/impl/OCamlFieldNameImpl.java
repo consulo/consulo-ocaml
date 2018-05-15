@@ -21,7 +21,7 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -38,23 +38,23 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordFieldDefinition;
  */
 public class OCamlFieldNameImpl extends BaseOCamlReference implements OCamlFieldName
 {
-	public OCamlFieldNameImpl(@NotNull final ASTNode node)
+	public OCamlFieldNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitFieldName(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public ASTNode getNameElement()
 	{
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
@@ -66,25 +66,25 @@ public class OCamlFieldNameImpl extends BaseOCamlReference implements OCamlField
 		return true; // todo
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "field";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlRecordFieldDefinition.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlModuleName> getModulePath()
 	{
 		return OCamlPsiUtil.getModulePath(this, OCamlModuleName.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlFieldName getFieldName()
 	{
 		return this;

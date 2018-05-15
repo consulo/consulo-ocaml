@@ -34,7 +34,7 @@ import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.MOD
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.MODULE_TYPE_SPECIFICATION_BINDING;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.PARENTHESES;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
@@ -106,32 +106,32 @@ public class ModuleMLIParsingTest extends BaseModuleParsingTest
 		doTest("module MyModule (Module1 : ModuleTypeName1) (Module2 : ModuleTypeName2) : ModuleTypeName", myTree.getStringRepresentation());
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getMainElement()
 	{
 		return MODULE_TYPE_SPECIFICATION;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected IElementType getTypeBindingElement()
 	{
 		return MODULE_TYPE_SPECIFICATION_BINDING;
 	}
 
-	@NotNull
+	@Nonnull
 	protected ParserDefinition getParserDefinition()
 	{
 		return new MLIParserDefinition();
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleExpressionNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_TYPE;
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleBindingNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;

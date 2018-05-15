@@ -23,9 +23,9 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 
@@ -37,22 +37,22 @@ public class OCamlRunConfigurationEditor extends SettingsEditor<OCamlRunConfigur
 {
 	private OCamlRunConfigurationForm myForm;
 
-	public OCamlRunConfigurationEditor(@NotNull final OCamlRunConfiguration configuration)
+	public OCamlRunConfigurationEditor(@Nonnull final OCamlRunConfiguration configuration)
 	{
 		myForm = new OCamlRunConfigurationForm(configuration);
 	}
 
-	protected void resetEditorFrom(@NotNull final OCamlRunConfiguration config)
+	protected void resetEditorFrom(@Nonnull final OCamlRunConfiguration config)
 	{
 		copyBean(config, myForm);
 	}
 
-	protected void applyEditorTo(@NotNull final OCamlRunConfiguration config) throws ConfigurationException
+	protected void applyEditorTo(@Nonnull final OCamlRunConfiguration config) throws ConfigurationException
 	{
 		copyBean(myForm, config);
 	}
 
-	private void copyBean(@NotNull final OCamlRunConfigurationParams source, @NotNull final OCamlRunConfigurationParams target)
+	private void copyBean(@Nonnull final OCamlRunConfigurationParams source, @Nonnull final OCamlRunConfigurationParams target)
 	{
 		try
 		{
@@ -70,7 +70,7 @@ public class OCamlRunConfigurationEditor extends SettingsEditor<OCamlRunConfigur
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	protected JComponent createEditor()
 	{
 		return myForm.getRootPanel();

@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
@@ -39,7 +39,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleTypeDefinitionBin
  */
 public class OCamlModuleTypeDefinitionBindingImpl extends BaseOCamlResolvedReference implements OCamlModuleTypeDefinitionBinding
 {
-	public OCamlModuleTypeDefinitionBindingImpl(@NotNull final ASTNode node)
+	public OCamlModuleTypeDefinitionBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -50,7 +50,7 @@ public class OCamlModuleTypeDefinitionBindingImpl extends BaseOCamlResolvedRefer
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleType.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitModuleTypeDefinitionBinding(this);
 	}
@@ -61,20 +61,20 @@ public class OCamlModuleTypeDefinitionBindingImpl extends BaseOCamlResolvedRefer
 		return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.MODULE_TYPE_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.AnyCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "module type";
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInStructuredBinding(builder, this);
 	}

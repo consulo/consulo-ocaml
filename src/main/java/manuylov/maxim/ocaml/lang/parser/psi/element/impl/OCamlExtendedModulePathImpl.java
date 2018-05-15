@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -32,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModulePath;
  */
 public class OCamlExtendedModulePathImpl extends BaseOCamlElement implements OCamlExtendedModulePath
 {
-	public OCamlExtendedModulePathImpl(@NotNull final ASTNode node)
+	public OCamlExtendedModulePathImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -43,7 +44,7 @@ public class OCamlExtendedModulePathImpl extends BaseOCamlElement implements OCa
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExtendedModuleName.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitExtendedModulePath(this);
 	}

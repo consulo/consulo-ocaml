@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround.surrounder;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -33,15 +33,15 @@ public class OCamlWithIfThenExpressionSurrounder extends BaseOCamlSurrounderWith
 		super("if / then");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected String doSurround(@NotNull final CharSequence text)
+	protected String doSurround(@Nonnull final CharSequence text)
 	{
 		return START + " then begin " + text + " end";
 	}
 
 	@Override
-	protected int getOffset(@NotNull final String surroundedText)
+	protected int getOffset(@Nonnull final String surroundedText)
 	{
 		return START.length();
 	}

@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType.mli.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
@@ -31,12 +32,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlFile;
  */
 public class MLIFile extends BaseOCamlFile
 {
-	public MLIFile(@NotNull final FileViewProvider fileViewProvider)
+	public MLIFile(@Nonnull final FileViewProvider fileViewProvider)
 	{
 		super(fileViewProvider, MLIFileTypeLanguage.INSTANCE);
 	}
 
-	@NotNull
+	@Nonnull
 	public FileType getFileType()
 	{
 		return MLIFileType.INSTANCE;

@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.feature.findUsages;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
@@ -36,7 +37,7 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
 public class OCamlFindUsagesProvider implements FindUsagesProvider
 {
 	@Override
-	@NotNull
+	@Nonnull
 	public WordsScanner getWordsScanner()
 	{
 		DefaultWordsScanner defaultWordsScanner = new DefaultWordsScanner(new OCamlHighlightingLexer(), OCamlTokenTypes.DWS_IDENTIFIERS,
@@ -47,21 +48,21 @@ public class OCamlFindUsagesProvider implements FindUsagesProvider
 	}
 
 	@Override
-	public boolean canFindUsagesFor(@NotNull final PsiElement psiElement)
+	public boolean canFindUsagesFor(@Nonnull final PsiElement psiElement)
 	{
 		return true;
 	}
 
 	@Override
 	@Nullable
-	public String getHelpId(@NotNull final PsiElement psiElement)
+	public String getHelpId(@Nonnull final PsiElement psiElement)
 	{
 		return null;
 	}
 
 	@Override
-	@NotNull
-	public String getType(@NotNull final PsiElement element)
+	@Nonnull
+	public String getType(@Nonnull final PsiElement element)
 	{
 		if(element instanceof OCamlNamedElement)
 		{
@@ -71,15 +72,15 @@ public class OCamlFindUsagesProvider implements FindUsagesProvider
 	}
 
 	@Override
-	@NotNull
-	public String getDescriptiveName(@NotNull final PsiElement element)
+	@Nonnull
+	public String getDescriptiveName(@Nonnull final PsiElement element)
 	{
 		return getName(element);
 	}
 
 	@Override
-	@NotNull
-	public String getNodeText(@NotNull final PsiElement element, final boolean useFullName)
+	@Nonnull
+	public String getNodeText(@Nonnull final PsiElement element, final boolean useFullName)
 	{
 		final StringBuilder sb = new StringBuilder(OCamlStringUtil.firstLetterToUpperCase(getType(element)));
 		if(sb.length() > 0)
@@ -90,8 +91,8 @@ public class OCamlFindUsagesProvider implements FindUsagesProvider
 		return sb.toString();
 	}
 
-	@NotNull
-	private String getName(@NotNull final PsiElement element)
+	@Nonnull
+	private String getName(@Nonnull final PsiElement element)
 	{
 		if(element instanceof OCamlNamedElement)
 		{
@@ -100,8 +101,8 @@ public class OCamlFindUsagesProvider implements FindUsagesProvider
 		return "";
 	}
 
-	@NotNull
-	private String getCanonicalPath(@NotNull final PsiElement element)
+	@Nonnull
+	private String getCanonicalPath(@Nonnull final PsiElement element)
 	{
 		if(element instanceof OCamlNamedElement)
 		{

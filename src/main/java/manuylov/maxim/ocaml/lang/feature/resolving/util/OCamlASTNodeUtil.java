@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.LeafElement;
@@ -32,8 +33,8 @@ import consulo.psi.tree.ASTLeafFactory;
  */
 public class OCamlASTNodeUtil
 {
-	@NotNull
-	public static ASTNode createLeaf(@NotNull final IElementType elementType, @NotNull LanguageVersion languageVersion, @NotNull final String token)
+	@Nonnull
+	public static ASTNode createLeaf(@Nonnull final IElementType elementType, @Nonnull LanguageVersion languageVersion, @Nonnull final String token)
 	{
 		final LeafElement createdNode = ASTLeafFactory.EP.getValue(elementType).createLeaf(elementType, languageVersion, token);
 		CodeEditUtil.setNodeGenerated(createdNode, true);
@@ -41,7 +42,7 @@ public class OCamlASTNodeUtil
 		return createdNode;
 	}
 
-	public static void replaceLeafText(@NotNull final ASTNode leaf, @NotNull LanguageVersion languageVersion, @NotNull final String text)
+	public static void replaceLeafText(@Nonnull final ASTNode leaf, @Nonnull LanguageVersion languageVersion, @Nonnull final String text)
 	{
 		leaf.getTreeParent().replaceChild(leaf, createLeaf(leaf.getElementType(), languageVersion, text));
 	}

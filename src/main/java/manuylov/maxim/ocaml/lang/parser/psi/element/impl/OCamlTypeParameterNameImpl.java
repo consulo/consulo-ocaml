@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
@@ -40,12 +40,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterName;
  */
 public class OCamlTypeParameterNameImpl extends BaseOCamlReference implements OCamlTypeParameterName
 {
-	public OCamlTypeParameterNameImpl(@NotNull final ASTNode node)
+	public OCamlTypeParameterNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTypeParameterName(this);
 	}
@@ -56,25 +56,25 @@ public class OCamlTypeParameterNameImpl extends BaseOCamlReference implements OC
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.AnyCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "type parameter";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlTypeParameterDefinition.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return Collections.emptyList();
@@ -92,7 +92,7 @@ public class OCamlTypeParameterNameImpl extends BaseOCamlReference implements OC
 		return true; // todo
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public LookupElement[] getVariants()
 	{

@@ -20,8 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
@@ -37,16 +37,16 @@ public interface OCamlReference extends OCamlNamedElement, PsiReference
 	@Nullable
 	OCamlResolvedReference resolve();
 
-	@NotNull
+	@Nonnull
 	LookupElement[] getVariants();
 
-	@NotNull
+	@Nonnull
 	List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes();
 
-	@NotNull
+	@Nonnull
 	List<? extends OCamlExtendedModuleName> getModulePath();
 
 	boolean isBundled();
 
-	boolean isReferenceToWithFakeModules(@NotNull final PsiElement element, @NotNull final OCamlFile... fakeModules);
+	boolean isReferenceToWithFakeModules(@Nonnull final PsiElement element, @Nonnull final OCamlFile... fakeModules);
 }

@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameExpression;
@@ -29,12 +29,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorNameExpressi
  */
 public class OCamlConstructorNameExpressionImpl extends BaseOCamlConstructorName implements OCamlConstructorNameExpression
 {
-	public OCamlConstructorNameExpressionImpl(@NotNull final ASTNode node)
+	public OCamlConstructorNameExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitConstructorNameExpression(this);
 	}

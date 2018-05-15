@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiFile;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -34,12 +34,12 @@ public class OCamlUnknownElementImpl extends BaseOCamlElement implements OCamlUn
 	@Nullable
 	private PsiFile myOriginalFile = null;
 
-	public OCamlUnknownElementImpl(@NotNull final ASTNode node)
+	public OCamlUnknownElementImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void setFile(@NotNull final PsiFile file)
+	public void setFile(@Nonnull final PsiFile file)
 	{
 		myOriginalFile = file;
 	}
@@ -50,7 +50,7 @@ public class OCamlUnknownElementImpl extends BaseOCamlElement implements OCamlUn
 		return myOriginalFile;
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitUnknownElement(this);
 	}

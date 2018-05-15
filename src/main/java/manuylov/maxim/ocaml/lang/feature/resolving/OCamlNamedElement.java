@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiNamedElement;
@@ -37,9 +38,9 @@ public interface OCamlNamedElement extends OCamlElement, PsiNamedElement, Naviga
 	@Nullable
 	String getCanonicalPath();
 
-	@NotNull
+	@Nonnull
 	NameType getNameType();
 
-	@NotNull
+	@Nonnull
 	String getDescription();
 }

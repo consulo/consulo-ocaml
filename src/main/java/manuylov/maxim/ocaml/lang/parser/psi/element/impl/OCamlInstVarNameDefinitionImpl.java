@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlSelfResolvedReference;
@@ -31,23 +32,23 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlInstVarNameDefinition;
  */
 public class OCamlInstVarNameDefinitionImpl extends BaseOCamlSelfResolvedReference implements OCamlInstVarNameDefinition
 {
-	public OCamlInstVarNameDefinitionImpl(@NotNull final ASTNode node)
+	public OCamlInstVarNameDefinitionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitInstVarNameDefinition(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "instance variable";

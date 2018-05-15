@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround.surrounder;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -31,9 +31,9 @@ public class OCamlWithLazyExpressionSurrounder extends BaseOCamlSurrounder
 		super("lazy");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected String doSurround(@NotNull final CharSequence text)
+	protected String doSurround(@Nonnull final CharSequence text)
 	{
 		return "lazy (" + text + ")";
 	}

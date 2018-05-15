@@ -23,7 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -37,7 +37,7 @@ import com.intellij.ui.content.ContentManager;
  */
 class OCamlToolWindowStartView extends BaseOCamlToolWindowView
 {
-	public OCamlToolWindowStartView(@NotNull final Project project, @NotNull final ContentManager contentManager)
+	public OCamlToolWindowStartView(@Nonnull final Project project, @Nonnull final ContentManager contentManager)
 	{
 		super(project, contentManager);
 
@@ -67,7 +67,7 @@ class OCamlToolWindowStartView extends BaseOCamlToolWindowView
 		line2.add(Box.createHorizontalGlue());
 	}
 
-	private JComponent createSingleActionToolbarComponent(@NotNull final AnAction action)
+	private JComponent createSingleActionToolbarComponent(@Nonnull final AnAction action)
 	{
 		final DefaultActionGroup group = new DefaultActionGroup(action);
 		final JComponent toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, group, false).getComponent();

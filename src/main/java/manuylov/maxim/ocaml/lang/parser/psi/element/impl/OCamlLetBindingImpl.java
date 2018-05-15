@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
@@ -36,12 +37,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
  */
 public class OCamlLetBindingImpl extends BaseOCamlElement implements OCamlLetBinding
 {
-	public OCamlLetBindingImpl(@NotNull final ASTNode node)
+	public OCamlLetBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitLetBinding(this);
 	}
@@ -53,7 +54,7 @@ public class OCamlLetBindingImpl extends BaseOCamlElement implements OCamlLetBin
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		final OCamlExpression expression = getExpression();
 		//noinspection SimplifiableIfStatement

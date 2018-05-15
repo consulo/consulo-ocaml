@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -36,7 +37,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
  */
 public class OCamlConstraintClassFieldSpecificationImpl extends BaseOCamlResolvedReference implements OCamlConstraintClassFieldSpecification
 {
-	public OCamlConstraintClassFieldSpecificationImpl(@NotNull final ASTNode node)
+	public OCamlConstraintClassFieldSpecificationImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -47,7 +48,7 @@ public class OCamlConstraintClassFieldSpecificationImpl extends BaseOCamlResolve
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitConstraintClassFieldSpecification(this);
 	}
@@ -58,13 +59,13 @@ public class OCamlConstraintClassFieldSpecificationImpl extends BaseOCamlResolve
 		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.INST_VAR_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "field";

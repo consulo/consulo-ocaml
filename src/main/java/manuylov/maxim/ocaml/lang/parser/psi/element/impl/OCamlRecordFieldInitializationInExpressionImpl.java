@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -36,7 +37,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlRecordFieldInitializati
  */
 public class OCamlRecordFieldInitializationInExpressionImpl extends BaseOCamlResolvedReference implements OCamlRecordFieldInitializationInExpression
 {
-	public OCamlRecordFieldInitializationInExpressionImpl(@NotNull final ASTNode node)
+	public OCamlRecordFieldInitializationInExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -59,19 +60,19 @@ public class OCamlRecordFieldInitializationInExpressionImpl extends BaseOCamlRes
 		return fieldName == null ? null : fieldName.getNameElement();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "field";
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitRecordFieldInitializationInExpression(this);
 	}

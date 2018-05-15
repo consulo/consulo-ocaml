@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.mock.MockDocument;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.RangeMarker;
@@ -35,13 +35,13 @@ public class MyMockDocument extends MockDocument
 	{
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public RangeMarker createRangeMarker(final int startOffset, final int endOffset)
 	{
 		return new RangeMarker()
 		{
-			@NotNull
+			@Nonnull
 			public Document getDocument()
 			{
 				return MyMockDocument.this;
@@ -86,12 +86,12 @@ public class MyMockDocument extends MockDocument
 
 			}
 
-			public <T> T getUserData(@NotNull final Key<T> key)
+			public <T> T getUserData(@Nonnull final Key<T> key)
 			{
 				return null;
 			}
 
-			public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value)
+			public <T> void putUserData(@Nonnull final Key<T> key, @Nullable final T value)
 			{
 			}
 		};

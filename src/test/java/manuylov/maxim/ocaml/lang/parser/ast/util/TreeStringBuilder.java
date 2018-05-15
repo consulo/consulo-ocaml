@@ -27,8 +27,8 @@ import manuylov.maxim.ocaml.lang.Keywords;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.lang.reflect.Field;
 
@@ -37,7 +37,8 @@ import java.lang.reflect.Field;
  *         Date: 25.02.2009
  */
 public class TreeStringBuilder {
-    @NotNull private static final TokenSet ourParenthesesTypes = TokenSet.create(
+    @Nonnull
+	private static final TokenSet ourParenthesesTypes = TokenSet.create(
         OCamlElementTypes.PARENTHESES_CLASS_EXPRESSION,
         OCamlElementTypes.PARENTHESES_EXPRESSION,
         OCamlElementTypes.PARENTHESES_MODULE_EXPRESSION,
@@ -56,7 +57,7 @@ public class TreeStringBuilder {
         myThrowExceptionIfErrorElementOccurred = throwExceptionIfErrorElementOccurred;
     }
 
-    public static TreeStringBuilder buildTreeString(@NotNull final ASTNode root, final boolean ignoreWhiteSpaces, final boolean ignoreParentheses,
+    public static TreeStringBuilder buildTreeString(@Nonnull final ASTNode root, final boolean ignoreWhiteSpaces, final boolean ignoreParentheses,
                                               final boolean throwExceptionIfErrorElementOccurred) {
         final TreeStringBuilder builder = new TreeStringBuilder(throwExceptionIfErrorElementOccurred);
         processNode(builder, 0, root, ignoreWhiteSpaces, ignoreParentheses);
@@ -66,7 +67,7 @@ public class TreeStringBuilder {
         return builder;
     }
 
-    private static void processNode(@NotNull final TreeStringBuilder builder, final int level, @NotNull final ASTNode node,
+    private static void processNode(@Nonnull final TreeStringBuilder builder, final int level, @Nonnull final ASTNode node,
                                     final boolean ignoreWhiteSpaces, final boolean ignoreParentheses) {
         doProcessNode(builder, level, node, ignoreWhiteSpaces, ignoreParentheses);
 
@@ -76,7 +77,7 @@ public class TreeStringBuilder {
         }
     }
 
-    private static void doProcessNode(@NotNull final TreeStringBuilder builder, final int level, @NotNull final ASTNode node,
+    private static void doProcessNode(@Nonnull final TreeStringBuilder builder, final int level, @Nonnull final ASTNode node,
                                       final boolean ignoreWhiteSpaces, final boolean ignoreParentheses) {
         final IElementType elementType = node.getElementType();
 
@@ -122,7 +123,7 @@ public class TreeStringBuilder {
         }
     }
 
-    public void addNode(final int level, @NotNull final IElementType type) {
+    public void addNode(final int level, @Nonnull final IElementType type) {
         final String text = getElementText(type);
 
         if (text != null) {
@@ -135,7 +136,7 @@ public class TreeStringBuilder {
         myStringBuilder.append("\n");
     }
 
-    public void addNode(final int level, @NotNull final IElementType type, @NotNull final String text) {
+    public void addNode(final int level, @Nonnull final IElementType type, @Nonnull final String text) {
         addIndent(level);
         myStringBuilder.append(type.toString());
         myStringBuilder.append("('");
@@ -144,13 +145,13 @@ public class TreeStringBuilder {
         myStringBuilder.append("\n");
     }
 
-    @NotNull
+    @Nonnull
     public String getStringRepresentation() {
         return myStringBuilder.toString();
     }
 
-    @NotNull
-    private static ASTNode getRoot(@NotNull final ASTNode node) {
+    @Nonnull
+    private static ASTNode getRoot(@Nonnull final ASTNode node) {
         ASTNode root = node;
 
         while (root.getTreeParent() != null) {
@@ -167,7 +168,7 @@ public class TreeStringBuilder {
     }
 
     @Nullable
-    private String getElementText(@NotNull final IElementType type) {
+    private String getElementText(@Nonnull final IElementType type) {
         final Field[] fields = OCamlTokenTypes.class.getFields();
 
         for (final Field field : fields) {
@@ -187,7 +188,7 @@ public class TreeStringBuilder {
     }
 
     @Nullable
-    private String findTextInClass(@NotNull final Class<?> clazz, @NotNull final String fieldName) throws IllegalAccessException {
+    private String findTextInClass(@Nonnull final Class<?> clazz, @Nonnull final String fieldName) throws IllegalAccessException {
         try {
             return String.valueOf(clazz.getField(fieldName).get(null));
         } catch (final NoSuchFieldException e) {

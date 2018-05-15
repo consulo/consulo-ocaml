@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -40,12 +40,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterDefinition
  */
 public class OCamlAsTypeExpressionImpl extends BaseOCamlResolvedReference implements OCamlAsTypeExpression
 {
-	public OCamlAsTypeExpressionImpl(@NotNull final ASTNode node)
+	public OCamlAsTypeExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitAsTypeExpression(this);
 	}
@@ -63,19 +63,19 @@ public class OCamlAsTypeExpressionImpl extends BaseOCamlResolvedReference implem
 		return node == null ? null : OCamlASTTreeUtil.checkNodeType(node.getLastChildNode(), OCamlElementTypes.TYPE_PARAMETER_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.AnyCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "type parameter";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return Collections.<OCamlStructuredElement>singletonList(this);

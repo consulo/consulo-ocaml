@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -34,7 +34,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameters;
  */
 public class OCamlTypeParameterizedBindingImpl extends BaseOCamlElement implements OCamlTypeParameterizedBinding
 {
-	public OCamlTypeParameterizedBindingImpl(@NotNull final ASTNode node)
+	public OCamlTypeParameterizedBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -45,13 +45,13 @@ public class OCamlTypeParameterizedBindingImpl extends BaseOCamlElement implemen
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeBinding.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTypeParameterizedBinding(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeParameters.class, OCamlTypeParameterizedBinding.class);
 	}

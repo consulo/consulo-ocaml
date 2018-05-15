@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -36,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPolyTypeExpression;
  */
 public class OCamlMethodClassFieldSpecificationImpl extends BaseOCamlResolvedReference implements OCamlMethodClassFieldSpecification
 {
-	public OCamlMethodClassFieldSpecificationImpl(@NotNull final ASTNode node)
+	public OCamlMethodClassFieldSpecificationImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -47,7 +47,7 @@ public class OCamlMethodClassFieldSpecificationImpl extends BaseOCamlResolvedRef
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlPolyTypeExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitMethodClassFieldSpecification(this);
 	}
@@ -58,13 +58,13 @@ public class OCamlMethodClassFieldSpecificationImpl extends BaseOCamlResolvedRef
 		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.METHOD_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "method";

@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -32,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParenthesesExpression;
  */
 public class OCamlParenthesesExpressionImpl extends OCamlParenthesesImpl implements OCamlParenthesesExpression
 {
-	public OCamlParenthesesExpressionImpl(@NotNull final ASTNode node)
+	public OCamlParenthesesExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -51,7 +51,7 @@ public class OCamlParenthesesExpressionImpl extends OCamlParenthesesImpl impleme
 				OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitParenthesesExpression(this);
 	}

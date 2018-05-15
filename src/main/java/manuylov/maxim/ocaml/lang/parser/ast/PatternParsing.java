@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.util.MultiMarker;
  */
 class PatternParsing extends Parsing
 {
-	public static void parsePattern(@NotNull final PsiBuilder builder)
+	public static void parsePattern(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParsePattern(builder))
 		{
@@ -39,12 +40,12 @@ class PatternParsing extends Parsing
 		}
 	}
 
-	private static boolean tryParsePattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParsePattern(@Nonnull final PsiBuilder builder)
 	{
 		return tryParseAsPattern(builder);
 	}
 
-	private static boolean tryParseAsPattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAsPattern(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker asPatternMarker = builder.mark();
 
@@ -69,7 +70,7 @@ class PatternParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseOrPattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParseOrPattern(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker orPatternMarker = builder.mark();
 
@@ -95,7 +96,7 @@ class PatternParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseCommaPattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParseCommaPattern(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker commaPatternMarker = builder.mark();
 
@@ -129,7 +130,7 @@ class PatternParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseHeadTailPattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParseHeadTailPattern(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker headTailPatternMarker = new MultiMarker(builder);
 		headTailPatternMarker.mark();
@@ -156,7 +157,7 @@ class PatternParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseConstructorPattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParseConstructorPattern(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker constructorApplicationPatternMarker = builder.mark();
 
@@ -184,7 +185,7 @@ class PatternParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseSimplePattern(@NotNull final PsiBuilder builder)
+	private static boolean tryParseSimplePattern(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -318,7 +319,7 @@ class PatternParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseUnderscore(@NotNull final PsiBuilder builder)
+	private static boolean tryParseUnderscore(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -332,7 +333,7 @@ class PatternParsing extends Parsing
 		return false;
 	}
 
-	private static void parseRecordFieldInitialization(@NotNull final PsiBuilder builder)
+	private static void parseRecordFieldInitialization(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker fieldInitializationMarker = builder.mark();
 

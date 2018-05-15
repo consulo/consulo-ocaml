@@ -21,8 +21,9 @@ package manuylov.maxim.ocaml.lang.feature.folding;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -36,15 +37,15 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 public class OCamlFoldingBuilder implements FoldingBuilder
 {
-	@NotNull
-	public FoldingDescriptor[] buildFoldRegions(@NotNull final ASTNode node, @NotNull final Document document)
+	@Nonnull
+	public FoldingDescriptor[] buildFoldRegions(@Nonnull final ASTNode node, @Nonnull final Document document)
 	{
 		final List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
 		appendDescriptors(node, descriptors);
 		return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
 	}
 
-	private void appendDescriptors(@NotNull final ASTNode node, @NotNull final List<FoldingDescriptor> descriptors)
+	private void appendDescriptors(@Nonnull final ASTNode node, @Nonnull final List<FoldingDescriptor> descriptors)
 	{
 		final ASTNode firstChildNode = node.getFirstChildNode();
 
@@ -71,7 +72,7 @@ public class OCamlFoldingBuilder implements FoldingBuilder
 	}
 
 	@Nullable
-	public String getPlaceholderText(@NotNull final ASTNode node)
+	public String getPlaceholderText(@Nonnull final ASTNode node)
 	{
 		if(node.getElementType() == OCamlElementTypes.PARENTHESES_EXPRESSION)
 		{
@@ -109,7 +110,7 @@ public class OCamlFoldingBuilder implements FoldingBuilder
 		return null;
 	}
 
-	public boolean isCollapsedByDefault(@NotNull final ASTNode node)
+	public boolean isCollapsedByDefault(@Nonnull final ASTNode node)
 	{
 		return false;
 	}

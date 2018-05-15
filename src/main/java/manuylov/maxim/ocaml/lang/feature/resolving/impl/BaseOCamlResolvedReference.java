@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -29,13 +30,13 @@ import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
  */
 public abstract class BaseOCamlResolvedReference extends BaseOCamlNamedElement implements OCamlResolvedReference
 {
-	protected BaseOCamlResolvedReference(@NotNull final ASTNode node)
+	protected BaseOCamlResolvedReference(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return builder.getProcessor().process(this);
 	}

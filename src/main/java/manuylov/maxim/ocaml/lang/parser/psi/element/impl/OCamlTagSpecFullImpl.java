@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -33,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
  */
 public class OCamlTagSpecFullImpl extends BaseOCamlElement implements OCamlTagSpecFull
 {
-	public OCamlTagSpecFullImpl(@NotNull final ASTNode node)
+	public OCamlTagSpecFullImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -60,7 +60,7 @@ public class OCamlTagSpecFullImpl extends BaseOCamlElement implements OCamlTagSp
 		}
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTagSpecFull(this);
 	}

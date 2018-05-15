@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.Language;
 import manuylov.maxim.ocaml.lang.OCamlLanguage;
 
@@ -28,7 +29,7 @@ import manuylov.maxim.ocaml.lang.OCamlLanguage;
  */
 public abstract class OCamlFileTypeLanguage extends Language
 {
-	protected OCamlFileTypeLanguage(@NotNull final String id)
+	protected OCamlFileTypeLanguage(@Nonnull final String id)
 	{
 		super(OCamlLanguage.INSTANCE, id);
 	}

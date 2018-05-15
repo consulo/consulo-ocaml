@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.run;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -36,7 +37,7 @@ import manuylov.maxim.ocaml.util.OCamlIconUtil;
  */
 public class OCamlConfigurationType implements ConfigurationType
 {
-	@NotNull
+	@Nonnull
 	public static OCamlConfigurationType getInstance()
 	{
 		for(final ConfigurationType configurationType : Extensions.getExtensions(CONFIGURATION_TYPE_EP))
@@ -49,52 +50,52 @@ public class OCamlConfigurationType implements ConfigurationType
 		throw new Error();
 	}
 
-	@NotNull
+	@Nonnull
 	private final ConfigurationFactory myConfigurationFactory = new ConfigurationFactory(this)
 	{
 		@Override
-		public RunConfiguration createTemplateConfiguration(@NotNull final Project project)
+		public RunConfiguration createTemplateConfiguration(@Nonnull final Project project)
 		{
 			return new OCamlRunConfiguration(new RunConfigurationModule(project), this, "");
 		}
 
 		@Override
-		public boolean isApplicable(@NotNull Project project)
+		public boolean isApplicable(@Nonnull Project project)
 		{
 			return ModuleExtensionHelper.getInstance(project).hasModuleExtension(OCamlModuleExtension.class);
 		}
 	};
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDisplayName()
 	{
 		return "OCaml Application";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getConfigurationTypeDescription()
 	{
 		return "OCaml application run configuration";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Image getIcon()
 	{
 		return OCamlIconUtil.getSmallOCamlIcon();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getId()
 	{
 		return "OCAML_CONFIGURATION_TYPE";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ConfigurationFactory[] getConfigurationFactories()
 	{
 		return new ConfigurationFactory[]{myConfigurationFactory};

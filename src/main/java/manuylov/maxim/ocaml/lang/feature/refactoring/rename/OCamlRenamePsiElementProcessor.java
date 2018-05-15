@@ -23,8 +23,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -51,13 +52,13 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFile;
 public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 {
 	@Override
-	public boolean canProcessElement(@NotNull final PsiElement element)
+	public boolean canProcessElement(@Nonnull final PsiElement element)
 	{
 		return element instanceof OCamlElement;
 	}
 
 	@Override
-	public void findExistingNameConflicts(@NotNull final PsiElement element, @NotNull final String newName, @NotNull final MultiMap<PsiElement,
+	public void findExistingNameConflicts(@Nonnull final PsiElement element, @Nonnull final String newName, @Nonnull final MultiMap<PsiElement,
 			String> conflicts)
 	{
 		super.findExistingNameConflicts(element, newName, conflicts);
@@ -159,7 +160,7 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		}
 	}
 
-	private boolean rename(@NotNull final PsiElement element, @NotNull final String newName)
+	private boolean rename(@Nonnull final PsiElement element, @Nonnull final String newName)
 	{
 		try
 		{
@@ -177,7 +178,7 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 	}
 
 	@Nullable
-	private String getName(@NotNull final PsiElement element)
+	private String getName(@Nonnull final PsiElement element)
 	{
 		if(element instanceof PsiNamedElement)
 		{
@@ -186,8 +187,8 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		return null;
 	}
 
-	private void addConflictIfNeeded(@NotNull final MultiMap<PsiElement, String> conflicts, @NotNull final PsiElement conflictingElement,
-			@NotNull final String text, @NotNull final Pair<PsiFile, PsiFile>... pairs)
+	private void addConflictIfNeeded(@Nonnull final MultiMap<PsiElement, String> conflicts, @Nonnull final PsiElement conflictingElement,
+			@Nonnull final String text, @Nonnull final Pair<PsiFile, PsiFile>... pairs)
 	{
 		final PsiElement originalElement = getOriginal(conflictingElement, pairs);
 		if(originalElement != null)
@@ -200,7 +201,7 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 	}
 
 	@Nullable
-	private PsiElement getOriginal(@NotNull final PsiElement element, @NotNull final Pair<PsiFile, PsiFile>... pairs)
+	private PsiElement getOriginal(@Nonnull final PsiElement element, @Nonnull final Pair<PsiFile, PsiFile>... pairs)
 	{
 		final PsiFile elementFile = element.getContainingFile();
 		for(final Pair<PsiFile, PsiFile> pair : pairs)
@@ -215,8 +216,8 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		return element;
 	}
 
-	@NotNull
-	private Collection<PsiReference> getReferences(@NotNull final PsiElement element, final boolean useCache, @Nullable final PsiFile originalFile)
+	@Nonnull
+	private Collection<PsiReference> getReferences(@Nonnull final PsiElement element, final boolean useCache, @Nullable final PsiFile originalFile)
 	{
 		final Collection<PsiReference> references = !useCache && originalFile != null ? findNewReferences(element, originalFile) : findReferences(element);
 		//noinspection SuspiciousMethodCalls
@@ -224,8 +225,8 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		return references;
 	}
 
-	@NotNull
-	private Collection<PsiReference> findNewReferences(@NotNull final PsiElement element, @NotNull final PsiFile originalFile)
+	@Nonnull
+	private Collection<PsiReference> findNewReferences(@Nonnull final PsiElement element, @Nonnull final PsiFile originalFile)
 	{
 		final PsiFile psiFile = element.getContainingFile();
 		if(!(psiFile instanceof OCamlFile))
@@ -260,12 +261,12 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		return references;
 	}
 
-	private void collectReferences(@NotNull final PsiElement element, @NotNull final OCamlFile fakeFile,
-			@NotNull final Collection<PsiReference> references)
+	private void collectReferences(@Nonnull final PsiElement element, @Nonnull final OCamlFile fakeFile,
+			@Nonnull final Collection<PsiReference> references)
 	{
 		OCamlPsiUtil.acceptRecursively(fakeFile, new OCamlElementProcessorAdapter()
 		{
-			public void process(@NotNull final OCamlElement psiElement)
+			public void process(@Nonnull final OCamlElement psiElement)
 			{
 				final PsiReference reference = psiElement.getReference();
 				if(reference == null)
@@ -280,8 +281,8 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		});
 	}
 
-	private void collectReferencesInFile(@NotNull final PsiElement element, @NotNull final OCamlFile fakeFile, @NotNull final File file,
-			@NotNull final Collection<PsiReference> references)
+	private void collectReferencesInFile(@Nonnull final PsiElement element, @Nonnull final OCamlFile fakeFile, @Nonnull final File file,
+			@Nonnull final Collection<PsiReference> references)
 	{
 		final VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByIoFile(file);
 		if(virtualFile == null)
@@ -295,7 +296,7 @@ public class OCamlRenamePsiElementProcessor extends RenamePsiElementProcessor
 		}
 		OCamlPsiUtil.acceptRecursively(psiFile, new OCamlElementProcessorAdapter()
 		{
-			public void process(@NotNull final OCamlElement psiElement)
+			public void process(@Nonnull final OCamlElement psiElement)
 			{
 				final PsiReference reference = psiElement.getReference();
 				if(reference == null || !(reference instanceof OCamlReference))

@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorPathPattern;
@@ -29,12 +29,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlConstructorPathPattern;
  */
 public class OCamlConstructorPathPatternImpl extends BaseOCamlConstructorPath implements OCamlConstructorPathPattern
 {
-	public OCamlConstructorPathPatternImpl(@NotNull final ASTNode node)
+	public OCamlConstructorPathPatternImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitConstructorPathPattern(this);
 	}

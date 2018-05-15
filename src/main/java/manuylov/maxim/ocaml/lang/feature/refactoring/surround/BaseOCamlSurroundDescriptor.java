@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.surroundWith.SurroundDescriptor;
 import com.intellij.lang.surroundWith.Surrounder;
 import com.intellij.psi.PsiElement;
@@ -32,11 +33,11 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
  */
 abstract class BaseOCamlSurroundDescriptor implements SurroundDescriptor
 {
-	@NotNull
+	@Nonnull
 	private final Surrounder[] mySurrounders;
 	private final Class<? extends OCamlElement> myElementClass;
 
-	public BaseOCamlSurroundDescriptor(@NotNull final Class<? extends OCamlElement> elementClass, @NotNull final Surrounder... surrounders)
+	public BaseOCamlSurroundDescriptor(@Nonnull final Class<? extends OCamlElement> elementClass, @Nonnull final Surrounder... surrounders)
 	{
 		myElementClass = elementClass;
 		mySurrounders = surrounders;
@@ -48,14 +49,14 @@ abstract class BaseOCamlSurroundDescriptor implements SurroundDescriptor
 		return false;
 	}
 
-	@NotNull
-	public PsiElement[] getElementsToSurround(@NotNull final PsiFile file, final int startOffset, final int endOffset)
+	@Nonnull
+	public PsiElement[] getElementsToSurround(@Nonnull final PsiFile file, final int startOffset, final int endOffset)
 	{
 		final PsiElement element = OCamlPsiUtil.findElementOfTypeInRange(file, myElementClass, startOffset, endOffset, true);
 		return element == null ? PsiElement.EMPTY_ARRAY : new PsiElement[]{element};
 	}
 
-	@NotNull
+	@Nonnull
 	public Surrounder[] getSurrounders()
 	{
 		return mySurrounders;

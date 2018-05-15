@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround.surrounder;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -33,15 +33,15 @@ public class OCamlWithLetExpressionSurrounder extends BaseOCamlSurrounderWithNav
 		super("let / in");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected String doSurround(@NotNull final CharSequence text)
+	protected String doSurround(@Nonnull final CharSequence text)
 	{
 		return START + " =  in (" + text + ")";
 	}
 
 	@Override
-	protected int getOffset(@NotNull final String surroundedText)
+	protected int getOffset(@Nonnull final String surroundedText)
 	{
 		return START.length();
 	}

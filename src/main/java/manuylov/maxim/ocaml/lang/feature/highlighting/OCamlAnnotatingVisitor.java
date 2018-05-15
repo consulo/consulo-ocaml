@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.feature.highlighting;
 import java.awt.Color;
 import java.awt.Font;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
@@ -40,17 +41,17 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnknownElement;
  */
 public class OCamlAnnotatingVisitor extends OCamlElementVisitorAdapter implements Annotator, OCamlElementProcessor
 {
-	@NotNull
+	@Nonnull
 	private AnnotationHolder myAnnotationHolder;
 
-	public void annotate(@NotNull final PsiElement psiElement, @NotNull final AnnotationHolder holder)
+	public void annotate(@Nonnull final PsiElement psiElement, @Nonnull final AnnotationHolder holder)
 	{
 		myAnnotationHolder = holder;
 		psiElement.accept(this);
 	}
 
 	@Override
-	public void visitUnknownElement(@NotNull final OCamlUnknownElement psiElement)
+	public void visitUnknownElement(@Nonnull final OCamlUnknownElement psiElement)
 	{
 		final ASTNode node = psiElement.getNode();
 		final Annotation annotation = myAnnotationHolder.createErrorAnnotation(psiElement, "OCaml element was not created properly: " + (node == null ?
@@ -58,7 +59,7 @@ public class OCamlAnnotatingVisitor extends OCamlElementVisitorAdapter implement
 		annotation.setEnforcedTextAttributes(new TextAttributes(Color.black, Color.red.darker(), null, null, Font.PLAIN));
 	}
 
-	public void process(@NotNull final OCamlElement psiElement)
+	public void process(@Nonnull final OCamlElement psiElement)
 	{
 		if(psiElement instanceof OCamlReference)
 		{

@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
+
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 

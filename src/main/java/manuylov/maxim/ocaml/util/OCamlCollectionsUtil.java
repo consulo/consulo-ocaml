@@ -21,7 +21,7 @@ package manuylov.maxim.ocaml.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class OCamlCollectionsUtil
 {
-	public static <T> List<T> createNotNullValuesList(@NotNull final T... values)
+	public static <T> List<T> createNotNullValuesList(@Nonnull final T... values)
 	{
 		final List<T> result = new ArrayList<T>(values.length);
 		for(final T value : values)

@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -42,12 +42,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueNamePattern;
  */
 public class OCamlValueNameImpl extends BaseOCamlReference implements OCamlValueName
 {
-	public OCamlValueNameImpl(@NotNull final ASTNode node)
+	public OCamlValueNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitValueName(this);
 	}
@@ -58,26 +58,26 @@ public class OCamlValueNameImpl extends BaseOCamlReference implements OCamlValue
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.ValueName;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "variable";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.asList(OCamlInstVarNameDefinition.class, OCamlValueNamePattern.class, OCamlForExpressionIndexVariableName.class,
 				OCamlLabelDefinition.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return OCamlPsiUtil.getModulePath(this, OCamlExtendedModuleName.class);

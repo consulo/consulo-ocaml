@@ -21,7 +21,7 @@ package manuylov.maxim.ocaml.lang.parser.ast;
 import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.junit.Test;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.parser.ast.testCase.ParsingTestCase;
@@ -194,9 +194,9 @@ public abstract class BaseModuleParsingTest extends ParsingTestCase
 		doTest("module type m = sig val a : int end", myTree.getStringRepresentation());
 	}
 
-	@NotNull
+	@Nonnull
 	protected abstract IElementType getMainElement();
 
-	@NotNull
+	@Nonnull
 	protected abstract IElementType getTypeBindingElement();
 }

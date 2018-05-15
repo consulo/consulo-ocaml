@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -37,7 +37,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
  */
 public class OCamlModuleTypeConstraintModuleExpressionImpl extends BaseOCamlElement implements OCamlModuleTypeConstraintModuleExpression
 {
-	public OCamlModuleTypeConstraintModuleExpressionImpl(@NotNull final ASTNode node)
+	public OCamlModuleTypeConstraintModuleExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -48,12 +48,12 @@ public class OCamlModuleTypeConstraintModuleExpressionImpl extends BaseOCamlElem
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitModuleTypeConstraintModuleExpression(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class),

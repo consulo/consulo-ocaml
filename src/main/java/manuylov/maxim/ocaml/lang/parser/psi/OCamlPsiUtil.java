@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -56,7 +56,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStatement;
 public class OCamlPsiUtil
 {
 	@Nullable
-	public static PsiElement getNonWhiteSpacePreviousLeaf(@NotNull final PsiElement element, final boolean emptyErrorIsWhitespace)
+	public static PsiElement getNonWhiteSpacePreviousLeaf(@Nonnull final PsiElement element, final boolean emptyErrorIsWhitespace)
 	{
 		PsiElement parent = element;
 		PsiElement prevElement = getNonWhiteSpacePrevSibling(parent, emptyErrorIsWhitespace);
@@ -74,8 +74,8 @@ public class OCamlPsiUtil
 		return prevElement == null ? null : getNonWhiteSpaceLastLeaf(prevElement, emptyErrorIsWhitespace);
 	}
 
-	@NotNull
-	public static PsiElement getNonWhiteSpaceLastLeaf(@NotNull final PsiElement psiElement, final boolean emptyErrorIsWhitespace)
+	@Nonnull
+	public static PsiElement getNonWhiteSpaceLastLeaf(@Nonnull final PsiElement psiElement, final boolean emptyErrorIsWhitespace)
 	{
 		PsiElement result = psiElement;
 		PsiElement lastChild = getNonWhiteSpaceLastChild(result, emptyErrorIsWhitespace);
@@ -90,7 +90,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement getNonWhiteSpaceLastChild(@NotNull final PsiElement element, final boolean emptyErrorIsWhitespace)
+	public static PsiElement getNonWhiteSpaceLastChild(@Nonnull final PsiElement element, final boolean emptyErrorIsWhitespace)
 	{
 		final PsiElement lastChild = element.getLastChild();
 		if(lastChild == null || !isWhiteSpace(lastChild, emptyErrorIsWhitespace))
@@ -101,7 +101,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static OCamlElement getPrevSibling(@NotNull final PsiElement sibling)
+	public static OCamlElement getPrevSibling(@Nonnull final PsiElement sibling)
 	{
 		PsiElement result = sibling;
 
@@ -115,7 +115,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement getStrictPrevSibling(@NotNull final PsiElement element)
+	public static PsiElement getStrictPrevSibling(@Nonnull final PsiElement element)
 	{
 		return ApplicationManager.getApplication().runReadAction(new Computable<PsiElement>()
 		{
@@ -127,7 +127,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement getNonWhiteSpacePrevSibling(@NotNull final PsiElement sibling, final boolean emptyErrorIsWhitespace)
+	public static PsiElement getNonWhiteSpacePrevSibling(@Nonnull final PsiElement sibling, final boolean emptyErrorIsWhitespace)
 	{
 		PsiElement result = sibling;
 
@@ -141,7 +141,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement getNonWhiteSpaceNextSibling(@NotNull final PsiElement sibling, final boolean emptyErrorIsWhitespace)
+	public static PsiElement getNonWhiteSpaceNextSibling(@Nonnull final PsiElement sibling, final boolean emptyErrorIsWhitespace)
 	{
 		PsiElement result = sibling;
 
@@ -154,18 +154,18 @@ public class OCamlPsiUtil
 		return result;
 	}
 
-	public static boolean isWhiteSpace(@NotNull final PsiElement element, final boolean emptyErrorIsWhitespace)
+	public static boolean isWhiteSpace(@Nonnull final PsiElement element, final boolean emptyErrorIsWhitespace)
 	{
 		return element instanceof PsiWhiteSpace || element instanceof PsiComment || emptyErrorIsWhitespace && isEmptyErrorMarker(element);
 	}
 
-	private static boolean isEmptyErrorMarker(@NotNull final PsiElement element)
+	private static boolean isEmptyErrorMarker(@Nonnull final PsiElement element)
 	{
 		return isError(element) && getChildren(element).isEmpty();
 	}
 
 	@Nullable
-	public static OCamlElement getNextSibling(@NotNull final PsiElement sibling)
+	public static OCamlElement getNextSibling(@Nonnull final PsiElement sibling)
 	{
 		PsiElement result = sibling;
 
@@ -179,7 +179,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	private static PsiElement getStrictNextSibling(@NotNull final PsiElement element)
+	private static PsiElement getStrictNextSibling(@Nonnull final PsiElement element)
 	{
 		return ApplicationManager.getApplication().runReadAction(new Computable<PsiElement>()
 		{
@@ -191,7 +191,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static OCamlElement getParent(@NotNull final PsiElement node)
+	public static OCamlElement getParent(@Nonnull final PsiElement node)
 	{
 		final PsiElement result = getStrictParent(node);
 		if(!(result instanceof OCamlElement))
@@ -202,7 +202,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement getStrictParent(@NotNull final PsiElement element)
+	public static PsiElement getStrictParent(@Nonnull final PsiElement element)
 	{
 		return ApplicationManager.getApplication().runReadAction(new Computable<PsiElement>()
 		{
@@ -214,7 +214,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static <T extends PsiElement> T getParentOfType(@NotNull final PsiElement element, @NotNull final Class<T> clazz)
+	public static <T extends PsiElement> T getParentOfType(@Nonnull final PsiElement element, @Nonnull final Class<T> clazz)
 	{
 		OCamlElement parent = element instanceof OCamlElement ? (OCamlElement) element : getParent(element);
 
@@ -227,13 +227,13 @@ public class OCamlPsiUtil
 		return (T) parent;
 	}
 
-	public static boolean areSiblings(@NotNull final OCamlElement firstNode, @NotNull final OCamlElement secondNode)
+	public static boolean areSiblings(@Nonnull final OCamlElement firstNode, @Nonnull final OCamlElement secondNode)
 	{
 		return getParent(firstNode) == getParent(secondNode);
 	}
 
-	@NotNull
-	public static <T extends OCamlElement> List<T> getModulePath(@NotNull final OCamlElement psiElement, @NotNull final Class<T> siblingsType)
+	@Nonnull
+	public static <T extends OCamlElement> List<T> getModulePath(@Nonnull final OCamlElement psiElement, @Nonnull final Class<T> siblingsType)
 	{
 		final List<T> result = new ArrayList<T>();
 
@@ -257,8 +257,8 @@ public class OCamlPsiUtil
 		return result;
 	}
 
-	@NotNull
-	public static <T extends OCamlElement> List<T> getChildrenOfType(@NotNull final PsiElement parent, @NotNull final Class<T> type)
+	@Nonnull
+	public static <T extends OCamlElement> List<T> getChildrenOfType(@Nonnull final PsiElement parent, @Nonnull final Class<T> type)
 	{
 		final List<T> result = new ArrayList<T>();
 
@@ -281,14 +281,14 @@ public class OCamlPsiUtil
 		return result;
 	}
 
-	@NotNull
-	public static List<OCamlElement> getChildren(@NotNull final PsiElement parent)
+	@Nonnull
+	public static List<OCamlElement> getChildren(@Nonnull final PsiElement parent)
 	{
 		return getChildrenOfType(parent, OCamlElement.class);
 	}
 
 	@Nullable
-	public static <T extends OCamlElement> T getFirstChildOfType(@NotNull final PsiElement parent, @NotNull final Class<T> type)
+	public static <T extends OCamlElement> T getFirstChildOfType(@Nonnull final PsiElement parent, @Nonnull final Class<T> type)
 	{
 		final List<OCamlElement> children = getChildren(parent);
 		for(final OCamlElement child : children)
@@ -303,7 +303,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static <T extends OCamlElement> T getLastChildOfType(@NotNull final OCamlElement parent, @NotNull final Class<T> type)
+	public static <T extends OCamlElement> T getLastChildOfType(@Nonnull final OCamlElement parent, @Nonnull final Class<T> type)
 	{
 		final List<OCamlElement> children = getChildren(parent);
 		for(int i = children.size() - 1; i >= 0; i--)
@@ -318,8 +318,8 @@ public class OCamlPsiUtil
 		return null;
 	}
 
-	@NotNull
-	public static List<? extends OCamlElement> getChildrenOfTypes(@NotNull final OCamlElement parent, @NotNull final Class<? extends OCamlElement>... types)
+	@Nonnull
+	public static List<? extends OCamlElement> getChildrenOfTypes(@Nonnull final OCamlElement parent, @Nonnull final Class<? extends OCamlElement>... types)
 	{
 		final List<OCamlElement> result = new ArrayList<OCamlElement>();
 
@@ -338,13 +338,13 @@ public class OCamlPsiUtil
 		return result;
 	}
 
-	public static List<OCamlModuleName> collectModuleReferences(@NotNull final OCamlElement psiElement)
+	public static List<OCamlModuleName> collectModuleReferences(@Nonnull final OCamlElement psiElement)
 	{
 		final List<OCamlModuleName> moduleReferences = new ArrayList<OCamlModuleName>();
 		acceptRecursively(psiElement, new OCamlElementVisitorAdapter()
 		{
 			@Override
-			public void visitModuleName(@NotNull final OCamlModuleName psiElement)
+			public void visitModuleName(@Nonnull final OCamlModuleName psiElement)
 			{
 				moduleReferences.add(psiElement);
 			}
@@ -352,7 +352,7 @@ public class OCamlPsiUtil
 		return moduleReferences;
 	}
 
-	public static void acceptRecursively(@NotNull final PsiElement psiElement, @NotNull final PsiElementVisitor visitor)
+	public static void acceptRecursively(@Nonnull final PsiElement psiElement, @Nonnull final PsiElementVisitor visitor)
 	{
 		final Stack<PsiElement> stack = new Stack<PsiElement>();
 		stack.push(psiElement);
@@ -365,7 +365,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement findCommonParent(@NotNull final PsiElement element1, @NotNull final PsiElement element2)
+	public static PsiElement findCommonParent(@Nonnull final PsiElement element1, @Nonnull final PsiElement element2)
 	{
 		if(element1 == element2)
 		{
@@ -387,8 +387,8 @@ public class OCamlPsiUtil
 		return null;
 	}
 
-	@NotNull
-	private static ArrayList<PsiElement> getParents(@NotNull final PsiElement element)
+	@Nonnull
+	private static ArrayList<PsiElement> getParents(@Nonnull final PsiElement element)
 	{
 		final ArrayList<PsiElement> parents = new ArrayList<PsiElement>();
 		PsiElement parent = element;
@@ -401,7 +401,7 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement findElementOfTypeInRange(@NotNull final PsiElement root, @NotNull final Class<? extends PsiElement> elementClass,
+	public static PsiElement findElementOfTypeInRange(@Nonnull final PsiElement root, @Nonnull final Class<? extends PsiElement> elementClass,
 			final int startOffset, final int endOffset, final boolean emptyErrorIsWhitespace)
 	{
 		PsiElement element1 = root.findElementAt(startOffset);
@@ -438,8 +438,8 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement findElementInRange(@NotNull final String text, @NotNull final TextRange range, @NotNull final Language language,
-			@NotNull final Project project)
+	public static PsiElement findElementInRange(@Nonnull final String text, @Nonnull final TextRange range, @Nonnull final Language language,
+			@Nonnull final Project project)
 	{
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(language);
 		if(parserDefinition == null)
@@ -452,9 +452,9 @@ public class OCamlPsiUtil
 		return findElementInRange(psiRoot, range);
 	}
 
-	@NotNull
-	public static PsiElement parse(@NotNull final CharSequence text, @NotNull final ParserDefinition parserDefinition,
-			@NotNull final Project project, final boolean isTestMode, LanguageVersion languageVersion)
+	@Nonnull
+	public static PsiElement parse(@Nonnull final CharSequence text, @Nonnull final ParserDefinition parserDefinition,
+			@Nonnull final Project project, final boolean isTestMode, LanguageVersion languageVersion)
 	{
 		final Lexer lexer = parserDefinition.createLexer(languageVersion);
 		final PsiParser parser = parserDefinition.createParser(languageVersion);
@@ -463,23 +463,23 @@ public class OCamlPsiUtil
 		return parserDefinition.createElement(parser.parse(parserDefinition.getFileNodeType(), builder, languageVersion));
 	}
 
-	public static boolean endsCorrectlyIfOCamlElement(@NotNull final PsiElement element)
+	public static boolean endsCorrectlyIfOCamlElement(@Nonnull final PsiElement element)
 	{
 		return !(element instanceof OCamlElement) || ((OCamlElement) element).endsCorrectly();
 	}
 
-	public static boolean endsWith(@NotNull final OCamlElement element, @NotNull final IElementType type)
+	public static boolean endsWith(@Nonnull final OCamlElement element, @Nonnull final IElementType type)
 	{
 		return getLastNodeType(element) == type;
 	}
 
-	public static boolean endsWith(@NotNull final OCamlElement element, @NotNull final TokenSet tokenSet)
+	public static boolean endsWith(@Nonnull final OCamlElement element, @Nonnull final TokenSet tokenSet)
 	{
 		return tokenSet.contains(getLastNodeType(element));
 	}
 
 	@Nullable
-	private static IElementType getLastNodeType(@NotNull final OCamlElement element)
+	private static IElementType getLastNodeType(@Nonnull final OCamlElement element)
 	{
 		final PsiElement lastChild = getLastChild(element);
 		if(lastChild == null)
@@ -494,14 +494,14 @@ public class OCamlPsiUtil
 		return node.getElementType();
 	}
 
-	public static boolean endsCorrectlyWith(@NotNull final OCamlElement element, @NotNull final Class<? extends OCamlElement> clazz)
+	public static boolean endsCorrectlyWith(@Nonnull final OCamlElement element, @Nonnull final Class<? extends OCamlElement> clazz)
 	{
 		final PsiElement lastChild = getLastChild(element);
 		return lastChild != null && clazz.isInstance(lastChild) && ((OCamlElement) lastChild).endsCorrectly();
 	}
 
 	@Nullable
-	private static PsiElement getLastChild(@NotNull final OCamlElement element)
+	private static PsiElement getLastChild(@Nonnull final OCamlElement element)
 	{
 		return ApplicationManager.getApplication().runReadAction(new Computable<PsiElement>()
 		{
@@ -513,17 +513,17 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static OCamlStatement getStatementOf(@NotNull final PsiElement element)
+	public static OCamlStatement getStatementOf(@Nonnull final PsiElement element)
 	{
 		return OCamlPsiUtil.getParentOfType(element, OCamlStatement.class);
 	}
 
-	public static boolean isError(@NotNull final PsiElement element)
+	public static boolean isError(@Nonnull final PsiElement element)
 	{
 		return element instanceof PsiErrorElement;
 	}
 
-	public static boolean isFirstChildOf(@NotNull final PsiElement parent, @NotNull final PsiElement element)
+	public static boolean isFirstChildOf(@Nonnull final PsiElement parent, @Nonnull final PsiElement element)
 	{
 		PsiElement current = element;
 		while(current != null)
@@ -541,13 +541,13 @@ public class OCamlPsiUtil
 		return false;
 	}
 
-	public static boolean hasChildOfType(@NotNull final PsiElement parent, @NotNull final Class<? extends OCamlElement> clazz)
+	public static boolean hasChildOfType(@Nonnull final PsiElement parent, @Nonnull final Class<? extends OCamlElement> clazz)
 	{
 		return !getChildrenOfType(parent, clazz).isEmpty();
 	}
 
-	@NotNull
-	public static PsiElement copy(@NotNull final PsiElement element)
+	@Nonnull
+	public static PsiElement copy(@Nonnull final PsiElement element)
 	{
 		final PsiElement fileCopy = element.getContainingFile().copy();
 		final TextRange range = element.getTextRange();
@@ -557,12 +557,12 @@ public class OCamlPsiUtil
 	}
 
 	@Nullable
-	public static PsiElement findElementInRange(@NotNull final PsiElement root, @NotNull final TextRange range)
+	public static PsiElement findElementInRange(@Nonnull final PsiElement root, @Nonnull final TextRange range)
 	{
 		return findElementOfTypeInRange(root, PsiElement.class, range.getStartOffset(), range.getEndOffset(), true);
 	}
 
-	public static boolean isParentOf(@NotNull final PsiElement parent, @NotNull final PsiElement child)
+	public static boolean isParentOf(@Nonnull final PsiElement parent, @Nonnull final PsiElement child)
 	{
 		PsiElement current = child;
 		while(current != null)

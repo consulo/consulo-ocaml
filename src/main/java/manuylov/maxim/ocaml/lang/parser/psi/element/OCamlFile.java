@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.psi.PsiFile;
 
 /**
@@ -29,7 +30,7 @@ import com.intellij.psi.PsiFile;
 public interface OCamlFile extends PsiFile
 {
 	@Nullable
-	<T extends OCamlStructuredBinding> T getModuleBinding(@NotNull Class<T> type);
+	<T extends OCamlStructuredBinding> T getModuleBinding(@Nonnull Class<T> type);
 
 	@Nullable
 	String getModuleName();

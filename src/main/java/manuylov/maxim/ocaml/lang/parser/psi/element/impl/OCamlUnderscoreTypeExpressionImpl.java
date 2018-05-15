@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
@@ -33,18 +34,18 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnderscoreTypeExpressio
  */
 public class OCamlUnderscoreTypeExpressionImpl extends BaseOCamlElement implements OCamlUnderscoreTypeExpression
 {
-	public OCamlUnderscoreTypeExpressionImpl(@NotNull final ASTNode node)
+	public OCamlUnderscoreTypeExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return Collections.<OCamlStructuredElement>singletonList(this);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitUnderscoreTypeExpression(this);
 	}

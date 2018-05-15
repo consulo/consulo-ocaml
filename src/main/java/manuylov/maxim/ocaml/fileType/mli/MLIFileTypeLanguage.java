@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.fileType.mli;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
 
 /**
@@ -27,7 +27,7 @@ import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
  */
 public class MLIFileTypeLanguage extends OCamlFileTypeLanguage
 {
-	@NotNull
+	@Nonnull
 	public static final MLIFileTypeLanguage INSTANCE = new MLIFileTypeLanguage();
 
 	public MLIFileTypeLanguage()

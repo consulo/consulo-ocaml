@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.run;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
@@ -37,20 +37,20 @@ public class OCamlRunner extends DefaultProgramRunner
 	@Nullable
 	private static Executor ourCurrentExecutor = null;
 
-	@NotNull
+	@Nonnull
 	public String getRunnerId()
 	{
 		return "OCamlRunner";
 	}
 
-	public boolean canRun(@NotNull final String executorId, @NotNull final RunProfile profile)
+	public boolean canRun(@Nonnull final String executorId, @Nonnull final RunProfile profile)
 	{
 		return profile instanceof OCamlRunConfiguration && (executorId.equals(DefaultRunExecutor.EXECUTOR_ID) || executorId.equals(DefaultDebugExecutor
 				.EXECUTOR_ID));
 	}
 
 	@Override
-	public void execute(@NotNull ExecutionEnvironment env, @Nullable Callback callback) throws ExecutionException
+	public void execute(@Nonnull ExecutionEnvironment env, @Nullable Callback callback) throws ExecutionException
 	{
 		ourCurrentExecutor = env.getExecutor();
 		super.execute(env, callback);

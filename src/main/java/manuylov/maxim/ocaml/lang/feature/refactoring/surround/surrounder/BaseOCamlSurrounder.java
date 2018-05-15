@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.refactoring.surround.surrounder;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.surroundWith.Surrounder;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Document;
@@ -35,27 +35,27 @@ import com.intellij.util.IncorrectOperationException;
  */
 abstract class BaseOCamlSurrounder implements Surrounder
 {
-	@NotNull
+	@Nonnull
 	private final String myDescription;
 
-	public BaseOCamlSurrounder(@NotNull final String description)
+	public BaseOCamlSurrounder(@Nonnull final String description)
 	{
 		myDescription = description;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getTemplateDescription()
 	{
 		return myDescription;
 	}
 
-	public boolean isApplicable(@NotNull final PsiElement[] elements)
+	public boolean isApplicable(@Nonnull final PsiElement[] elements)
 	{
 		return true;
 	}
 
 	@Nullable
-	public TextRange surroundElements(@NotNull final Project project, @NotNull final Editor editor, @NotNull final PsiElement[] elements) throws
+	public TextRange surroundElements(@Nonnull final Project project, @Nonnull final Editor editor, @Nonnull final PsiElement[] elements) throws
 			IncorrectOperationException
 	{
 		if(elements.length == 0)
@@ -77,12 +77,12 @@ abstract class BaseOCamlSurrounder implements Surrounder
 		return getTextRange(startPos, surroundedText);
 	}
 
-	@NotNull
-	protected TextRange getTextRange(final int startPos, @NotNull final String surroundedText)
+	@Nonnull
+	protected TextRange getTextRange(final int startPos, @Nonnull final String surroundedText)
 	{
 		return new TextRange(startPos, startPos + surroundedText.length());
 	}
 
-	@NotNull
-	protected abstract String doSurround(@NotNull final CharSequence text);
+	@Nonnull
+	protected abstract String doSurround(@Nonnull final CharSequence text);
 }

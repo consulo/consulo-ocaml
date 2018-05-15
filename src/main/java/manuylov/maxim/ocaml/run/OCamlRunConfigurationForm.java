@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -33,8 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.application.options.ModuleListCellRenderer;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
@@ -61,39 +61,39 @@ import manuylov.maxim.ocaml.util.OCamlFileUtil;
  */
 public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 {
-	@NotNull
+	@Nonnull
 	private JPanel myRootPanel;
-	@NotNull
+	@Nonnull
 	private TextFieldWithBrowseButton myMainFileEditor;
-	@NotNull
+	@Nonnull
 	private RawCommandLineEditor myProgramParamsEditor;
-	@NotNull
+	@Nonnull
 	private RawCommandLineEditor myCompilerParamsEditor;
-	@NotNull
+	@Nonnull
 	private RawCommandLineEditor myLinkerParamsEditor;
-	@NotNull
+	@Nonnull
 	private TextFieldWithBrowseButton myWorkingDirectoryEditor;
 	private RawCommandLineEditor myRunnerParamsEditor;
-	@NotNull
+	@Nonnull
 	private JRadioButton myUseModuleSdkRadioButton;
-	@NotNull
+	@Nonnull
 	private JRadioButton myUseSpecifiedSdkRadioButton;
-	@NotNull
+	@Nonnull
 	private JComboBox myModuleComboBox;
-	@NotNull
+	@Nonnull
 	private consulo.roots.ui.configuration.SdkComboBox mySpecifiedSdkComboBox;
 	private JButton myConfigureSdkButton;
 
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 
-	public OCamlRunConfigurationForm(@NotNull final OCamlRunConfiguration configuration)
+	public OCamlRunConfigurationForm(@Nonnull final OCamlRunConfiguration configuration)
 	{
 		myProject = configuration.getProject();
 
 		final FileChooserDescriptor mlFileChooserDescriptor = new FileChooserDescriptor(true, false, false, false, false, false)
 		{
-			public boolean isFileVisible(@NotNull final VirtualFile file, final boolean showHiddenFiles)
+			public boolean isFileVisible(@Nonnull final VirtualFile file, final boolean showHiddenFiles)
 			{
 				return file.isDirectory() || OCamlFileUtil.isImplementationFile(file);
 			}
@@ -104,7 +104,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 				.BrowseFolderActionListener<JTextField>("Select OCaml Application Main File", "", myMainFileEditor, myProject, mlFileChooserDescriptor,
 				TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT)
 		{
-			protected void onFileChosen(@NotNull final VirtualFile chosenFile)
+			protected void onFileChosen(@Nonnull final VirtualFile chosenFile)
 			{
 				super.onFileChosen(chosenFile);
 				setWorkingDirectory(chosenFile.getParent().getPath());
@@ -116,7 +116,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		final List<Module> validModules = configuration.getValidModules();
 		Collections.sort(validModules, new Comparator<Module>()
 		{
-			public int compare(@NotNull final Module module1, @NotNull final Module module2)
+			public int compare(@Nonnull final Module module1, @Nonnull final Module module2)
 			{
 				return module1.getName().compareTo(module2.getName());
 			}
@@ -126,7 +126,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		myModuleComboBox.setRenderer(new ModuleListCellRenderer());
 		myModuleComboBox.addItemListener(new ItemListener()
 		{
-			public void itemStateChanged(@NotNull final ItemEvent e)
+			public void itemStateChanged(@Nonnull final ItemEvent e)
 			{
 				myUseModuleSdkRadioButton.setSelected(true);
 				myUseSpecifiedSdkRadioButton.setSelected(false);
@@ -135,7 +135,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 
 		mySpecifiedSdkComboBox.addItemListener(new ItemListener()
 		{
-			public void itemStateChanged(@NotNull final ItemEvent e)
+			public void itemStateChanged(@Nonnull final ItemEvent e)
 			{
 				myUseSpecifiedSdkRadioButton.setSelected(true);
 				myUseModuleSdkRadioButton.setSelected(false);
@@ -144,7 +144,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 
 		myConfigureSdkButton.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(@NotNull final ActionEvent e)
+			public void actionPerformed(@Nonnull final ActionEvent e)
 			{
 			/*	final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySpecifiedSdkComboBox.getSelectedItem(), myProject,
 					mySpecifiedSdkComboBox);
@@ -161,7 +161,7 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		myWorkingDirectoryEditor.addBrowseFolderListener("Select Working Directory", "", myProject, workingDirChooserDescriptor);
 	}
 
-	@NotNull
+	@Nonnull
 	public JComponent getRootPanel()
 	{
 		return myRootPanel;
@@ -184,13 +184,13 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		myMainFileEditor.setText(ocamlModule == null ? "" : FileUtil.toSystemDependentName(ocamlModule.getImplementationFile().getAbsolutePath()));
 	}
 
-	@NotNull
+	@Nonnull
 	public String getProgramParams()
 	{
 		return myProgramParamsEditor.getText();
 	}
 
-	public void setProgramParams(@NotNull final String params)
+	public void setProgramParams(@Nonnull final String params)
 	{
 		myProgramParamsEditor.setText(params);
 	}
@@ -258,46 +258,46 @@ public class OCamlRunConfigurationForm implements OCamlRunConfigurationParams
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	public String getCompilerOptions()
 	{
 		return myCompilerParamsEditor.getText();
 	}
 
-	public void setCompilerOptions(@NotNull final String options)
+	public void setCompilerOptions(@Nonnull final String options)
 	{
 		myCompilerParamsEditor.setText(options);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getLinkerOptions()
 	{
 		return myLinkerParamsEditor.getText();
 	}
 
-	public void setLinkerOptions(@NotNull final String options)
+	public void setLinkerOptions(@Nonnull final String options)
 	{
 		myLinkerParamsEditor.setText(options);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getRunnerOptions()
 	{
 		return myRunnerParamsEditor.getText();
 	}
 
-	public void setRunnerOptions(@NotNull final String options)
+	public void setRunnerOptions(@Nonnull final String options)
 	{
 		myRunnerParamsEditor.setText(options);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getWorkingDirectory()
 	{
 		return FileUtil.toSystemIndependentName(myWorkingDirectoryEditor.getText());
 	}
 
-	public void setWorkingDirectory(@NotNull final String dirPath)
+	public void setWorkingDirectory(@Nonnull final String dirPath)
 	{
 		myWorkingDirectoryEditor.setText(FileUtil.toSystemDependentName(dirPath));
 	}

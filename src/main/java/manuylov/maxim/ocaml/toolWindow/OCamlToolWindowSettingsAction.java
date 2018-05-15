@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
@@ -34,12 +34,12 @@ import manuylov.maxim.ocaml.util.OCamlIconUtil;
 @SuppressWarnings({"ComponentNotRegistered"})
 public class OCamlToolWindowSettingsAction extends AnAction
 {
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 	@Nullable
 	private final Runnable myAction;
 
-	public OCamlToolWindowSettingsAction(@NotNull final Project project, @Nullable final Runnable action)
+	public OCamlToolWindowSettingsAction(@Nonnull final Project project, @Nullable final Runnable action)
 	{
 		super(null, "Configure settings", OCamlIconUtil.getSettingsIcon());
 		myProject = project;

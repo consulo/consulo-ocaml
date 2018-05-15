@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.refactoring.rename;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.intellij.util.containers.MultiMap;
@@ -38,14 +39,14 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlVariantTypeDefinition;
 public class OCamlRenameRecordFieldOrConstructorProcessor extends RenamePsiElementProcessor
 {
 	@Override
-	public boolean canProcessElement(@NotNull final PsiElement element)
+	public boolean canProcessElement(@Nonnull final PsiElement element)
 	{
 		return element instanceof OCamlRecordFieldDefinition || element instanceof OCamlConstructorNameDefinition; // todo support others (children of
 		// structuredElement)
 	}
 
 	@Override
-	public void findExistingNameConflicts(@NotNull final PsiElement element, @NotNull final String newName, @NotNull final MultiMap<PsiElement,
+	public void findExistingNameConflicts(@Nonnull final PsiElement element, @Nonnull final String newName, @Nonnull final MultiMap<PsiElement,
 			String> conflicts)
 	{
 		super.findExistingNameConflicts(element, newName, conflicts);

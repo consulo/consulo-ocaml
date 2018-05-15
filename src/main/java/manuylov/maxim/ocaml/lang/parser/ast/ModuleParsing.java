@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.PsiBuilder;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -30,7 +30,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 class ModuleParsing extends Parsing
 {
-	public static void parseModuleOrModuleTypeDefinition(@NotNull final PsiBuilder builder)
+	public static void parseModuleOrModuleTypeDefinition(@Nonnull final PsiBuilder builder)
 	{
 		if(getNextTokenType(builder) == OCamlTokenTypes.TYPE_KEYWORD)
 		{
@@ -42,7 +42,7 @@ class ModuleParsing extends Parsing
 		}
 	}
 
-	public static void parseModuleExpression(@NotNull final PsiBuilder builder)
+	public static void parseModuleExpression(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker moduleExpressionMarker = builder.mark();
 
@@ -74,7 +74,7 @@ class ModuleParsing extends Parsing
 		moduleExpressionMarker.drop();
 	}
 
-	public static void parseModuleType(@NotNull final PsiBuilder builder)
+	public static void parseModuleType(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleTypeMarker = builder.mark();
 
@@ -111,7 +111,7 @@ class ModuleParsing extends Parsing
 		}
 	}
 
-	public static void parseModuleOrModuleTypeSpecification(@NotNull final PsiBuilder builder)
+	public static void parseModuleOrModuleTypeSpecification(@Nonnull final PsiBuilder builder)
 	{
 		if(getNextTokenType(builder) == OCamlTokenTypes.TYPE_KEYWORD)
 		{
@@ -123,7 +123,7 @@ class ModuleParsing extends Parsing
 		}
 	}
 
-	private static void parseModuleTypeDefinition(@NotNull final PsiBuilder builder)
+	private static void parseModuleTypeDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleTypeDefinitionMarker = builder.mark();
 
@@ -144,7 +144,7 @@ class ModuleParsing extends Parsing
 		moduleTypeDefinitionMarker.done(OCamlElementTypes.MODULE_TYPE_DEFINITION);
 	}
 
-	private static void parseModuleDefinition(@NotNull final PsiBuilder builder)
+	private static void parseModuleDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleDefinitionMarker = builder.mark();
 
@@ -168,7 +168,7 @@ class ModuleParsing extends Parsing
 		moduleDefinitionMarker.done(OCamlElementTypes.MODULE_DEFINITION);
 	}
 
-	private static void parseModuleExpressionInParentheses(@NotNull final PsiBuilder builder, final boolean isParenthesesModuleExpression)
+	private static void parseModuleExpressionInParentheses(@Nonnull final PsiBuilder builder, final boolean isParenthesesModuleExpression)
 	{
 		final PsiBuilder.Marker moduleExpressionMarker = builder.mark();
 
@@ -201,7 +201,7 @@ class ModuleParsing extends Parsing
 		}
 	}
 
-	private static void parseFunctorModuleExpression(@NotNull final PsiBuilder builder)
+	private static void parseFunctorModuleExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker functorModuleExpressionMarker = builder.mark();
 
@@ -224,7 +224,7 @@ class ModuleParsing extends Parsing
 		functorModuleExpressionMarker.done(OCamlElementTypes.FUNCTOR_MODULE_EXPRESSION);
 	}
 
-	private static void parseModuleParameterInner(@NotNull final PsiBuilder builder)
+	private static void parseModuleParameterInner(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -237,7 +237,7 @@ class ModuleParsing extends Parsing
 		marker.done(OCamlElementTypes.MODULE_PARAMETER);
 	}
 
-	private static void parseStructModuleExpression(@NotNull final PsiBuilder builder)
+	private static void parseStructModuleExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker structModuleExpressionMarker = builder.mark();
 
@@ -248,8 +248,8 @@ class ModuleParsing extends Parsing
 		structModuleExpressionMarker.done(OCamlElementTypes.STRUCT_END_MODULE_EXPRESSION);
 	}
 
-	@NotNull
-	private static StatementParsing.Condition createExitOnEndKeywordOrEofCondition(@NotNull final PsiBuilder builder)
+	@Nonnull
+	private static StatementParsing.Condition createExitOnEndKeywordOrEofCondition(@Nonnull final PsiBuilder builder)
 	{
 		return new StatementParsing.Condition()
 		{
@@ -272,7 +272,7 @@ class ModuleParsing extends Parsing
 		};
 	}
 
-	private static void parseModuleConstraint(@NotNull final PsiBuilder builder)
+	private static void parseModuleConstraint(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.TYPE_KEYWORD)
 		{
@@ -288,7 +288,7 @@ class ModuleParsing extends Parsing
 		}
 	}
 
-	private static void parseModuleModuleConstraint(@NotNull final PsiBuilder builder)
+	private static void parseModuleModuleConstraint(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleModuleConstraintMarker = builder.mark();
 
@@ -303,7 +303,7 @@ class ModuleParsing extends Parsing
 		moduleModuleConstraintMarker.done(OCamlElementTypes.MODULE_TYPE_MODULE_CONSTRAINT);
 	}
 
-	private static void parseTypeModuleConstraint(@NotNull final PsiBuilder builder)
+	private static void parseTypeModuleConstraint(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker typeModuleConstraintMarker = builder.mark();
 
@@ -327,7 +327,7 @@ class ModuleParsing extends Parsing
 		typeModuleConstraintMarker.done(OCamlElementTypes.MODULE_TYPE_TYPE_CONSTRAINT);
 	}
 
-	private static void parseSigModuleType(@NotNull final PsiBuilder builder)
+	private static void parseSigModuleType(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker sigModuleTypeMarker = builder.mark();
 
@@ -338,12 +338,12 @@ class ModuleParsing extends Parsing
 		sigModuleTypeMarker.done(OCamlElementTypes.SIG_END_MODULE_TYPE);
 	}
 
-	private static void parseModuleTypePathModuleType(@NotNull final PsiBuilder builder)
+	private static void parseModuleTypePathModuleType(@Nonnull final PsiBuilder builder)
 	{
 		NameParsing.parseModuleTypePath(builder);
 	}
 
-	private static void parseFunctorModuleType(@NotNull final PsiBuilder builder)
+	private static void parseFunctorModuleType(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker functorModuleTypeMarker = builder.mark();
 
@@ -366,7 +366,7 @@ class ModuleParsing extends Parsing
 		functorModuleTypeMarker.done(OCamlElementTypes.FUNCTOR_MODULE_TYPE);
 	}
 
-	private static void parseModuleTypeInParentheses(@NotNull final PsiBuilder builder)
+	private static void parseModuleTypeInParentheses(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -379,7 +379,7 @@ class ModuleParsing extends Parsing
 		marker.done(OCamlElementTypes.PARENTHESES_MODULE_TYPE);
 	}
 
-	private static void parseModuleSpecification(@NotNull final PsiBuilder builder)
+	private static void parseModuleSpecification(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleSpecificationMarker = builder.mark();
 
@@ -398,7 +398,7 @@ class ModuleParsing extends Parsing
 		moduleSpecificationMarker.done(OCamlElementTypes.MODULE_SPECIFICATION);
 	}
 
-	private static void parseModuleTypeSpecification(@NotNull final PsiBuilder builder)
+	private static void parseModuleTypeSpecification(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleTypeSpecificationMarker = builder.mark();
 
@@ -420,7 +420,7 @@ class ModuleParsing extends Parsing
 		moduleTypeSpecificationMarker.done(OCamlElementTypes.MODULE_TYPE_SPECIFICATION);
 	}
 
-	private static void doParseModuleBindingStarting(@NotNull final PsiBuilder builder)
+	private static void doParseModuleBindingStarting(@Nonnull final PsiBuilder builder)
 	{
 		NameParsing.parseModuleName(builder);
 

@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.ast;
 import java.util.Collections;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.TokenSet;
 import manuylov.maxim.ocaml.lang.Keywords;
@@ -36,7 +37,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.util.MultiMarker;
  */
 class ExpressionParsing extends Parsing
 {
-	public static void parseExpression(@NotNull final PsiBuilder builder)
+	public static void parseExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseExpression(builder))
 		{
@@ -44,7 +45,7 @@ class ExpressionParsing extends Parsing
 		}
 	}
 
-	public static void parseParameter(@NotNull final PsiBuilder builder)
+	public static void parseParameter(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker parameterMarker = builder.mark();
 
@@ -130,7 +131,7 @@ class ExpressionParsing extends Parsing
 		parameterMarker.done(OCamlElementTypes.PARAMETER);
 	}
 
-	public static boolean tryParseArgument(@NotNull final PsiBuilder builder)
+	public static boolean tryParseArgument(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker argumentMarker = builder.mark();
 
@@ -158,12 +159,12 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	public static boolean tryParseExpression(@NotNull final PsiBuilder builder)
+	public static boolean tryParseExpression(@Nonnull final PsiBuilder builder)
 	{
 		return tryParseLetMatchFunFunctionTryExpressions(builder);
 	}
 
-	private static void parseAssignmentExpression(@NotNull final PsiBuilder builder)
+	private static void parseAssignmentExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseAssignmentExpression(builder))
 		{
@@ -171,7 +172,7 @@ class ExpressionParsing extends Parsing
 		}
 	}
 
-	private static void parseHashDotDotParDotBracketExpression(@NotNull final PsiBuilder builder)
+	private static void parseHashDotDotParDotBracketExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseHashDotDotParDotBracketExpression(builder))
 		{
@@ -179,7 +180,7 @@ class ExpressionParsing extends Parsing
 		}
 	}
 
-	private static void parseInstanceDuplicatingExpression(@NotNull final PsiBuilder builder)
+	private static void parseInstanceDuplicatingExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker instanceDuplicatingExpressionMarker = builder.mark();
 
@@ -206,7 +207,7 @@ class ExpressionParsing extends Parsing
 		instanceDuplicatingExpressionMarker.done(OCamlElementTypes.INSTANCE_DUPLICATING_EXPRESSION);
 	}
 
-	private static void parseRecordExpression(@NotNull final PsiBuilder builder)
+	private static void parseRecordExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker recordExpressionMarker = builder.mark();
 
@@ -241,7 +242,7 @@ class ExpressionParsing extends Parsing
 		recordExpressionMarker.done(withParsed ? OCamlElementTypes.INHERITED_RECORD_EXPRESSION : OCamlElementTypes.RECORD_EXPRESSION);
 	}
 
-	private static void parseFieldInitialization(@NotNull final PsiBuilder builder)
+	private static void parseFieldInitialization(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker fieldInitializationMarker = builder.mark();
 
@@ -257,7 +258,7 @@ class ExpressionParsing extends Parsing
 		fieldInitializationMarker.done(OCamlElementTypes.RECORD_FIELD_INITIALIZATION_IN_EXPRESSION);
 	}
 
-	private static void parseArrayExpression(@NotNull final PsiBuilder builder)
+	private static void parseArrayExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker arrayExpressionMarker = builder.mark();
 
@@ -270,7 +271,7 @@ class ExpressionParsing extends Parsing
 		arrayExpressionMarker.done(OCamlElementTypes.ARRAY_EXPRESSION);
 	}
 
-	private static void parseListExpression(@NotNull final PsiBuilder builder)
+	private static void parseListExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker listExpressionMarker = builder.mark();
 
@@ -283,7 +284,7 @@ class ExpressionParsing extends Parsing
 		listExpressionMarker.done(OCamlElementTypes.LIST_EXPRESSION);
 	}
 
-	private static void parseParenthesesExpression(@NotNull final PsiBuilder builder)
+	private static void parseParenthesesExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker castingOrTypeConstraintExpressionMarker = builder.mark();
 
@@ -352,7 +353,7 @@ class ExpressionParsing extends Parsing
 		}
 	}
 
-	private static void parseWhileExpression(@NotNull final PsiBuilder builder)
+	private static void parseWhileExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker whileExpressionMarker = builder.mark();
 
@@ -369,7 +370,7 @@ class ExpressionParsing extends Parsing
 		whileExpressionMarker.done(OCamlElementTypes.WHILE_EXPRESSION);
 	}
 
-	private static void parseForExpression(@NotNull final PsiBuilder builder)
+	private static void parseForExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker forExpressionMarker = builder.mark();
 
@@ -401,7 +402,7 @@ class ExpressionParsing extends Parsing
 		forExpressionMarker.done(OCamlElementTypes.FOR_EXPRESSION);
 	}
 
-	private static void parseIfExpression(@NotNull final PsiBuilder builder)
+	private static void parseIfExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker ifExpressionMarker = builder.mark();
 
@@ -427,7 +428,7 @@ class ExpressionParsing extends Parsing
 		ifExpressionMarker.done(OCamlElementTypes.IF_EXPRESSION);
 	}
 
-	private static void parseTryExpression(@NotNull final PsiBuilder builder)
+	private static void parseTryExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker tryExpressionMarker = builder.mark();
 
@@ -442,7 +443,7 @@ class ExpressionParsing extends Parsing
 		tryExpressionMarker.done(OCamlElementTypes.TRY_EXPRESSION);
 	}
 
-	private static void parseFunctionExpression(@NotNull final PsiBuilder builder)
+	private static void parseFunctionExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker functionExpressionMatching = builder.mark();
 
@@ -453,7 +454,7 @@ class ExpressionParsing extends Parsing
 		functionExpressionMatching.done(OCamlElementTypes.FUNCTION_EXPRESSION);
 	}
 
-	private static void parseFunExpression(@NotNull final PsiBuilder builder)
+	private static void parseFunExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker funExpressionMarker = builder.mark();
 
@@ -479,7 +480,7 @@ class ExpressionParsing extends Parsing
 		funExpressionMarker.done(OCamlElementTypes.FUN_EXPRESSION);
 	}
 
-	private static void parseMatchExpression(@NotNull final PsiBuilder builder)
+	private static void parseMatchExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker matchExpressionMarker = builder.mark();
 
@@ -494,7 +495,7 @@ class ExpressionParsing extends Parsing
 		matchExpressionMarker.done(OCamlElementTypes.MATCH_EXPRESSION);
 	}
 
-	private static void parsePatternMatching(@NotNull final PsiBuilder builder)
+	private static void parsePatternMatching(@Nonnull final PsiBuilder builder)
 	{
 		ignore(builder, OCamlTokenTypes.VBAR);
 
@@ -518,7 +519,7 @@ class ExpressionParsing extends Parsing
 		}
 	}
 
-	private static void parseAssertExpression(@NotNull final PsiBuilder builder)
+	private static void parseAssertExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker assertExpressionMarker = builder.mark();
 
@@ -529,7 +530,7 @@ class ExpressionParsing extends Parsing
 		assertExpressionMarker.done(OCamlElementTypes.ASSERT_EXPRESSION);
 	}
 
-	private static void parseLazyExpression(@NotNull final PsiBuilder builder)
+	private static void parseLazyExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker lazyExpressionMarker = builder.mark();
 
@@ -540,7 +541,7 @@ class ExpressionParsing extends Parsing
 		lazyExpressionMarker.done(OCamlElementTypes.LAZY_EXPRESSION);
 	}
 
-	private static void doParseMatching(@NotNull final PsiBuilder builder)
+	private static void doParseMatching(@Nonnull final PsiBuilder builder)
 	{
 		if(ignore(builder, OCamlTokenTypes.WHEN_KEYWORD))
 		{
@@ -552,12 +553,12 @@ class ExpressionParsing extends Parsing
 		parseExpression(builder);
 	}
 
-	private static boolean tryParseLetMatchFunFunctionTryExpressions(@NotNull final PsiBuilder builder)
+	private static boolean tryParseLetMatchFunFunctionTryExpressions(@Nonnull final PsiBuilder builder)
 	{
 		return doTryParseLetMatchFunFunctionTryExpression(builder) || tryParseSemicolonExpression(builder, true);
 	}
 
-	private static boolean tryParseSemicolonExpression(@NotNull final PsiBuilder builder, final boolean useMarker)
+	private static boolean tryParseSemicolonExpression(@Nonnull final PsiBuilder builder, final boolean useMarker)
 	{
 		final PsiBuilder.Marker semicolonExpressionMarker = builder.mark();
 
@@ -590,12 +591,12 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseIfForWhileExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseIfForWhileExpression(@Nonnull final PsiBuilder builder)
 	{
 		return doTryParseIfForWhileExpression(builder) || tryParseAssignmentExpression(builder);
 	}
 
-	private static boolean tryParseAssignmentExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAssignmentExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker assignmentExpressionMarker = new MultiMarker(builder);
 		assignmentExpressionMarker.mark();
@@ -622,7 +623,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseCommaExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseCommaExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker commaExpressionMarker = builder.mark();
 
@@ -656,7 +657,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseOrExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseOrExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker orExpressionMarker = new MultiMarker(builder);
 		orExpressionMarker.mark();
@@ -683,7 +684,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseAndExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAndExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker andExpressionMarker = new MultiMarker(builder);
 		andExpressionMarker.mark();
@@ -710,7 +711,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseEqLtGtVbarAmpDollarOperatorExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseEqLtGtVbarAmpDollarOperatorExpression(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker binaryExpressionMarker = builder.mark();
 
@@ -737,8 +738,8 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseInfixOperator(@NotNull final PsiBuilder builder, @NotNull final TokenSet ignoredOperators,
-			@NotNull final Set<String> ignoredFirstChars, @NotNull final TokenSet operators, @NotNull final String... firstChars)
+	private static boolean tryParseInfixOperator(@Nonnull final PsiBuilder builder, @Nonnull final TokenSet ignoredOperators,
+			@Nonnull final Set<String> ignoredFirstChars, @Nonnull final TokenSet operators, @Nonnull final String... firstChars)
 	{
 		if(!OCamlTokenTypes.INFIX_OPERATORS.contains(builder.getTokenType()))
 		{
@@ -784,7 +785,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseAtXorOperatorExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAtXorOperatorExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker binaryExpressionMarker = new MultiMarker(builder);
 		binaryExpressionMarker.mark();
@@ -811,7 +812,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseHeadTailExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseHeadTailExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker headTailExpressionMarker = new MultiMarker(builder);
 		headTailExpressionMarker.mark();
@@ -838,7 +839,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseAddExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAddExpression(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker binaryExpressionMarker = builder.mark();
 
@@ -864,7 +865,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseMultExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseMultExpression(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker binaryExpressionMarker = builder.mark();
 
@@ -892,7 +893,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParsePowerExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParsePowerExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker binaryExpressionMarker = new MultiMarker(builder);
 		binaryExpressionMarker.mark();
@@ -920,7 +921,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseUnaryMinusExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseUnaryMinusExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker negationExpressionMarker = builder.mark();
 
@@ -946,7 +947,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseFunctionConstructorAssertLazy(@NotNull final PsiBuilder builder)
+	private static boolean tryParseFunctionConstructorAssertLazy(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.ASSERT_KEYWORD)
 		{
@@ -964,7 +965,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseFunctionApplicationExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseFunctionApplicationExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker functionApplicationExpressionMarker = builder.mark();
 
@@ -1004,7 +1005,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseConstructorApplicationExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseConstructorApplicationExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker constructorApplicationExpressionMarker = builder.mark();
 
@@ -1026,7 +1027,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseHashDotDotParDotBracketExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseHashDotDotParDotBracketExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker hashDotDotParDotBracketExpressionMarker = builder.mark();
 
@@ -1093,7 +1094,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParsePrefixOperatorExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParsePrefixOperatorExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker unaryExpressionMarker = builder.mark();
 
@@ -1114,7 +1115,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseTaggedExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseTaggedExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker taggedExpressionMarker = builder.mark();
 
@@ -1144,7 +1145,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseWrappedOrSimpleExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseWrappedOrSimpleExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(TokenSet.create(OCamlTokenTypes.BEGIN_KEYWORD, OCamlTokenTypes.LPAR).contains(builder.getTokenType()))
 		{
@@ -1174,7 +1175,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseSimpleExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseSimpleExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker simpleExpressionMarker = builder.mark();
 
@@ -1205,12 +1206,12 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseExpressionStartingWithKeyword(@NotNull final PsiBuilder builder)
+	private static boolean tryParseExpressionStartingWithKeyword(@Nonnull final PsiBuilder builder)
 	{
 		return doTryParseLetMatchFunFunctionTryExpression(builder) || doTryParseIfForWhileExpression(builder);
 	}
 
-	private static boolean doTryParseLetMatchFunFunctionTryExpression(@NotNull final PsiBuilder builder)
+	private static boolean doTryParseLetMatchFunFunctionTryExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.LET_KEYWORD)
 		{
@@ -1240,7 +1241,7 @@ class ExpressionParsing extends Parsing
 		return true;
 	}
 
-	private static boolean doTryParseIfForWhileExpression(@NotNull final PsiBuilder builder)
+	private static boolean doTryParseIfForWhileExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.IF_KEYWORD)
 		{

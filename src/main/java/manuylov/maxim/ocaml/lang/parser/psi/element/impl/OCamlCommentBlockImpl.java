@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -33,12 +34,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlCommentBlock;
  */
 public class OCamlCommentBlockImpl extends BaseOCamlElement implements OCamlCommentBlock
 {
-	public OCamlCommentBlockImpl(@NotNull final ASTNode node)
+	public OCamlCommentBlockImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitCommentBlock(this);
 	}
@@ -49,7 +50,7 @@ public class OCamlCommentBlockImpl extends BaseOCamlElement implements OCamlComm
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.COMMENT_END);
 	}
 
-	@NotNull
+	@Nonnull
 	public IElementType getTokenType()
 	{
 		return OCamlElementTypes.COMMENT_BLOCK;

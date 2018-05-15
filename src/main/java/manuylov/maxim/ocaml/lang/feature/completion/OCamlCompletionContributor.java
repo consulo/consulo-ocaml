@@ -24,8 +24,8 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.TailType;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
@@ -67,28 +67,28 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  */
 public class OCamlCompletionContributor extends CompletionContributor
 {
-	@NotNull
+	@Nonnull
 	public static final String LOWER_CASE_DUMMY_IDENTIFIER = "lowerCase"; // todo sometimes this string appeared in list (e.g "class }{")
-	@NotNull
+	@Nonnull
 	public static final String UPPER_CASE_DUMMY_IDENTIFIER = "UpperCase";
 
-	@NotNull
+	@Nonnull
 	private static final Key<CompletionParameters> PARAMETERS = Key.create("OCamlCompletionContributorCompletionParameters");
 
 	private static final char SPACE = ' ';
 
-	@NotNull
+	@Nonnull
 	private static final PsiElementPattern.Capture<PsiElement> OCAML_ELEMENT = psiElement().andOr(psiElement().withLanguage(MLFileTypeLanguage
 			.INSTANCE), psiElement().withLanguage(MLIFileTypeLanguage.INSTANCE));
 
 	@Override
-	public void beforeCompletion(@NotNull final CompletionInitializationContext context)
+	public void beforeCompletion(@Nonnull final CompletionInitializationContext context)
 	{
 		context.setDummyIdentifier(LOWER_CASE_DUMMY_IDENTIFIER);
 	}
 
 	@Override
-	public void fillCompletionVariants(@NotNull final CompletionParameters parameters, @NotNull final CompletionResultSet result)
+	public void fillCompletionVariants(@Nonnull final CompletionParameters parameters, @Nonnull final CompletionResultSet result)
 	{
 		final PsiElement element = parameters.getPosition();
 		try
@@ -116,8 +116,8 @@ public class OCamlCompletionContributor extends CompletionContributor
 		extend(CompletionType.BASIC, psiElement(), new CompletionProvider()
 		{
 			@Override
-			public void addCompletions(@NotNull final CompletionParameters parameters, @NotNull final ProcessingContext context,
-					@NotNull final CompletionResultSet result)
+			public void addCompletions(@Nonnull final CompletionParameters parameters, @Nonnull final ProcessingContext context,
+					@Nonnull final CompletionResultSet result)
 			{
 				processUpperCaseVariants(parameters, result);
 			}
@@ -126,7 +126,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 		//todo ModuleName (ClassName?) completion + smart completion
 	}
 
-	private void processUpperCaseVariants(@NotNull final CompletionParameters parameters, @NotNull final CompletionResultSet result)
+	private void processUpperCaseVariants(@Nonnull final CompletionParameters parameters, @Nonnull final CompletionResultSet result)
 	{
 		final PsiElement dummyElement = createDummyElement(parameters, UPPER_CASE_DUMMY_IDENTIFIER, true);
 		if(dummyElement != null)
@@ -143,7 +143,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	private static Set<String> collectAllKeywords()
 	{
 		final HashSet<String> result = new HashSet<String>();
@@ -164,8 +164,8 @@ public class OCamlCompletionContributor extends CompletionContributor
 		return result;
 	}
 
-	@NotNull
-	private ElementPattern isPossibleHere(@NotNull final String keyword)
+	@Nonnull
+	private ElementPattern isPossibleHere(@Nonnull final String keyword)
 	{
 		return new FilterPattern(new ElementFilter()
 		{
@@ -181,14 +181,14 @@ public class OCamlCompletionContributor extends CompletionContributor
 				return dummyElement != null && isCorrect(dummyElement);
 			}
 
-			public boolean isClassAcceptable(@NotNull final Class hintClass)
+			public boolean isClassAcceptable(@Nonnull final Class hintClass)
 			{
 				return true;
 			}
 		});
 	}
 
-	private static boolean isCorrect(@NotNull final PsiElement element)
+	private static boolean isCorrect(@Nonnull final PsiElement element)
 	{
 		final PsiElement parent = OCamlPsiUtil.getStrictParent(element);
 		if(parent != null && OCamlPsiUtil.isError(parent))
@@ -199,12 +199,12 @@ public class OCamlCompletionContributor extends CompletionContributor
 		return previousLeaf == null || !OCamlPsiUtil.isError(previousLeaf);
 	}
 
-	@NotNull
+	@Nonnull
 	private ElementPattern isEndAfterStructOrSig()
 	{
 		return new FilterPattern(new ElementFilter()
 		{
-			public boolean isAcceptable(@NotNull final Object element, @NotNull final PsiElement context)
+			public boolean isAcceptable(@Nonnull final Object element, @Nonnull final PsiElement context)
 			{
 				final CompletionParameters parameters = getCompletionParameters(element);
 				if(parameters == null)
@@ -254,7 +254,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 				return elementType == OCamlTokenTypes.STRUCT_KEYWORD || elementType == OCamlTokenTypes.SIG_KEYWORD;
 			}
 
-			public boolean isClassAcceptable(@NotNull final Class hintClass)
+			public boolean isClassAcceptable(@Nonnull final Class hintClass)
 			{
 				return true;
 			}
@@ -262,7 +262,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 	}
 
 	@Nullable
-	private static CompletionParameters getCompletionParameters(@NotNull final Object object)
+	private static CompletionParameters getCompletionParameters(@Nonnull final Object object)
 	{
 		if(!(object instanceof UserDataHolder))
 		{
@@ -272,7 +272,7 @@ public class OCamlCompletionContributor extends CompletionContributor
 	}
 
 	@Nullable
-	private static PsiElement createDummyElement(@NotNull final CompletionParameters parameters, @NotNull final String elementText,
+	private static PsiElement createDummyElement(@Nonnull final CompletionParameters parameters, @Nonnull final String elementText,
 			final boolean parseWholeFile)
 	{
 		final PsiFile file = parameters.getOriginalFile();
@@ -347,19 +347,19 @@ public class OCamlCompletionContributor extends CompletionContributor
 		return root.findElementAt(offsetInStatement);
 	}
 
-	private static int getStartOffset(@NotNull final PsiElement element)
+	private static int getStartOffset(@Nonnull final PsiElement element)
 	{
 		return element.getTextRange().getStartOffset();
 	}
 
-	@NotNull
-	private static PsiElement getStatementOrElement(@NotNull final PsiElement element)
+	@Nonnull
+	private static PsiElement getStatementOrElement(@Nonnull final PsiElement element)
 	{
 		final PsiElement statement = OCamlPsiUtil.getStatementOf(element);
 		return statement == null ? element : statement;
 	}
 
-	private static int appendElementText(@NotNull final StringBuilder builder, @NotNull final PsiElement element)
+	private static int appendElementText(@Nonnull final StringBuilder builder, @Nonnull final PsiElement element)
 	{
 		final ASTNode node = element.getNode();
 		if(node != null)
@@ -371,22 +371,22 @@ public class OCamlCompletionContributor extends CompletionContributor
 		return 0;
 	}
 
-	@NotNull
-	private static CompletionProvider createCompletionProvider(@NotNull final TailType tailType,
-			@NotNull final String... keywords)
+	@Nonnull
+	private static CompletionProvider createCompletionProvider(@Nonnull final TailType tailType,
+			@Nonnull final String... keywords)
 	{
 		return new CompletionProvider()
 		{
 			@Override
-			public void addCompletions(@NotNull final CompletionParameters parameters, @NotNull final ProcessingContext context,
-					@NotNull final CompletionResultSet result)
+			public void addCompletions(@Nonnull final CompletionParameters parameters, @Nonnull final ProcessingContext context,
+					@Nonnull final CompletionResultSet result)
 			{
 				putKeywords(result, tailType, keywords);
 			}
 		};
 	}
 
-	private static void putKeywords(@NotNull final CompletionResultSet result, @NotNull final TailType tail, @NotNull final String... words)
+	private static void putKeywords(@Nonnull final CompletionResultSet result, @Nonnull final TailType tail, @Nonnull final String... words)
 	{
 		for(final String word : words)
 		{

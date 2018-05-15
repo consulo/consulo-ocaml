@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -35,12 +36,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeConstructorPath;
  */
 public class OCamlTypeConstructorPathImpl extends BaseOCamlElement implements OCamlTypeConstructorPath
 {
-	public OCamlTypeConstructorPathImpl(@NotNull final ASTNode node)
+	public OCamlTypeConstructorPathImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTypeConstructorPath(this);
 	}
@@ -51,7 +52,7 @@ public class OCamlTypeConstructorPathImpl extends BaseOCamlElement implements OC
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeConstructorName.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getLastChildOfType(this, OCamlTypeConstructorName.class));

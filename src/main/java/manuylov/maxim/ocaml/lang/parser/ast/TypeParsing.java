@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.TokenSet;
 import manuylov.maxim.ocaml.lang.Strings;
@@ -28,7 +29,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.util.MultiMarker;
 
 class TypeParsing extends Parsing
 {
-	public static void parseTypeDefinition(@NotNull final PsiBuilder builder)
+	public static void parseTypeDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker typeDefinitionMarker = builder.mark();
 
@@ -43,7 +44,7 @@ class TypeParsing extends Parsing
 		typeDefinitionMarker.done(OCamlElementTypes.TYPE_DEFINITION);
 	}
 
-	public static void parseTypeExpression(@NotNull final PsiBuilder builder)
+	public static void parseTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseTypeExpression(builder))
 		{
@@ -51,7 +52,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	public static void parsePolyTypeExpression(@NotNull final PsiBuilder builder)
+	public static void parsePolyTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParsePolyTypeExpression(builder))
 		{
@@ -59,7 +60,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	public static void parseTypeParameter(@NotNull final PsiBuilder builder, final boolean parsePlusAndMinus, final boolean isDefinition)
+	public static void parseTypeParameter(@Nonnull final PsiBuilder builder, final boolean parsePlusAndMinus, final boolean isDefinition)
 	{
 		final PsiBuilder.Marker typeParameterMarker = builder.mark();
 
@@ -82,12 +83,12 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	private static boolean tryParseTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		return tryParseAsTypeExpression(builder);
 	}
 
-	private static void parseTypeBinding(@NotNull final PsiBuilder builder)
+	private static void parseTypeBinding(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker typeParameterizedBindingMarker = null;
 
@@ -114,7 +115,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	private static void parseTypeInformation(@NotNull final PsiBuilder builder)
+	private static void parseTypeInformation(@Nonnull final PsiBuilder builder)
 	{
 		if(ignore(builder, OCamlTokenTypes.EQ) && !tryParseTypeExpression(builder))
 		{
@@ -134,7 +135,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	private static void parseTypeConstraint(@NotNull final PsiBuilder builder)
+	private static void parseTypeConstraint(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker typeConstraintMarker = builder.mark();
 
@@ -149,7 +150,7 @@ class TypeParsing extends Parsing
 		typeConstraintMarker.done(OCamlElementTypes.TYPE_DEFINITION_CONSTRAINT);
 	}
 
-	private static void parseVariantTypeDeclaration(@NotNull final PsiBuilder builder)
+	private static void parseVariantTypeDeclaration(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker variantTypeDeclarationMarker = builder.mark();
 
@@ -162,7 +163,7 @@ class TypeParsing extends Parsing
 		variantTypeDeclarationMarker.done(OCamlElementTypes.VARIANT_TYPE_DEFINITION);
 	}
 
-	private static void parseTypeConstructorDefinition(@NotNull final PsiBuilder builder)
+	private static void parseTypeConstructorDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker typeConstructorDefinitionMarker = builder.mark();
 
@@ -176,7 +177,7 @@ class TypeParsing extends Parsing
 		typeConstructorDefinitionMarker.done(OCamlElementTypes.CONSTRUCTOR_DEFINITION);
 	}
 
-	private static void parseRecordDeclaration(@NotNull final PsiBuilder builder)
+	private static void parseRecordDeclaration(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker recordTypeDeclarationMarker = builder.mark();
 
@@ -193,7 +194,7 @@ class TypeParsing extends Parsing
 		recordTypeDeclarationMarker.done(OCamlElementTypes.RECORD_TYPE_DEFINITION);
 	}
 
-	private static void parseRecordFieldDeclaration(@NotNull final PsiBuilder builder)
+	private static void parseRecordFieldDeclaration(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker recordFieldDeclarationMarker = builder.mark();
 
@@ -208,7 +209,7 @@ class TypeParsing extends Parsing
 		recordFieldDeclarationMarker.done(OCamlElementTypes.RECORD_FIELD_DEFINITION);
 	}
 
-	private static void parseTypeParameters(@NotNull final PsiBuilder builder)
+	private static void parseTypeParameters(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -232,7 +233,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	private static void parseTagSpecFull(@NotNull final PsiBuilder builder)
+	private static void parseTagSpecFull(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker tagSpecFullMarker = builder.mark();
 
@@ -258,7 +259,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	private static void parseTagSpec(@NotNull final PsiBuilder builder)
+	private static void parseTagSpec(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker tagSpecMarker = builder.mark();
 
@@ -280,7 +281,7 @@ class TypeParsing extends Parsing
 		}
 	}
 
-	private static boolean tryParseAsTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAsTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker asTypeExpressionMarker = builder.mark();
 
@@ -303,7 +304,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseFunctionTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseFunctionTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		final MultiMarker functionTypeExpressionMarker = new MultiMarker(builder);
 		functionTypeExpressionMarker.mark();
@@ -349,7 +350,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseTupleTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseTupleTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker tupleTypeExpressionMarker = builder.mark();
 
@@ -383,7 +384,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseTypeConstructorOrSuperClassTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseTypeConstructorOrSuperClassTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		PsiBuilder.Marker typeExpressionMarker = builder.mark();
 
@@ -467,7 +468,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseSimpleTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseSimpleTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.QUOTE)
 		{
@@ -498,7 +499,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseUnderscore(@NotNull final PsiBuilder builder)
+	private static boolean tryParseUnderscore(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -512,7 +513,7 @@ class TypeParsing extends Parsing
 		return false;
 	}
 
-	private static boolean tryParseVariantTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseVariantTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker variantTypeExpressionMarker = builder.mark();
 
@@ -571,7 +572,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseObjectInterfaceTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParseObjectInterfaceTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker recordTypeExpressionMarker = builder.mark();
 
@@ -605,7 +606,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static void parseMethodType(@NotNull final PsiBuilder builder)
+	private static void parseMethodType(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker methodTypeMarker = builder.mark();
 
@@ -618,7 +619,7 @@ class TypeParsing extends Parsing
 		methodTypeMarker.done(OCamlElementTypes.METHOD_TYPE);
 	}
 
-	private static boolean tryParsePolyTypeExpression(@NotNull final PsiBuilder builder)
+	private static boolean tryParsePolyTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker polyTypeExpressionMarker = builder.mark();
 
@@ -653,7 +654,7 @@ class TypeParsing extends Parsing
 		return true;
 	}
 
-	private static int doParsePolyTypeExpressionParameters(@NotNull final PsiBuilder builder, final boolean isDefinition)
+	private static int doParsePolyTypeExpressionParameters(@Nonnull final PsiBuilder builder, final boolean isDefinition)
 	{
 		int parameterCount = 0;
 
@@ -666,7 +667,7 @@ class TypeParsing extends Parsing
 		return parameterCount;
 	}
 
-	public static void parseTupleTypeExpression(@NotNull final PsiBuilder builder)
+	public static void parseTupleTypeExpression(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseTupleTypeExpression(builder))
 		{

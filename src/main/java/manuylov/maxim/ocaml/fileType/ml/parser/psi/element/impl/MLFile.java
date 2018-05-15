@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.fileType.ml.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
@@ -31,12 +31,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlFile;
  */
 public class MLFile extends BaseOCamlFile
 {
-	public MLFile(@NotNull final FileViewProvider fileViewProvider)
+	public MLFile(@Nonnull final FileViewProvider fileViewProvider)
 	{
 		super(fileViewProvider, MLFileTypeLanguage.INSTANCE);
 	}
 
-	@NotNull
+	@Nonnull
 	public FileType getFileType()
 	{
 		return MLFileType.INSTANCE;

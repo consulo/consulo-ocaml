@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -32,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 class NameParsing extends Parsing
 {
-	public static void parseModulePath(@NotNull final PsiBuilder builder)
+	public static void parseModulePath(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseModulePath(builder))
 		{
@@ -40,7 +41,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseModuleName(@NotNull final PsiBuilder builder)
+	public static void parseModuleName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseModuleName(builder))
 		{
@@ -48,7 +49,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseConstructorPath(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static void parseConstructorPath(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		if(!tryParseConstructorPath(builder, type))
 		{
@@ -56,7 +57,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseAnyIdentifier(@NotNull final PsiBuilder builder)
+	public static void parseAnyIdentifier(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseAnyIdentifier(builder))
 		{
@@ -64,7 +65,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseTypeParameterName(@NotNull final PsiBuilder builder)
+	public static void parseTypeParameterName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -73,7 +74,7 @@ class NameParsing extends Parsing
 		marker.done(OCamlElementTypes.TYPE_PARAMETER_NAME);
 	}
 
-	public static void parseForExpressionIndexVariableName(@NotNull final PsiBuilder builder)
+	public static void parseForExpressionIndexVariableName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseForExpressionIndexVariableName(builder))
 		{
@@ -81,7 +82,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static boolean tryParseForExpressionIndexVariableName(@NotNull final PsiBuilder builder)
+	public static boolean tryParseForExpressionIndexVariableName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -96,7 +97,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static void parseClassPath(@NotNull final PsiBuilder builder)
+	public static void parseClassPath(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseClassPath(builder))
 		{
@@ -104,7 +105,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseMethodName(@NotNull final PsiBuilder builder)
+	public static void parseMethodName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseMethodName(builder))
 		{
@@ -112,7 +113,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseLabelNameProbablyWithColon(@NotNull final PsiBuilder builder, @NotNull final Runnable afterColonProcessing,
+	public static void parseLabelNameProbablyWithColon(@Nonnull final PsiBuilder builder, @Nonnull final Runnable afterColonProcessing,
 			final boolean isDefinition)
 	{
 		doParseLabelNameWithColon(builder, afterColonProcessing, false, isDefinition);
@@ -155,7 +156,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseModuleTypeName(@NotNull final PsiBuilder builder)
+	public static void parseModuleTypeName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseModuleTypeName(builder))
 		{
@@ -163,7 +164,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseExtendedModulePath(@NotNull final PsiBuilder builder)
+	public static void parseExtendedModulePath(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseExtendedModulePath(builder))
 		{
@@ -171,7 +172,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	private static boolean tryParseExtendedModulePath(@NotNull final PsiBuilder builder)
+	private static boolean tryParseExtendedModulePath(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker extendedModulePathMarker = builder.mark();
 
@@ -196,7 +197,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static void parseTypeConstructorPath(@NotNull final PsiBuilder builder)
+	public static void parseTypeConstructorPath(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseTypeConstructorPath(builder))
 		{
@@ -204,7 +205,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseModuleTypePath(@NotNull final PsiBuilder builder)
+	public static void parseModuleTypePath(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseModuleTypePath(builder))
 		{
@@ -212,7 +213,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static boolean tryParseModuleTypePath(@NotNull final PsiBuilder builder)
+	public static boolean tryParseModuleTypePath(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleTypePathMarker = builder.mark();
 
@@ -237,7 +238,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static void parseTypeConstructorName(@NotNull final PsiBuilder builder)
+	public static void parseTypeConstructorName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseTypeConstructorName(builder))
 		{
@@ -245,7 +246,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseTagName(@NotNull final PsiBuilder builder)
+	public static void parseTagName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseTagName(builder))
 		{
@@ -253,7 +254,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseClassName(@NotNull final PsiBuilder builder)
+	public static void parseClassName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseClassName(builder))
 		{
@@ -261,7 +262,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseConstructorName(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static void parseConstructorName(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		if(!tryParseConstructorName(builder, type))
 		{
@@ -269,7 +270,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseInstVarName(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static void parseInstVarName(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		if(!tryParseInstVarName(builder, type))
 		{
@@ -277,7 +278,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseValueName(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static void parseValueName(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		if(!tryParseValueName(builder, type))
 		{
@@ -285,7 +286,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseFieldName(@NotNull final PsiBuilder builder)
+	public static void parseFieldName(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseFieldName(builder))
 		{
@@ -293,7 +294,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static void parseFieldPath(@NotNull final PsiBuilder builder)
+	public static void parseFieldPath(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseFieldPath(builder))
 		{
@@ -301,7 +302,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static boolean tryParseValueName(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static boolean tryParseValueName(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		final PsiBuilder.Marker valueNameMarker = builder.mark();
 
@@ -327,7 +328,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseModuleName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseModuleName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleNameMarker = builder.mark();
 
@@ -342,13 +343,13 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static boolean tryParseConstructorPath(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static boolean tryParseConstructorPath(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		return tryParseModulePathWithLastPart(builder, getConstructorPathType(type), type);
 	}
 
-	@NotNull
-	private static IElementType getConstructorPathType(@NotNull final NameType type)
+	@Nonnull
+	private static IElementType getConstructorPathType(@Nonnull final NameType type)
 	{
 		switch(type)
 		{
@@ -371,7 +372,7 @@ class NameParsing extends Parsing
 		throw new IllegalArgumentException();
 	}
 
-	private static boolean tryParseConstructorName(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	private static boolean tryParseConstructorName(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		final PsiBuilder.Marker constructorNameMarker = builder.mark();
 
@@ -411,7 +412,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseTypeConstructorName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseTypeConstructorName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker typeConstructorNameMarker = builder.mark();
 
@@ -426,12 +427,12 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseAnyIdentifier(@NotNull final PsiBuilder builder)
+	private static boolean tryParseAnyIdentifier(@Nonnull final PsiBuilder builder)
 	{
 		return ignore(builder, OCamlTokenTypes.IDENTIFIERS);
 	}
 
-	private static boolean tryParseFieldName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseFieldName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker fieldNameMarker = builder.mark();
 
@@ -446,17 +447,17 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static boolean tryParseClassPath(@NotNull final PsiBuilder builder)
+	public static boolean tryParseClassPath(@Nonnull final PsiBuilder builder)
 	{
 		return tryParseModulePathWithLastPart(builder, OCamlElementTypes.CLASS_PATH, NameType.NONE);
 	}
 
-	public static boolean tryParseModulePath(@NotNull final PsiBuilder builder)
+	public static boolean tryParseModulePath(@Nonnull final PsiBuilder builder)
 	{
 		return tryParseModulePathWithLastPart(builder, OCamlElementTypes.MODULE_PATH, NameType.NONE);
 	}
 
-	private static boolean tryParseClassName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseClassName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker classNameMarker = builder.mark();
 
@@ -471,7 +472,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseMethodName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseMethodName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker methodNameMarker = builder.mark();
 
@@ -486,7 +487,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseInstVarName(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	private static boolean tryParseInstVarName(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		final PsiBuilder.Marker instVarNameMarker = builder.mark();
 
@@ -501,7 +502,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseModuleTypeName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseModuleTypeName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker moduleTypeNameMarker = builder.mark();
 
@@ -516,7 +517,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static boolean tryParseTypeConstructorPath(@NotNull final PsiBuilder builder)
+	public static boolean tryParseTypeConstructorPath(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker typeConstructorPathMarker = builder.mark();
 
@@ -541,7 +542,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static boolean tryParseQuestAndLabel(@NotNull final PsiBuilder builder)
+	public static boolean tryParseQuestAndLabel(@Nonnull final PsiBuilder builder)
 	{
 		if(ignore(builder, OCamlTokenTypes.QUEST))
 		{
@@ -556,7 +557,7 @@ class NameParsing extends Parsing
 		return false;
 	}
 
-	private static boolean tryParseTagName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseTagName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker tagNameMarker = builder.mark();
 
@@ -571,7 +572,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static boolean tryParseValuePath(@NotNull final PsiBuilder builder)
+	public static boolean tryParseValuePath(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker pathMarker = builder.mark();
 
@@ -601,12 +602,12 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseFieldPath(@NotNull final PsiBuilder builder)
+	private static boolean tryParseFieldPath(@Nonnull final PsiBuilder builder)
 	{
 		return tryParseModulePathWithLastPart(builder, OCamlElementTypes.FIELD_PATH, NameType.NONE);
 	}
 
-	public static boolean tryParseConstant(@NotNull final PsiBuilder builder, @NotNull final NameType type)
+	public static boolean tryParseConstant(@Nonnull final PsiBuilder builder, @Nonnull final NameType type)
 	{
 		if(tryParseConstructorPath(builder, type))
 		{
@@ -627,7 +628,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	public static void parseCharLiteral(@NotNull final PsiBuilder builder)
+	public static void parseCharLiteral(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseCharLiteral(builder))
 		{
@@ -635,7 +636,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	public static boolean tryParseCharLiteral(@NotNull final PsiBuilder builder)
+	public static boolean tryParseCharLiteral(@Nonnull final PsiBuilder builder)
 	{
 		if(ignore(builder, OCamlTokenTypes.CHAR_LITERAL))
 		{
@@ -655,7 +656,7 @@ class NameParsing extends Parsing
 		}
 	}
 
-	private static void doParseLabelNameWithMandatoryColon(@NotNull final PsiBuilder builder, final boolean isDefinition)
+	private static void doParseLabelNameWithMandatoryColon(@Nonnull final PsiBuilder builder, final boolean isDefinition)
 	{
 		doParseLabelNameWithColon(builder, new Runnable()
 		{
@@ -666,12 +667,12 @@ class NameParsing extends Parsing
 		}, true, isDefinition);
 	}
 
-	@NotNull
+	@Nonnull
 	private static final TokenSet ourConstructorPathTypes = TokenSet.create(OCamlElementTypes.CONSTRUCTOR_PATH,
 			OCamlElementTypes.CONSTRUCTOR_PATH_EXPRESSION, OCamlElementTypes.CONSTRUCTOR_PATH_PATTERN);
 
-	private static boolean tryParseModulePathWithLastPart(@NotNull final PsiBuilder builder, @NotNull final IElementType pathType,
-			@NotNull final NameType type)
+	private static boolean tryParseModulePathWithLastPart(@Nonnull final PsiBuilder builder, @Nonnull final IElementType pathType,
+			@Nonnull final NameType type)
 	{
 		final PsiBuilder.Marker pathMarker = builder.mark();
 
@@ -733,7 +734,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseOperatorName(@NotNull final PsiBuilder builder)
+	private static boolean tryParseOperatorName(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker operatorNameMarker = builder.mark();
 
@@ -748,7 +749,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseExtendedModuleName(@NotNull final PsiBuilder builder, final boolean parseDot)
+	private static boolean tryParseExtendedModuleName(@Nonnull final PsiBuilder builder, final boolean parseDot)
 	{
 		final PsiBuilder.Marker extendedModuleNameMarker = builder.mark();
 
@@ -811,7 +812,7 @@ class NameParsing extends Parsing
 		return true;
 	}
 
-	private static boolean doTryParseExtendedModuleNames(@NotNull final PsiBuilder builder)
+	private static boolean doTryParseExtendedModuleNames(@Nonnull final PsiBuilder builder)
 	{
 		final boolean[] extendedModuleNameParsed = {false};
 		final boolean[] shouldBreak = {false};

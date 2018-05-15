@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.lang.parser.psi;
 
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.*;
@@ -35,11 +35,11 @@ public class OCamlElementFactory
 	{
 	}
 
-	@NotNull
+	@Nonnull
 	public final static OCamlElementFactory INSTANCE = new OCamlElementFactory();
 
-	@NotNull
-	public OCamlElement createElement(@NotNull final ASTNode node)
+	@Nonnull
+	public OCamlElement createElement(@Nonnull final ASTNode node)
 	{
 		final IElementType elementType = node.getElementType();
 

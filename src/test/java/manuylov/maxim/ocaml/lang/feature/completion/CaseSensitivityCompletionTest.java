@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.lang.feature.completion;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.junit.Test;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.CompletionType;
@@ -55,12 +55,12 @@ public class CaseSensitivityCompletionTest extends CompletionTestCase
 		Editor dummyEditor = createDummyEditor();
 		new OCamlCompletionContributor().beforeCompletion(new CompletionInitializationContext(dummyEditor, dummyEditor.getCaretModel().getCurrentCaret(), createFakeFile(), CompletionType.BASIC, 0)
 		{
-			public void setFileCopyPatcher(@NotNull final FileCopyPatcher fileCopyPatcher)
+			public void setFileCopyPatcher(@Nonnull final FileCopyPatcher fileCopyPatcher)
 			{
 				final MockDocument document = new MyMockDocument()
 				{
 					@Override
-					public void replaceString(final int startOffset, final int endOffset, @NotNull final CharSequence s)
+					public void replaceString(final int startOffset, final int endOffset, @Nonnull final CharSequence s)
 					{
 						assertEquals(OCamlCompletionContributor.LOWER_CASE_DUMMY_IDENTIFIER, s);
 					}
@@ -83,7 +83,7 @@ public class CaseSensitivityCompletionTest extends CompletionTestCase
 		return createFakeFile(new OCamlUnknownElementImpl(new MockASTNode(OCamlElementTypes.ML_FILE)));
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected CompletionType getCompletionType()
 	{

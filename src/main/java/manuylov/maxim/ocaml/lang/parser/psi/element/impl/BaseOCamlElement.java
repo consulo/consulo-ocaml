@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
@@ -33,18 +34,18 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
  */
 public abstract class BaseOCamlElement extends ASTWrapperPsiElement implements OCamlElement
 {
-	public BaseOCamlElement(@NotNull final ASTNode astNode)
+	public BaseOCamlElement(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
 	}
 
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return false;
 	}
 
 	@Override
-	public void accept(@NotNull final PsiElementVisitor psiElementVisitor)
+	public void accept(@Nonnull final PsiElementVisitor psiElementVisitor)
 	{
 		boolean processed = false;
 

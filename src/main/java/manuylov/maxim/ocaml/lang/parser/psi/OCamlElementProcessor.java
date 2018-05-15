@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -26,5 +26,5 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface OCamlElementProcessor
 {
-	void process(@NotNull final OCamlElement psiElement);
+	void process(@Nonnull final OCamlElement psiElement);
 }

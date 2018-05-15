@@ -20,10 +20,10 @@ package manuylov.maxim.ocaml.toolWindow;
 
 import java.awt.Dimension;
 
+import javax.annotation.Nonnull;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
@@ -49,12 +49,12 @@ class OCamlTopLevelConsoleView extends BaseOCamlToolWindowView
 	private static int ourLastConsoleNumber = 0;
 	private final int myConsoleNumber;
 
-	@NotNull
+	@Nonnull
 	private final ConsoleView myConsoleView;
-	@NotNull
+	@Nonnull
 	private final OSProcessHandler myProcessHandler;
 
-	public OCamlTopLevelConsoleView(@NotNull final Project project, @NotNull final ContentManager contentManager,
+	public OCamlTopLevelConsoleView(@Nonnull final Project project, @Nonnull final ContentManager contentManager,
 			final Sdk topLevelSdk) throws ExecutionException
 	{
 		super(project, contentManager);
@@ -88,8 +88,8 @@ class OCamlTopLevelConsoleView extends BaseOCamlToolWindowView
 		return myConsoleNumber;
 	}
 
-	@NotNull
-	private GeneralCommandLine createCommandLine(@NotNull final Sdk topLevelSdk)
+	@Nonnull
+	private GeneralCommandLine createCommandLine(@Nonnull final Sdk topLevelSdk)
 	{
 		final String sdkHomePath = topLevelSdk.getHomePath();
 		final String consoleExePath = OCamlSdkType.getTopLevelExecutable(sdkHomePath).getAbsolutePath();

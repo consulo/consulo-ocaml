@@ -23,7 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -34,17 +35,17 @@ import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
  */
 class VariantsCollectorProcessor extends BaseOCamlResolvedReferencesProcessor
 {
-	@NotNull
+	@Nonnull
 	private final ArrayList<LookupElement> myVariants = new ArrayList<LookupElement>();
-	@NotNull
+	@Nonnull
 	private final Set<String> myPaths = new HashSet<String>();
 
-	public VariantsCollectorProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types)
+	public VariantsCollectorProcessor(@Nonnull final List<Class<? extends OCamlResolvedReference>> types)
 	{
 		super(types);
 	}
 
-	public boolean doProcess(@NotNull final OCamlResolvedReference psiElement)
+	public boolean doProcess(@Nonnull final OCamlResolvedReference psiElement)
 	{
 		final String path = psiElement.getCanonicalPath();
 		if(!myPaths.contains(path))
@@ -55,7 +56,7 @@ class VariantsCollectorProcessor extends BaseOCamlResolvedReferencesProcessor
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	public LookupElement[] getCollectedVariants()
 	{
 		return myVariants.toArray(new LookupElement[myVariants.size()]);

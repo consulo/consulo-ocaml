@@ -22,7 +22,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
@@ -38,41 +39,41 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLabelName;
  */
 public class OCamlLabelNameImpl extends BaseOCamlReference implements OCamlLabelName
 {
-	public OCamlLabelNameImpl(@NotNull final ASTNode node)
+	public OCamlLabelNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitLabelName(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public ASTNode getNameElement()
 	{
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "label";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.<Class<? extends OCamlResolvedReference>>asList(OCamlLabelDefinition.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return Collections.emptyList();

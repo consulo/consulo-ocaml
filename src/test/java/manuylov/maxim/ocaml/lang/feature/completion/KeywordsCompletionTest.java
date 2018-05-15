@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.completion;
 
 import static manuylov.maxim.ocaml.lang.Keywords.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import com.intellij.codeInsight.completion.CompletionType;
 import manuylov.maxim.ocaml.lang.feature.completion.testCase.CompletionTestCase;
@@ -757,7 +758,7 @@ public class KeywordsCompletionTest extends CompletionTestCase
 		doTest(24, "module type M = sig class type ['a, 'b }{", true);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected CompletionType getCompletionType()
 	{

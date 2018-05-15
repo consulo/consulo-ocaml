@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ElementPosition;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -35,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetStatement;
  */
 public class OCamlLetStatementImpl extends BaseOCamlLetElement implements OCamlLetStatement
 {
-	public OCamlLetStatementImpl(@NotNull final ASTNode node)
+	public OCamlLetStatementImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -46,13 +47,13 @@ public class OCamlLetStatementImpl extends BaseOCamlLetElement implements OCamlL
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlLetBinding.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitLetStatement(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		final ElementPosition lastParentPosition = builder.getLastParentPosition();
 		final OCamlElement lastParent = builder.getLastParent();

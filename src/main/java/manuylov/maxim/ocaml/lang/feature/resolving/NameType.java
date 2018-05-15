@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving;
 
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.util.IncorrectOperationException;
 
 /**
@@ -35,21 +36,21 @@ public enum NameType
 	ValueName("(" + LowerCase.myRegexp + ")|(\\([=<>@\\^\\|\\&/$%!\\?~\\-+\\*][!$%\\&\\*\\-+./:<=>\\?@^\\|~]*\\))")
 			{
 				@Override
-				public void checkNameIsCorrect(@NotNull final OCamlNamedElement reference, @NotNull final String name) throws IncorrectOperationException
+				public void checkNameIsCorrect(@Nonnull final OCamlNamedElement reference, @Nonnull final String name) throws IncorrectOperationException
 				{
 					super.checkNameIsCorrect(reference, name);
 				}
 			};
 
-	@NotNull
+	@Nonnull
 	private final String myRegexp;
 
-	NameType(@NotNull final String regexp)
+	NameType(@Nonnull final String regexp)
 	{
 		myRegexp = regexp;
 	}
 
-	public void checkNameIsCorrect(@NotNull final OCamlNamedElement reference, @NotNull final String name) throws IncorrectOperationException
+	public void checkNameIsCorrect(@Nonnull final OCamlNamedElement reference, @Nonnull final String name) throws IncorrectOperationException
 	{
 		if(!isNameIsCorrect(name))
 		{
@@ -57,7 +58,7 @@ public enum NameType
 		}
 	}
 
-	public boolean isNameIsCorrect(@NotNull final String name)
+	public boolean isNameIsCorrect(@Nonnull final String name)
 	{
 		return Pattern.matches(myRegexp, name);
 	}

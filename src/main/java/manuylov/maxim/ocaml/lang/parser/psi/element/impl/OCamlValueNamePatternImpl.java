@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlSelfResolvedReference;
@@ -31,23 +32,23 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueNamePattern;
  */
 public class OCamlValueNamePatternImpl extends BaseOCamlSelfResolvedReference implements OCamlValueNamePattern
 {
-	public OCamlValueNamePatternImpl(@NotNull final ASTNode node)
+	public OCamlValueNamePatternImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitValueNamePattern(this);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.ValueName;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "variable";

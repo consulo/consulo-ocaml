@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -36,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlClassType;
  */
 public class OCamlClassSpecificationBindingImpl extends BaseOCamlResolvedReference implements OCamlClassSpecificationBinding
 {
-	public OCamlClassSpecificationBindingImpl(@NotNull final ASTNode node)
+	public OCamlClassSpecificationBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -47,7 +47,7 @@ public class OCamlClassSpecificationBindingImpl extends BaseOCamlResolvedReferen
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlClassType.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitClassSpecificationBinding(this);
 	}
@@ -58,13 +58,13 @@ public class OCamlClassSpecificationBindingImpl extends BaseOCamlResolvedReferen
 		return OCamlASTTreeUtil.checkNodeType(getNode().getFirstChildNode(), OCamlElementTypes.CLASS_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "class";

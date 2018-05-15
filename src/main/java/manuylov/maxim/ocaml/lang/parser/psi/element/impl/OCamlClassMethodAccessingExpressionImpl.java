@@ -20,8 +20,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -35,7 +35,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlMethodName;
  */
 public class OCamlClassMethodAccessingExpressionImpl extends BaseOCamlElement implements OCamlClassMethodAccessingExpression
 {
-	public OCamlClassMethodAccessingExpressionImpl(@NotNull final ASTNode node)
+	public OCamlClassMethodAccessingExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -46,7 +46,7 @@ public class OCamlClassMethodAccessingExpressionImpl extends BaseOCamlElement im
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlMethodName.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitClassMethodAccessingExpression(this);
 	}

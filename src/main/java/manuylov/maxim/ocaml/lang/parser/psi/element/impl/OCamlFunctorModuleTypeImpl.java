@@ -20,7 +20,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -38,7 +39,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
  */
 public class OCamlFunctorModuleTypeImpl extends BaseOCamlElement implements OCamlFunctorModuleType
 {
-	public OCamlFunctorModuleTypeImpl(@NotNull final ASTNode node)
+	public OCamlFunctorModuleTypeImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -49,18 +50,18 @@ public class OCamlFunctorModuleTypeImpl extends BaseOCamlElement implements OCam
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlModuleType.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitFunctorModuleType(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlParentheses.class);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleType.class));

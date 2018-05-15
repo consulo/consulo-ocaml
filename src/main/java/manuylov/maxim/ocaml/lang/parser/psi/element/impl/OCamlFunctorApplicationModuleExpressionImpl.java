@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlResolvingUtil;
@@ -38,7 +38,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
  */
 public class OCamlFunctorApplicationModuleExpressionImpl extends BaseOCamlElement implements OCamlFunctorApplicationModuleExpression
 {
-	public OCamlFunctorApplicationModuleExpressionImpl(@NotNull final ASTNode node)
+	public OCamlFunctorApplicationModuleExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -49,13 +49,13 @@ public class OCamlFunctorApplicationModuleExpressionImpl extends BaseOCamlElemen
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlParentheses.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitFunctorApplicationModuleExpression(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		final OCamlParentheses parentheses = OCamlPsiUtil.getFirstChildOfType(this, OCamlParentheses.class);
 		if(parentheses == null || builder.childWasAlreadyProcessed(parentheses))
@@ -66,7 +66,7 @@ public class OCamlFunctorApplicationModuleExpressionImpl extends BaseOCamlElemen
 		return moduleParameter != null && moduleParameter.processDeclarations(builder);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlStructuredElement> findActualDefinitions()
 	{
 		return OCamlResolvingUtil.collectActualDefinitionsOfStructuredElements(OCamlPsiUtil.getFirstChildOfType(this, OCamlModuleExpression.class));

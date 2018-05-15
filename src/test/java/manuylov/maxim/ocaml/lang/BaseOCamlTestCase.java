@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import org.junit.Assert;
 import org.junit.Before;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -45,7 +45,7 @@ public class BaseOCamlTestCase extends Assert
 		}
 	}
 
-	private void register(@NotNull final OCamlFileTypeLanguage language)
+	private void register(@Nonnull final OCamlFileTypeLanguage language)
 	{
 		LanguageParserDefinitions.INSTANCE.addExplicitExtension(language, new MLParserDefinition());
 		//LanguageASTFactory.INSTANCE.addExplicitExtension(language, ASTFactory.DEFAULT);

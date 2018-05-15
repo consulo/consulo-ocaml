@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -30,7 +31,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 class LetParsing extends Parsing
 {
-	public static void parseLetExpression(@NotNull final PsiBuilder builder, @NotNull final ExpressionType expType)
+	public static void parseLetExpression(@Nonnull final PsiBuilder builder, @Nonnull final ExpressionType expType)
 	{
 		final PsiBuilder.Marker letExpressionMarker = builder.mark();
 
@@ -68,7 +69,7 @@ class LetParsing extends Parsing
 		}
 	}
 
-	public static boolean tryParseLetStatement(@NotNull final PsiBuilder builder)
+	public static boolean tryParseLetStatement(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker letStatementMarker = builder.mark();
 
@@ -97,7 +98,7 @@ class LetParsing extends Parsing
 		return true;
 	}
 
-	private static void parseLetBinding(@NotNull final PsiBuilder builder)
+	private static void parseLetBinding(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker letBindingMarker = builder.mark();
 

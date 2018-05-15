@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExpression;
  */
 public class OCamlCommaExpressionImpl extends BaseOCamlElement implements OCamlCommaExpression
 {
-	public OCamlCommaExpressionImpl(@NotNull final ASTNode node)
+	public OCamlCommaExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +43,7 @@ public class OCamlCommaExpressionImpl extends BaseOCamlElement implements OCamlC
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitCommaExpression(this);
 	}

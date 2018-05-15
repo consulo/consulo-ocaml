@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -39,12 +39,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueNamePattern;
  */
 public class OCamlAsPatternImpl extends BaseOCamlResolvedReference implements OCamlAsPattern
 {
-	public OCamlAsPatternImpl(@NotNull final ASTNode node)
+	public OCamlAsPatternImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitAsPattern(this);
 	}
@@ -61,20 +61,20 @@ public class OCamlAsPatternImpl extends BaseOCamlResolvedReference implements OC
 		return OCamlASTTreeUtil.checkNodeType(getNode().getLastChildNode(), OCamlElementTypes.VALUE_NAME_PATTERN);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.ValueName;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "pattern";
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return builder.getProcessor().process(this) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
 	}

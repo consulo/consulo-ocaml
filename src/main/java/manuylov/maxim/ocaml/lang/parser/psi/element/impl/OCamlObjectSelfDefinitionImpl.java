@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -34,7 +34,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlPattern;
  */
 public class OCamlObjectSelfDefinitionImpl extends BaseOCamlElement implements OCamlObjectSelfDefinition
 {
-	public OCamlObjectSelfDefinitionImpl(@NotNull final ASTNode node)
+	public OCamlObjectSelfDefinitionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -45,13 +45,13 @@ public class OCamlObjectSelfDefinitionImpl extends BaseOCamlElement implements O
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.RPAR);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitObjectSelfDefinition(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
 	}

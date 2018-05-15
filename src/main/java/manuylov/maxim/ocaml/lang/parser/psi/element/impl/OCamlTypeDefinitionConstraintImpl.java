@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -31,7 +32,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeExpression;
  */
 public class OCamlTypeDefinitionConstraintImpl extends BaseOCamlElement implements OCamlTypeDefinitionConstraint
 {
-	public OCamlTypeDefinitionConstraintImpl(@NotNull final ASTNode node)
+	public OCamlTypeDefinitionConstraintImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +43,7 @@ public class OCamlTypeDefinitionConstraintImpl extends BaseOCamlElement implemen
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTypeDefinitionConstraint(this);
 	}

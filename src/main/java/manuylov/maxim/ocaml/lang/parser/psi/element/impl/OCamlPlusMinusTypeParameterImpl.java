@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.impl.BaseOCamlResolvedReference;
@@ -36,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlTypeParameterName;
  */
 public class OCamlPlusMinusTypeParameterImpl extends BaseOCamlResolvedReference implements OCamlPlusMinusTypeParameter
 {
-	public OCamlPlusMinusTypeParameterImpl(@NotNull final ASTNode node)
+	public OCamlPlusMinusTypeParameterImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -47,7 +47,7 @@ public class OCamlPlusMinusTypeParameterImpl extends BaseOCamlResolvedReference 
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeParameterName.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitPlusMinusTypeParameter(this);
 	}
@@ -58,13 +58,13 @@ public class OCamlPlusMinusTypeParameterImpl extends BaseOCamlResolvedReference 
 		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.TYPE_PARAMETER_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.AnyCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "type parameter";

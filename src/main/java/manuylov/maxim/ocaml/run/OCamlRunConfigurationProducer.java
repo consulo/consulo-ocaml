@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.run;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.actions.ConfigurationContext;
@@ -55,8 +55,8 @@ public class OCamlRunConfigurationProducer extends RuntimeConfigurationProducer 
 	}
 
 	@Nullable
-	protected RunnerAndConfigurationSettings createConfigurationByElement(@NotNull final Location location,
-			@NotNull final ConfigurationContext context)
+	protected RunnerAndConfigurationSettings createConfigurationByElement(@Nonnull final Location location,
+			@Nonnull final ConfigurationContext context)
 	{
 		final PsiFile psiFile = location.getPsiElement().getContainingFile();
 		if(psiFile == null || !OCamlFileUtil.isImplementationFile(psiFile))

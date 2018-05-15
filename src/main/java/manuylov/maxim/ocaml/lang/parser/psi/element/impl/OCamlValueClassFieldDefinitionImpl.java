@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlDeclarationsUtil;
@@ -36,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueClassFieldDefiniti
  */
 public class OCamlValueClassFieldDefinitionImpl extends BaseOCamlElement implements OCamlValueClassFieldDefinition
 {
-	public OCamlValueClassFieldDefinitionImpl(@NotNull final ASTNode node)
+	public OCamlValueClassFieldDefinitionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -54,13 +54,13 @@ public class OCamlValueClassFieldDefinitionImpl extends BaseOCamlElement impleme
 		}
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitValueClassFieldDefinition(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlInstVarNameDefinition.class);
 	}

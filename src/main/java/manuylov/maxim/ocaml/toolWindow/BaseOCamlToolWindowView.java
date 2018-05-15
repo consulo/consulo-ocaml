@@ -20,7 +20,7 @@ package manuylov.maxim.ocaml.toolWindow;
 
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.content.ContentManager;
@@ -31,24 +31,24 @@ import com.intellij.ui.content.ContentManager;
  */
 abstract class BaseOCamlToolWindowView extends JPanel implements Disposable
 {
-	@NotNull
+	@Nonnull
 	private final ContentManager myContentManager;
-	@NotNull
+	@Nonnull
 	protected final Project myProject;
 
-	protected BaseOCamlToolWindowView(@NotNull final Project project, @NotNull final ContentManager contentManager)
+	protected BaseOCamlToolWindowView(@Nonnull final Project project, @Nonnull final ContentManager contentManager)
 	{
 		myContentManager = contentManager;
 		myProject = project;
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlToolWindowOpenCloseAction getOCamlToolWindowOpenCloseAction(final boolean openConsole, final boolean closeView)
 	{
 		return new OCamlToolWindowOpenCloseAction(myProject, myContentManager, openConsole, closeView);
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlToolWindowSettingsAction getOCamlToolWindowSettingsAction()
 	{
 		return new OCamlToolWindowSettingsAction(myProject, null);

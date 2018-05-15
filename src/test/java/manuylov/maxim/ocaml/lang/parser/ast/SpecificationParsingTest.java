@@ -28,7 +28,8 @@ import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.UCFC_IDENTIF
 import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.VAL_KEYWORD;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
@@ -130,19 +131,19 @@ public class SpecificationParsingTest extends BaseStatementParsingTest
 		doTest("", myTree.getStringRepresentation());
 	}
 
-	@NotNull
+	@Nonnull
 	protected ParserDefinition getParserDefinition()
 	{
 		return new MLIParserDefinition();
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleExpressionNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_TYPE;
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleBindingNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;

@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -36,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlForExpressionIndexVaria
  */
 public class OCamlForExpressionBindingImpl extends BaseOCamlElement implements OCamlForExpressionBinding
 {
-	public OCamlForExpressionBindingImpl(@NotNull final ASTNode node)
+	public OCamlForExpressionBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -48,13 +48,13 @@ public class OCamlForExpressionBindingImpl extends BaseOCamlElement implements O
 				.endsCorrectlyWith(this, OCamlExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitForExpressionBinding(this);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlForExpressionIndexVariableName.class);
 	}

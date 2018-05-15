@@ -23,7 +23,8 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Before;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -56,12 +57,12 @@ public abstract class ParsingTestCase extends BaseOCamlTestCase {
         myTree.addNode(2, getModuleExpressionNodeType());
     }
 
-    protected void doTest(@NotNull final String text, @NotNull final String expectedTree) throws Exception {
+    protected void doTest(@Nonnull final String text, @Nonnull final String expectedTree) throws Exception {
         assertEquals(getTreeAsString(text, false, false, true), expectedTree);
     }
 
-    @NotNull
-    private String getTreeAsString(@NotNull final String text,
+    @Nonnull
+    private String getTreeAsString(@Nonnull final String text,
                                    final boolean ignoreParentheses,
                                    final boolean throwExceptionIfErrorElementOccurred,
                                    final boolean checkAllNodesEndCorrectly) throws Exception {
@@ -72,7 +73,7 @@ public abstract class ParsingTestCase extends BaseOCamlTestCase {
         return treeToString(root, ignoreParentheses, throwExceptionIfErrorElementOccurred);
     }
 
-    private void checkAllNodesEndCorrectly(@NotNull final OCamlElement root) {
+    private void checkAllNodesEndCorrectly(@Nonnull final OCamlElement root) {
         final ASTNode node = root.getNode();
         assert node != null : root.toString();
         assertEquals("type: " + node.getElementType(), root.endsCorrectly(), node.getElementType() != OCamlElementTypes.UNCLOSED_COMMENT);
@@ -82,16 +83,16 @@ public abstract class ParsingTestCase extends BaseOCamlTestCase {
         }
     }
 
-    @NotNull
-    protected String getTreeIgnoringParentheses(@NotNull final String text) throws Exception {
+    @Nonnull
+    protected String getTreeIgnoringParentheses(@Nonnull final String text) throws Exception {
         return getTreeAsString(text, true, true, false);
     }
 
-    protected void assertIsAllowed(@NotNull final String text) throws Exception {
+    protected void assertIsAllowed(@Nonnull final String text) throws Exception {
         getTreeAsString(text, false, true, false);
     }
 
-    protected void assertIsNotAllowed(@NotNull final String text) throws Exception {
+    protected void assertIsNotAllowed(@Nonnull final String text) throws Exception {
         try {
             getTreeAsString(text, false, true, false);
         }
@@ -101,17 +102,17 @@ public abstract class ParsingTestCase extends BaseOCamlTestCase {
         fail();
     }
 
-    @NotNull
-    private String treeToString(@NotNull final ASTNode root, final boolean ignoreParentheses, final boolean throwExceptionIfErrorElementOccurred) {
+    @Nonnull
+    private String treeToString(@Nonnull final ASTNode root, final boolean ignoreParentheses, final boolean throwExceptionIfErrorElementOccurred) {
         return TreeStringBuilder.buildTreeString(root, true, ignoreParentheses, throwExceptionIfErrorElementOccurred).getStringRepresentation();
     }
 
-    @NotNull
+    @Nonnull
     protected abstract ParserDefinition getParserDefinition();
 
-    @NotNull
+    @Nonnull
     protected abstract IElementType getModuleExpressionNodeType();
 
-    @NotNull
+    @Nonnull
     protected abstract IElementType getModuleBindingNodeType();
 }

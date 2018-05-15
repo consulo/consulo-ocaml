@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlOperatorName;
@@ -29,12 +30,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlOperatorName;
  */
 public class OCamlOperatorNameImpl extends BaseOCamlElement implements OCamlOperatorName
 {
-	public OCamlOperatorNameImpl(@NotNull final ASTNode node)
+	public OCamlOperatorNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitOperatorName(this);
 	}

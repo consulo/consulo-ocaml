@@ -18,9 +18,9 @@
 
 package manuylov.maxim.ocaml.util;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
 
@@ -30,58 +30,58 @@ import consulo.ui.image.Image;
  */
 public class OCamlIconUtil
 {
-	@NotNull
+	@Nonnull
 	public static final Image ourMLFileIcon = IconLoader.getIcon("/img/ml-file.png");
-	@NotNull
+	@Nonnull
 	public static final Image ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
-	@NotNull
+	@Nonnull
 	public static final Icon ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
-	@NotNull
+	@Nonnull
 	public static final Image ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
-	@NotNull
+	@Nonnull
 	public static final Icon ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
-	@NotNull
+	@Nonnull
 	public static final Icon ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
-	@NotNull
+	@Nonnull
 	public static final Icon ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
 
-	@NotNull
+	@Nonnull
 	public static Image getSmallOCamlIcon()
 	{
 		return ourOCamlSmallIcon;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Icon getBigOCamlIcon()
 	{
 		return ourOCamlBigIcon;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Image getMLFileIcon()
 	{
 		return ourMLFileIcon;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Image getMLIFileIcon()
 	{
 		return ourMLIFileIcon;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Icon getOpenConsoleIcon()
 	{
 		return ourOpenConsoleIcon;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Icon getCloseViewIcon()
 	{
 		return ourCloseViewIcon;
 	}
 
-	@NotNull
+	@Nonnull
 	public static Icon getSettingsIcon()
 	{
 		return ourSettingsIcon;

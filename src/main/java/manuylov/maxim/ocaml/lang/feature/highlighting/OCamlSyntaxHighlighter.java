@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.feature.highlighting;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
@@ -37,36 +38,36 @@ import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
  */
 class OCamlSyntaxHighlighter extends SyntaxHighlighterBase
 {
-	@NotNull
+	@Nonnull
 	private static final Map<IElementType, TextAttributesKey> keys = new HashMap<IElementType, TextAttributesKey>();
 
-	@NotNull
+	@Nonnull
 	public static final TextAttributesKey OCAML_KEYWORD = TextAttributesKey.createTextAttributesKey("OCAML.KEYWORD",
 			DefaultLanguageHighlighterColors.KEYWORD);
-	@NotNull
+	@Nonnull
 	public static final TextAttributesKey OCAML_STRING = TextAttributesKey.createTextAttributesKey("OCAML.STRING",
 			DefaultLanguageHighlighterColors.STRING);
-	@NotNull
+	@Nonnull
 	public static final TextAttributesKey OCAML_ESCAPE = TextAttributesKey.createTextAttributesKey("OCAML.ESCAPE",
 			DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
-	@NotNull
+	@Nonnull
 	public static final TextAttributesKey OCAML_NUMBER = TextAttributesKey.createTextAttributesKey("OCAML.NUMBER",
 			DefaultLanguageHighlighterColors.NUMBER);
-	@NotNull
+	@Nonnull
 	public static final TextAttributesKey OCAML_COMMENT = TextAttributesKey.createTextAttributesKey("OCAML.COMMENT",
 			DefaultLanguageHighlighterColors.LINE_COMMENT);
-	@NotNull
+	@Nonnull
 	public static final TextAttributesKey OCAML_SYNTAX_SYMBOL = TextAttributesKey.createTextAttributesKey("OCAML.SYNTAX.SYMBOL",
 			DefaultLanguageHighlighterColors.LABEL);
 
-	@NotNull
+	@Nonnull
 	public Lexer getHighlightingLexer()
 	{
 		return new OCamlHighlightingLexer();
 	}
 
-	@NotNull
-	public TextAttributesKey[] getTokenHighlights(@NotNull final IElementType tokenType)
+	@Nonnull
+	public TextAttributesKey[] getTokenHighlights(@Nonnull final IElementType tokenType)
 	{
 		return pack(keys.get(tokenType));
 	}

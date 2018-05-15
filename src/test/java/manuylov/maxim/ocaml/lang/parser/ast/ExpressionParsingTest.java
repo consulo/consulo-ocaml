@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.ast;
 import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import manuylov.maxim.ocaml.lang.parser.ast.testCase.MLParsingTestCase;
 
@@ -1346,7 +1347,7 @@ public class ExpressionParsingTest extends MLParsingTestCase
 		doTestRightAssociativity(":=");
 	}
 
-	private void doTestLeftAssociativity(@NotNull final String operator) throws Exception
+	private void doTestLeftAssociativity(@Nonnull final String operator) throws Exception
 	{
 		final String expr1 = getTreeIgnoringParentheses("a " + operator + " b " + operator + " c");
 		final String expr2 = getTreeIgnoringParentheses("((a " + operator + " b) " + operator + " c)");
@@ -1354,7 +1355,7 @@ public class ExpressionParsingTest extends MLParsingTestCase
 		assertEquals(expr1, expr2);
 	}
 
-	private void doTestRightAssociativity(@NotNull final String operator) throws Exception
+	private void doTestRightAssociativity(@Nonnull final String operator) throws Exception
 	{
 		final String expr1 = getTreeIgnoringParentheses("a " + operator + " b " + operator + " c");
 		final String expr2 = getTreeIgnoringParentheses("(a " + operator + " (b " + operator + " c))");

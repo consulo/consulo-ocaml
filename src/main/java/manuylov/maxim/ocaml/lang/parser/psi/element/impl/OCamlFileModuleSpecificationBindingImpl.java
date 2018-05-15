@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -35,18 +35,18 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlModuleType;
 public class OCamlFileModuleSpecificationBindingImpl extends BaseOCamlFileModuleBinding<OCamlModuleType> implements
 		OCamlFileModuleSpecificationBinding
 {
-	public OCamlFileModuleSpecificationBindingImpl(@NotNull final ASTNode node)
+	public OCamlFileModuleSpecificationBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.AnyCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "module type";
@@ -64,7 +64,7 @@ public class OCamlFileModuleSpecificationBindingImpl extends BaseOCamlFileModule
 		return null;
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitFileModuleSpecificationBinding(this);
 	}

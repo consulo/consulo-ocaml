@@ -21,13 +21,13 @@ package manuylov.maxim.ocaml.toolWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -50,16 +50,16 @@ public class OCamlToolWindowSettingsForm
 	private JPanel myRootPanel;
 	private TextFieldWithBrowseButton myWorkingDirectoryEditor;
 
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 
-	public OCamlToolWindowSettingsForm(@NotNull final Project project)
+	public OCamlToolWindowSettingsForm(@Nonnull final Project project)
 	{
 		myProject = project;
 
 		myConfigureButton.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(@NotNull final ActionEvent e)
+			public void actionPerformed(@Nonnull final ActionEvent e)
 			{
 				/*final ProjectJdksEditor editor = new ProjectJdksEditor((Sdk) mySdkComboBox.getSelectedItem(), myProject, mySdkComboBox);
 				editor.show();
@@ -75,36 +75,36 @@ public class OCamlToolWindowSettingsForm
 		myWorkingDirectoryEditor.addBrowseFolderListener("Select Working Directory", "", myProject, workingDirChooserDescriptor);
 	}
 
-	@NotNull
+	@Nonnull
 	public JComponent getRootPanel()
 	{
 		return myRootPanel;
 	}
 
-	@NotNull
+	@Nonnull
 	public JComboBox getSdkComboBox()
 	{
 		return mySdkComboBox;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getCmdParams()
 	{
 		return myCommandLineParamsEditor.getText();
 	}
 
-	public void setCmdParams(@NotNull final String params)
+	public void setCmdParams(@Nonnull final String params)
 	{
 		myCommandLineParamsEditor.setText(params);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getWorkingDirectory()
 	{
 		return myWorkingDirectoryEditor.getText();
 	}
 
-	public void setWorkingDirectory(@NotNull final String dir)
+	public void setWorkingDirectory(@Nonnull final String dir)
 	{
 		myWorkingDirectoryEditor.setText(dir);
 	}

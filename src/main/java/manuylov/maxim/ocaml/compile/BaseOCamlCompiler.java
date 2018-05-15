@@ -26,8 +26,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.FileProcessingCompiler;
@@ -49,28 +49,28 @@ import manuylov.maxim.ocaml.util.OCamlModuleUtil;
 
 abstract class BaseOCamlCompiler implements FileProcessingCompiler
 {
-	@NotNull
+	@Nonnull
 	protected static final Key<Boolean> THERE_WAS_RECOMPILATION = new Key<Boolean>("THERE_WAS_RECOMPILATION");
-	@NotNull
+	@Nonnull
 	private static final String FILE = "File";
-	@NotNull
+	@Nonnull
 	private static final String LINE = "line";
-	@NotNull
+	@Nonnull
 	private static final String CHARACTERS = "characters";
-	@NotNull
+	@Nonnull
 	private static final String WARNING_ = "Warning:";
 	private static final int INVALID_INT = -1;
 
-	@NotNull
-	protected OCamlModule getMainOCamlModule(@NotNull final OCamlCompileContext ocamlContext)
+	@Nonnull
+	protected OCamlModule getMainOCamlModule(@Nonnull final OCamlCompileContext ocamlContext)
 	{
 		final OCamlModule ocamlModule = getRunConfiguration(ocamlContext).getMainOCamlModule();
 		assert ocamlModule != null;
 		return ocamlModule;
 	}
 
-	@NotNull
-	protected OCamlRunConfiguration getRunConfiguration(@NotNull final OCamlCompileContext ocamlContext)
+	@Nonnull
+	protected OCamlRunConfiguration getRunConfiguration(@Nonnull final OCamlCompileContext ocamlContext)
 	{
 		final OCamlRunConfiguration runConfiguration = ocamlContext.getRunConfiguration();
 		assert runConfiguration != null;
@@ -78,9 +78,9 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 	}
 
 	@Nullable
-	protected GeneralCommandLine getBaseCompilerCommandLineForFile(@NotNull final VirtualFile file,
-			@NotNull final ProjectFileIndex fileIndex,
-			@NotNull final CompileContext context,
+	protected GeneralCommandLine getBaseCompilerCommandLineForFile(@Nonnull final VirtualFile file,
+			@Nonnull final ProjectFileIndex fileIndex,
+			@Nonnull final CompileContext context,
 			final boolean isDebugMode)
 	{
 		final Module module = fileIndex.getModuleForFile(file);
@@ -112,7 +112,7 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return cmd;
 	}
 
-	protected void processInfoLines(@NotNull final List<String> lines, @NotNull final CompileContext context, @Nullable final VirtualFile file)
+	protected void processInfoLines(@Nonnull final List<String> lines, @Nonnull final CompileContext context, @Nullable final VirtualFile file)
 	{
 		for(final String line : lines)
 		{
@@ -121,7 +121,7 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		}
 	}
 
-	protected boolean processErrorAndWarningLines(@NotNull final List<String> lines, @NotNull final CompileContext context, @Nullable final VirtualFile file)
+	protected boolean processErrorAndWarningLines(@Nonnull final List<String> lines, @Nonnull final CompileContext context, @Nullable final VirtualFile file)
 	{
 		boolean hasError = false;
 		final List<FailureMessage> failures = parseOutput(lines);
@@ -135,8 +135,8 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return hasError;
 	}
 
-	@NotNull
-	private List<FailureMessage> parseOutput(@NotNull final List<String> lines)
+	@Nonnull
+	private List<FailureMessage> parseOutput(@Nonnull final List<String> lines)
 	{
 		final List<FailureMessage> result = new ArrayList<FailureMessage>();
 		final int size = lines.size();
@@ -162,8 +162,8 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return result;
 	}
 
-	@NotNull
-	private String join(@NotNull final List<String> lines, final int startIndex, final int endIndex)
+	@Nonnull
+	private String join(@Nonnull final List<String> lines, final int startIndex, final int endIndex)
 	{
 		final StringBuilder sb = new StringBuilder();
 		for(int i = startIndex; i < endIndex; i++)
@@ -173,8 +173,8 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return sb.toString().trim();
 	}
 
-	@NotNull
-	private FailureMessage createFailureMessage(@NotNull final String firstLine, @NotNull final String secondLine)
+	@Nonnull
+	private FailureMessage createFailureMessage(@Nonnull final String firstLine, @Nonnull final String secondLine)
 	{
 		final String[] parts = firstLine.split(", ");
 		final int partsCount = parts.length;
@@ -234,7 +234,7 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return new FailureMessage(type, messageText, filePath, lineNum, startPos, endPos);
 	}
 
-	private int parseInt(@NotNull final String string)
+	private int parseInt(@Nonnull final String string)
 	{
 		try
 		{
@@ -247,7 +247,7 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 	}
 
 	@Nullable
-	private String findUrl(@NotNull final FailureMessage failure)
+	private String findUrl(@Nonnull final FailureMessage failure)
 	{
 		final String path = failure.getFilePath();
 		if(path == null)
@@ -258,22 +258,22 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return file == null ? null : file.getUrl();
 	}
 
-	@NotNull
-	protected OCamlLinkerProcessingItem createFakeProcessingItem(@NotNull final VirtualFile file)
+	@Nonnull
+	protected OCamlLinkerProcessingItem createFakeProcessingItem(@Nonnull final VirtualFile file)
 	{
 		return doCreateProcessingItem(null, file, null);
 	}
 
-	@NotNull
-	protected OCamlLinkerProcessingItem createProcessingItem(@NotNull final VirtualFile file, @NotNull final File compiledFile, final boolean isDebugMode, final boolean force)
+	@Nonnull
+	protected OCamlLinkerProcessingItem createProcessingItem(@Nonnull final VirtualFile file, @Nonnull final File compiledFile, final boolean isDebugMode, final boolean force)
 	{
 		return createProcessingItem(null, file, compiledFile, isDebugMode, force);
 	}
 
-	@NotNull
+	@Nonnull
 	protected OCamlLinkerProcessingItem createProcessingItem(@Nullable final OCamlModule ocamlModule,
-			@NotNull final VirtualFile file,
-			@NotNull final File compiledFile,
+			@Nonnull final VirtualFile file,
+			@Nonnull final File compiledFile,
 			final boolean isDebugMode,
 			final boolean force)
 	{
@@ -281,8 +281,8 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 		return doCreateProcessingItem(ocamlModule, file, state);
 	}
 
-	@NotNull
-	private OCamlLinkerProcessingItem doCreateProcessingItem(@Nullable final OCamlModule ocamlModule, @NotNull final VirtualFile file, @Nullable final ValidityState state)
+	@Nonnull
+	private OCamlLinkerProcessingItem doCreateProcessingItem(@Nullable final OCamlModule ocamlModule, @Nonnull final VirtualFile file, @Nullable final ValidityState state)
 	{
 		return new OCamlLinkerProcessingItem(ocamlModule, file, state);
 	}
@@ -291,12 +291,12 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 	{
 		@Nullable
 		private final OCamlModule myOCamlModule;
-		@NotNull
+		@Nonnull
 		private final VirtualFile myFile;
 		@Nullable
 		private final ValidityState myState;
 
-		private OCamlLinkerProcessingItem(@Nullable final OCamlModule OCamlModule, @NotNull final VirtualFile file, @Nullable final ValidityState state)
+		private OCamlLinkerProcessingItem(@Nullable final OCamlModule OCamlModule, @Nonnull final VirtualFile file, @Nullable final ValidityState state)
 		{
 			myOCamlModule = OCamlModule;
 			myFile = file;
@@ -309,7 +309,7 @@ abstract class BaseOCamlCompiler implements FileProcessingCompiler
 			return myOCamlModule;
 		}
 
-		@NotNull
+		@Nonnull
 		public File getFile()
 		{
 			return VfsUtilCore.virtualToIoFile(myFile);

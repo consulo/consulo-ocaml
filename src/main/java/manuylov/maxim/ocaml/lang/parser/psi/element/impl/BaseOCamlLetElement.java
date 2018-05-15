@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.OCamlASTTreeUtil;
@@ -26,7 +26,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetElement;
 
 abstract class BaseOCamlLetElement extends BaseOCamlElement implements OCamlLetElement
 {
-	public BaseOCamlLetElement(@NotNull final ASTNode astNode)
+	public BaseOCamlLetElement(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
 	}

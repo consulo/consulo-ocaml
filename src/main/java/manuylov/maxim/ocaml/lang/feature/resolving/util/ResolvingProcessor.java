@@ -20,8 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.util.Comparing;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlResolvedReference;
 
@@ -33,12 +33,12 @@ class ResolvingProcessor extends BaseOCamlResolvedReferencesProcessor
 {
 	private OCamlResolvedReference myResolvedReference = null;
 
-	public ResolvingProcessor(@NotNull final List<Class<? extends OCamlResolvedReference>> types)
+	public ResolvingProcessor(@Nonnull final List<Class<? extends OCamlResolvedReference>> types)
 	{
 		super(types);
 	}
 
-	public boolean doProcess(@NotNull final OCamlResolvedReference psiElement)
+	public boolean doProcess(@Nonnull final OCamlResolvedReference psiElement)
 	{
 		if(Comparing.equal(psiElement.getName(), getSourceElementName()))
 		{

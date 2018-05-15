@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.ast.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -31,12 +32,12 @@ import com.intellij.psi.tree.IElementType;
  */
 public class MultiMarker
 {
-	@NotNull
+	@Nonnull
 	private final PsiBuilder myBuilder;
-	@NotNull
+	@Nonnull
 	private final List<PsiBuilder.Marker> myMarkers = new ArrayList<PsiBuilder.Marker>();
 
-	public MultiMarker(@NotNull final PsiBuilder builder)
+	public MultiMarker(@Nonnull final PsiBuilder builder)
 	{
 		myBuilder = builder;
 	}
@@ -46,7 +47,7 @@ public class MultiMarker
 		myMarkers.add(myBuilder.mark());
 	}
 
-	public void done(@NotNull final IElementType type)
+	public void done(@Nonnull final IElementType type)
 	{
 		for(int i = myMarkers.size() - 1; i >= 0; i--)
 		{

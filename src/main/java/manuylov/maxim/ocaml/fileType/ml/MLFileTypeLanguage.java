@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType.ml;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
 
 /**
@@ -27,7 +28,7 @@ import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
  */
 public class MLFileTypeLanguage extends OCamlFileTypeLanguage
 {
-	@NotNull
+	@Nonnull
 	public static final MLFileTypeLanguage INSTANCE = new MLFileTypeLanguage();
 
 	private MLFileTypeLanguage()

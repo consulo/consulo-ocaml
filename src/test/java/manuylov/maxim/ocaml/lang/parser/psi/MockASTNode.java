@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
@@ -35,12 +35,12 @@ public class MockASTNode implements ASTNode
 {
 	private final IElementType myElementType;
 
-	public MockASTNode(@NotNull final IElementType elementType)
+	public MockASTNode(@Nonnull final IElementType elementType)
 	{
 		myElementType = elementType;
 	}
 
-	@NotNull
+	@Nonnull
 	public IElementType getElementType()
 	{
 		return myElementType;
@@ -106,27 +106,27 @@ public class MockASTNode implements ASTNode
 		return new ASTNode[0];
 	}
 
-	public void addChild(@NotNull final ASTNode child)
+	public void addChild(@Nonnull final ASTNode child)
 	{
 	}
 
-	public void addChild(@NotNull final ASTNode child, final ASTNode anchorBefore)
+	public void addChild(@Nonnull final ASTNode child, final ASTNode anchorBefore)
 	{
 	}
 
-	public void addLeaf(@NotNull final IElementType leafType, final CharSequence leafText, final ASTNode anchorBefore)
+	public void addLeaf(@Nonnull final IElementType leafType, final CharSequence leafText, final ASTNode anchorBefore)
 	{
 	}
 
-	public void removeChild(@NotNull final ASTNode child)
+	public void removeChild(@Nonnull final ASTNode child)
 	{
 	}
 
-	public void removeRange(@NotNull final ASTNode firstNodeToRemove, final ASTNode firstNodeToKeep)
+	public void removeRange(@Nonnull final ASTNode firstNodeToRemove, final ASTNode firstNodeToKeep)
 	{
 	}
 
-	public void replaceChild(@NotNull final ASTNode oldChild, @NotNull final ASTNode newChild)
+	public void replaceChild(@Nonnull final ASTNode oldChild, @Nonnull final ASTNode newChild)
 	{
 	}
 
@@ -174,12 +174,12 @@ public class MockASTNode implements ASTNode
 		return null;
 	}
 
-	public ASTNode findChildByType(@NotNull final TokenSet typesSet)
+	public ASTNode findChildByType(@Nonnull final TokenSet typesSet)
 	{
 		return null;
 	}
 
-	public ASTNode findChildByType(@NotNull final TokenSet typesSet, @Nullable final ASTNode anchor)
+	public ASTNode findChildByType(@Nonnull final TokenSet typesSet, @Nullable final ASTNode anchor)
 	{
 		return null;
 	}

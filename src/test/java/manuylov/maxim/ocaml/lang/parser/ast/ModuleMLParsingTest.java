@@ -21,7 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.ast;
 import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
@@ -257,32 +258,32 @@ public class ModuleMLParsingTest extends BaseModuleParsingTest
 		doTest("module MyModule = (ModuleName : ModuleTypeName)", myTree.getStringRepresentation());
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getMainElement()
 	{
 		return MODULE_TYPE_DEFINITION;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected IElementType getTypeBindingElement()
 	{
 		return MODULE_TYPE_DEFINITION_BINDING;
 	}
 
-	@NotNull
+	@Nonnull
 	protected ParserDefinition getParserDefinition()
 	{
 		return new MLParserDefinition();
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleExpressionNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_EXPRESSION;
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleBindingNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_DEFINITION_BINDING;

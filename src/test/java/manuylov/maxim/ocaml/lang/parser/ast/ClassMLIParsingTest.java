@@ -27,7 +27,8 @@ import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.OBJ
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.TYPE_PARAMETER_DEFINITION;
 import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.TYPE_PARAMETER_NAME;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
@@ -115,19 +116,19 @@ public class ClassMLIParsingTest extends BaseClassParsingTest
 		doTest("class class1 : class0 and virtual class1 : object end and ['a, 'b, 'c] class1 : object end and virtual ['a, 'b, 'c] class1 : object end", myTree.getStringRepresentation());
 	}
 
-	@NotNull
+	@Nonnull
 	protected ParserDefinition getParserDefinition()
 	{
 		return new MLIParserDefinition();
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleExpressionNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_TYPE;
 	}
 
-	@NotNull
+	@Nonnull
 	protected IElementType getModuleBindingNodeType()
 	{
 		return OCamlElementTypes.FILE_MODULE_SPECIFICATION_BINDING;

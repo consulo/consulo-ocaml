@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface OCamlResolvedReferencesProcessor
 {
-	boolean process(@NotNull final OCamlResolvedReference psiElement);
+	boolean process(@Nonnull final OCamlResolvedReference psiElement);
 
-	void setResolvingBuilder(@NotNull final ResolvingBuilder resolvingBuilder);
+	void setResolvingBuilder(@Nonnull final ResolvingBuilder resolvingBuilder);
 }

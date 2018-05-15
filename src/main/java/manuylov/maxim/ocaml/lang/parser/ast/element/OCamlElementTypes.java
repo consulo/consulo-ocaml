@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.element;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
@@ -31,411 +32,411 @@ import manuylov.maxim.ocaml.lang.OCamlElementType;
  */
 public interface OCamlElementTypes
 {
-	@NotNull
+	@Nonnull
 	IFileElementType ML_FILE = new IFileElementType("OCaml:ML_FILE", MLFileTypeLanguage.INSTANCE);
-	@NotNull
+	@Nonnull
 	IFileElementType MLI_FILE = new IFileElementType("OCaml:MLI_FILE", MLIFileTypeLanguage.INSTANCE);
 
     /* Let parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType LET_BINDING = new OCamlElementType("LET_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType LET_BINDING_PATTERN = new OCamlElementType("LET_BINDING_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType LET_STATEMENT = new OCamlElementType("LET_STATEMENT");
-	@NotNull
+	@Nonnull
 	IElementType LET_EXPRESSION = new OCamlElementType("LET_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType LET_CLASS_EXPRESSION = new OCamlElementType("LET_CLASS_EXPRESSION");
 
     /* } */
 
     /* Statement parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType EXTERNAL_DEFINITION = new OCamlElementType("EXTERNAL_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType EXCEPTION_DEFINITION = new OCamlElementType("EXCEPTION_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType OPEN_DIRECTIVE = new OCamlElementType("OPEN_DIRECTIVE");
-	@NotNull
+	@Nonnull
 	IElementType INCLUDE_DIRECTIVE_DEFINITION = new OCamlElementType("INCLUDE_DIRECTIVE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType EXCEPTION_SPECIFICATION = new OCamlElementType("EXCEPTION_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType INCLUDE_DIRECTIVE_SPECIFICATION = new OCamlElementType("INCLUDE_DIRECTIVE_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType VALUE_SPECIFICATION = new OCamlElementType("VALUE_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType EXTERNAL_DECLARATION = new OCamlElementType("EXTERNAL_DECLARATION");
 
     /* } */
 
     /* Type parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType TYPE_DEFINITION = new OCamlElementType("TYPE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_PARAMETERIZED_BINDING = new OCamlElementType("TYPE_PARAMETERIZED_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_BINDING = new OCamlElementType("TYPE_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_PARAMETER = new OCamlElementType("TYPE_PARAMETER");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_PARAMETER_DEFINITION = new OCamlElementType("TYPE_PARAMETER_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType PLUS_MINUS_TYPE_PARAMETER = new OCamlElementType("PLUS_MINUS_TYPE_PARAMETER");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_TYPE_DEFINITION = new OCamlElementType("RECORD_TYPE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_FIELD_DEFINITION = new OCamlElementType("RECORD_FIELD_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType VARIANT_TYPE_DEFINITION = new OCamlElementType("VARIANT_TYPE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_DEFINITION = new OCamlElementType("CONSTRUCTOR_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_DEFINITION_CONSTRAINT = new OCamlElementType("TYPE_DEFINITION_CONSTRAINT");
-	@NotNull
+	@Nonnull
 	IElementType AS_TYPE_EXPRESSION = new OCamlElementType("AS_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTION_TYPE_EXPRESSION = new OCamlElementType("FUNCTION_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType TUPLE_TYPE_EXPRESSION = new OCamlElementType("TUPLE_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType SUPER_CLASS_TYPE_EXPRESSION = new OCamlElementType("SUPER_CLASS_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_CONSTRUCTOR_APPLICATION_TYPE_EXPRESSION = new OCamlElementType("TYPE_CONSTRUCTOR_APPLICATION_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType OBJECT_INTERFACE_TYPE_EXPRESSION = new OCamlElementType("OBJECT_INTERFACE_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType METHOD_TYPE = new OCamlElementType("METHOD_TYPE");
-	@NotNull
+	@Nonnull
 	IElementType VARIANT_TYPE_TYPE_EXPRESSION = new OCamlElementType("VARIANT_TYPE_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType TAG_SPEC = new OCamlElementType("TAG_SPEC");
-	@NotNull
+	@Nonnull
 	IElementType TAG_SPEC_FULL = new OCamlElementType("TAG_SPEC_FULL");
-	@NotNull
+	@Nonnull
 	IElementType POLY_TYPE_EXPRESSION = new OCamlElementType("POLY_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_TYPE_EXPRESSION = new OCamlElementType("PARENTHESES_TYPE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_TYPE_PARAMETERS = new OCamlElementType("PARENTHESES_TYPE_PARAMETERS");
-	@NotNull
+	@Nonnull
 	IElementType UNDERSCORE_TYPE_EXPRESSION = new OCamlElementType("UNDERSCORE_TYPE_EXPRESSION");
 
     /* } */
 
     /* Class parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType CLASS_DEFINITION = new OCamlElementType("CLASS_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_BINDING = new OCamlElementType("CLASS_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_TYPE_DEFINITION = new OCamlElementType("CLASS_TYPE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_TYPE_BINDING = new OCamlElementType("CLASS_TYPE_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTION_CLASS_TYPE = new OCamlElementType("FUNCTION_CLASS_TYPE");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_PATH_APPLICATION = new OCamlElementType("CLASS_PATH_APPLICATION");
-	@NotNull
+	@Nonnull
 	IElementType OBJECT_END_CLASS_BODY_TYPE = new OCamlElementType("OBJECT_END_CLASS_BODY_TYPE");
-	@NotNull
+	@Nonnull
 	IElementType INHERIT_CLASS_FILED_SPECIFICATION = new OCamlElementType("INHERIT_CLASS_FILED_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType VALUE_CLASS_FIELD_SPECIFICATION = new OCamlElementType("VALUE_CLASS_FIELD_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType METHOD_CLASS_FIELD_SPECIFICATION = new OCamlElementType("METHOD_CLASS_FIELD_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRAINT_CLASS_FIELD_SPECIFICATION = new OCamlElementType("CONSTRAINT_CLASS_FIELD_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTION_APPLICATION_CLASS_EXPRESSION = new OCamlElementType("FUNCTION_APPLICATION_CLASS_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType OBJECT_END_CLASS_EXPRESSION = new OCamlElementType("OBJECT_END_CLASS_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType OBJECT_SELF_DEFINITION = new OCamlElementType("OBJECT_SELF_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType OBJECT_SELF_SPECIFICATION = new OCamlElementType("OBJECT_SELF_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType INHERIT_CLASS_FIELD_DEFINITION = new OCamlElementType("INHERIT_CLASS_FIELD_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType INITIALIZER_CLASS_FIELD_DEFINITION = new OCamlElementType("INITIALIZER_CLASS_FIELD_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRAINT_CLASS_FIELD_DEFINITION = new OCamlElementType("CONSTRAINT_CLASS_FIELD_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType VALUE_CLASS_FIELD_DEFINITION = new OCamlElementType("VALUE_CLASS_FIELD_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType METHOD_CLASS_FIELD_DEFINITION = new OCamlElementType("METHOD_CLASS_FIELD_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTION_CLASS_EXPRESSION = new OCamlElementType("FUNCTION_CLASS_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_SPECIFICATION = new OCamlElementType("CLASS_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_SPECIFICATION_BINDING = new OCamlElementType("CLASS_SPECIFICATION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_TYPE_CONSTRAINT = new OCamlElementType("CLASS_TYPE_CONSTRAINT");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_CLASS_EXPRESSION = new OCamlElementType("PARENTHESES_CLASS_EXPRESSION");
 
     /* } */
 
     /* Module parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType MODULE_DEFINITION = new OCamlElementType("MODULE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_DEFINITION = new OCamlElementType("MODULE_TYPE_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTOR_MODULE_TYPE = new OCamlElementType("FUNCTOR_MODULE_TYPE");
-	@NotNull
+	@Nonnull
 	IElementType SIG_END_MODULE_TYPE = new OCamlElementType("SIG_END_MODULE_TYPE");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_TYPE_CONSTRAINT = new OCamlElementType("MODULE_TYPE_TYPE_CONSTRAINT");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_MODULE_CONSTRAINT = new OCamlElementType("MODULE_TYPE_MODULE_CONSTRAINT");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTOR_APPLICATION_MODULE_EXPRESSION = new OCamlElementType("FUNCTOR_APPLICATION_MODULE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType STRUCT_END_MODULE_EXPRESSION = new OCamlElementType("STRUCT_END_MODULE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTOR_MODULE_EXPRESSION = new OCamlElementType("FUNCTOR_MODULE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_CONSTRAINT_MODULE_EXPRESSION = new OCamlElementType("MODULE_TYPE_CONSTRAINT_MODULE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_WITH_CONSTRAINTS = new OCamlElementType("MODULE_TYPE_WITH_CONSTRAINTS");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_SPECIFICATION = new OCamlElementType("MODULE_TYPE_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_SPECIFICATION = new OCamlElementType("MODULE_SPECIFICATION");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_DEFINITION_BINDING = new OCamlElementType("MODULE_TYPE_DEFINITION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_SPECIFICATION_BINDING = new OCamlElementType("MODULE_TYPE_SPECIFICATION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_DEFINITION_BINDING = new OCamlElementType("MODULE_DEFINITION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_SPECIFICATION_BINDING = new OCamlElementType("MODULE_SPECIFICATION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_PARAMETER = new OCamlElementType("MODULE_PARAMETER");
-	@NotNull
+	@Nonnull
 	IElementType FILE_MODULE_DEFINITION_BINDING = new OCamlElementType("FILE_MODULE_DEFINITION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType FILE_MODULE_EXPRESSION = new OCamlElementType("FILE_MODULE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FILE_MODULE_SPECIFICATION_BINDING = new OCamlElementType("FILE_MODULE_SPECIFICATION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType FILE_MODULE_TYPE = new OCamlElementType("FILE_MODULE_TYPE");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_MODULE_EXPRESSION = new OCamlElementType("PARENTHESES_MODULE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_MODULE_TYPE = new OCamlElementType("PARENTHESES_MODULE_TYPE");
 
     /* } */
 
     /* Name parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType VALUE_NAME = new OCamlElementType("VALUE_NAME");
-	@NotNull
+	@Nonnull
 	IElementType OPERATOR_NAME = new OCamlElementType("OPERATOR_NAME");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_PATH = new OCamlElementType("MODULE_PATH");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_NAME = new OCamlElementType("MODULE_NAME");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_PATH_EXPRESSION = new OCamlElementType("CONSTRUCTOR_PATH_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_NAME_EXPRESSION = new OCamlElementType("CONSTRUCTOR_NAME_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_PATH_PATTERN = new OCamlElementType("CONSTRUCTOR_PATH_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_NAME_PATTERN = new OCamlElementType("CONSTRUCTOR_NAME_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_CONSTRUCTOR_NAME = new OCamlElementType("TYPE_CONSTRUCTOR_NAME");
-	@NotNull
+	@Nonnull
 	IElementType INST_VAR_NAME_DEFINITION = new OCamlElementType("INST_VAR_NAME_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_NAME_DEFINITION = new OCamlElementType("CONSTRUCTOR_NAME_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_NAME = new OCamlElementType("CONSTRUCTOR_NAME");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_PATH = new OCamlElementType("CONSTRUCTOR_PATH");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_PARAMETER_NAME = new OCamlElementType("TYPE_PARAMETER_NAME");
-	@NotNull
+	@Nonnull
 	IElementType FIELD_NAME = new OCamlElementType("FIELD_NAME");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_PATH = new OCamlElementType("CLASS_PATH");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_NAME = new OCamlElementType("CLASS_NAME");
-	@NotNull
+	@Nonnull
 	IElementType METHOD_NAME = new OCamlElementType("METHOD_NAME");
-	@NotNull
+	@Nonnull
 	IElementType INST_VAR_NAME = new OCamlElementType("INST_VAR_NAME");
-	@NotNull
+	@Nonnull
 	IElementType LABEL_NAME = new OCamlElementType("LABEL_NAME");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_NAME = new OCamlElementType("MODULE_TYPE_NAME");
-	@NotNull
+	@Nonnull
 	IElementType EXTENDED_MODULE_PATH = new OCamlElementType("EXTENDED_MODULE_PATH");
-	@NotNull
+	@Nonnull
 	IElementType EXTENDED_MODULE_NAME = new OCamlElementType("EXTENDED_MODULE_NAME");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_CONSTRUCTOR_PATH = new OCamlElementType("TYPE_CONSTRUCTOR_PATH");
-	@NotNull
+	@Nonnull
 	IElementType MODULE_TYPE_PATH = new OCamlElementType("MODULE_TYPE_PATH");
-	@NotNull
+	@Nonnull
 	IElementType TAG_NAME = new OCamlElementType("TAG_NAME");
-	@NotNull
+	@Nonnull
 	IElementType VALUE_PATH = new OCamlElementType("VALUE_PATH");
-	@NotNull
+	@Nonnull
 	IElementType FIELD_PATH = new OCamlElementType("FIELD_PATH");
-	@NotNull
+	@Nonnull
 	IElementType FOR_EXPRESSION_INDEX_VARIABLE_NAME = new OCamlElementType("FOR_EXPRESSION_INDEX_VARIABLE_NAME");
 
     /* } */
 
     /* Expression parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType MATCH_EXPRESSION = new OCamlElementType("MATCH_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FUN_EXPRESSION = new OCamlElementType("FUN_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTION_EXPRESSION = new OCamlElementType("FUNCTION_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType TRY_EXPRESSION = new OCamlElementType("TRY_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType PATTERN_MATCHING = new OCamlElementType("PATTERN_MATCHING");
-	@NotNull
+	@Nonnull
 	IElementType SEMICOLON_EXPRESSION = new OCamlElementType("SEMICOLON_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType IF_EXPRESSION = new OCamlElementType("IF_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FOR_EXPRESSION = new OCamlElementType("FOR_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FOR_EXPRESSION_BINDING = new OCamlElementType("FOR_EXPRESSION_BINDING");
-	@NotNull
+	@Nonnull
 	IElementType WHILE_EXPRESSION = new OCamlElementType("WHILE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType ASSIGNMENT_EXPRESSION = new OCamlElementType("ASSIGNMENT_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType COMMA_EXPRESSION = new OCamlElementType("COMMA_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType BINARY_EXPRESSION = new OCamlElementType("BINARY_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType HEAD_TAIL_EXPRESSION = new OCamlElementType("HEAD_TAIL_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType ASSERT_EXPRESSION = new OCamlElementType("ASSERT_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType LAZY_EXPRESSION = new OCamlElementType("LAZY_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_APPLICATION_EXPRESSION = new OCamlElementType("CONSTRUCTOR_APPLICATION_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType FUNCTION_APPLICATION_EXPRESSION = new OCamlElementType("FUNCTION_APPLICATION_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType ARRAY_ELEMENT_ACCESSING_EXPRESSION = new OCamlElementType("ARRAY_ELEMENT_ACCESSING_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType STRING_CHAR_ACCESSING_EXPRESSION = new OCamlElementType("STRING_CHAR_ACCESSING_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_FIELD_ACCESSING_EXPRESSION = new OCamlElementType("RECORD_FIELD_ACCESSING_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_FIELD_INITIALIZATION_IN_EXPRESSION = new OCamlElementType("RECORD_FIELD_INITIALIZATION_IN_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_FIELD_INITIALIZATION_IN_PATTERN = new OCamlElementType("RECORD_FIELD_INITIALIZATION_IN_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType UNARY_EXPRESSION = new OCamlElementType("UNARY_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType CLASS_METHOD_ACCESSING_EXPRESSION = new OCamlElementType("CLASS_METHOD_ACCESSING_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType TAGGED_EXPRESSION = new OCamlElementType("TAGGED_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_CONSTRAINT_EXPRESSION = new OCamlElementType("TYPE_CONSTRAINT_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType CASTING_EXPRESSION = new OCamlElementType("CASTING_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType LIST_EXPRESSION = new OCamlElementType("LIST_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType ARRAY_EXPRESSION = new OCamlElementType("ARRAY_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_EXPRESSION = new OCamlElementType("RECORD_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType INHERITED_RECORD_EXPRESSION = new OCamlElementType("INHERITED_RECORD_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType INSTANCE_DUPLICATING_EXPRESSION = new OCamlElementType("INSTANCE_DUPLICATING_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType OBJECT_CLASS_BODY_END_EXPRESSION = new OCamlElementType("OBJECT_CLASS_BODY_END_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType NEW_INSTANCE_EXPRESSION = new OCamlElementType("NEW_INSTANCE_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType ARGUMENT = new OCamlElementType("ARGUMENT");
-	@NotNull
+	@Nonnull
 	IElementType PARAMETER = new OCamlElementType("PARAMETER");
-	@NotNull
+	@Nonnull
 	IElementType LABEL_DEFINITION = new OCamlElementType("LABEL_DEFINITION");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_EXPRESSION = new OCamlElementType("PARENTHESES_EXPRESSION");
-	@NotNull
+	@Nonnull
 	IElementType EXPRESSION_STATEMENT = new OCamlElementType("EXPRESSION_STATEMENT");
-	@NotNull
+	@Nonnull
 	IElementType CONSTANT_EXPRESSION = new OCamlElementType("CONSTANT_EXPRESSION");
 
     /* } */
 
     /* Pattern parsing { */
 
-	@NotNull
+	@Nonnull
 	IElementType VALUE_NAME_PATTERN = new OCamlElementType("VALUE_NAME_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType AS_PATTERN = new OCamlElementType("AS_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType OR_PATTERN = new OCamlElementType("OR_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType COMMA_PATTERN = new OCamlElementType("COMMA_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType HEAD_TAIL_PATTERN = new OCamlElementType("HEAD_TAIL_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType CONSTRUCTOR_APPLICATION_PATTERN = new OCamlElementType("CONSTRUCTOR_APPLICATION_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType TAGGED_PATTERN = new OCamlElementType("TAGGED_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_CONSTRUCTOR_PATTERN = new OCamlElementType("TYPE_CONSTRUCTOR_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType LAZY_PATTERN = new OCamlElementType("LAZY_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType LIST_PATTERN = new OCamlElementType("LIST_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType ARRAY_PATTERN = new OCamlElementType("ARRAY_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType RECORD_PATTERN = new OCamlElementType("RECORD_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType TYPE_CONSTRAINT_PATTERN = new OCamlElementType("TYPE_CONSTRAINT_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType CHAR_RANGE_PATTERN = new OCamlElementType("CHAR_RANGE_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES_PATTERN = new OCamlElementType("PARENTHESES_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType UNDERSCORE_PATTERN = new OCamlElementType("UNDERSCORE_PATTERN");
-	@NotNull
+	@Nonnull
 	IElementType CONSTANT_PATTERN = new OCamlElementType("CONSTANT_PATTERN");
 
     /* } */
 
     /* Comments { */
 
-	@NotNull
+	@Nonnull
 	IElementType COMMENT_BLOCK = new OCamlElementType("COMMENT_BLOCK");
-	@NotNull
+	@Nonnull
 	IElementType UNCLOSED_COMMENT = new OCamlElementType("UNCLOSED_COMMENT");
 
     /* } */
 
-	@NotNull
+	@Nonnull
 	IElementType PARENTHESES = new OCamlElementType("PARENTHESES");
-	@NotNull
+	@Nonnull
 	IElementType BRACKETS = new OCamlElementType("BRACKETS");
 }
 

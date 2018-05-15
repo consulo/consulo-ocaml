@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 
@@ -28,21 +29,21 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
  */
 public abstract class OCamlFileType extends LanguageFileType implements FileType
 {
-	@NotNull
+	@Nonnull
 	private final OCamlFileTypeLanguage myLanguage;
 
-	protected OCamlFileType(@NotNull final OCamlFileTypeLanguage language)
+	protected OCamlFileType(@Nonnull final OCamlFileTypeLanguage language)
 	{
 		super(language);
 		myLanguage = language;
 	}
 
-	@NotNull
+	@Nonnull
 	public OCamlFileTypeLanguage getOCamlFileTypeLanguage()
 	{
 		return myLanguage;
 	}
 
-	@NotNull
+	@Nonnull
 	public abstract OCamlFileType getAnotherFileType();
 }

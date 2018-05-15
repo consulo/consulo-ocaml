@@ -22,13 +22,13 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.codeInsight.unwrap.ScopeHighlighter;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.ui.popup.JBPopupAdapter;
@@ -43,8 +43,8 @@ import com.intellij.psi.PsiElement;
  */
 public class OCamlRefactoringUtil
 {
-	public static void showChooser(@NotNull final String title, @NotNull final Editor editor, @NotNull final List<PsiElement> elements,
-			@NotNull final Pass<PsiElement> callback)
+	public static void showChooser(@Nonnull final String title, @Nonnull final Editor editor, @Nonnull final List<PsiElement> elements,
+			@Nonnull final Pass<PsiElement> callback)
 	{  //todo remove method if it is not needed
 		final ScopeHighlighter highlighter = new ScopeHighlighter(editor);
 

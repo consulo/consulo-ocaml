@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -32,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLabelName;
  */
 public class OCamlArgumentImpl extends BaseOCamlElement implements OCamlArgument
 {
-	public OCamlArgumentImpl(@NotNull final ASTNode node)
+	public OCamlArgumentImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -43,7 +44,7 @@ public class OCamlArgumentImpl extends BaseOCamlElement implements OCamlArgument
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlLabelName.class) || OCamlPsiUtil.endsCorrectlyWith(this, OCamlExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitArgument(this);
 	}

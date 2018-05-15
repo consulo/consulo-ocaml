@@ -18,9 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType.ml;
 
-import javax.swing.Icon;
+import javax.annotation.Nonnull;
 
-import org.jetbrains.annotations.NotNull;
 import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.fileType.OCamlFileType;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
@@ -32,7 +31,7 @@ import manuylov.maxim.ocaml.util.OCamlIconUtil;
  */
 public class MLFileType extends OCamlFileType
 {
-	@NotNull
+	@Nonnull
 	public static final MLFileType INSTANCE = new MLFileType();
 
 	private MLFileType()
@@ -41,34 +40,34 @@ public class MLFileType extends OCamlFileType
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getName()
 	{
 		return "OCAML_ML_FILE";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "OCaml module implementation files";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String getDefaultExtension()
 	{
 		return "ml";
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public Image getIcon()
 	{
 		return OCamlIconUtil.getMLFileIcon();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public OCamlFileType getAnotherFileType()
 	{

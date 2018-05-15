@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -35,13 +35,13 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  */
 public abstract class BaseOCamlFile extends PsiFileBase implements OCamlFile
 {
-	protected BaseOCamlFile(@NotNull final FileViewProvider fileViewProvider, @NotNull final Language language)
+	protected BaseOCamlFile(@Nonnull final FileViewProvider fileViewProvider, @Nonnull final Language language)
 	{
 		super(fileViewProvider, language);
 	}
 
 	@Nullable
-	public <T extends OCamlStructuredBinding> T getModuleBinding(@NotNull final Class<T> type)
+	public <T extends OCamlStructuredBinding> T getModuleBinding(@Nonnull final Class<T> type)
 	{
 		return OCamlPsiUtil.getFirstChildOfType(this, type);
 	}

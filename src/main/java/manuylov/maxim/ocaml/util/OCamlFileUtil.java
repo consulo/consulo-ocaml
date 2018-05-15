@@ -21,8 +21,9 @@ package manuylov.maxim.ocaml.util;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -41,24 +42,24 @@ import manuylov.maxim.ocaml.fileType.mli.MLIFileType;
  */
 public class OCamlFileUtil
 {
-	public static boolean isOCamlSourceFile(@NotNull final FileType fileType)
+	public static boolean isOCamlSourceFile(@Nonnull final FileType fileType)
 	{
 		return fileType == MLFileType.INSTANCE || fileType == MLIFileType.INSTANCE;
 	}
 
-	public static boolean isOCamlSourceFile(@NotNull final VirtualFile file)
+	public static boolean isOCamlSourceFile(@Nonnull final VirtualFile file)
 	{
 		return isOCamlSourceFile(file.getFileType());
 	}
 
-	public static boolean isOCamlFile(@NotNull final VirtualFile file)
+	public static boolean isOCamlFile(@Nonnull final VirtualFile file)
 	{
 		final String extension = file.getExtension();
 		return isOCamlSourceFile(file) || "cmi".equals(extension) || "cmo".equals(extension); //todo create CMI and CMO fileTypes
 	}
 
-	@NotNull
-	public static File getCompiledDir(@NotNull final ProjectFileIndex fileIndex, @NotNull final VirtualFile sourcesDir)
+	@Nonnull
+	public static File getCompiledDir(@Nonnull final ProjectFileIndex fileIndex, @Nonnull final VirtualFile sourcesDir)
 	{
 		final VirtualFile sourceRoot = fileIndex.getSourceRootForFile(sourcesDir);
 		assert sourceRoot != null && sourceRoot.isDirectory();
@@ -89,16 +90,16 @@ public class OCamlFileUtil
 		return destDir;
 	}
 
-	@NotNull
-	public static String getAnotherFileName(@NotNull final VirtualFile file)
+	@Nonnull
+	public static String getAnotherFileName(@Nonnull final VirtualFile file)
 	{
 		final FileType type = file.getFileType();
 		assert type instanceof OCamlFileType;
 		return getFileName(file.getNameWithoutExtension(), ((OCamlFileType) type).getAnotherFileType());
 	}
 
-	@NotNull
-	public static String getFileName(@NotNull final String nameWithoutExtension, @NotNull final FileType type)
+	@Nonnull
+	public static String getFileName(@Nonnull final String nameWithoutExtension, @Nonnull final FileType type)
 	{
 		return nameWithoutExtension + "." + type.getDefaultExtension();
 	}
@@ -118,18 +119,18 @@ public class OCamlFileUtil
 		return parent.findChild(getAnotherFileName(file));
 	}
 
-	public static boolean isImplementationFile(@NotNull final VirtualFile file)
+	public static boolean isImplementationFile(@Nonnull final VirtualFile file)
 	{
 		return file.getFileType() == MLFileType.INSTANCE;
 	}
 
-	public static boolean isImplementationFile(@NotNull final PsiFile file)
+	public static boolean isImplementationFile(@Nonnull final PsiFile file)
 	{
 		return file.getFileType() == MLFileType.INSTANCE;
 	}
 
-	@NotNull
-	public static String getPathToDisplay(@NotNull final VirtualFile file)
+	@Nonnull
+	public static String getPathToDisplay(@Nonnull final VirtualFile file)
 	{
 		return FileUtil.toSystemDependentName(file.getPath());
 	}

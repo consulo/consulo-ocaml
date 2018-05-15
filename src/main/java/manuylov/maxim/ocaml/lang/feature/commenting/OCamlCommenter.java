@@ -18,8 +18,9 @@
 
 package manuylov.maxim.ocaml.lang.feature.commenting;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.Commenter;
 
 /**
@@ -34,25 +35,25 @@ public class OCamlCommenter implements Commenter
 		return null;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getBlockCommentPrefix()
 	{
 		return "(*";
 	}
 
-	@NotNull
+	@Nonnull
 	public String getBlockCommentSuffix()
 	{
 		return "*)";
 	}
 
-	@NotNull
+	@Nonnull
 	public String getCommentedBlockCommentPrefix()
 	{
 		return "(*";
 	}
 
-	@NotNull
+	@Nonnull
 	public String getCommentedBlockCommentSuffix()
 	{
 		return "*)";

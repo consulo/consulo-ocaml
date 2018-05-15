@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageUtil;
 import com.intellij.lang.ParserDefinition;
@@ -38,36 +39,36 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementFactory;
 public abstract class BaseParserDefinition implements ParserDefinition
 {
 	@Override
-	@NotNull
-	public Lexer createLexer(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public Lexer createLexer(@Nonnull LanguageVersion languageVersion)
 	{
 		return doCreateLexer();
 	}
 
 	@Override
-	@NotNull
-	public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion)
 	{
 		return OCamlTokenTypes.WHITE_SPACES;
 	}
 
 	@Override
-	@NotNull
-	public TokenSet getCommentTokens(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion)
 	{
 		return OCamlTokenTypes.COMMENTS;
 	}
 
 	@Override
-	@NotNull
-	public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion)
 	{
 		return OCamlTokenTypes.STRING_LITERALS;
 	}
 
 	@Override
-	@NotNull
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(@NotNull final ASTNode left, @NotNull final ASTNode right)
+	@Nonnull
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(@Nonnull final ASTNode left, @Nonnull final ASTNode right)
 	{
 		if(left.getElementType() == OCamlElementTypes.LABEL_NAME && right.getElementType() == OCamlTokenTypes.COLON)
 		{
@@ -77,13 +78,13 @@ public abstract class BaseParserDefinition implements ParserDefinition
 	}
 
 	@Override
-	@NotNull
-	public PsiElement createElement(@NotNull final ASTNode astNode)
+	@Nonnull
+	public PsiElement createElement(@Nonnull final ASTNode astNode)
 	{
 		return OCamlElementFactory.INSTANCE.createElement(astNode);
 	}
 
-	@NotNull
+	@Nonnull
 	private Lexer doCreateLexer()
 	{
 		return new OCamlParsingLexer();

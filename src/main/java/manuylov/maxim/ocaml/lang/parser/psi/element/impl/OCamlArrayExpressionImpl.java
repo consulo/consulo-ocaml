@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
@@ -31,7 +31,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlArrayExpression;
  */
 public class OCamlArrayExpressionImpl extends BaseOCamlElement implements OCamlArrayExpression
 {
-	public OCamlArrayExpressionImpl(@NotNull final ASTNode node)
+	public OCamlArrayExpressionImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -42,7 +42,7 @@ public class OCamlArrayExpressionImpl extends BaseOCamlElement implements OCamlA
 		return OCamlPsiUtil.endsWith(this, OCamlTokenTypes.VBAR_RBRACKET);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitArrayExpression(this);
 	}

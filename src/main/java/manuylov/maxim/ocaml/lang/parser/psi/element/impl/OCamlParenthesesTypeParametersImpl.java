@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitor;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParenthesesTypeParameters;
@@ -29,12 +30,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlParenthesesTypeParamete
  */
 public class OCamlParenthesesTypeParametersImpl extends OCamlParenthesesImpl implements OCamlParenthesesTypeParameters
 {
-	public OCamlParenthesesTypeParametersImpl(@NotNull final ASTNode node)
+	public OCamlParenthesesTypeParametersImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitParenthesesTypeParameters(this);
 	}

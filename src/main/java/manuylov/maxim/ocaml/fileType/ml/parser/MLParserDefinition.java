@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.fileType.ml.parser;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
@@ -35,22 +36,22 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 public class MLParserDefinition extends BaseParserDefinition
 {
 	@Override
-	@NotNull
-	public PsiParser createParser(@NotNull LanguageVersion languageVersion)
+	@Nonnull
+	public PsiParser createParser(@Nonnull LanguageVersion languageVersion)
 	{
 		return new MLParser();
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public IFileElementType getFileNodeType()
 	{
 		return OCamlElementTypes.ML_FILE;
 	}
 
 	@Override
-	@NotNull
-	public PsiFile createFile(@NotNull final FileViewProvider fileViewProvider)
+	@Nonnull
+	public PsiFile createFile(@Nonnull final FileViewProvider fileViewProvider)
 	{
 		return new MLFile(fileViewProvider);
 	}

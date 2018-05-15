@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 
@@ -28,9 +29,9 @@ import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
  */
 public interface OCamlElement extends PsiElement
 {
-	boolean processDeclarations(@NotNull final ResolvingBuilder builder);
+	boolean processDeclarations(@Nonnull final ResolvingBuilder builder);
 
 	boolean endsCorrectly();
 
-	void visit(@NotNull final OCamlElementVisitor visitor);
+	void visit(@Nonnull final OCamlElementVisitor visitor);
 }

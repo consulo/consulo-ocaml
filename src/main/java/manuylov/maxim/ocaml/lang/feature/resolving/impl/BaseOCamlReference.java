@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Comparing;
@@ -39,25 +39,25 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlFile;
  */
 public abstract class BaseOCamlReference extends BaseOCamlNamedElement implements OCamlReference
 {
-	public BaseOCamlReference(@NotNull final ASTNode astNode)
+	public BaseOCamlReference(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
 	}
 
-	@NotNull
+	@Nonnull
 	public PsiElement getElement()
 	{
 		return this;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public PsiReference getReference()
 	{
 		return this;
 	}
 
-	@NotNull
+	@Nonnull
 	public TextRange getRangeInElement()
 	{
 		return new TextRange(0, getTextLength());
@@ -69,34 +69,34 @@ public abstract class BaseOCamlReference extends BaseOCamlNamedElement implement
 		return getCanonicalPath();
 	}
 
-	@NotNull
-	public PsiElement handleElementRename(@NotNull final String newElementName) throws IncorrectOperationException
+	@Nonnull
+	public PsiElement handleElementRename(@Nonnull final String newElementName) throws IncorrectOperationException
 	{
 		return setName(newElementName);
 	}
 
 	@Nullable
-	public PsiElement bindToElement(@NotNull final PsiElement element)
+	public PsiElement bindToElement(@Nonnull final PsiElement element)
 	{
 		return null;
 	}
 
-	public boolean isReferenceTo(@NotNull final PsiElement element)
+	public boolean isReferenceTo(@Nonnull final PsiElement element)
 	{
 		return isReferenceTo_weak(element) && resolve() == element;
 	}
 
-	public boolean isReferenceToWithFakeModules(@NotNull final PsiElement element, @NotNull final OCamlFile... fakeModules)
+	public boolean isReferenceToWithFakeModules(@Nonnull final PsiElement element, @Nonnull final OCamlFile... fakeModules)
 	{
 		return isReferenceTo_weak(element) && OCamlResolvingUtil.resolveWithFakeModules(this, fakeModules) == element;
 	}
 
-	private boolean isReferenceTo_weak(@NotNull final PsiElement element)
+	private boolean isReferenceTo_weak(@Nonnull final PsiElement element)
 	{
 		return hasPossibleType(element) && Comparing.equal(getName(), ((OCamlResolvedReference) element).getName());
 	}
 
-	private boolean hasPossibleType(@NotNull final PsiElement element)
+	private boolean hasPossibleType(@Nonnull final PsiElement element)
 	{
 		for(final Class<? extends OCamlResolvedReference> type : getPossibleResolvedTypes())
 		{
@@ -108,7 +108,7 @@ public abstract class BaseOCamlReference extends BaseOCamlNamedElement implement
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	public LookupElement[] getVariants()
 	{
 		return OCamlResolvingUtil.getVariants(getResolvingContext(), getPossibleResolvedTypes());
@@ -130,7 +130,7 @@ public abstract class BaseOCamlReference extends BaseOCamlNamedElement implement
 		return false;
 	}
 
-	@NotNull
+	@Nonnull
 	private ResolvingContext getResolvingContext()
 	{
 		return new ResolvingContext(this, getModulePath());

@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import manuylov.maxim.ocaml.lang.feature.completion.DoNotSuggestInCompletionVariants;
 
 /**
@@ -27,274 +28,274 @@ import manuylov.maxim.ocaml.lang.feature.completion.DoNotSuggestInCompletionVari
  */
 public interface Keywords
 {
-	@NotNull
+	@Nonnull
 	String AND_KEYWORD = "and";
-	@NotNull
+	@Nonnull
 	String AS_KEYWORD = "as";
-	@NotNull
+	@Nonnull
 	String ASSERT_KEYWORD = "assert";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String ASR_KEYWORD = "asr";
-	@NotNull
+	@Nonnull
 	String BEGIN_KEYWORD = "begin";
-	@NotNull
+	@Nonnull
 	String CLASS_KEYWORD = "class";
-	@NotNull
+	@Nonnull
 	String CONSTRAINT_KEYWORD = "constraint";
-	@NotNull
+	@Nonnull
 	String DO_KEYWORD = "do";
-	@NotNull
+	@Nonnull
 	String DONE_KEYWORD = "done";
-	@NotNull
+	@Nonnull
 	String DOWNTO_KEYWORD = "downto";
-	@NotNull
+	@Nonnull
 	String ELSE_KEYWORD = "else";
-	@NotNull
+	@Nonnull
 	String END_KEYWORD = "end";
-	@NotNull
+	@Nonnull
 	String EXCEPTION_KEYWORD = "exception";
-	@NotNull
+	@Nonnull
 	String EXTERNAL_KEYWORD = "external";
-	@NotNull
+	@Nonnull
 	String FALSE_KEYWORD = "false";
-	@NotNull
+	@Nonnull
 	String FOR_KEYWORD = "for";
-	@NotNull
+	@Nonnull
 	String FUN_KEYWORD = "fun";
-	@NotNull
+	@Nonnull
 	String FUNCTION_KEYWORD = "function";
-	@NotNull
+	@Nonnull
 	String FUNCTOR_KEYWORD = "functor";
-	@NotNull
+	@Nonnull
 	String IF_KEYWORD = "if";
-	@NotNull
+	@Nonnull
 	String IN_KEYWORD = "in";
-	@NotNull
+	@Nonnull
 	String INCLUDE_KEYWORD = "include";
-	@NotNull
+	@Nonnull
 	String INHERIT_KEYWORD = "inherit";
-	@NotNull
+	@Nonnull
 	String INITIALIZER_KEYWORD = "initializer";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LAND_KEYWORD = "land";
-	@NotNull
+	@Nonnull
 	String LAZY_KEYWORD = "lazy";
-	@NotNull
+	@Nonnull
 	String LET_KEYWORD = "let";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LOR_KEYWORD = "lor";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LSR_KEYWORD = "lsr";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LSL_KEYWORD = "lsl";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LXOR_KEYWORD = "lxor";
-	@NotNull
+	@Nonnull
 	String MATCH_KEYWORD = "match";
-	@NotNull
+	@Nonnull
 	String METHOD_KEYWORD = "method";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String MOD_KEYWORD = "mod";
-	@NotNull
+	@Nonnull
 	String MODULE_KEYWORD = "module";
-	@NotNull
+	@Nonnull
 	String MUTABLE_KEYWORD = "mutable";
-	@NotNull
+	@Nonnull
 	String NEW_KEYWORD = "new";
-	@NotNull
+	@Nonnull
 	String OBJECT_KEYWORD = "object";
-	@NotNull
+	@Nonnull
 	String OF_KEYWORD = "of";
-	@NotNull
+	@Nonnull
 	String OPEN_KEYWORD = "open";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String OR_KEYWORD = "or";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String PARSER_KEYWORD = "parser";
-	@NotNull
+	@Nonnull
 	String PRIVATE_KEYWORD = "private";
-	@NotNull
+	@Nonnull
 	String REC_KEYWORD = "rec";
-	@NotNull
+	@Nonnull
 	String SIG_KEYWORD = "sig";
-	@NotNull
+	@Nonnull
 	String STRUCT_KEYWORD = "struct";
-	@NotNull
+	@Nonnull
 	String THEN_KEYWORD = "then";
-	@NotNull
+	@Nonnull
 	String TO_KEYWORD = "to";
-	@NotNull
+	@Nonnull
 	String TRUE_KEYWORD = "true";
-	@NotNull
+	@Nonnull
 	String TRY_KEYWORD = "try";
-	@NotNull
+	@Nonnull
 	String TYPE_KEYWORD = "type";
-	@NotNull
+	@Nonnull
 	String VAL_KEYWORD = "val";
-	@NotNull
+	@Nonnull
 	String VIRTUAL_KEYWORD = "virtual";
-	@NotNull
+	@Nonnull
 	String WHEN_KEYWORD = "when";
-	@NotNull
+	@Nonnull
 	String WHILE_KEYWORD = "while";
-	@NotNull
+	@Nonnull
 	String WITH_KEYWORD = "with";
 
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String NOT_EQ = "!=";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String HASH = "#";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String AMP = "&";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String AMP_AMP = "&&";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String QUOTE = "'";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LPAR = "(";
-	@NotNull
+	@Nonnull
 	String RPAR = ")";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String MULT = "*";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String PLUS = "+";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String COMMA = ",";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String MINUS = "-";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String MINUS_DOT = "-.";
-	@NotNull
+	@Nonnull
 	String MINUS_GT = "->";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String DOT = ".";
-	@NotNull
+	@Nonnull
 	String DOT_DOT = "..";
-	@NotNull
+	@Nonnull
 	String COLON = ":";
-	@NotNull
+	@Nonnull
 	String COLON_COLON = "::";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String COLON_EQ = ":=";
-	@NotNull
+	@Nonnull
 	String COLON_GT = ":>";
-	@NotNull
+	@Nonnull
 	String SEMICOLON = ";";
-	@NotNull
+	@Nonnull
 	String SEMICOLON_SEMICOLON = ";;";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LT = "<";
-	@NotNull
+	@Nonnull
 	String LT_MINUS = "<-";
-	@NotNull
+	@Nonnull
 	String EQ = "=";
-	@NotNull
+	@Nonnull
 	String GT = ">";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String GT_RBRACKET = ">]";
-	@NotNull
+	@Nonnull
 	String GT_RBRACE = ">}";
-	@NotNull
+	@Nonnull
 	String QUEST = "?";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String QUEST_QUEST = "??";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LBRACKET = "[";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LBRACKET_LT = "[<";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LBRACKET_GT = "[>";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LBRACKET_VBAR = "[|";
-	@NotNull
+	@Nonnull
 	String RBRACKET = "]";
-	@NotNull
+	@Nonnull
 	String UNDERSCORE = "_";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String ACCENT = "`";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LBRACE = "{";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LBRACE_LT = "{<";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String VBAR = "|";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String VBAR_VBAR = "||";
-	@NotNull
+	@Nonnull
 	String VBAR_RBRACKET = "|]";
-	@NotNull
+	@Nonnull
 	String RBRACE = "}";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String TILDE = "~";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LT_LT = "<<";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String LT_COLON = "<:";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String GT_GT = ">>";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String DOLLAR = "$";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String DOLLAR_DOLLAR = "$$";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String DOLLAR_COLON = "$:";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String DOUBLE_QUOTE = "\"";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String AT = "@";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String XOR = "^";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String DIV = "/";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String PERCENT = "%";
-	@NotNull
+	@Nonnull
 	@DoNotSuggestInCompletionVariants
 	String POWER = "**";
 }

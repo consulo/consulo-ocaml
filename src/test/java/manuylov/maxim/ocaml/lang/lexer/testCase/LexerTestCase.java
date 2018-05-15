@@ -24,7 +24,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lexer.Lexer;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.BaseOCamlTestCase;
@@ -35,19 +36,19 @@ import manuylov.maxim.ocaml.lang.BaseOCamlTestCase;
  */
 public abstract class LexerTestCase extends BaseOCamlTestCase
 {
-	protected void doTest(@NotNull final String text, @NotNull final String... expectedTokens)
+	protected void doTest(@Nonnull final String text, @Nonnull final String... expectedTokens)
 	{
 		final List<String> expectedTokensStr = new ArrayList<String>(expectedTokens.length);
 		expectedTokensStr.addAll(Arrays.asList(expectedTokens));
 		doTest(text, expectedTokensStr);
 	}
 
-	protected String token(@NotNull final IElementType tokenType, @NotNull final String tokenText)
+	protected String token(@Nonnull final IElementType tokenType, @Nonnull final String tokenText)
 	{
 		return tokenType.toString() + "('" + tokenText + "')";
 	}
 
-	private void doTest(@NotNull final String text, @NotNull final List<String> expectedTokens)
+	private void doTest(@Nonnull final String text, @Nonnull final List<String> expectedTokens)
 	{
 		final Lexer lexer = createLexer();
 		lexer.start(text);
@@ -65,7 +66,7 @@ public abstract class LexerTestCase extends BaseOCamlTestCase
 		assertEquals(actualTokens, expectedTokens);
 	}
 
-	private String getTokenText(@NotNull final Lexer lexer)
+	private String getTokenText(@Nonnull final Lexer lexer)
 	{
 		return lexer.getBufferSequence().subSequence(lexer.getTokenStart(), lexer.getTokenEnd()).toString();
 	}

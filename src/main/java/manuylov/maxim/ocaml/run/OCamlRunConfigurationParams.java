@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.run;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import manuylov.maxim.ocaml.entity.OCamlModule;
@@ -35,10 +35,10 @@ public interface OCamlRunConfigurationParams
 
 	void setMainOCamlModule(@Nullable OCamlModule ocamlModule);
 
-	@NotNull
+	@Nonnull
 	String getProgramParams();
 
-	void setProgramParams(@NotNull String params);
+	void setProgramParams(@Nonnull String params);
 
 	boolean isUsedModuleSdk();
 
@@ -54,23 +54,23 @@ public interface OCamlRunConfigurationParams
 
 	void setSpecifiedSdk(@Nullable Sdk sdk);
 
-	@NotNull
+	@Nonnull
 	String getCompilerOptions();
 
-	void setCompilerOptions(@NotNull String options);
+	void setCompilerOptions(@Nonnull String options);
 
-	@NotNull
+	@Nonnull
 	String getLinkerOptions();
 
-	void setLinkerOptions(@NotNull String options);
+	void setLinkerOptions(@Nonnull String options);
 
-	@NotNull
+	@Nonnull
 	String getRunnerOptions();
 
-	void setRunnerOptions(@NotNull String options);
+	void setRunnerOptions(@Nonnull String options);
 
-	@NotNull
+	@Nonnull
 	String getWorkingDirectory();
 
-	void setWorkingDirectory(@NotNull String dirPath);
+	void setWorkingDirectory(@Nonnull String dirPath);
 }

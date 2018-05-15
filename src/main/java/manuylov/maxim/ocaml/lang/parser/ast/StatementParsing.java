@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.PsiBuilder;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
@@ -30,7 +31,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  */
 public class StatementParsing extends Parsing
 {
-	public static void parseDefinitionsAndExpressions(@NotNull final PsiBuilder builder, @NotNull final Condition exitCondition)
+	public static void parseDefinitionsAndExpressions(@Nonnull final PsiBuilder builder, @Nonnull final Condition exitCondition)
 	{
 		final Appearance[] lastDoubleSemicolon = {Appearance.None};
 
@@ -76,7 +77,7 @@ public class StatementParsing extends Parsing
 		}
 	}
 
-	public static void parseSpecifications(@NotNull final PsiBuilder builder, @NotNull final Condition exitCondition)
+	public static void parseSpecifications(@Nonnull final PsiBuilder builder, @Nonnull final Condition exitCondition)
 	{
 		final Runnable parsing = new Runnable()
 		{
@@ -99,7 +100,7 @@ public class StatementParsing extends Parsing
 		}
 	}
 
-	private static boolean tryParseExpressionStatement(@NotNull final PsiBuilder builder)
+	private static boolean tryParseExpressionStatement(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker marker = builder.mark();
 
@@ -113,7 +114,7 @@ public class StatementParsing extends Parsing
 		return false;
 	}
 
-	private static void parseExpressionStatement(@NotNull final PsiBuilder builder)
+	private static void parseExpressionStatement(@Nonnull final PsiBuilder builder)
 	{
 		if(!tryParseExpressionStatement(builder))
 		{
@@ -121,7 +122,7 @@ public class StatementParsing extends Parsing
 		}
 	}
 
-	private static boolean tryParseSpecification(@NotNull final PsiBuilder builder)
+	private static boolean tryParseSpecification(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.VAL_KEYWORD)
 		{
@@ -163,7 +164,7 @@ public class StatementParsing extends Parsing
 		return true;
 	}
 
-	private static boolean tryParseDefinition(@NotNull final PsiBuilder builder)
+	private static boolean tryParseDefinition(@Nonnull final PsiBuilder builder)
 	{
 		if(builder.getTokenType() == OCamlTokenTypes.LET_KEYWORD)
 		{
@@ -205,7 +206,7 @@ public class StatementParsing extends Parsing
 		return true;
 	}
 
-	private static void parseValueSpecification(@NotNull final PsiBuilder builder)
+	private static void parseValueSpecification(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker valueSpecificationMarker = builder.mark();
 
@@ -220,7 +221,7 @@ public class StatementParsing extends Parsing
 		valueSpecificationMarker.done(OCamlElementTypes.VALUE_SPECIFICATION);
 	}
 
-	private static void parseIncludeSpecification(@NotNull final PsiBuilder builder)
+	private static void parseIncludeSpecification(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker includeSpecificationMarker = builder.mark();
 
@@ -231,7 +232,7 @@ public class StatementParsing extends Parsing
 		includeSpecificationMarker.done(OCamlElementTypes.INCLUDE_DIRECTIVE_SPECIFICATION);
 	}
 
-	private static void parseExceptionSpecification(@NotNull final PsiBuilder builder)
+	private static void parseExceptionSpecification(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker exceptionSpecificationMarker = builder.mark();
 
@@ -245,7 +246,7 @@ public class StatementParsing extends Parsing
 		exceptionSpecificationMarker.done(OCamlElementTypes.EXCEPTION_SPECIFICATION);
 	}
 
-	private static void parseIncludeDefinition(@NotNull final PsiBuilder builder)
+	private static void parseIncludeDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker includeDirectiveMarker = builder.mark();
 
@@ -256,7 +257,7 @@ public class StatementParsing extends Parsing
 		includeDirectiveMarker.done(OCamlElementTypes.INCLUDE_DIRECTIVE_DEFINITION);
 	}
 
-	private static void parseOpenDirective(@NotNull final PsiBuilder builder)
+	private static void parseOpenDirective(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker openDirectiveMarker = builder.mark();
 
@@ -267,7 +268,7 @@ public class StatementParsing extends Parsing
 		openDirectiveMarker.done(OCamlElementTypes.OPEN_DIRECTIVE);
 	}
 
-	private static void parseExceptionDefinition(@NotNull final PsiBuilder builder)
+	private static void parseExceptionDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker exceptionDefinitionMarker = builder.mark();
 
@@ -285,7 +286,7 @@ public class StatementParsing extends Parsing
 		exceptionDefinitionMarker.done(OCamlElementTypes.EXCEPTION_DEFINITION);
 	}
 
-	private static void parseExternalDefinition(@NotNull final PsiBuilder builder)
+	private static void parseExternalDefinition(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker externalDefinitionMarker = builder.mark();
 
@@ -304,7 +305,7 @@ public class StatementParsing extends Parsing
 		externalDefinitionMarker.done(OCamlElementTypes.EXTERNAL_DEFINITION);
 	}
 
-	private static void parseExternalDeclaration(@NotNull final PsiBuilder builder)
+	private static void parseExternalDeclaration(@Nonnull final PsiBuilder builder)
 	{
 		final PsiBuilder.Marker externalDeclarationMarker = builder.mark();
 
@@ -315,7 +316,7 @@ public class StatementParsing extends Parsing
 		externalDeclarationMarker.done(OCamlElementTypes.EXTERNAL_DECLARATION);
 	}
 
-	private static void doParseExceptionSpecification(@NotNull final PsiBuilder builder)
+	private static void doParseExceptionSpecification(@Nonnull final PsiBuilder builder)
 	{
 		checkMatches(builder, OCamlTokenTypes.EXCEPTION_KEYWORD, Strings.EXCEPTION_KEYWORD_EXPECTED);
 
@@ -333,7 +334,7 @@ public class StatementParsing extends Parsing
 		Yes,
 		No;
 
-		@NotNull
+		@Nonnull
 		public static Appearance create(final boolean appearance)
 		{
 			return appearance ? Yes : No;

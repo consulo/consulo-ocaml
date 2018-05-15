@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -38,7 +38,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlValueSpecification;
  */
 public class OCamlValueSpecificationImpl extends BaseOCamlElement implements OCamlValueSpecification
 {
-	public OCamlValueSpecificationImpl(@NotNull final ASTNode node)
+	public OCamlValueSpecificationImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -49,7 +49,7 @@ public class OCamlValueSpecificationImpl extends BaseOCamlElement implements OCa
 		return OCamlPsiUtil.endsCorrectlyWith(this, OCamlTypeExpression.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitValueSpecification(this);
 	}
@@ -60,20 +60,20 @@ public class OCamlValueSpecificationImpl extends BaseOCamlElement implements OCa
 		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.VALUE_NAME_PATTERN);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.ValueName;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "variable";
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlPattern.class);
 	}

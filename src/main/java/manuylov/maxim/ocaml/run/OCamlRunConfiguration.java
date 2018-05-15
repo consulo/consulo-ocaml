@@ -21,9 +21,11 @@ package manuylov.maxim.ocaml.run;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import consulo.ocaml.module.extension.OCamlModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -59,28 +61,28 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 {
 	@Nullable
 	private VirtualFile myMLFile = null;
-	@NotNull
+	@Nonnull
 	private String myProgramParams = "";
 	private boolean myIsUsedModuleSdk = true;
 	@Nullable
 	private Sdk mySpecifiedSdk = null;
-	@NotNull
+	@Nonnull
 	private String myCompilerOptions = "";
-	@NotNull
+	@Nonnull
 	private String myLinkerOptions = "";
-	@NotNull
+	@Nonnull
 	private String myRunnerOptions = "";
-	@NotNull
+	@Nonnull
 	private String myWorkingDirectory = "";
 
-	public OCamlRunConfiguration(@NotNull final RunConfigurationModule runConfigurationModule, @NotNull final ConfigurationFactory factory,
-			@NotNull final String name)
+	public OCamlRunConfiguration(@Nonnull final RunConfigurationModule runConfigurationModule, @Nonnull final ConfigurationFactory factory,
+			@Nonnull final String name)
 	{
 		super(name, runConfigurationModule, factory);
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public List<Module> getValidModules()
 	{
 		final Module[] modules = ModuleManager.getInstance(getProject()).getModules();
@@ -96,26 +98,26 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	protected ModuleBasedConfiguration createInstance()
 	{
 		return new OCamlRunConfiguration(getConfigurationModule(), getFactory(), getName());
 	}
 
-	@NotNull
+	@Nonnull
 	public SettingsEditor<? extends RunConfiguration> getConfigurationEditor()
 	{
 		return new OCamlRunConfigurationEditor(this);
 	}
 
-	@NotNull
-	public RunProfileState getState(@NotNull final Executor executor, @NotNull final ExecutionEnvironment env) throws ExecutionException
+	@Nonnull
+	public RunProfileState getState(@Nonnull final Executor executor, @Nonnull final ExecutionEnvironment env) throws ExecutionException
 	{
 		return new OCamlCommandLineState(this, executor, env);
 	}
 
 	@Override
-	public void readExternal(@NotNull final Element element) throws InvalidDataException
+	public void readExternal(@Nonnull final Element element) throws InvalidDataException
 	{
 		super.readExternal(element);
 		myMLFile = null;
@@ -152,7 +154,7 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 	}
 
 	@Override
-	public void writeExternal(@NotNull final Element element) throws WriteExternalException
+	public void writeExternal(@Nonnull final Element element) throws WriteExternalException
 	{
 		super.writeExternal(element);
 		if(myMLFile != null)
@@ -221,7 +223,7 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public String suggestedName()
 	{
 		final OCamlModule ocamlModule = getOCamlModule();
@@ -239,13 +241,13 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 		myMLFile = ocamlModule == null ? null : LocalFileSystem.getInstance().findFileByIoFile(ocamlModule.getImplementationFile());
 	}
 
-	@NotNull
+	@Nonnull
 	public String getProgramParams()
 	{
 		return myProgramParams;
 	}
 
-	public void setProgramParams(@NotNull final String params)
+	public void setProgramParams(@Nonnull final String params)
 	{
 		myProgramParams = params;
 	}
@@ -277,46 +279,46 @@ public class OCamlRunConfiguration extends ModuleBasedConfiguration<RunConfigura
 		mySpecifiedSdk = sdk;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getCompilerOptions()
 	{
 		return myCompilerOptions;
 	}
 
-	public void setCompilerOptions(@NotNull final String options)
+	public void setCompilerOptions(@Nonnull final String options)
 	{
 		myCompilerOptions = options;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getLinkerOptions()
 	{
 		return myLinkerOptions;
 	}
 
-	public void setLinkerOptions(@NotNull final String options)
+	public void setLinkerOptions(@Nonnull final String options)
 	{
 		myLinkerOptions = options;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getRunnerOptions()
 	{
 		return myRunnerOptions;
 	}
 
-	public void setRunnerOptions(@NotNull final String options)
+	public void setRunnerOptions(@Nonnull final String options)
 	{
 		myRunnerOptions = options;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getWorkingDirectory()
 	{
 		return myWorkingDirectory;
 	}
 
-	public void setWorkingDirectory(@NotNull final String dirPath)
+	public void setWorkingDirectory(@Nonnull final String dirPath)
 	{
 		myWorkingDirectory = dirPath;
 	}

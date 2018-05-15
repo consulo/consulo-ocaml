@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.feature.resolving.testCase;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.junit.Before;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageParserDefinitions;
@@ -49,14 +49,14 @@ import manuylov.maxim.ocaml.lang.parser.util.ParserTestUtil;
  */
 public abstract class ResolvingTestCase extends BaseOCamlTestCase
 {
-	@NotNull
+	@Nonnull
 	private static final String RESOLVED_REFERENCE_START = "{{";
-	@NotNull
+	@Nonnull
 	private static final String RESOLVED_REFERENCE_END = "}}";
-	@NotNull
+	@Nonnull
 	private static final String REFERENCE_POSITION = "}{";
 
-	@NotNull
+	@Nonnull
 	private static final OCamlFileTypeLanguage ourLanguage = MLFileTypeLanguage.INSTANCE;
 
 	private static int testNumber;
@@ -68,7 +68,7 @@ public abstract class ResolvingTestCase extends BaseOCamlTestCase
 		testNumber = 0;
 	}
 
-	protected void doTest(final int n, @NotNull final String text) throws Exception
+	protected void doTest(final int n, @Nonnull final String text) throws Exception
 	{
 		if(n <= testNumber)
 		{
@@ -138,13 +138,13 @@ public abstract class ResolvingTestCase extends BaseOCamlTestCase
 		doTest(actualText, referencePosition, textRange, errorText);
 	}
 
-	@NotNull
-	private String remove(@NotNull final String text, final int start, final int length)
+	@Nonnull
+	private String remove(@Nonnull final String text, final int start, final int length)
 	{
 		return text.substring(0, start) + text.substring(start + length);
 	}
 
-	private void doTest(@NotNull final String actualText, final int referencePosition, @Nullable final TextRange resolvedReferenceRange, @NotNull final String errorText) throws Exception
+	private void doTest(@Nonnull final String actualText, final int referencePosition, @Nullable final TextRange resolvedReferenceRange, @Nonnull final String errorText) throws Exception
 	{
 		final ASTNode root = ParserTestUtil.buildTree(actualText, LanguageParserDefinitions.INSTANCE.findSingle(ourLanguage));
 		final PsiReference reference = findReferenceAt(root.getPsi(), referencePosition);
@@ -175,7 +175,7 @@ public abstract class ResolvingTestCase extends BaseOCamlTestCase
 	}
 
 	@Nullable
-	private PsiReference findReferenceAt(@NotNull final PsiElement root, final int referencePosition)
+	private PsiReference findReferenceAt(@Nonnull final PsiElement root, final int referencePosition)
 	{
 		PsiElement element = root.findElementAt(referencePosition);
 		if(element == null)

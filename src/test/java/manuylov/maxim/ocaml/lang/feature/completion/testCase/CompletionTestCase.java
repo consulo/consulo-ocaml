@@ -21,8 +21,9 @@ package manuylov.maxim.ocaml.lang.feature.completion.testCase;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.junit.Before;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
@@ -59,12 +60,12 @@ import manuylov.maxim.ocaml.util.OCamlStringUtil;
  */
 public abstract class CompletionTestCase extends BaseOCamlTestCase
 {
-	@NotNull
+	@Nonnull
 	private static final String COMPLETION_POSITION = "}{";
 
-	@NotNull
+	@Nonnull
 	private static final OCamlFileTypeLanguage ourLanguage = MLFileTypeLanguage.INSTANCE;
-	@NotNull
+	@Nonnull
 	private static final CompletionContributor ourContributor = new OCamlCompletionContributor();
 
 	private static int testNumber;
@@ -78,17 +79,17 @@ public abstract class CompletionTestCase extends BaseOCamlTestCase
 		testNumber = 0;
 	}
 
-	@NotNull
+	@Nonnull
 	protected abstract CompletionType getCompletionType();
 
 	protected abstract int getInvocationCount();
 
-	protected void setVariants(@NotNull final String... variants)
+	protected void setVariants(@Nonnull final String... variants)
 	{
 		myVariants = variants;
 	}
 
-	protected void doTest(final int n, @NotNull final String text, final boolean shouldContain) throws Exception
+	protected void doTest(final int n, @Nonnull final String text, final boolean shouldContain) throws Exception
 	{
 		if(n <= testNumber)
 		{
@@ -106,13 +107,13 @@ public abstract class CompletionTestCase extends BaseOCamlTestCase
 		doTest(actualText, completionPosition, shouldContain, errorText);
 	}
 
-	@NotNull
-	private String remove(@NotNull final String text, final int start, final int length)
+	@Nonnull
+	private String remove(@Nonnull final String text, final int start, final int length)
 	{
 		return text.substring(0, start) + text.substring(start + length);
 	}
 
-	private void doTest(@NotNull final String text, final int completionPosition, final boolean shouldContain, @NotNull final String errorText) throws Exception
+	private void doTest(@Nonnull final String text, final int completionPosition, final boolean shouldContain, @Nonnull final String errorText) throws Exception
 	{
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.findSingle(ourLanguage);
 
@@ -132,53 +133,53 @@ public abstract class CompletionTestCase extends BaseOCamlTestCase
 		}
 	}
 
-	@NotNull
-	private CompletionParameters createCompletionParameters(@NotNull final OCamlElement originalPsiRoot, @NotNull final OCamlElement dummyPsiRoot, final int completionPosition)
+	@Nonnull
+	private CompletionParameters createCompletionParameters(@Nonnull final OCamlElement originalPsiRoot, @Nonnull final OCamlElement dummyPsiRoot, final int completionPosition)
 	{
 		//noinspection ConstantConditions
 		throw new UnsupportedOperationException("CompletionParameters is package local");
 		//return new CompletionParameters(dummyPsiRoot.findElementAt(completionPosition), createFakeFile(originalPsiRoot), getCompletionType(), completionPosition, getInvocationCount());
 	}
 
-	@NotNull
-	private CompletionResultSet createResultSet(@NotNull final Set<String> result)
+	@Nonnull
+	private CompletionResultSet createResultSet(@Nonnull final Set<String> result)
 	{
 		return new CompletionResultSet(null, null, ourContributor)
 		{
 			@Override
-			public void addElement(@NotNull final LookupElement element)
+			public void addElement(@Nonnull final LookupElement element)
 			{
 				result.add(element.getLookupString());
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
-			public CompletionResultSet withPrefixMatcher(@NotNull final PrefixMatcher matcher)
+			public CompletionResultSet withPrefixMatcher(@Nonnull final PrefixMatcher matcher)
 			{
 				return this;
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
-			public CompletionResultSet withPrefixMatcher(@NotNull final String prefix)
+			public CompletionResultSet withPrefixMatcher(@Nonnull final String prefix)
 			{
 				return this;
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
-			public CompletionResultSet withRelevanceSorter(@NotNull CompletionSorter completionSorter)
+			public CompletionResultSet withRelevanceSorter(@Nonnull CompletionSorter completionSorter)
 			{
 				return null;
 			}
 
 			@Override
-			public void addLookupAdvertisement(@NotNull String s)
+			public void addLookupAdvertisement(@Nonnull String s)
 			{
 
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
 			public CompletionResultSet caseInsensitive()
 			{
@@ -199,12 +200,12 @@ public abstract class CompletionTestCase extends BaseOCamlTestCase
 		};
 	}
 
-	@NotNull
-	public PsiFile createFakeFile(@NotNull final OCamlElement originalPsiRoot)
+	@Nonnull
+	public PsiFile createFakeFile(@Nonnull final OCamlElement originalPsiRoot)
 	{
 		return new PsiFileImpl(new DummyHolderViewProvider(new MockPsiManager(originalPsiRoot.getProject())))
 		{
-			@NotNull
+			@Nonnull
 			public FileType getFileType()
 			{
 				//noinspection ConstantConditions
@@ -223,7 +224,7 @@ public abstract class CompletionTestCase extends BaseOCamlTestCase
 				return (com.intellij.lang.FileASTNode) originalPsiRoot.getNode();
 			}
 
-			@NotNull
+			@Nonnull
 			@Override
 			public Language getLanguage()
 			{
@@ -237,14 +238,14 @@ public abstract class CompletionTestCase extends BaseOCamlTestCase
 				return originalPsiRoot.getLastChild();
 			}
 
-			public void accept(@NotNull final PsiElementVisitor visitor)
+			public void accept(@Nonnull final PsiElementVisitor visitor)
 			{
 			}
 		};
 	}
 
-	@NotNull
-	public static String insert(@NotNull final String text, final int position, @NotNull final String textToInsert)
+	@Nonnull
+	public static String insert(@Nonnull final String text, final int position, @Nonnull final String textToInsert)
 	{
 		final StringBuilder sb = new StringBuilder(text);
 		OCamlStringUtil.insert(sb, position, textToInsert);

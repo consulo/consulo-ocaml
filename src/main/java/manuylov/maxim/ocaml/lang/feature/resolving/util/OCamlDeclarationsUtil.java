@@ -20,8 +20,8 @@ package manuylov.maxim.ocaml.lang.feature.resolving.util;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
@@ -34,8 +34,8 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStructuredElement;
  */
 public class OCamlDeclarationsUtil
 {
-	public static boolean processDeclarationsInChildren(@NotNull final ResolvingBuilder builder, @NotNull final OCamlElement parent,
-			@NotNull final Class<? extends OCamlElement>... childrenTypes)
+	public static boolean processDeclarationsInChildren(@Nonnull final ResolvingBuilder builder, @Nonnull final OCamlElement parent,
+			@Nonnull final Class<? extends OCamlElement>... childrenTypes)
 	{
 		final List<? extends OCamlElement> children = OCamlPsiUtil.getChildrenOfTypes(parent, childrenTypes);
 		for(int i = children.size() - 1; i >= 0; i--)
@@ -49,7 +49,7 @@ public class OCamlDeclarationsUtil
 		return false;
 	}
 
-	public static boolean processDeclarationsInStructuredElement(@NotNull final ResolvingBuilder builder,
+	public static boolean processDeclarationsInStructuredElement(@Nonnull final ResolvingBuilder builder,
 			@Nullable final OCamlStructuredElement psiElement)
 	{
 		if(psiElement == null || builder.childWasAlreadyProcessed(psiElement))
@@ -67,7 +67,7 @@ public class OCamlDeclarationsUtil
 		return false;
 	}
 
-	public static boolean processDeclarationsInStructuredBinding(@NotNull final ResolvingBuilder builder, @NotNull final OCamlStructuredBinding binding)
+	public static boolean processDeclarationsInStructuredBinding(@Nonnull final ResolvingBuilder builder, @Nonnull final OCamlStructuredBinding binding)
 	{
 		final OCamlStructuredElement expression = binding.getExpression();
 		if(expression != null && builder.childWasAlreadyProcessed(expression))
@@ -91,7 +91,7 @@ public class OCamlDeclarationsUtil
 				typeExpression));
 	}
 
-	private static ResolvingBuilder.ModuleProcessor createModuleProcessor(@NotNull final ResolvingBuilder builder,
+	private static ResolvingBuilder.ModuleProcessor createModuleProcessor(@Nonnull final ResolvingBuilder builder,
 			@Nullable final OCamlStructuredElement moduleElement)
 	{
 		return new ResolvingBuilder.ModuleProcessor()

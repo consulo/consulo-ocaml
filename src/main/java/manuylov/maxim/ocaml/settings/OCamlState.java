@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.settings;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Maxim.Manuylov
@@ -32,11 +32,11 @@ public class OCamlState
 {
 	@Nullable
 	private String myTopLevelSdkHomePath = null;
-	@NotNull
+	@Nonnull
 	private String myTopLevelCmdParams = "";
-	@NotNull
+	@Nonnull
 	private String myTopLevelCmdWorkingDir = "";
-	@NotNull
+	@Nonnull
 	private Map<String, Boolean> myExeFileStates = new HashMap<String, Boolean>();
 
 	@Nullable
@@ -50,39 +50,39 @@ public class OCamlState
 		myTopLevelSdkHomePath = topLevelSdkHomePath;
 	}
 
-	@NotNull
+	@Nonnull
 	public Map<String, Boolean> getExeFileStates()
 	{
 		return myExeFileStates;
 	}
 
-	public void setExeFileStates(@NotNull final Map<String, Boolean> exeFileStates)
+	public void setExeFileStates(@Nonnull final Map<String, Boolean> exeFileStates)
 	{
 		myExeFileStates = exeFileStates;
 	}
 
-	public void putExeFileState(@NotNull final String exeFilePath, final boolean flag)
+	public void putExeFileState(@Nonnull final String exeFilePath, final boolean flag)
 	{
 		myExeFileStates.put(exeFilePath, flag);
 	}
 
-	public void setTopLevelCmdOptions(@NotNull final String cmdParams)
+	public void setTopLevelCmdOptions(@Nonnull final String cmdParams)
 	{
 		myTopLevelCmdParams = cmdParams;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getTopLevelCmdOptions()
 	{
 		return myTopLevelCmdParams;
 	}
 
-	public void setTopLevelCmdWorkingDir(@NotNull final String dir)
+	public void setTopLevelCmdWorkingDir(@Nonnull final String dir)
 	{
 		myTopLevelCmdWorkingDir = dir;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getTopLevelCmdWorkingDir()
 	{
 		return myTopLevelCmdWorkingDir;

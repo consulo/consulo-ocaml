@@ -18,8 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -42,7 +42,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlVariantTypeDefinition;
  */
 public class OCamlTypeBindingImpl extends BaseOCamlResolvedReference implements OCamlTypeBinding
 {
-	public OCamlTypeBindingImpl(@NotNull final ASTNode node)
+	public OCamlTypeBindingImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -55,7 +55,7 @@ public class OCamlTypeBindingImpl extends BaseOCamlResolvedReference implements 
 				OCamlTypeDefinitionConstraint.class);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitTypeBinding(this);
 	}
@@ -66,20 +66,20 @@ public class OCamlTypeBindingImpl extends BaseOCamlResolvedReference implements 
 		return OCamlASTTreeUtil.findChildOfType(getNode(), OCamlElementTypes.TYPE_CONSTRUCTOR_NAME);
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "type";
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return super.processDeclarations(builder) || OCamlDeclarationsUtil.processDeclarationsInChildren(builder, this, OCamlTypeRepresentation.class);
 	}

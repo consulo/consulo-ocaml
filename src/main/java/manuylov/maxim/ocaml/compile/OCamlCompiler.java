@@ -30,8 +30,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.compiler.impl.CompilerContentIterator;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -66,8 +66,8 @@ import manuylov.maxim.ocaml.util.OCamlSystemUtil;
  */
 public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrumentingCompiler
 {
-	@NotNull
-	public ProcessingItem[] getProcessingItems(@NotNull final CompileContext context)
+	@Nonnull
+	public ProcessingItem[] getProcessingItems(@Nonnull final CompileContext context)
 	{
 		final ProgressIndicator progressIndicator = context.getProgressIndicator();
 		progressIndicator.setIndeterminate(true);
@@ -112,7 +112,7 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		return items.toArray(new ProcessingItem[items.size()]);
 	}
 
-	private void processFile(@Nullable final VirtualFile file, @NotNull final File compiledFile, @NotNull final ArrayList<ProcessingItem> items,
+	private void processFile(@Nullable final VirtualFile file, @Nonnull final File compiledFile, @Nonnull final ArrayList<ProcessingItem> items,
 			final boolean isDebugMode, final boolean isRebuild)
 	{
 		if(file != null)
@@ -121,8 +121,8 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		}
 	}
 
-	@NotNull
-	private List<OCamlModule> collectItemsForStandaloneCompile(@NotNull final CompileContext context, @NotNull final ArrayList<ProcessingItem>
+	@Nonnull
+	private List<OCamlModule> collectItemsForStandaloneCompile(@Nonnull final CompileContext context, @Nonnull final ArrayList<ProcessingItem>
 			items) throws CyclicDependencyException
 	{
 		final Project project = context.getProject();
@@ -166,8 +166,8 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		}
 	}
 
-	@NotNull
-	public ProcessingItem[] process(@NotNull final CompileContext context, @NotNull final ProcessingItem[] items)
+	@Nonnull
+	public ProcessingItem[] process(@Nonnull final CompileContext context, @Nonnull final ProcessingItem[] items)
 	{
 		final ProgressIndicator progressIndicator = context.getProgressIndicator();
 		progressIndicator.setIndeterminate(false);
@@ -227,8 +227,8 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		return processedItems.toArray(new ProcessingItem[processedItems.size()]);
 	}
 
-	private boolean compile(@NotNull final VirtualFile file, @NotNull final ProjectFileIndex fileIndex, @NotNull final CompileContext context,
-			@NotNull final OCamlCompileContext ocamlContext, final VirtualFile destDir)
+	private boolean compile(@Nonnull final VirtualFile file, @Nonnull final ProjectFileIndex fileIndex, @Nonnull final CompileContext context,
+			@Nonnull final OCamlCompileContext ocamlContext, final VirtualFile destDir)
 	{
 		final OCamlModule ocamlModule = OCamlModule.getBySourceFile(file, context.getProject());
 		assert ocamlModule != null;
@@ -278,7 +278,7 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		}
 	}
 
-	private void addPath(@NotNull final GeneralCommandLine cmd, @NotNull final Set<String> addedPaths, @NotNull final String path)
+	private void addPath(@Nonnull final GeneralCommandLine cmd, @Nonnull final Set<String> addedPaths, @Nonnull final String path)
 	{
 		if(!addedPaths.contains(path))
 		{
@@ -288,25 +288,25 @@ public class OCamlCompiler extends BaseOCamlCompiler implements SourceInstrument
 		addedPaths.add(path);
 	}
 
-	@NotNull
-	public ValidityState createValidityState(@NotNull final DataInput in) throws IOException
+	@Nonnull
+	public ValidityState createValidityState(@Nonnull final DataInput in) throws IOException
 	{
 		return OCamlValidityState.load(in);
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "OCaml Files Compiler";
 	}
 
-	public boolean validateConfiguration(@NotNull final CompileScope scope)
+	public boolean validateConfiguration(@Nonnull final CompileScope scope)
 	{
 		return true;
 	}
 
 	@Nullable
-	private VirtualFile getDestination(@NotNull final VirtualFile file, @NotNull final ProjectFileIndex fileIndex)
+	private VirtualFile getDestination(@Nonnull final VirtualFile file, @Nonnull final ProjectFileIndex fileIndex)
 	{
 		if(!fileIndex.isInSourceContent(file))
 		{

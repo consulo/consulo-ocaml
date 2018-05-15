@@ -21,8 +21,8 @@ package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.NameType;
@@ -38,12 +38,12 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlMethodName;
  */
 public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMethodName
 {
-	public OCamlMethodNameImpl(@NotNull final ASTNode node)
+	public OCamlMethodNameImpl(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
 
-	public void visit(@NotNull final OCamlElementVisitor visitor)
+	public void visit(@Nonnull final OCamlElementVisitor visitor)
 	{
 		visitor.visitMethodName(this);
 	}
@@ -53,25 +53,25 @@ public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMeth
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public NameType getNameType()
 	{
 		return NameType.LowerCase;
 	}
 
-	@NotNull
+	@Nonnull
 	public String getDescription()
 	{
 		return "method";
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Collections.emptyList();
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return Collections.emptyList();
@@ -109,7 +109,7 @@ public class OCamlMethodNameImpl extends BaseOCamlReference implements OCamlMeth
 	}
 
 
-	@NotNull
+	@Nonnull
 	@Override
 	public LookupElement[] getVariants()
 	{

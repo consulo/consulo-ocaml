@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.lang.ASTNode;
@@ -37,7 +37,7 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlExtendedModuleName;
  */
 public abstract class BaseOCamlSelfResolvedReference extends BaseOCamlReference implements OCamlResolvedReference
 {
-	public BaseOCamlSelfResolvedReference(@NotNull final ASTNode node)
+	public BaseOCamlSelfResolvedReference(@Nonnull final ASTNode node)
 	{
 		super(node);
 	}
@@ -48,13 +48,13 @@ public abstract class BaseOCamlSelfResolvedReference extends BaseOCamlReference 
 		return getNode();
 	}
 
-	@NotNull
+	@Nonnull
 	public List<Class<? extends OCamlResolvedReference>> getPossibleResolvedTypes()
 	{
 		return Arrays.<Class<? extends OCamlResolvedReference>>asList(getClass());
 	}
 
-	@NotNull
+	@Nonnull
 	public List<OCamlExtendedModuleName> getModulePath()
 	{
 		return Collections.emptyList();
@@ -66,7 +66,7 @@ public abstract class BaseOCamlSelfResolvedReference extends BaseOCamlReference 
 		return this;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public LookupElement[] getVariants()
 	{
@@ -74,7 +74,7 @@ public abstract class BaseOCamlSelfResolvedReference extends BaseOCamlReference 
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		return builder.getProcessor().process(this);
 	}

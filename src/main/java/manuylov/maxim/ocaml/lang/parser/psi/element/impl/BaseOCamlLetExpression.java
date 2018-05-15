@@ -18,7 +18,8 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi.element.impl;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import manuylov.maxim.ocaml.lang.feature.resolving.ElementPosition;
 import manuylov.maxim.ocaml.lang.feature.resolving.ResolvingBuilder;
@@ -32,13 +33,13 @@ import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlLetBinding;
  */
 abstract class BaseOCamlLetExpression extends BaseOCamlLetElement
 {
-	public BaseOCamlLetExpression(@NotNull final ASTNode astNode)
+	public BaseOCamlLetExpression(@Nonnull final ASTNode astNode)
 	{
 		super(astNode);
 	}
 
 	@Override
-	public boolean processDeclarations(@NotNull final ResolvingBuilder builder)
+	public boolean processDeclarations(@Nonnull final ResolvingBuilder builder)
 	{
 		if(builder.getLastParentPosition() == ElementPosition.Sibling)
 		{

@@ -25,7 +25,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import org.junit.Test;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -45,7 +46,7 @@ public class IntegrityTest extends BaseOCamlTestCase
 	{
 		processElementTypes(new ElementTypeProcessor()
 		{
-			public void process(@NotNull final IElementType type, @NotNull final OCamlElement element)
+			public void process(@Nonnull final IElementType type, @Nonnull final OCamlElement element)
 			{
 				if(element instanceof OCamlUnknownElement)
 				{
@@ -62,7 +63,7 @@ public class IntegrityTest extends BaseOCamlTestCase
 
 		processElementTypes(new ElementTypeProcessor()
 		{
-			public void process(@NotNull final IElementType type, @NotNull final OCamlElement element)
+			public void process(@Nonnull final IElementType type, @Nonnull final OCamlElement element)
 			{
 				final String name = element.getClass().getSimpleName();
 				expectedVisitorMethodNames.add(name.substring("OCaml".length(), name.length() - "Impl".length()));
@@ -144,7 +145,7 @@ public class IntegrityTest extends BaseOCamlTestCase
 		assertNull("\"Override\" annotation was not supposed here.", endsCorrectly.getAnnotation(Override.class));
 		processElementTypes(new ElementTypeProcessor()
 		{
-			public void process(@NotNull final IElementType type, @NotNull final OCamlElement element)
+			public void process(@Nonnull final IElementType type, @Nonnull final OCamlElement element)
 			{
 				Class<?> clazz = element.getClass();
 				final String name = clazz.getSimpleName();
@@ -186,7 +187,7 @@ public class IntegrityTest extends BaseOCamlTestCase
 		});
 	}
 
-	private static boolean hasDeclaredMethod(@NotNull final Class<?> clazz, @NotNull final String methodName, @NotNull final Class<?>... parameterTypes)
+	private static boolean hasDeclaredMethod(@Nonnull final Class<?> clazz, @Nonnull final String methodName, @Nonnull final Class<?>... parameterTypes)
 	{
 		try
 		{
@@ -199,7 +200,7 @@ public class IntegrityTest extends BaseOCamlTestCase
 		}
 	}
 
-	private void processElementTypes(@NotNull final ElementTypeProcessor processor) throws IllegalAccessException
+	private void processElementTypes(@Nonnull final ElementTypeProcessor processor) throws IllegalAccessException
 	{
 		final Field[] fields = OCamlElementTypes.class.getFields();
 
@@ -220,6 +221,6 @@ public class IntegrityTest extends BaseOCamlTestCase
 
 	private static interface ElementTypeProcessor
 	{
-		void process(@NotNull final IElementType type, @NotNull final OCamlElement element);
+		void process(@Nonnull final IElementType type, @Nonnull final OCamlElement element);
 	}
 }
