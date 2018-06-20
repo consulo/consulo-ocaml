@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.intellij.lexer.Lexer;
 import com.intellij.psi.TokenType;
 import manuylov.maxim.ocaml.lang.Keywords;
+import manuylov.maxim.ocaml.lang.lexer.flex.OCamlParsingFlexLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 
 /**
@@ -71,6 +72,6 @@ public class OCamlParsingLexerTest extends BaseLexerTest
 
 	protected Lexer createLexer()
 	{
-		return new OCamlParsingLexer();
+		return new OCamlParsingFlexLexer();
 	}
 }

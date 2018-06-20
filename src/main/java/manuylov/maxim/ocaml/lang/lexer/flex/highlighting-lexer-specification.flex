@@ -18,7 +18,7 @@
 
 package manuylov.maxim.ocaml.lang.lexer.flex;
 
-import com.intellij.lexer.FlexLexer;
+import com.intellij.lexer.LexerBase;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 
@@ -28,9 +28,9 @@ import java.util.HashMap;
 
 %public
 %class OCamlHighlightingFlexLexer
-%implements FlexLexer
+%extends LexerBase
 
-%function advance
+%function advanceImpl
 %type IElementType
 
 %unicode            

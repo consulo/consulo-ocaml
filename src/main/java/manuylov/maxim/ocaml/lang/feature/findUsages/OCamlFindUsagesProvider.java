@@ -26,7 +26,7 @@ import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.PsiElement;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlNamedElement;
-import manuylov.maxim.ocaml.lang.lexer.OCamlHighlightingLexer;
+import manuylov.maxim.ocaml.lang.lexer.flex.OCamlHighlightingFlexLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
 
@@ -40,7 +40,7 @@ public class OCamlFindUsagesProvider implements FindUsagesProvider
 	@Nonnull
 	public WordsScanner getWordsScanner()
 	{
-		DefaultWordsScanner defaultWordsScanner = new DefaultWordsScanner(new OCamlHighlightingLexer(), OCamlTokenTypes.DWS_IDENTIFIERS,
+		DefaultWordsScanner defaultWordsScanner = new DefaultWordsScanner(new OCamlHighlightingFlexLexer(), OCamlTokenTypes.DWS_IDENTIFIERS,
 				OCamlTokenTypes.DWS_COMMENTS, OCamlTokenTypes.DWS_LITERALS);
 		defaultWordsScanner.setMayHaveFileRefsInLiterals(true);
 

@@ -21,6 +21,7 @@ package manuylov.maxim.ocaml.lang.lexer;
 import org.junit.Test;
 import com.intellij.lexer.Lexer;
 import manuylov.maxim.ocaml.lang.Keywords;
+import manuylov.maxim.ocaml.lang.lexer.flex.OCamlHighlightingFlexLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 
 /**
@@ -74,6 +75,6 @@ public class OCamlHighlightingLexerTest extends BaseLexerTest
 
 	protected Lexer createLexer()
 	{
-		return new OCamlHighlightingLexer();
+		return new OCamlHighlightingFlexLexer();
 	}
 }

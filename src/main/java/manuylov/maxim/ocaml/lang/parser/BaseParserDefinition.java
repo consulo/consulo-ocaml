@@ -27,7 +27,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import consulo.lang.LanguageVersion;
-import manuylov.maxim.ocaml.lang.lexer.OCamlParsingLexer;
+import manuylov.maxim.ocaml.lang.lexer.flex.OCamlParsingFlexLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementFactory;
@@ -87,6 +87,6 @@ public abstract class BaseParserDefinition implements ParserDefinition
 	@Nonnull
 	private Lexer doCreateLexer()
 	{
-		return new OCamlParsingLexer();
+		return new OCamlParsingFlexLexer();
 	}
 }

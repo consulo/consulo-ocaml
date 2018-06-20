@@ -29,7 +29,7 @@ import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
-import manuylov.maxim.ocaml.lang.lexer.OCamlHighlightingLexer;
+import manuylov.maxim.ocaml.lang.lexer.flex.OCamlHighlightingFlexLexer;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 
 /**
@@ -63,7 +63,7 @@ class OCamlSyntaxHighlighter extends SyntaxHighlighterBase
 	@Nonnull
 	public Lexer getHighlightingLexer()
 	{
-		return new OCamlHighlightingLexer();
+		return new OCamlHighlightingFlexLexer();
 	}
 
 	@Nonnull
