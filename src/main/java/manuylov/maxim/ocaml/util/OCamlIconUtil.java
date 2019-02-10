@@ -19,7 +19,6 @@
 package manuylov.maxim.ocaml.util;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
 
 import com.intellij.openapi.util.IconLoader;
 import consulo.ui.image.Image;
@@ -35,15 +34,15 @@ public class OCamlIconUtil
 	@Nonnull
 	public static final Image ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
 	@Nonnull
-	public static final Icon ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
+	public static final Image ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
 	@Nonnull
 	public static final Image ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
 	@Nonnull
-	public static final Icon ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
+	public static final Image ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
 	@Nonnull
-	public static final Icon ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
+	public static final Image ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
 	@Nonnull
-	public static final Icon ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
+	public static final Image ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
 
 	@Nonnull
 	public static Image getSmallOCamlIcon()
@@ -52,7 +51,7 @@ public class OCamlIconUtil
 	}
 
 	@Nonnull
-	public static Icon getBigOCamlIcon()
+	public static Image getBigOCamlIcon()
 	{
 		return ourOCamlBigIcon;
 	}
@@ -70,19 +69,19 @@ public class OCamlIconUtil
 	}
 
 	@Nonnull
-	public static Icon getOpenConsoleIcon()
+	public static Image getOpenConsoleIcon()
 	{
 		return ourOpenConsoleIcon;
 	}
 
 	@Nonnull
-	public static Icon getCloseViewIcon()
+	public static Image getCloseViewIcon()
 	{
 		return ourCloseViewIcon;
 	}
 
 	@Nonnull
-	public static Icon getSettingsIcon()
+	public static Image getSettingsIcon()
 	{
 		return ourSettingsIcon;
 	}

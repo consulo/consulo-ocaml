@@ -22,7 +22,6 @@ import java.io.File;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
 
 import com.intellij.ide.IdeView;
 import com.intellij.ide.actions.CreateElementActionBase;
@@ -40,6 +39,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
+import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
 
@@ -52,7 +52,7 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 	@Nonnull
 	private static final Pattern MODULE_NAME_PATTERN = Pattern.compile("[a-zA-Z][a-zA-Z0-9_']*");
 
-	protected BaseCreateOCamlFileAction(@Nonnull final String text, @Nonnull final String description, @Nonnull final Icon icon)
+	protected BaseCreateOCamlFileAction(@Nonnull final String text, @Nonnull final String description, @Nonnull final Image icon)
 	{
 		super(text, description, icon);
 	}

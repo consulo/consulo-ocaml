@@ -21,7 +21,6 @@ package manuylov.maxim.ocaml.actions;
 import javax.annotation.Nonnull;
 
 import com.intellij.openapi.fileTypes.FileType;
-import consulo.awt.TargetAWT;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 
@@ -33,7 +32,7 @@ public class CreateMLFileAction extends BaseCreateOCamlFileAction
 {
 	protected CreateMLFileAction()
 	{
-		super("OCaml Module Implementation", "Create New OCaml Module Implementation File", TargetAWT.to(OCamlIconUtil.getMLFileIcon()));
+		super("OCaml Module Implementation", "Create New OCaml Module Implementation File", OCamlIconUtil.getMLFileIcon());
 	}
 
 	@Nonnull
