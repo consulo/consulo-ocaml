@@ -19,14 +19,14 @@
 package manuylov.maxim.ocaml.lang.feature.resolving.impl;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
-
 import javax.annotation.Nullable;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.lang.feature.refactoring.rename.OCamlNamesValidator;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlNamedElement;
 import manuylov.maxim.ocaml.lang.feature.resolving.util.OCamlASTNodeUtil;
@@ -146,13 +146,7 @@ public abstract class BaseOCamlNamedElement extends BaseOCamlElement implements 
 			}
 
 			@Nullable
-			public Icon getIcon(final boolean open)
-			{
-				return null;
-			}
-
-			@Nullable
-			public TextAttributesKey getTextAttributesKey()
+			public Image getIcon()
 			{
 				return null;
 			}
