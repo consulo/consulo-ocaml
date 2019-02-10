@@ -6,7 +6,7 @@ import javax.swing.JComponent;
 import javax.annotation.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.RequiredUIAccess;
 import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
@@ -23,7 +23,7 @@ public class OCamlMutableModuleExtension extends OCamlModuleExtension implements
 		super(id, module);
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	@Nullable
 	@Override
 	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
