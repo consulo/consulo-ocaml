@@ -19,13 +19,12 @@
 package manuylov.maxim.ocaml.lang;
 
 import javax.annotation.Nonnull;
+
 import org.junit.Assert;
 import org.junit.Before;
-import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.openapi.application.ex.ApplicationManagerEx;
 import manuylov.maxim.ocaml.fileType.OCamlFileTypeLanguage;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
-import manuylov.maxim.ocaml.fileType.ml.parser.MLParserDefinition;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileTypeLanguage;
 
 /**
@@ -47,7 +46,7 @@ public class BaseOCamlTestCase extends Assert
 
 	private void register(@Nonnull final OCamlFileTypeLanguage language)
 	{
-		LanguageParserDefinitions.INSTANCE.addExplicitExtension(language, new MLParserDefinition());
+		//LanguageParserDefinitions.INSTANCE.addExplicitExtension(language, new MLParserDefinition());
 		//LanguageASTFactory.INSTANCE.addExplicitExtension(language, ASTFactory.DEFAULT);
 	}
 }
