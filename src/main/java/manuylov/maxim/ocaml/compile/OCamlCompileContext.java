@@ -20,13 +20,9 @@ package manuylov.maxim.ocaml.compile;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import com.intellij.compiler.options.CompileStepBeforeRun;
-import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.executors.DefaultDebugExecutor;
+
 import com.intellij.openapi.compiler.CompileContext;
 import manuylov.maxim.ocaml.run.OCamlRunConfiguration;
-import manuylov.maxim.ocaml.run.OCamlRunner;
 
 /**
  * @author Maxim.Manuylov
@@ -65,14 +61,15 @@ class OCamlCompileContext
 	@Nonnull
 	public static OCamlCompileContext createOn(@Nonnull final CompileContext context)
 	{
-		final RunConfiguration configuration = CompileStepBeforeRun.getRunConfiguration(context);
-		if(configuration == null || !(configuration instanceof OCamlRunConfiguration))
-		{
-			return new OCamlCompileContext(true, null, false);
-		}
-		final String debugExecutorId = DefaultDebugExecutor.getDebugExecutorInstance().getId();
-		final Executor currentExecutor = OCamlRunner.getCurrentExecutor();
-		final boolean isDebugMode = currentExecutor != null && debugExecutorId.equals(currentExecutor.getId());
-		return new OCamlCompileContext(false, (OCamlRunConfiguration) configuration, isDebugMode);
+		return new OCamlCompileContext(true, null, false);
+//		final RunConfiguration configuration = CompileStepBeforeRun.getRunConfiguration(context);
+//		if(configuration == null || !(configuration instanceof OCamlRunConfiguration))
+//		{
+//			return new OCamlCompileContext(true, null, false);
+//		}
+//		final String debugExecutorId = DefaultDebugExecutor.getDebugExecutorInstance().getId();
+//		final Executor currentExecutor = OCamlRunner.getCurrentExecutor();
+//		final boolean isDebugMode = currentExecutor != null && debugExecutorId.equals(currentExecutor.getId());
+//		return new OCamlCompileContext(false, (OCamlRunConfiguration) configuration, isDebugMode);
 	}
 }
