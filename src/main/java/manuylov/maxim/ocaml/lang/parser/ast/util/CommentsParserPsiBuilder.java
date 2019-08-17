@@ -18,188 +18,73 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast.util;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Stack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.ITokenTypeRemapper;
-import com.intellij.lang.LighterASTNode;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.WhitespaceSkippedCallback;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
+import com.intellij.lang.impl.PsiBuilderAdapter;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.util.diff.FlyweightCapableTreeStructure;
 import manuylov.maxim.ocaml.lang.Strings;
 import manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
+
+import javax.annotation.Nonnull;
+import java.util.Stack;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.06.2009
  */
-public class CommentsParserPsiBuilder implements PsiBuilder
+public class CommentsParserPsiBuilder extends PsiBuilderAdapter
 {
-	@Nonnull
-	private final PsiBuilder myBuilder;
-
 	public CommentsParserPsiBuilder(@Nonnull final PsiBuilder builder)
 	{
-		myBuilder = builder;
-		myBuilder.enforceCommentTokens(TokenSet.create());
+		super(builder);
+		builder.enforceCommentTokens(TokenSet.create());
 	}
 
 	public void advanceLexer()
 	{
 		tryParseComments();
-		myBuilder.advanceLexer();
+		super.advanceLexer();
 	}
 
 	public IElementType getTokenType()
 	{
 		tryParseComments();
-		return myBuilder.getTokenType();
+		return super.getTokenType();
 	}
 
 	public String getTokenText()
 	{
 		tryParseComments();
-		return myBuilder.getTokenText();
+		return super.getTokenText();
 	}
 
 	public int getCurrentOffset()
 	{
 		tryParseComments();
-		return myBuilder.getCurrentOffset();
+		return super.getCurrentOffset();
 	}
 
 	public Marker mark()
 	{
-		return myBuilder.mark();
+		return super.mark();
 	}
 
 	public void error(final String messageText)
 	{
 		tryParseComments();
-		myBuilder.error(messageText);
+		super.error(messageText);
 	}
 
 	public boolean eof()
 	{
 		tryParseComments();
-		return myBuilder.eof();
-	}
-
-	@Override
-	public Project getProject()
-	{
-		return myBuilder.getProject();
-	}
-
-	public CharSequence getOriginalText()
-	{
-		return myBuilder.getOriginalText();
-	}
-
-	public void setTokenTypeRemapper(final ITokenTypeRemapper remapper)
-	{
-		myBuilder.setTokenTypeRemapper(remapper);
-	}
-
-	@Override
-	public void remapCurrentToken(IElementType elementType)
-	{
-
-	}
-
-	@Override
-	public void setWhitespaceSkippedCallback(@Nullable WhitespaceSkippedCallback whitespaceSkippedCallback)
-	{
-
-	}
-
-	@Nullable
-	@Override
-	public IElementType lookAhead(int i)
-	{
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public IElementType rawLookup(int i)
-	{
-		return null;
-	}
-
-	@Override
-	public int rawTokenTypeStart(int i)
-	{
-		return 0;
-	}
-
-	@Override
-	public int rawTokenIndex()
-	{
-		return 0;
-	}
-
-	public ASTNode getTreeBuilt()
-	{
-		return myBuilder.getTreeBuilt();
-	}
-
-	public FlyweightCapableTreeStructure<LighterASTNode> getLightTree()
-	{
-		return myBuilder.getLightTree();
-	}
-
-	public void setDebugMode(final boolean dbgMode)
-	{
-		myBuilder.setDebugMode(dbgMode);
-	}
-
-	public void enforceCommentTokens(final TokenSet tokens)
-	{
-		myBuilder.enforceCommentTokens(tokens);
-	}
-
-	public LighterASTNode getLatestDoneMarker()
-	{
-		try
-		{
-			return (LighterASTNode) myBuilder.getClass().getMethod("getLatestDoneMarker").invoke(myBuilder);
-		}
-		catch(final IllegalAccessException e)
-		{
-			return null;
-		}
-		catch(InvocationTargetException e)
-		{
-			return null;
-		}
-		catch(NoSuchMethodException e)
-		{
-			return null;
-		}
-	}
-
-	public <T> T getUserData(@Nonnull final Key<T> key)
-	{
-		return myBuilder.getUserData(key);
-	}
-
-	public <T> void putUserData(@Nonnull final Key<T> key, @Nullable final T value)
-	{
-		myBuilder.putUserData(key, value);
+		return super.eof();
 	}
 
 	private void tryParseComments()
 	{
-		while(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN)
+		while(super.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN)
 		{
 			parseComment();
 		}
@@ -207,46 +92,33 @@ public class CommentsParserPsiBuilder implements PsiBuilder
 
 	private void parseComment()
 	{
-		final Stack<Marker> markers = new Stack<PsiBuilder.Marker>();
+		final Stack<Marker> markers = new Stack<>();
 
 		do
 		{
-			if(myBuilder.getTokenType() == null)
+			if(super.getTokenType() == null)
 			{
 				while(markers.size() > 0)
 				{
 					markers.pop().done(OCamlElementTypes.UNCLOSED_COMMENT);
 				}
-				myBuilder.error(Strings.UNCLOSED_COMMENT);
+				super.error(Strings.UNCLOSED_COMMENT);
 			}
-			else if(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN)
+			else if(super.getTokenType() == OCamlTokenTypes.COMMENT_BEGIN)
 			{
-				markers.push(myBuilder.mark());
-				myBuilder.advanceLexer();
+				markers.push(super.mark());
+				super.advanceLexer();
 			}
-			else if(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT_END)
+			else if(super.getTokenType() == OCamlTokenTypes.COMMENT_END)
 			{
-				myBuilder.advanceLexer();
+				super.advanceLexer();
 				markers.pop().done(OCamlElementTypes.COMMENT_BLOCK);
 			}
-			else if(myBuilder.getTokenType() == OCamlTokenTypes.COMMENT)
+			else if(super.getTokenType() == OCamlTokenTypes.COMMENT)
 			{
-				myBuilder.advanceLexer();
+				super.advanceLexer();
 			}
 		}
 		while(markers.size() > 0);
-	}
-
-	@Nullable
-	@Override
-	public <T> T getUserDataUnprotected(@Nonnull Key<T> tKey)
-	{
-		return null;
-	}
-
-	@Override
-	public <T> void putUserDataUnprotected(@Nonnull Key<T> tKey, @Nullable T t)
-	{
-
 	}
 }
