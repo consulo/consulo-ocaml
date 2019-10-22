@@ -18,28 +18,23 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.swing.JComponent;
-import javax.swing.border.Border;
-
-import javax.annotation.Nullable;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
-import com.intellij.openapi.editor.event.CaretListener;
-import com.intellij.openapi.editor.event.EditorMouseEventArea;
-import com.intellij.openapi.editor.event.EditorMouseListener;
-import com.intellij.openapi.editor.event.EditorMouseMotionListener;
-import com.intellij.openapi.editor.event.SelectionListener;
+import com.intellij.openapi.editor.event.*;
 import com.intellij.openapi.editor.markup.MarkupModel;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
+import java.util.List;
 
 /**
  * @author Maxim.Manuylov
@@ -401,13 +396,13 @@ public class MockEditor implements Editor
 			}
 
 			@Override
-			public void setCaretsAndSelections(@Nonnull List<CaretState> list)
+			public void setCaretsAndSelections(@Nonnull List<? extends CaretState> list)
 			{
 
 			}
 
 			@Override
-			public void setCaretsAndSelections(@Nonnull List<CaretState> list, boolean b)
+			public void setCaretsAndSelections(@Nonnull List<? extends CaretState> list, boolean b)
 			{
 
 			}
@@ -427,6 +422,12 @@ public class MockEditor implements Editor
 
 			@Override
 			public void runForEachCaret(@Nonnull CaretAction caretAction, boolean b)
+			{
+
+			}
+
+			@Override
+			public void addCaretActionListener(@Nonnull CaretActionListener caretActionListener, @Nonnull Disposable disposable)
 			{
 
 			}
@@ -616,6 +617,13 @@ public class MockEditor implements Editor
 	@Nonnull
 	@Override
 	public InlayModel getInlayModel()
+	{
+		return null;
+	}
+
+	@Nonnull
+	@Override
+	public EditorKind getEditorKind()
 	{
 		return null;
 	}

@@ -18,10 +18,6 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
-import static org.junit.Assert.assertEquals;
-
-import javax.annotation.Nonnull;
-import org.junit.Test;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.FileCopyPatcher;
@@ -33,6 +29,9 @@ import manuylov.maxim.ocaml.lang.feature.completion.testCase.CompletionTestCase;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.psi.MockASTNode;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.OCamlUnknownElementImpl;
+import org.junit.Test;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -53,7 +52,8 @@ public class CaseSensitivityCompletionTest extends CompletionTestCase
 	public void testLowerCase() throws Exception
 	{
 		Editor dummyEditor = createDummyEditor();
-		new OCamlCompletionContributor().beforeCompletion(new CompletionInitializationContext(dummyEditor, dummyEditor.getCaretModel().getCurrentCaret(), createFakeFile(), CompletionType.BASIC, 0)
+		PsiFile fakeFile = createFakeFile();
+		new OCamlCompletionContributor().beforeCompletion(new CompletionInitializationContext(dummyEditor, dummyEditor.getCaretModel().getCurrentCaret(), fakeFile.getLanguage(), fakeFile, CompletionType.BASIC, 0)
 		{
 			public void setFileCopyPatcher(@Nonnull final FileCopyPatcher fileCopyPatcher)
 			{
