@@ -19,6 +19,7 @@
 package manuylov.maxim.ocaml.actions;
 
 import java.io.File;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
@@ -63,14 +64,13 @@ abstract class BaseCreateOCamlFileAction extends CreateElementActionBase
 	@Nonnull
 	protected abstract FileType getFileType();
 
-	@Nonnull
 	@Override
-	protected PsiElement[] invokeDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory)
+	protected void invokeDialog(@Nonnull final Project project, @Nonnull final PsiDirectory directory, Consumer<PsiElement[]> elementsConsumer)
 	{
 		final MyInputValidator validator = new MyInputValidator(project, directory);
 		Messages.showInputDialog(project, "Enter module name:", "New OCaml Module " + getCapitalizedType() + " File", Messages.getQuestionIcon(), null,
 				validator);
-		return validator.getCreatedElements();
+		elementsConsumer.accept(validator.getCreatedElements());
 	}
 
 	@Nonnull
