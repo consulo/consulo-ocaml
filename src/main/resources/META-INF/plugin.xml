@@ -15,7 +15,7 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
   -->
 
-<idea-plugin>
+<consulo-plugin>
 	<id>consulo.ocaml</id>
 	<name>OCaml Support</name>
 	<description>OCaml language support</description>
@@ -136,4 +136,4 @@
 			<keyboard-shortcut keymap="$default" first-keystroke="shift alt M"/>
 		</action>
 	</actions>
-</idea-plugin>
+</consulo-plugin>

@@ -18,8 +18,6 @@
 
 package manuylov.maxim.ocaml.toolWindow;
 
-import javax.annotation.Nonnull;
-
 import com.intellij.ProjectTopics;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.module.Module;
@@ -33,9 +31,11 @@ import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.content.ContentManagerAdapter;
 import com.intellij.ui.content.ContentManagerEvent;
 import com.intellij.util.messages.MessageBusConnection;
-import consulo.ui.RequiredUIAccess;
+import consulo.ui.annotation.RequiredUIAccess;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
