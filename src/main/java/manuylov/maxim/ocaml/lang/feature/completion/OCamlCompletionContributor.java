@@ -18,29 +18,14 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-
-import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.intellij.codeInsight.TailType;
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionInitializationContext;
-import com.intellij.codeInsight.completion.CompletionParameters;
-import consulo.codeInsight.completion.CompletionProvider;
-import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInsight.lookup.TailTypeDecorator;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.UserDataHolder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.patterns.ElementPattern;
 import com.intellij.patterns.PsiElementPattern;
@@ -50,6 +35,9 @@ import com.intellij.psi.filters.ElementFilter;
 import com.intellij.psi.filters.position.FilterPattern;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ProcessingContext;
+import consulo.codeInsight.completion.CompletionProvider;
+import consulo.util.dataholder.Key;
+import consulo.util.dataholder.UserDataHolder;
 import manuylov.maxim.ocaml.fileType.ml.MLFileTypeLanguage;
 import manuylov.maxim.ocaml.fileType.mli.MLIFileTypeLanguage;
 import manuylov.maxim.ocaml.lang.Keywords;
@@ -60,6 +48,14 @@ import manuylov.maxim.ocaml.lang.parser.psi.OCamlPsiUtil;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlStatement;
 import manuylov.maxim.ocaml.lang.parser.psi.element.impl.OCamlUnknownElementImpl;
 import manuylov.maxim.ocaml.util.OCamlStringUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 /**
  * @author Maxim.Manuylov

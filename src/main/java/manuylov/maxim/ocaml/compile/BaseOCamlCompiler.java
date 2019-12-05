@@ -18,16 +18,6 @@
 
 package manuylov.maxim.ocaml.compile;
 
-import static com.intellij.openapi.compiler.CompilerMessageCategory.ERROR;
-import static com.intellij.openapi.compiler.CompilerMessageCategory.INFORMATION;
-import static com.intellij.openapi.compiler.CompilerMessageCategory.WARNING;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.FileProcessingCompiler;
@@ -36,16 +26,24 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import consulo.ocaml.module.extension.OCamlModuleExtension;
+import consulo.util.dataholder.Key;
 import manuylov.maxim.ocaml.entity.OCamlModule;
 import manuylov.maxim.ocaml.run.OCamlRunConfiguration;
 import manuylov.maxim.ocaml.sdk.OCamlSdkType;
 import manuylov.maxim.ocaml.util.OCamlFileUtil;
 import manuylov.maxim.ocaml.util.OCamlModuleUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.intellij.openapi.compiler.CompilerMessageCategory.*;
 
 abstract class BaseOCamlCompiler implements FileProcessingCompiler
 {
