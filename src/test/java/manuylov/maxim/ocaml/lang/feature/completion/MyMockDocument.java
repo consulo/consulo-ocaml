@@ -18,12 +18,13 @@
 
 package manuylov.maxim.ocaml.lang.feature.completion;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.intellij.mock.MockDocument;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.RangeMarker;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Maxim.Manuylov
