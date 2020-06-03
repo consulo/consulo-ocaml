@@ -21,9 +21,10 @@ package manuylov.maxim.ocaml.toolWindow;
 import javax.swing.JPanel;
 
 import javax.annotation.Nonnull;
-import com.intellij.openapi.Disposable;
+
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.content.ContentManager;
+import consulo.disposer.Disposable;
 
 /**
  * @author Maxim.Manuylov
