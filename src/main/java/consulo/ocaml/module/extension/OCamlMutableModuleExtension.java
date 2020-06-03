@@ -2,11 +2,15 @@ package consulo.ocaml.module.extension;
 
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
+import consulo.disposer.Disposable;
+import consulo.extension.ui.ModuleExtensionBundleBoxBuilder;
 import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.roots.ModuleRootLayer;
+import consulo.ui.Component;
 import consulo.ui.annotation.RequiredUIAccess;
+import consulo.ui.layout.VerticalLayout;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -26,9 +30,11 @@ public class OCamlMutableModuleExtension extends OCamlModuleExtension implements
 	@RequiredUIAccess
 	@Nullable
 	@Override
-	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
+	public Component createConfigurationComponent(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
 	{
-		return JBUI.Panels.simplePanel().addToTop(ModuleExtensionSdkBoxBuilder.createAndDefine(this, runnable).build());
+		VerticalLayout layout = VerticalLayout.create();
+		layout.add(ModuleExtensionBundleBoxBuilder.createAndDefine(this, disposable, runnable).build());
+		return layout;
 	}
 
 	@Nonnull
