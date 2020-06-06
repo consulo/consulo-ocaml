@@ -45,7 +45,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  * @author Maxim.Manuylov
  *         Date: 19.03.2009
  */
-public class ModuleMLIParsingTest extends BaseModuleParsingTest
+public abstract class ModuleMLIParsingTest extends BaseModuleParsingTest
 {
 	@Test
 	public void testModuleType() throws Exception

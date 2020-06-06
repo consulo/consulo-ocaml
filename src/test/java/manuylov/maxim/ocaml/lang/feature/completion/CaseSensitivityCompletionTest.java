@@ -37,7 +37,7 @@ import javax.annotation.Nonnull;
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-public class CaseSensitivityCompletionTest extends CompletionTestCase
+public abstract class CaseSensitivityCompletionTest extends CompletionTestCase
 {
 	@Test
 	public void testUpperCase() throws Exception

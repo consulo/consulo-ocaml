@@ -30,7 +30,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.testCase.MLParsingTestCase;
  * @author Maxim.Manuylov
  *         Date: 28.02.2009
  */
-public class ExpressionParsingTest extends MLParsingTestCase
+public abstract class ExpressionParsingTest extends MLParsingTestCase
 {
 	@Test
 	public void testConstant() throws Exception

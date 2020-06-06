@@ -25,7 +25,7 @@ import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-public class ForExpressionIndexVariableNameResolvingTest extends ResolvingTestCase
+public abstract class ForExpressionIndexVariableNameResolvingTest extends ResolvingTestCase
 {
 	@Test
 	public void testForExpressionIndexVariableNameResolving() throws Exception

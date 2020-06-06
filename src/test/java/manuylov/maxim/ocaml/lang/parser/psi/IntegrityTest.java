@@ -18,6 +18,15 @@
 
 package manuylov.maxim.ocaml.lang.parser.psi;
 
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import manuylov.maxim.ocaml.lang.BaseOCamlTestCase;
+import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
+import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnknownElement;
+import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlElement;
+import org.junit.Test;
+
+import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -25,21 +34,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
-import org.junit.Test;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import manuylov.maxim.ocaml.lang.BaseOCamlTestCase;
-import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
-import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnknownElement;
-import manuylov.maxim.ocaml.lang.parser.psi.element.impl.BaseOCamlElement;
-
 /**
  * @author Maxim.Manuylov
  *         Date: 23.03.2009
  */
-public class IntegrityTest extends BaseOCamlTestCase
+public abstract class IntegrityTest extends BaseOCamlTestCase
 {
 	@Test
 	public void testFactoryCreatesAllElementsProperly() throws IllegalAccessException

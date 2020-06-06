@@ -25,7 +25,7 @@ import manuylov.maxim.ocaml.lang.feature.resolving.testCase.ResolvingTestCase;
  * @author Maxim.Manuylov
  *         Date: 19.06.2009
  */
-public class TypeConstructorNameResolvingTest extends ResolvingTestCase
+public abstract class TypeConstructorNameResolvingTest extends ResolvingTestCase
 {
 	@Test
 	public void testTypeConstructorNameResolving() throws Exception

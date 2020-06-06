@@ -33,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
  * @author Maxim.Manuylov
  *         Date: 19.03.2009
  */
-public class ClassMLParsingTest extends BaseClassParsingTest
+public abstract class ClassMLParsingTest extends BaseClassParsingTest
 {
 	@Test
 	public void testSeveralClassBindings() throws Exception

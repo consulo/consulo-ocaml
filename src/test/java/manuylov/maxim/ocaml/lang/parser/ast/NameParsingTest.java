@@ -33,7 +33,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.testCase.MLParsingTestCase;
  * @author Maxim.Manuylov
  *         Date: 13.03.2009
  */
-public class NameParsingTest extends MLParsingTestCase
+public abstract class NameParsingTest extends MLParsingTestCase
 {
 	@Test
 	public void testModulePath() throws Exception

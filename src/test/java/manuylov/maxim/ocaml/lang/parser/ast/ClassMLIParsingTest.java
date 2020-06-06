@@ -18,28 +18,22 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.BRACKETS;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.CLASS_NAME;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.CLASS_SPECIFICATION;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.CLASS_SPECIFICATION_BINDING;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.OBJECT_END_CLASS_BODY_TYPE;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.TYPE_PARAMETER_DEFINITION;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.TYPE_PARAMETER_NAME;
-
-import javax.annotation.Nonnull;
-
-import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
+import org.junit.Test;
+
+import javax.annotation.Nonnull;
+
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.03.2009
  */
-public class ClassMLIParsingTest extends BaseClassParsingTest
+public abstract class ClassMLIParsingTest extends BaseClassParsingTest
 {
 	@Test
 	public void testSeveralSpecificationBindings() throws Exception

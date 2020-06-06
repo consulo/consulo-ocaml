@@ -18,18 +18,18 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import javax.annotation.Nonnull;
-
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Maxim.Manuylov
  *         Date: 18.03.2009
  */
-public class TypeMLIParsingTest extends BaseTypeParsingTest
+public abstract class TypeMLIParsingTest extends BaseTypeParsingTest
 {
 	@Nonnull
 	protected ParserDefinition getParserDefinition()

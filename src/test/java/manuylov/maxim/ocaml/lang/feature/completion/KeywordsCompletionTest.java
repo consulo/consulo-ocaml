@@ -30,7 +30,7 @@ import manuylov.maxim.ocaml.lang.feature.completion.testCase.CompletionTestCase;
  * @author Maxim.Manuylov
  *         Date: 20.05.2010
  */
-public class KeywordsCompletionTest extends CompletionTestCase
+public abstract class KeywordsCompletionTest extends CompletionTestCase
 {
 	@Test
 	public void testAndKeyword() throws Exception

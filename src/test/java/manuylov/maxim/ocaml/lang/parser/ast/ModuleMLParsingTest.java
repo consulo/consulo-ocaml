@@ -18,22 +18,22 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
-
-import javax.annotation.Nonnull;
-
-import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.ml.parser.MLParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
+import org.junit.Test;
+
+import javax.annotation.Nonnull;
+
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 19.03.2009
  */
-public class ModuleMLParsingTest extends BaseModuleParsingTest
+public abstract class ModuleMLParsingTest extends BaseModuleParsingTest
 {
 	@Test
 	public void testModuleDefinition() throws Exception

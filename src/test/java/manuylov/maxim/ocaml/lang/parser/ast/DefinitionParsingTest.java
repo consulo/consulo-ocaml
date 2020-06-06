@@ -36,7 +36,7 @@ import manuylov.maxim.ocaml.lang.parser.ast.util.TreeStringBuilder;
  * @author Maxim.Manuylov
  *         Date: 28.02.2009
  */
-public class DefinitionParsingTest extends BaseStatementParsingTest
+public abstract class DefinitionParsingTest extends BaseStatementParsingTest
 {
 	@Test
 	public void testDoubleSemicolon() throws Exception

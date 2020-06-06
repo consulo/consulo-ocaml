@@ -18,30 +18,23 @@
 
 package manuylov.maxim.ocaml.lang.parser.ast;
 
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.COLON;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.EXCEPTION_KEYWORD;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.INCLUDE_KEYWORD;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.LCFC_IDENTIFIER;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.OF_KEYWORD;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.SEMICOLON_SEMICOLON;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.UCFC_IDENTIFIER;
-import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.VAL_KEYWORD;
-import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
-
-import javax.annotation.Nonnull;
-
-import org.junit.Test;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.psi.tree.IElementType;
 import manuylov.maxim.ocaml.fileType.mli.parser.MLIParserDefinition;
 import manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes;
 import manuylov.maxim.ocaml.lang.parser.ast.util.TreeStringBuilder;
+import org.junit.Test;
+
+import javax.annotation.Nonnull;
+
+import static manuylov.maxim.ocaml.lang.lexer.token.OCamlTokenTypes.*;
+import static manuylov.maxim.ocaml.lang.parser.ast.element.OCamlElementTypes.*;
 
 /**
  * @author Maxim.Manuylov
  *         Date: 13.03.2009
  */
-public class SpecificationParsingTest extends BaseStatementParsingTest
+public abstract class SpecificationParsingTest extends BaseStatementParsingTest
 {
 	@Test
 	public void testDoubleSemicolon() throws Exception
