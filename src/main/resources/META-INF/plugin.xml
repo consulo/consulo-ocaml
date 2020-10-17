@@ -35,7 +35,7 @@
 
 		<moduleExtensionProvider key="ocaml"
 								 allowMixin="true"
-								 icon="/img/ocaml-small.png"
+								 icon="consulo.ocaml.OcamlIconGroup@ocaml_small"
 								 name="OCaml"
 								 immutableClass="consulo.ocaml.module.extension.OCamlModuleExtension"
 								 mutableClass="consulo.ocaml.module.extension.OCamlMutableModuleExtension"/>

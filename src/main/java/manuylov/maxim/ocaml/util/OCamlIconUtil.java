@@ -18,10 +18,10 @@
 
 package manuylov.maxim.ocaml.util;
 
-import javax.annotation.Nonnull;
-
-import com.intellij.openapi.util.IconLoader;
+import consulo.ocaml.icon.OcamlIconGroup;
 import consulo.ui.image.Image;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -30,59 +30,44 @@ import consulo.ui.image.Image;
 public class OCamlIconUtil
 {
 	@Nonnull
-	public static final Image ourMLFileIcon = IconLoader.getIcon("/img/ml-file.png");
-	@Nonnull
-	public static final Image ourMLIFileIcon = IconLoader.getIcon("/img/mli-file.png");
-	@Nonnull
-	public static final Image ourOCamlBigIcon = IconLoader.getIcon("/img/ocaml-big.png");
-	@Nonnull
-	public static final Image ourOCamlSmallIcon = IconLoader.getIcon("/img/ocaml-small.png");
-	@Nonnull
-	public static final Image ourCloseViewIcon = IconLoader.getIcon("/img/cancel.png");
-	@Nonnull
-	public static final Image ourSettingsIcon = IconLoader.getIcon("/img/settings.png");
-	@Nonnull
-	public static final Image ourOpenConsoleIcon = IconLoader.getIcon("/img/open-console.png");
-
-	@Nonnull
 	public static Image getSmallOCamlIcon()
 	{
-		return ourOCamlSmallIcon;
+		return OcamlIconGroup.ocaml_small();
 	}
 
 	@Nonnull
 	public static Image getBigOCamlIcon()
 	{
-		return ourOCamlBigIcon;
+		return OcamlIconGroup.ocaml_big();
 	}
 
 	@Nonnull
 	public static Image getMLFileIcon()
 	{
-		return ourMLFileIcon;
+		return OcamlIconGroup.ml_file();
 	}
 
 	@Nonnull
 	public static Image getMLIFileIcon()
 	{
-		return ourMLIFileIcon;
+		return OcamlIconGroup.mli_file();
 	}
 
 	@Nonnull
 	public static Image getOpenConsoleIcon()
 	{
-		return ourOpenConsoleIcon;
+		return OcamlIconGroup.open_console();
 	}
 
 	@Nonnull
 	public static Image getCloseViewIcon()
 	{
-		return ourCloseViewIcon;
+		return OcamlIconGroup.cancel();
 	}
 
 	@Nonnull
 	public static Image getSettingsIcon()
 	{
-		return ourSettingsIcon;
+		return OcamlIconGroup.settings();
 	}
 }
