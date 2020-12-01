@@ -18,22 +18,22 @@
 
 package manuylov.maxim.ocaml.lang.feature.highlighting;
 
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.annotation.Nonnull;
-
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
+import consulo.ui.style.StandardColors;
+import consulo.ui.util.ColorValueUtil;
 import manuylov.maxim.ocaml.lang.feature.resolving.OCamlReference;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElement;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementProcessor;
 import manuylov.maxim.ocaml.lang.parser.psi.OCamlElementVisitorAdapter;
 import manuylov.maxim.ocaml.lang.parser.psi.element.OCamlUnknownElement;
+
+import javax.annotation.Nonnull;
+import java.awt.*;
 
 /**
  * @author Maxim.Manuylov
@@ -56,7 +56,7 @@ public class OCamlAnnotatingVisitor extends OCamlElementVisitorAdapter implement
 		final ASTNode node = psiElement.getNode();
 		final Annotation annotation = myAnnotationHolder.createErrorAnnotation(psiElement, "OCaml element was not created properly: " + (node == null ?
 				"null, " : node.getElementType().toString() + ", ") + psiElement.toString());
-		annotation.setEnforcedTextAttributes(new TextAttributes(Color.black, Color.red.darker(), null, null, Font.PLAIN));
+		annotation.setEnforcedTextAttributes(new TextAttributes(StandardColors.BLUE, ColorValueUtil.darker(StandardColors.RED), null, null, Font.PLAIN));
 	}
 
 	public void process(@Nonnull final OCamlElement psiElement)
@@ -67,7 +67,7 @@ public class OCamlAnnotatingVisitor extends OCamlElementVisitorAdapter implement
 			if(!ref.isSoft() && !ref.isBundled() && ref.resolve() == null)
 			{
 				final Annotation annotation = myAnnotationHolder.createErrorAnnotation(psiElement, "Unknown " + ref.getDescription());
-				annotation.setEnforcedTextAttributes(new TextAttributes(Color.red, null, null, null, Font.PLAIN));
+				annotation.setEnforcedTextAttributes(new TextAttributes(StandardColors.RED, null, null, null, Font.PLAIN));
 			}
 		}
 	}
