@@ -23,6 +23,10 @@
 	<vendor email="maxim.manuylov@gmail.com">Maxim Manuylov</vendor>
 	<category>Custom Languages</category>
 
+	<tags>
+		<tag>custom.language</tag>
+	</tags>
+
 	<project-components>
 		<component>
 			<implementation-class>manuylov.maxim.ocaml.toolWindow.OCamlToolWindowComponent</implementation-class>
