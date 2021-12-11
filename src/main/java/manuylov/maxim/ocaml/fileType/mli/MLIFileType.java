@@ -18,12 +18,13 @@
 
 package manuylov.maxim.ocaml.fileType.mli;
 
-import javax.annotation.Nonnull;
-
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import manuylov.maxim.ocaml.fileType.OCamlFileType;
 import manuylov.maxim.ocaml.fileType.ml.MLFileType;
 import manuylov.maxim.ocaml.util.OCamlIconUtil;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Maxim.Manuylov
@@ -41,16 +42,16 @@ public class MLIFileType extends OCamlFileType
 
 	@Override
 	@Nonnull
-	public String getName()
+	public String getId()
 	{
 		return "OCAML_MLI_FILE";
 	}
 
 	@Override
 	@Nonnull
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return "OCaml module interface files";
+		return LocalizeValue.localizeTODO("OCaml module interface files");
 	}
 
 	@Override
