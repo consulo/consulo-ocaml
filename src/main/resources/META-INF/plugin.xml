@@ -15,7 +15,7 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
   -->
 
-<consulo-plugin>
+<consulo-plugin url="https://github.com/consulo/consulo-ocaml">
 	<id>consulo.ocaml</id>
 	<name>OCaml Support</name>
 	<description>OCaml language support</description>
